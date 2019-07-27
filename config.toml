@@ -65,3 +65,21 @@ home = [ "HTML", "RSS", "JSON"]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
 
   themeVariant = "mine"
+  
+ # English is the default language
+defaultContentLanguage = "en"
+# Force to have /en/my-page and /fr/my-page routes, even for default language.
+defaultContentLanguageInSubdir= true
+
+[Languages]
+	[Languages.en]
+	title = "Ori Engineering"
+	weight = 1
+	languageName = "English"
+	contentDir = "content/english"
+
+	[Languages.hr]
+	title = "Ori Engineering"
+	weight = 2
+	languageName = "Hrvatski"
+	contentDir = "content/hrvatski"

@@ -5,6 +5,9 @@
   <div id="header-wrapper">
     <div id="header">
       {{ partial "logo.html" . }}
+	  {{ .WordCount }} words.<br>
+	  Reading time: {{ .ReadingTime }} minutes.
+	  
     </div>
     {{if not .Site.Params.disableSearch}}
         {{ partial "search.html" . }}
@@ -38,6 +41,7 @@
         </ul>
       </section>
     {{end}}
+
 
     {{ if or .Site.IsMultiLingual $showvisitedlinks }}
     <section id="prefooter">

@@ -6,10 +6,22 @@
     <description>Recent content in Basics on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jul 2019 15:46:03 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jul 2019 15:46:14 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/basics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The Hardware</title>
+      <link>http://example.org/basics/second-content/the-hardware/</link>
+      <pubDate>Sat, 27 Jul 2019 15:46:14 +0200</pubDate>
+      
+      <guid>http://example.org/basics/second-content/the-hardware/</guid>
+      <description>The hardware This is the first post in the series of guides on how to make a RC car.
+It will explain what hardware parts and tools are needed, how to put them all together and how to setup the base software needed for it to run.
+The end result should be something that looks like this, and runs a custom Linux kernel:
+ Parts list You&amp;rsquo;ll want to have:</description>
+    </item>
     
   </channel>
 </rss>

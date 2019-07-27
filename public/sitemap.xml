@@ -4,7 +4,56 @@
   
   <url>
     <loc>http://example.org/basics/</loc>
+    <lastmod>2019-07-27T15:46:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/</loc>
     <lastmod>2019-07-27T15:46:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/basics/requirements/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/basics/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/basics/configuration/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/basics/style-customization/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/basics/second-content/the-hardware/</loc>
+    <lastmod>2019-07-27T15:46:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/attachments/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/attachments.fr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/button/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/button.fr/</loc>
   </url>
   
   <url>
@@ -13,13 +62,92 @@
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
-    <priority>0</priority>
+    <loc>http://example.org/shortcodes/children/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/expand/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/expand.fr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/mermaid/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/mermaid.fr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/notice/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/notice.fr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/siteparam/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/siteparam.fr/</loc>
   </url>
   
   <url>
     <loc>http://example.org/tags/</loc>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-1/children-1-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-1/children-1-1/children-1-1-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1/children-1-1-1-1-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-2/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-4/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/test/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/test.fr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-2/test3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.org/shortcodes/children/children-2/test3.fr/</loc>
   </url>
   
 </urlset>

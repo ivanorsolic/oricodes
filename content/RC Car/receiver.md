@@ -5,7 +5,6 @@ draft = false
 weight=9
 +++
 
-## Receiver
 {{% notice info %}}
 If you buy a "kit car" that is listed as "needs a receiver," then you don't need to buy a receiver.
 {{% /notice %}}

@@ -1,13 +1,13 @@
 +++
-title = "RC Car"
+title = "RC Cars: a primer"
 date = 2019-07-27T16:24:11+02:00
 weight = 1
 chapter = true
 pre = "<b>1. </b>"
 +++
 
-### First chapter
+### Prerequisite knowledge
 
-# The RC Car
+# RC Cars: a primer
 
-**Through this chapter we'll explore what hardware parts and tools are needed, how to put them all together and how to setup the base software needed for it to run.**
+Through this chapter we'll explore what kind of parts is a RC car comprised of, and what are the most important ones for us. We’ll use that knowledge while buying parts and assembling them for our hardware platform.

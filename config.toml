@@ -44,7 +44,7 @@ home = [ "HTML", "RSS", "JSON"]
 
   # A title for shortcuts in menu is set by default. Set this to true to disable it. 
 
-  disableShortcutsTitle = false
+  disableShortcutsTitle = true
 
   # When using mulitlingual website, disable the switch language button.
 
@@ -83,3 +83,24 @@ defaultContentLanguageInSubdir= true
 	weight = 2
 	languageName = "Hrvatski"
 	contentDir = "content/hrvatski"
+
+[[menu.shortcuts]] 
+name = "<i class='fab fa-github'></i> Github"
+url = "https://github.com/ivanorsolic"
+weight = 10
+
+[[menu.shortcuts]] 
+name = "<i class='fab fa-twitter'></i> Twitter"
+identifier = "ds"
+url = "https://twitter.com/ivanorsolic"
+weight = 11
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tasks'></i> Other stuff"
+url = "https://ivanorsolic.github.io"
+weight = 12
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-file'></i> My CV"
+url = "https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"
+weight = 20

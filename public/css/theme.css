@@ -38,6 +38,7 @@
     font-weight: 500;
     src: url("../fonts/Work_Sans_500.eot?#iefix") format("embedded-opentype"), url("../fonts/Work_Sans_500.woff") format("woff"), url("../fonts/Work_Sans_500.woff2") format("woff2"), url("../fonts/Work_Sans_500.svg#WorkSans") format("svg"), url("../fonts/Work_Sans_500.ttf") format("truetype");
 }
+
 body {
     background: #fff;
     color: #777;
@@ -449,7 +450,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 }
 body {
     font-family: "Work Sans", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
     font-size: 18px !important;
 }

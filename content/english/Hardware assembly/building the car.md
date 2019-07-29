@@ -31,4 +31,5 @@ I found it helpful to have a ‘bro nearby that’s willing to help you assemble
 
 After assembling the car, take it for a spin. If it works, you’re ready to move on to the electronics part of the project. :)
 
-<center><video controls src="/video/testrun.mp4" autoplay loop></video></center>
+<center><video controls muted src="/video/testrun.mp4" autoplay loop width=100%></video></center>
+

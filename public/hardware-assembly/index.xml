@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hardware assembly on Ori Engineering</title>
+    <link>https://ori.engineering/hardware-assembly/</link>
+    <description>Recent content in Hardware assembly on Ori Engineering</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
+    
+	<atom:link href="https://ori.engineering/hardware-assembly/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hardware inventory</title>
+      <link>https://ori.engineering/hardware-assembly/inventory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.engineering/hardware-assembly/inventory/</guid>
+      <description>Let’s start with a list of all of the hardware I’ll be using through this tutorial, and of course, with the money shot:
+RC Car kit The RC Car I went with was the Tamiya TT-02, which came prebuilt and even included an receiver and a remote, for just a bit over 100€. Very lucky!
+The reason I went with this is that it was just such a good deal for such a car.</description>
+    </item>
+    
+    <item>
+      <title>Building the RC Car</title>
+      <link>https://ori.engineering/hardware-assembly/building-the-car/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.engineering/hardware-assembly/building-the-car/</guid>
+      <description>Now to the fun part: building the RC car. This will vary very much based on your RC Car kit. If it’s ready-to-run (RTR), you should be good out of the box. If it’s an unassembled kit, you’ve got a ton of work ahead, just follow the instructions that came with the car. If you’re like me, and got something in between, you’ll have just a bit of work before running it.</description>
+    </item>
+    
+    <item>
+      <title>Building the mounting plates for the hardware</title>
+      <link>https://ori.engineering/hardware-assembly/mounting-plates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.engineering/hardware-assembly/mounting-plates/</guid>
+      <description>There are many options to go for when it comes to mounting your Nano and the rest of the hardware to your RC car.
+If you’re planning on 3D printing your parts, take a look at:
+ The official DonkeyCar docs which contain a lot of 3D models for printing: chassis and adapters, mounting plates, more mounting plates, etc. Markku.ai’s Chilicorn Rail for the Tamiya cars  If you’re planning on hacking something together by yourself, you can pretty much do anything you want.</description>
+    </item>
+    
+  </channel>
+</rss>

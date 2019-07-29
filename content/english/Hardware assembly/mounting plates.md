@@ -49,3 +49,4 @@ With some zip-tie magic and screwing around 🙃 this was the end result:
 Nevermind the disconnected antennae, we’ll get to that in a second.
 
 ### That should be it as far as the ‘dumb’ part of the hardware is concerned. On to connecting all of the stuff together and setting up the Nano!
+

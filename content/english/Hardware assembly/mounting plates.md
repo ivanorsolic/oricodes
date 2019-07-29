@@ -32,8 +32,7 @@ If you’re planning on hacking something together by yourself, you can pretty m
 
 After some modeling and tinkering, I came up with the following idea for my mounts:
 
-<center><video controls src="/video/carmodel.mp4" autoplay loop height="500px"></video></center>
-
+<center><video controls src="/video/carmodel.mp4" autoplay loop width=100%></video></center>
 The only thing left now is to measure the aluminium, mark down where to drill the screw holes and assemble it together, but being the lucky man that I am, my hand drill broke down just as I wanted to drill the aluminium, but fear not, I had this bad boy standing by:
 
 ![Drill](/images/hardware/drill.jpg)

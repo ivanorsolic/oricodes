@@ -1,6 +1,6 @@
 +++
 title = "Running the OS from an external SSD using a custom kernel"
-menuTitle = "Custom kernel"
+menuTitle = "Kernel Hacking"
 draft = false
 weight=11
 

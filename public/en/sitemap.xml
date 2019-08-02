@@ -37,6 +37,11 @@
   </url>
   
   <url>
+    <loc>https://ori.engineering/hardware-installation/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ori.engineering/rc-car/scale/</loc>
     <xhtml:link
                 rel="alternate"
@@ -139,7 +144,15 @@
   </url>
   
   <url>
+    <loc>https://ori.engineering/hardware-installation/jetson-nano-installation/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.engineering/hardware-assembly/building-the-car/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.engineering/hardware-installation/kernel-hacking/</loc>
   </url>
   
   <url>

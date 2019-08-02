@@ -2,7 +2,8 @@ baseURL = "https://ori.engineering/"
 languageCode = "en-us"
 title = "Ori Engineering"
 theme = "hugo-theme-learn"
-
+googleAnalytics = "UA-145066676-1"
+disqusShortname = "ori-engineering"
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 

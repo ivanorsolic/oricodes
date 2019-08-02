@@ -132,7 +132,7 @@ On GitHub, you can add .patch at the end of the URL to get the patch file for th
 
 - [Download the patch file](https://github.com/torvalds/linux/commit/a85f878b443f8d2b91ba76f09da21ac0af22e07f.patch) for the same-filled pages commit
 - Patch the kernel using patch -p1 and the downloaded patch
-- There is a memeset_l call in the patch we’ve just applied, and it doesn’t exist yet in the 4.9 kernel, so we’ll need to replace it with the regular memset.
+- There is a memset_l call in the patch we’ve just applied, and it doesn’t exist yet in the 4.9 kernel, so we’ll need to replace it with the regular memset.
 
 See instructions below:
 
@@ -241,7 +241,7 @@ If you mess something up and the Nano doesn’t boot, don’t worry, you can alw
 
 {{% notice tip %}}
 
-If you somehow end up messing up the extlinux.conf file, I’ve provided a copy for you down below, so you can overwrite it as state above and boot back to the microSD:
+If you somehow end up messing up the extlinux.conf file, I’ve provided a copy for you down below, so you can overwrite it as stated in the tip above and boot back to the microSD:
 
 {{% /notice %}}
 

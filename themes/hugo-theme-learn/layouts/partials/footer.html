@@ -1,11 +1,15 @@
         {{ if .Params.chapter }}
             </div> <!-- end chapter-->
-		{{ else if not .IsHome }}
-		<div id="commento"></div><script src="https://cdn.commento.io/js/commento.js"></script>
-        {{ end }}
+		{{ end }}
+		
+	
+	{{if not .IsHome }}
+		<center><div class="commento" id="commento" ></div><script src="https://cdn.commento.io/js/commento.js"></script>
+	{{ end }}
         </div> 
 		
         {{ partial "custom-comments.html" . }}
+
       </div>
 
     <div id="navigation">
@@ -56,6 +60,7 @@
     </div>
     </section>
     
+		
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
@@ -76,6 +81,6 @@
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
-    {{ partial "custom-footer.html" . }}
+	
   </body>
 </html>

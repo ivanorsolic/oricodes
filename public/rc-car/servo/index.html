@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.61.0" />
     <meta name="description" content="Ori&#39;s self-driving RC car">
 <meta name="author" content="ori">
 
@@ -12,20 +12,20 @@
     <title>Steering servo :: Ori Engineering</title>
 
     
-    <link href="/css/nucleus.css?1564788124" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564788124" rel="stylesheet">
-    <link href="/css/hybrid.css?1564788124" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564788124" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564788124" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564788124" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564788124" rel="stylesheet">
-    <link href="/css/theme.css?1564788124" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564788124" rel="stylesheet">
+    <link href="/css/nucleus.css?1577024478" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1577024478" rel="stylesheet">
+    <link href="/css/hybrid.css?1577024478" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1577024478" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1577024478" rel="stylesheet">
+    <link href="/css/auto-complete.css?1577024478" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1577024478" rel="stylesheet">
+    <link href="/css/theme.css?1577024478" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1577024478" rel="stylesheet">
     
-      <link href="/css/theme-mine.css?1564788124" rel="stylesheet">
+      <link href="/css/theme-mine.css?1577024478" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564788124"></script>
+    <script src="/js/jquery-3.3.1.min.js?1577024478"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564788124"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564788124"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1577024478"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1577024478"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ori.engineering\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564788124"></script>
+<script type="text/javascript" src="/js/search.js?1577024478"></script>
 
     
   </div>
@@ -553,7 +553,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -577,33 +577,25 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
 
-<p><img src="/images/rc_car/servo.png" alt="Servo" /></p>
-
+<p><img src="/images/rc_car/servo.png" alt="Servo"></p>
 <p><strong>An RC servo is used for controlling the steering wheels of the car.</strong> It almost always comes with the RC car, so you shouldn’t worry about getting one.</p>
-
 <p>It typically expects around 4.8V to 6V input on the power wire (varies by car) and a PWM control signal on the signal wire. Typically, the three wires are colored black-red-white, or brown-red-yellow, where:</p>
-
 <ul>
 <li>the dark wire (black/brown) is ground,</li>
 <li>and the center wire (red) is power,</li>
 <li>and the light wire (white/yellow) is control.</li>
 </ul>
-
 <p>The control signal is RC-style PWM, where one pulse is sent 60 times a second, and the width of this pulse controls how left/right the servo turns. When this pulse is:</p>
-
 <ul>
 <li>1500 microseconds, the servo is centered;</li>
 <li>1000 microseconds, the servo is turned all the way left (or right)</li>
 <li>2000 microseconds, the servo is turned all the way in the other direction.</li>
 </ul>
 
-
 <div class="notices warning" ><p><strong>This is NOT the same kind of PWM that you would use to control the duty cycle of a motor, or the brightness of a LED.</strong></p>
 </div>
 
-
 <p>The power for the servo typically comes from the motor ESC, which has a BEC (Battery Eliminator Circuit) built in.</p>
-
 <p>Source: <a href="http://docs.donkeycar.com/roll_your_own/">DonkeyCar docs</a>.</p>
 
 
@@ -613,11 +605,10 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
         
-		<div id="disqus_thread" ></div>
-        
         </div> 
 		
         
+
 
       </div>
 
@@ -922,46 +913,30 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 	
 
     </div>
-	
-<script>
-
-var disqus_config = function () {
-this.page.url = "https://ori.engieering";  
-this.page.identifier = "ori-engineering"; 
-};
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://ori-engineering.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
     
+		
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564788124"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564788124"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564788124"></script>
-    <script src="/js/jquery.sticky.js?1564788124"></script>
-    <script src="/js/featherlight.min.js?1564788124"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564788124"></script>
-    <script src="/js/highlight.pack.js?1564788124"></script>
+    <script src="/js/clipboard.min.js?1577024478"></script>
+    <script src="/js/perfect-scrollbar.min.js?1577024478"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1577024478"></script>
+    <script src="/js/jquery.sticky.js?1577024478"></script>
+    <script src="/js/featherlight.min.js?1577024478"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1577024478"></script>
+    <script src="/js/highlight.pack.js?1577024478"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564788124"></script>
-    <script src="/js/learn.js?1564788124"></script>
-    <script src="/js/hugo-learn.js?1564788124"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1577024478"></script>
+    <script src="/js/learn.js?1577024478"></script>
+    <script src="/js/hugo-learn.js?1577024478"></script>
 
-    <link href="/mermaid/mermaid.css?1564788124" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564788124"></script>
+    <link href="/mermaid/mermaid.css?1577024478" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1577024478"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
-    
-
+	
   </body>
 </html>
 

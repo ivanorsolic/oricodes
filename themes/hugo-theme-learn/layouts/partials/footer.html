@@ -1,11 +1,6 @@
         {{ if .Params.chapter }}
             </div> <!-- end chapter-->
 		{{ end }}
-		
-	
-	{{if not .IsHome }}
-		<center><div class="commento" id="commento" ></div><script src="https://cdn.commento.io/js/commento.js"></script>
-	{{ end }}
         </div> 
 		
         {{ partial "custom-comments.html" . }}

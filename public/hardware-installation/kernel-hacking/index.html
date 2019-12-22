@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.61.0" />
     <meta name="description" content="Ori&#39;s self-driving RC car">
 <meta name="author" content="ori">
 
@@ -12,20 +12,20 @@
     <title>Running the OS from an external SSD using a custom kernel :: Ori Engineering</title>
 
     
-    <link href="/css/nucleus.css?1564788124" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564788124" rel="stylesheet">
-    <link href="/css/hybrid.css?1564788124" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564788124" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564788124" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564788124" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564788124" rel="stylesheet">
-    <link href="/css/theme.css?1564788124" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564788124" rel="stylesheet">
+    <link href="/css/nucleus.css?1577024478" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1577024478" rel="stylesheet">
+    <link href="/css/hybrid.css?1577024478" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1577024478" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1577024478" rel="stylesheet">
+    <link href="/css/auto-complete.css?1577024478" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1577024478" rel="stylesheet">
+    <link href="/css/theme.css?1577024478" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1577024478" rel="stylesheet">
     
-      <link href="/css/theme-mine.css?1564788124" rel="stylesheet">
+      <link href="/css/theme-mine.css?1577024478" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564788124"></script>
+    <script src="/js/jquery-3.3.1.min.js?1577024478"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -46,7 +46,7 @@
   <img src="/images/logo.png">
 </a>
 
-	  1327 words.<br>
+	  1339 words.<br>
 	  Reading time: 7 minutes.
 	  
     </div>
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564788124"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564788124"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1577024478"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1577024478"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ori.engineering\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564788124"></script>
+<script type="text/javascript" src="/js/search.js?1577024478"></script>
 
     
   </div>
@@ -542,15 +542,12 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#so-what-is-it-we-re-exactly-planning-to-do-here-and-why">So what is it we’re exactly planning to do here, and why?</a></li>
-<li><a href="#okay-hack-all-the-kernels">Okay, hack all the kernels</a></li>
-<li><a href="#building-and-installing-the-kernel">Building and installing the kernel</a></li>
-<li><a href="#tweaking-swap">Tweaking swap</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#so-what-is-it-were-exactly-planning-to-do-here-and-why">So what is it we’re exactly planning to do here, and why?</a></li>
+    <li><a href="#okay-hack-all-the-kernels">Okay, hack all the kernels</a></li>
+    <li><a href="#building-and-installing-the-kernel">Building and installing the kernel</a></li>
+    <li><a href="#tweaking-swap">Tweaking swap</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -575,128 +572,94 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
 
-
-
 <p>This is the technical, optional upgrade that will enable you to boot your OS from an external SSD.</p>
-
 
 <div class="notices tip" ><p><a href="https://syonyk.blogspot.com/2019/04/nvidia-jetson-nano-desktop-use-kernel-builds.html">Syonyk</a> has an awesome Jetson Nano guide with all of this stuff explained and was the primary source of info while researching how to do this.</p>
 </div>
-
 
 
 <div class="notices tip" ><p><a href="https://www.jetsonhacks.com/2019/04/25/jetson-nano-run-on-usb-drive/">JetsonHacks also have a guide</a> that should make this much easier to do, as they’ve prepared scripts that do all of the work for you, but I haven’t tried it so I can’t say it works for sure, but it should!</p>
 </div>
 
 
-
 <div class="notices info" ><p><strong>This will take some time.</strong> Taking kernels apart, patching them and building them takes a while even on your regular workstations or servers, but doing it on an embedded device is a whole new world of pain when it comes to waiting for stuff to build, compile or extract. Be prepared to be patient while you’re doing this.</p>
 </div>
 
-
-<h2 id="so-what-is-it-we-re-exactly-planning-to-do-here-and-why">So what is it we’re exactly planning to do here, and why?</h2>
-
+<h2 id="so-what-is-it-were-exactly-planning-to-do-here-and-why">So what is it we’re exactly planning to do here, and why?</h2>
 <p>We want to use our external SSD as the root filesystem because of the huge performance boost it gives us. But the problem is this:</p>
-
 <ul>
 <li>The USB 3 ports require the kernel to load some firmware on boot to enable them to work, which means the USB ports won’t work until the device boots up</li>
 <li>That firmware is stored on the root filesystem, which we want to, you know, put on our external SSD</li>
 <li>That means we’d need the firmware from our SSD in order to use our SSD…</li>
 </ul>
-
 <p>So, how can we work this out? Simple: patch the kernel and embed the firmware we need right into it, so it doesn’t need to read it from the root filesystem, which we can then freely put on our external SSD.</p>
-
 <p>While we’re at it, there’s another thing that would give us a noticeable performance boost which we could build into the kernel, <a href="https://github.com/torvalds/linux/commit/a85f878b443f8d2b91ba76f09da21ac0af22e07f#diff-35c0f993808844bdbabad45bd7dea086">same-filled page merging</a> support for zswap.</p>
-
 <h2 id="okay-hack-all-the-kernels">Okay, hack all the kernels</h2>
-
 
 <div class="notices info" ><p>All of the steps written below are meant to be run directly on your Jetson Nano.</p>
 </div>
 
-
 <p>First of all, since the Nano doesn’t run the stock Linux kernel, we’ll need the sources for its custom kernel. Miraculously Nvidia actually provides it.</p>
-
 <ul>
 <li>Download the <a href="https://developer.nvidia.com/embedded/dlc/public_sources_Nano">BSP Sources</a> from the right side, under Jetson Nano on the <a href="https://developer.nvidia.com/embedded/linux-tegra">L4T download page</a>.</li>
 <li>Unpack the archive</li>
 <li>Unpack the kernel source from the public sources folder to your home directory</li>
 <li>Open the kernel folder</li>
 </ul>
-
 <p>Steps shown below:</p>
-
-<pre><code class="language-bash">cd Downloads
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd Downloads
 tar -xf public_sources.tbz2
 cd ~
 tar -xf ~/Downloads/public_sources/kernel_src.tbz2
 cd ~/kernel/kernel-4.9
-</code></pre>
-
-<p>Once we’re in the kernel directory, we’ll save the current kernel configuration from the Nano to it:</p>
-
-<pre><code class="language-bash">zcat /proc/config.gz &gt; .config
-</code></pre>
-
-<p>Now we need to copy the USB firmware from the root filesystem into the kernel directory, since we want to pack it together with the kernel:</p>
-
-<pre><code class="language-bash">cp /lib/firmware/tegra21x_xusb_firmware ./firmware/
-</code></pre>
-
-<p>Now we need to change the kernel config, and since we’re using a GUI desktop environment on the Nano, we can just use menuconfig:</p>
-
-<pre><code class="language-bash">sudo apt-get install libncurses5-dev
+</code></pre></div><p>Once we’re in the kernel directory, we’ll save the current kernel configuration from the Nano to it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zcat /proc/config.gz &gt; .config
+</code></pre></div><p>Now we need to copy the USB firmware from the root filesystem into the kernel directory, since we want to pack it together with the kernel:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /lib/firmware/tegra21x_xusb_firmware ./firmware/
+</code></pre></div><p>Now we need to change the kernel config, and since we’re using a GUI desktop environment on the Nano, we can just use menuconfig:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install libncurses5-dev
 make menuconfig
-</code></pre>
-
-<p>You should see something like this:</p>
-
-<p><img src="/images/kernel hacking/menuconfig1.jpg" alt="" /></p>
-
+</code></pre></div><p>You should see something like this:</p>
+<p>![](/images/kernel hacking/menuconfig1.jpg)</p>
 
 <div class="notices tip" ><p>When selecting kernel features in menuconfig, <strong>*</strong> denotes a built-in feature and <strong>M</strong> denotes a module. You’ll be wanting stars for the features you want to build in.</p>
 </div>
 
-
 <ul>
 <li>Go to Kernel features:
-
 <ul>
 <li>Select: Enable frontswap to cache swap pages if tmem is present</li>
 <li>Select: Compressed cache for swap pages (EXPERIMENTAL) (NEW)</li>
 <li>Select: Low (Up to 2x) density storage for compressed pages</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-
-<div class="notices tip" ><p>We didn’t select the 3x allocator (z3fold) because isn&rsquo;t reliable prior to mid-4.20 kernel versions. With same-filled page merging, the results are about the same as the zbud 2x allocator.</p>
+<div class="notices tip" ><p>We didn’t select the 3x allocator (z3fold) because isn't reliable prior to mid-4.20 kernel versions. With same-filled page merging, the results are about the same as the zbud 2x allocator.</p>
 </div>
-
 
 <ul>
 <li>Exit</li>
 <li>Go to Device Drivers
-
 <ul>
-<li>Generic Driver Options</li>
+<li>Generic Driver Options
+<ul>
 <li>External firmware blobs to build into the kernel binary
-
 <ul>
 <li>Type: “tegra21x_xusb_firmware”</li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Exit</li>
-</ul></li>
+</ul>
+</li>
 <li>Save the new configuration</li>
 </ul>
-
-<p><img src="/images/kernel hacking/menuconfig2.jpg" alt="" /></p>
-
-<p><img src="/images/kernel hacking/menuconfig3.jpg" alt="" /></p>
-
+<p>![](/images/kernel hacking/menuconfig2.jpg)</p>
+<p>![](/images/kernel hacking/menuconfig3.jpg)</p>
 <p>Now we’ll update ZSwap to enable same-filled page compression. The kernel that the Jetson Nano is running at the time of writing is 4.9, which doesn’t include it, but it can easily be backported from a newer kernel.</p>
-
 <p>One of the best things about Linux, what makes it what it is, is that it’s available for everyone, and we can find it on Linus Torvalds’ GitHub:</p>
-
 <ul>
 <li>Go to the <a href="https://github.com/torvalds/linux">Linux kernel source</a> on GitHub</li>
 <li>Go to <a href="https://github.com/torvalds/linux/blob/master/mm/zswap.c">mm/zswap.c</a></li>
@@ -704,69 +667,50 @@ make menuconfig
 <li>Find the <em><a href="https://github.com/torvalds/linux/commit/a85f878b443f8d2b91ba76f09da21ac0af22e07f#diff-35c0f993808844bdbabad45bd7dea086">zswap: same-filled pages handling</a></em> commit</li>
 </ul>
 
-
 <div class="notices tip" ><p>On GitHub, you can add .patch at the end of the URL to get the patch file for the commit you’re looking at. Just be sure to remove the #diff parameter from the URL if you’re looking at the diff from the commit.</p>
 </div>
-
 
 <ul>
 <li><a href="https://github.com/torvalds/linux/commit/a85f878b443f8d2b91ba76f09da21ac0af22e07f.patch">Download the patch file</a> for the same-filled pages commit</li>
 <li>Patch the kernel using patch -p1 and the downloaded patch</li>
 <li>There is a memset_l call in the patch we’ve just applied, and it doesn’t exist yet in the 4.9 kernel, so we’ll need to replace it with the regular memset.</li>
 </ul>
-
 <p>See instructions below:</p>
-
 
 <div class="notices info" ><p>Make sure you’re in the kernel-4.9 directory before proceeding.</p>
 </div>
 
-
-<pre><code class="language-bash"># You should be in the Downloads directory
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># You should be in the Downloads directory</span>
 wget https://github.com/torvalds/linux/commit/a85f878b443f8d2b91ba76f09da21ac0af22e07f.patch
 
-# Change to the kernel directory
+<span style="color:#75715e"># Change to the kernel directory</span>
 cd ~/kernel/kernel-4.9
 patch -p1 &lt; ~/Downloads/a85f878b443f8d2b91ba76f09da21ac0af22e07f.patch
 
-# Replace the nonexistent memset_l call with the regular memset
-sed -i 's/memset_l(page, value, PAGE_SIZE \/ sizeof(unsigned long));/memset(page, value, PAGE_SIZE);/g' mm/zswap.c
-</code></pre>
-
-<p><img src="/images/kernel hacking/patching kernel.png" alt="" /></p>
-
+<span style="color:#75715e"># Replace the nonexistent memset_l call with the regular memset</span>
+sed -i <span style="color:#e6db74">&#39;s/memset_l(page, value, PAGE_SIZE \/ sizeof(unsigned long));/memset(page, value, PAGE_SIZE);/g&#39;</span> mm/zswap.c
+</code></pre></div><p>![](/images/kernel hacking/patching kernel.png)</p>
 <h2 id="building-and-installing-the-kernel">Building and installing the kernel</h2>
-
 <p>Now that we’ve made all of the changes we wanted to the kernel, we need to build it and place it on the /boot partition.</p>
-
 
 <div class="notices info" ><p>This <strong>will</strong> take a while.</p>
 </div>
 
-
-<pre><code class="language-bash"># Make sure we're in the kernel directory
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Make sure we&#39;re in the kernel directory</span>
 cd ~/kernel/kernel-4.9
-make -j5 # -j denotes the number of threads
+make -j5 <span style="color:#75715e"># -j denotes the number of threads</span>
 sudo make modules_install
 sudo cp /boot/Image /boot/Image.dist
 sudo cp arch/arm64/boot/Image /boot
-</code></pre>
-
-<p><img src="/images/kernel hacking/building kernel.png" alt="" /></p>
-
+</code></pre></div><p>![](/images/kernel hacking/building kernel.png)</p>
 <p>After this is done, you can reboot. If the Nano boots successfully, it means that you’re running your new custom kernel. You can run uname -r to check it:</p>
-
-<pre><code class="language-bash"># The stock kernel returns '4.9.140-tegra'
-# Your custom kernel should return only '4.9.140'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># The stock kernel returns &#39;4.9.140-tegra&#39;</span>
+<span style="color:#75715e"># Your custom kernel should return only &#39;4.9.140&#39;</span>
 uname -r
-</code></pre>
-
-<p>If all is well, we can transfer our root partition to the external SSD.</p>
-
+</code></pre></div><p>If all is well, we can transfer our root partition to the external SSD.</p>
 
 <div class="notices info" ><p>This will also take a while when you get to the copying of the root filesystem to the SSD.</p>
 </div>
-
 
 <ul>
 <li>Plug the SSD in</li>
@@ -775,53 +719,42 @@ uname -r
 <li>Create a new EXT4 volume 4 gigabytes smaller than the SSD</li>
 <li>Create a 4 gigabytes swap partition</li>
 </ul>
-
 <p>See steps below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Wipe the partition table</span>
+sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/dev/sda bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span>1
 
-<pre><code class="language-bash"># Wipe the partition table
-sudo dd if=/dev/zero of=/dev/sda bs=1M count=1
-
-# Create a GPT partition table, then create a new EXT4 volume
-# Create a Linux swap partition (4GB) - arrow over to &quot;Type&quot; and select &quot;Linux swap&quot;
-# Go over to &quot;Write&quot; and type &quot;yes&quot; and then quit
+<span style="color:#75715e"># Create a GPT partition table, then create a new EXT4 volume</span>
+<span style="color:#75715e"># Create a Linux swap partition (4GB) - arrow over to &#34;Type&#34; and select &#34;Linux swap&#34;</span>
+<span style="color:#75715e"># Go over to &#34;Write&#34; and type &#34;yes&#34; and then quit</span>
 sudo cfdisk /dev/sda
 
-# Make an ext4 volume and a swap partition
+<span style="color:#75715e"># Make an ext4 volume and a swap partition</span>
 sudo mkfs.ext4 /dev/sda1
 sudo mkswap /dev/sda2
 
-# Mount the partition and copy the root filesystem to it
+<span style="color:#75715e"># Mount the partition and copy the root filesystem to it</span>
 sudo mkdir /mnt/root
 sudo mount /dev/sda1 /mnt/root
 sudo mkdir /mnt/root/proc
 sudo apt -y install rsync
-sudo rsync -axHAWX --numeric-ids --info=progress2 --exclude=/proc / /mnt/root
+sudo rsync -axHAWX --numeric-ids --info<span style="color:#f92672">=</span>progress2 --exclude<span style="color:#f92672">=</span>/proc / /mnt/root
  
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>Edit /boot/extlinux/extlinux.conf so that the kernel points at /dev/sda1 instead of /dev/mmcblk0p1 (the microSD)</li>
-
-<li><p>Enable zswap in extlinux.conf</p>
-
-<pre><code class="language-bash">sudo sed -i 's/mmcblk0p1/sda1/' /boot/extlinux/extlinux.conf
-sudo sed -i 's/rootwait/rootwait zswap.enabled=1/' /boot/extlinux/extlinux.conf
-</code></pre></li>
+<li>Enable zswap in extlinux.conf</li>
 </ul>
-
-<p>Reboot, and you should be running from the USB SSD.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo sed -i <span style="color:#e6db74">&#39;s/mmcblk0p1/sda1/&#39;</span> /boot/extlinux/extlinux.conf
+sudo sed -i <span style="color:#e6db74">&#39;s/rootwait/rootwait zswap.enabled=1/&#39;</span> /boot/extlinux/extlinux.conf
+</code></pre></div><p>Reboot, and you should be running from the USB SSD.</p>
 
 <div class="notices tip" ><p>If you mess something up and the Nano doesn’t boot, don’t worry, you can always plug the microSD into a Linux PC and mount it, go to the boot partition and open the extlinux/extlinux.conf file and replace sda1 with mmcblk0p1 so it boots from the microSD.</p>
 </div>
 
 
-
 <div class="notices tip" ><p>If you somehow end up messing up the extlinux.conf file, I’ve provided a copy for you down below, so you can overwrite it as stated in the tip above and boot back to the microSD:</p>
 </div>
 
-
-<pre><code class="language-shell">TIMEOUT 30
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">TIMEOUT 30
 DEFAULT primary
 
 MENU TITLE p3450-porg eMMC boot options
@@ -830,18 +763,12 @@ LABEL primary
       MENU LABEL primary kernel
       LINUX /boot/Image
       INITRD /boot/initrd
-      APPEND ${cbootargs} rootfstype=ext4 root=/dev/sda1 rw rootwait
-</code></pre>
-
-<h2 id="tweaking-swap">Tweaking swap</h2>
-
+      APPEND <span style="color:#e6db74">${</span>cbootargs<span style="color:#e6db74">}</span> rootfstype<span style="color:#f92672">=</span>ext4 root<span style="color:#f92672">=</span>/dev/sda1 rw rootwait
+</code></pre></div><h2 id="tweaking-swap">Tweaking swap</h2>
 <p>One last thing to do after you boot from your SSD, enable swap:</p>
-
-<pre><code class="language-bash">echo &quot;/dev/sda2            none                  swap           \
-defaults                                     0 1&quot; | sudo tee -a /etc/fstab
-</code></pre>
-
-<p>And you’re done. Congrats on hacking the kernel and running your Nano from an external SSD. It’ll be worth it!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;/dev/sda2            none                  swap           \
+</span><span style="color:#e6db74">defaults                                     0 1&#34;</span> | sudo tee -a /etc/fstab
+</code></pre></div><p>And you’re done. Congrats on hacking the kernel and running your Nano from an external SSD. It’ll be worth it!</p>
 
 
 <footer class=" footline" >
@@ -850,11 +777,10 @@ defaults                                     0 1&quot; | sudo tee -a /etc/fstab
 
 
         
-		<div id="disqus_thread" ></div>
-        
         </div> 
 		
         
+
 
       </div>
 
@@ -1159,46 +1085,30 @@ defaults                                     0 1&quot; | sudo tee -a /etc/fstab
 	
 
     </div>
-	
-<script>
-
-var disqus_config = function () {
-this.page.url = "https://ori.engieering";  
-this.page.identifier = "ori-engineering"; 
-};
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://ori-engineering.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
     
+		
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564788124"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564788124"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564788124"></script>
-    <script src="/js/jquery.sticky.js?1564788124"></script>
-    <script src="/js/featherlight.min.js?1564788124"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564788124"></script>
-    <script src="/js/highlight.pack.js?1564788124"></script>
+    <script src="/js/clipboard.min.js?1577024478"></script>
+    <script src="/js/perfect-scrollbar.min.js?1577024478"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1577024478"></script>
+    <script src="/js/jquery.sticky.js?1577024478"></script>
+    <script src="/js/featherlight.min.js?1577024478"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1577024478"></script>
+    <script src="/js/highlight.pack.js?1577024478"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564788124"></script>
-    <script src="/js/learn.js?1564788124"></script>
-    <script src="/js/hugo-learn.js?1564788124"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1577024478"></script>
+    <script src="/js/learn.js?1577024478"></script>
+    <script src="/js/hugo-learn.js?1577024478"></script>
 
-    <link href="/mermaid/mermaid.css?1564788124" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564788124"></script>
+    <link href="/mermaid/mermaid.css?1577024478" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1577024478"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
-    
-
+	
   </body>
 </html>
 

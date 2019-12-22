@@ -12,6 +12,8 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+
 .button, .button-secondary {
     display: inline-block;
     padding: 7px 12px;
@@ -329,6 +331,14 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 }
 #body img, #body .video-container {
     margin: 3rem auto;
+    display: block;
+    text-align: center;
+}
+#commento div .commento-header{
+	margin-right: 500px;
+}
+#commento img{
+    margin: auto;
     display: block;
     text-align: center;
 }

@@ -334,6 +334,9 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     display: block;
     text-align: center;
 }
+#commento div .commento-header{
+	margin-right: 500px;
+}
 #commento img{
     margin: auto;
     display: block;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hardware installation on Ori Engineering</title>
@@ -20,7 +20,8 @@
       <description>We’ll begin by preparing installing the Jetson Nano image and setting up the software neccessary to connect it to the RC Car via the PCA Servo Driver.
 Preparing the microSD The official Jetson Nano docs are great and you can just follow them until the Next Steps step.
  If you want a TL;DR version:
- Download the Jetson Nano Developer Kit SD Card Image Format your microSD card and then flash the image on it using whatever tool you’d like.</description>
+  Download the Jetson Nano Developer Kit SD Card Image
+  Format your microSD card and then flash the image on it using whatever tool you’d like.</description>
     </item>
     
     <item>

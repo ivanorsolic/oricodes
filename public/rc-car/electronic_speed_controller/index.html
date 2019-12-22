@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.61.0" />
     <meta name="description" content="Ori&#39;s self-driving RC car">
 <meta name="author" content="ori">
 
@@ -12,20 +12,20 @@
     <title>Electronic Speed Controller :: Ori Engineering</title>
 
     
-    <link href="/css/nucleus.css?1564788124" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564788124" rel="stylesheet">
-    <link href="/css/hybrid.css?1564788124" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564788124" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564788124" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564788124" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564788124" rel="stylesheet">
-    <link href="/css/theme.css?1564788124" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564788124" rel="stylesheet">
+    <link href="/css/nucleus.css?1577024478" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1577024478" rel="stylesheet">
+    <link href="/css/hybrid.css?1577024478" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1577024478" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1577024478" rel="stylesheet">
+    <link href="/css/auto-complete.css?1577024478" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1577024478" rel="stylesheet">
+    <link href="/css/theme.css?1577024478" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1577024478" rel="stylesheet">
     
-      <link href="/css/theme-mine.css?1564788124" rel="stylesheet">
+      <link href="/css/theme-mine.css?1577024478" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564788124"></script>
+    <script src="/js/jquery-3.3.1.min.js?1577024478"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564788124"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564788124"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1577024478"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1577024478"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ori.engineering\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564788124"></script>
+<script type="text/javascript" src="/js/search.js?1577024478"></script>
 
     
   </div>
@@ -553,7 +553,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -577,21 +577,15 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
 
-<p><img src="/images/rc_car/tamiya_esc.jpg" alt="Tamiya ESC" />
+<p><img src="/images/rc_car/tamiya_esc.jpg" alt="Tamiya ESC">
 <strong>The role of the ESC is to take a RC PWM control signal (pulse between 1000 and 2000 microseconds) in, and use that to control the power to the motor so the motor spins with different amounts of power in forward or reverse.</strong> Many RC car kits come with an ESC preinstalled, in which case you should be just fine.</p>
-
 <p>Again, 1500 microseconds typically means &ldquo;center&rdquo; which for the motor means &ldquo;dead stop.&rdquo;</p>
-
 <p>The battery typically connects straight to the ESC using thicker wiring than the simple control signals, because the motor draws many more amps than the control. The ESC then connects on to the motor with equally thick power wiring.</p>
-
 <p>Standard motors and ESCs have a peak current of about 12A; a 1/8th scale RC car with powerful brushless motor can have a peak draw up to 200A.</p>
-
 <p>Additionally, the ESC typically contains a linear or switching voltage converter that outputs the power needed to control the steering servo; this is typically somewhere in the 4.8V to 6V range. Most BECs built into ESCs will not deliver more than about 1A of current, so it is not typically possible to power both the steering servo and the Jetson Nano from the BEC.</p>
-
 
 <div class="notices info" ><p>The main thing to look out for when getting an ESC on your own is to <strong>be sure to match your motor type to your ESC type (brushed/brushless)</strong>.</p>
 </div>
-
 
 <blockquote>
 <p>Source: <a href="http://docs.donkeycar.com/roll_your_own/">DonkeyCar docs</a>.</p>
@@ -604,11 +598,10 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
         
-		<div id="disqus_thread" ></div>
-        
         </div> 
 		
         
+
 
       </div>
 
@@ -913,46 +906,30 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 	
 
     </div>
-	
-<script>
-
-var disqus_config = function () {
-this.page.url = "https://ori.engieering";  
-this.page.identifier = "ori-engineering"; 
-};
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://ori-engineering.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
     
+		
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564788124"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564788124"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564788124"></script>
-    <script src="/js/jquery.sticky.js?1564788124"></script>
-    <script src="/js/featherlight.min.js?1564788124"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564788124"></script>
-    <script src="/js/highlight.pack.js?1564788124"></script>
+    <script src="/js/clipboard.min.js?1577024478"></script>
+    <script src="/js/perfect-scrollbar.min.js?1577024478"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1577024478"></script>
+    <script src="/js/jquery.sticky.js?1577024478"></script>
+    <script src="/js/featherlight.min.js?1577024478"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1577024478"></script>
+    <script src="/js/highlight.pack.js?1577024478"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564788124"></script>
-    <script src="/js/learn.js?1564788124"></script>
-    <script src="/js/hugo-learn.js?1564788124"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1577024478"></script>
+    <script src="/js/learn.js?1577024478"></script>
+    <script src="/js/hugo-learn.js?1577024478"></script>
 
-    <link href="/mermaid/mermaid.css?1564788124" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564788124"></script>
+    <link href="/mermaid/mermaid.css?1577024478" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1577024478"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
-    
-
+	
   </body>
 </html>
 

@@ -42,6 +42,11 @@
   </url>
   
   <url>
+    <loc>https://ori.engineering/host-pc/</loc>
+    <lastmod>2019-12-22T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ori.engineering/rc-car/scale/</loc>
     <xhtml:link
                 rel="alternate"
@@ -140,6 +145,10 @@
   </url>
   
   <url>
+    <loc>https://ori.engineering/host-pc/donkeycar/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.engineering/hardware-assembly/inventory/</loc>
   </url>
   
@@ -156,7 +165,23 @@
   </url>
   
   <url>
+    <loc>https://ori.engineering/host-pc/simulator/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.engineering/hardware-assembly/mounting-plates/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.engineering/hardware-assembly/jetson-nano-installation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.engineering/hardware-assembly/assembling-the-nano/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.engineering/hardware-assembly/connecting-the-car-to-the-nano/</loc>
   </url>
   
   <url>

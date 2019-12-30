@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.61.0" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Assembling the Jetson Nano :: Ori Engineering</title>
+
+    
+    <link href="/css/nucleus.css?1577732520" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1577732520" rel="stylesheet">
+    <link href="/css/hybrid.css?1577732520" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1577732520" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1577732520" rel="stylesheet">
+    <link href="/css/auto-complete.css?1577732520" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1577732520" rel="stylesheet">
+    <link href="/css/theme.css?1577732520" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1577732520" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css?1577732520" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1577732520"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/hardware-assembly/assembling-the-nano/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.engineering/">
+  <img src="/images/logo.png">
+</a>
+
+	  297 words.<br>
+	  Reading time: 2 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1577732520"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1577732520"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.engineering\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1577732520"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware-assembly/" title="Hardware assembly" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/hardware-assembly/">
+          <b>2. </b>Hardware assembly
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware-assembly/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware-assembly/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware-assembly/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware-assembly/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item active">
+        <a href="/hardware-assembly/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware-assembly/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware-installation/" title="Hardware installation" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware-installation/">
+          <b>3. </b>Hardware installation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-installation/jetson-nano-installation/" title="Jetson Nano installation" class="dd-item ">
+        <a href="/hardware-installation/jetson-nano-installation/">
+        Jetson Nano install
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-installation/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/hardware-installation/kernel-hacking/">
+        Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/host-pc/" title="Host PC" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/host-pc/">
+          <b>4. </b>Host PC
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/host-pc/donkeycar/" title="DonkeyCar installation" class="dd-item ">
+        <a href="/host-pc/donkeycar/">
+        DonkeyCar installation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/host-pc/simulator/" title="Simulator installation" class="dd-item ">
+        <a href="/host-pc/simulator/">
+        Simulator installation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.engineering/hardware-assembly/assembling-the-nano/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Assembling the Jetson Nano 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#plugging-in-the-microsd">Plugging in the microSD</a></li>
+    <li><a href="#connecting-the-noctua-fan-to-the-nano">Connecting the Noctua fan to the Nano</a></li>
+    <li><a href="#plugging-in-the-wlanbt-card">Plugging in the WLAN+BT card</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Assembling the Jetson Nano
+            </h1>
+          
+
+        
+
+
+
+<p>Now we can finish up our Nano by connecting the WLAN card, microSD and the fan to it.</p>
+<h2 id="plugging-in-the-microsd">Plugging in the microSD</h2>
+
+<div class="notices tip" ><p>I actually already did a lot of assembly some time ago, and I'm writing this in retrospect, so don't be worried if my Nano has a lot of stuff already hooked up to it and if it looks a bit different than yours, just focus on the stuff we're going through and disregard the rest.</p>
+</div>
+
+<p>First, we have to take out the Nano module from the breakout board we got it with. We begin by unscrewing these two Phillips screws, highlighted in yellow:</p>
+<p><img src="/images/hardware/jetson1.png" alt="Two Phillips screws to unscrew" style="zoom:50%;" /></p>
+<p>After unscrewing them, pull these two levers outwards (highlighted in yellow)  and your Nano module will pop out:</p>
+<p><img src="/images/hardware/jetson2.png" alt="Levers that hold the Nano card in place" style="zoom:50%;" /></p>
+<p>The Nano should pop out like this:</p>
+<p><img src="/images/hardware/jetson3.png" alt="Nano pops out" style="zoom:50%;" /></p>
+<p>And after pulling it out, you can plug in your microSD on the bottom side:</p>
+<p><img src="/images/hardware/jetson4.png" alt="microSD slot" style="zoom:50%;" /></p>
+<h2 id="connecting-the-noctua-fan-to-the-nano">Connecting the Noctua fan to the Nano</h2>
+<p>On the other side of the module, you can find the heatsink with four screw holes into which, if you haven't done so already, you can screw in the fan you bought for your Nano:</p>
+<p><img src="/images/hardware/jetson5.png" alt="Noctua fan" style="zoom:50%;" /></p>
+<p>You also need to plug in the 3-pin (or 4-pin) fan connector to the Jetson board right below the ethernet port:</p>
+<p><img src="/images/hardware/jetson6.png" alt="Fan connector" style="zoom:50%;" /></p>
+<h2 id="plugging-in-the-wlanbt-card">Plugging in the WLAN+BT card</h2>
+<p>The only thing left is the wireless card, which is plugged into the slot at the middle of the breakout board. You just need to unscrew one Phillips screw, insert the card, put the screw back in and connect your antennae connectors to the WLAN card. The antennae are the same, so don't worry where to plug which one, it doesn't matter.</p>
+<p><img src="/images/hardware/jetson7.png" alt="WLAN+BT Card" style="zoom:50%;" /></p>
+<h4 id="and-thats-it-for-the-nano-board">And that's it for the Nano board!</h4>
+<p>After putting it all back together, and connecting the antennae, it looks something like this:</p>
+<p><img src="/images/hardware/jetson8.png" alt="Finished Jetson Nano" style="zoom:50%;" /></p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/hardware-assembly/jetson-nano-installation/" title="Preparing the Jetson Nano"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/hardware-assembly/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1577732520"></script>
+    <script src="/js/perfect-scrollbar.min.js?1577732520"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1577732520"></script>
+    <script src="/js/jquery.sticky.js?1577732520"></script>
+    <script src="/js/featherlight.min.js?1577732520"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1577732520"></script>
+    <script src="/js/highlight.pack.js?1577732520"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1577732520"></script>
+    <script src="/js/learn.js?1577732520"></script>
+    <script src="/js/hugo-learn.js?1577732520"></script>
+
+    <link href="/mermaid/mermaid.css?1577732520" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1577732520"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

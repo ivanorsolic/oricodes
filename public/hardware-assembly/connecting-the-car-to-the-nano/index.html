@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.61.0" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Connecting the RC to the Nano :: Ori Engineering</title>
+
+    
+    <link href="/css/nucleus.css?1577732520" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1577732520" rel="stylesheet">
+    <link href="/css/hybrid.css?1577732520" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1577732520" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1577732520" rel="stylesheet">
+    <link href="/css/auto-complete.css?1577732520" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1577732520" rel="stylesheet">
+    <link href="/css/theme.css?1577732520" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1577732520" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css?1577732520" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1577732520"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/hardware-assembly/connecting-the-car-to-the-nano/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.engineering/">
+  <img src="/images/logo.png">
+</a>
+
+	  1336 words.<br>
+	  Reading time: 7 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1577732520"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1577732520"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.engineering\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1577732520"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware-assembly/" title="Hardware assembly" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/hardware-assembly/">
+          <b>2. </b>Hardware assembly
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware-assembly/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware-assembly/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware-assembly/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware-assembly/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware-assembly/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item active">
+        <a href="/hardware-assembly/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware-installation/" title="Hardware installation" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware-installation/">
+          <b>3. </b>Hardware installation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-installation/jetson-nano-installation/" title="Jetson Nano installation" class="dd-item ">
+        <a href="/hardware-installation/jetson-nano-installation/">
+        Jetson Nano install
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-installation/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/hardware-installation/kernel-hacking/">
+        Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/host-pc/" title="Host PC" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/host-pc/">
+          <b>4. </b>Host PC
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/host-pc/donkeycar/" title="DonkeyCar installation" class="dd-item ">
+        <a href="/host-pc/donkeycar/">
+        DonkeyCar installation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/host-pc/simulator/" title="Simulator installation" class="dd-item ">
+        <a href="/host-pc/simulator/">
+        Simulator installation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.engineering/hardware-assembly/connecting-the-car-to-the-nano/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Connecting the RC to the Nano 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#finding-your-escservo">Finding your ESC/Servo</a></li>
+    <li><a href="#i2c">I2C</a></li>
+    <li><a href="#why-i2c">Why I2C</a>
+      <ul>
+        <li><a href="#serial-uart">Serial UART:</a></li>
+        <li><a href="#spi">SPI:</a></li>
+        <li><a href="#i2c-1">I2C</a></li>
+      </ul>
+    </li>
+    <li><a href="#i2c-signals">I2C Signals</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#example-led-brightness">Example: LED Brightness</a></li>
+      </ul>
+    </li>
+    <li><a href="#pca9865">PCA9865</a></li>
+    <li><a href="#pwm-controlled-servo">PWM Controlled Servo</a></li>
+    <li><a href="#rc-servo">RC Servo</a></li>
+    <li><a href="#rc-esc">RC ESC</a>
+      <ul>
+        <li><a href="#my-schematic">My schematic:</a></li>
+      </ul>
+    </li>
+    <li><a href="#calibrating-the-rc">Calibrating the RC</a></li>
+    <li><a href="#the-neural-net">The Neural Net</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Connecting the RC to the Nano
+            </h1>
+          
+
+        
+
+
+
+<p>Now comes the part that should differ the most, based on the RC you got. But don't worry, it's very much doable no matter the RC you got!</p>
+<h2 id="finding-your-escservo">Finding your ESC/Servo</h2>
+<p>The first thing you should do is find your ESC and your Servo connectors, which should be a three wire connector coming from your RC car.</p>
+<p>If you've bought a car that came with a wireless receiver, both the connectors should be connected to it. Here's what it looked like on my RC:</p>
+<p><img src="/images/hardware/esc.png" alt="Photo of my ESC and wireless receiver" style="zoom:50%;" /></p>
+<p>If you didn't have a wireless receiver, you should be able to see a connector coming out of your ESC, which is hooked to the RC motor, and a connector coming out of your steering servo, found at the front of your RC.</p>
+<p>Here's a closeup of the two connectors connected to the receiver, with the first channel being the steering servo and the second one being the ESC, in my case:</p>
+<h2 id="i2c">I2C</h2>
+<h2 id="why-i2c">Why I2C</h2>
+<h3 id="serial-uart">Serial UART:</h3>
+<ul>
+<li>Serial ports are asynchronous (no CLK), so both devices have to agree to use a data rate - any excessive clock difference will result in garbled data</li>
+<li>Requires hardware overhead - the UART at either end is relatively complex and difficult to accurately implement in software if necessary. At least one start and stop bit is a part of each frame of data, meaning that 10 bits of transmission time are required for each 8 bits of data sent, which eats into the data rate.</li>
+<li>Two, and only two devices - <strong>bus contention</strong> (where two devices attempt to drive the same line at the same time) is always an issue and must be dealt with carefully to prevent damage to the devices in question, usually through external hardware.</li>
+<li>Data rate - only a fixed number of baud rates available, highest of which is usually 230400 bits per second.</li>
+</ul>
+<p><img src="https://cdn.sparkfun.com/r/600-600/assets/5/c/a/3/0/51adfda8ce395f935d000000.png" alt="Block diagram of an asynchronous serial system."></p>
+<h3 id="spi">SPI:</h3>
+<ul>
+<li>Number of pins - four lines for a single master -&gt; slave connection and each additional slave needs another chip select I/O pin on the master</li>
+<li>A larger number of devices rapidly proliferates the connections - routing signals sucks, sometimes impossible in tight PCB situations</li>
+<li>It's pretty good for high data rate full-duplex connections (10MHz - bits), scales nicely</li>
+<li>The hardware is pretty simple - a shift register, easy software  implementation</li>
+</ul>
+<p><img src="https://cdn.sparkfun.com/r/600-600/assets/e/b/d/5/8/51adfda8ce395f9d5d000000.png" alt="Block diagram of an SPI system."></p>
+<h3 id="i2c-1">I2C</h3>
+<ul>
+<li>I2C requires a mere two wires, like asynchronous serial, but those two wires can support up to 1008 slave devices.</li>
+<li>Also, unlike SPI, I2C can support a multi-master system, allowing more than one master to communicate with all devices on the bus (although the master devices can't talk to each other over the bus and must take turns using the bus lines).</li>
+<li>Data rates fall between asynchronous serial and SPI; most I2C devices can communicate at 100kHz or 400kHz. There is some overhead with I2C; for every 8 bits of data to be sent, one extra bit of meta data (the &ldquo;ACK/NACK&rdquo; bit) must be transmitted.</li>
+<li>The hardware required to implement I2C is more complex than SPI, but less than asynchronous serial. It can be fairly trivially implemented in software.</li>
+</ul>
+<p><img src="https://cdn.sparkfun.com/r/600-600/assets/3/d/1/b/6/51adfda8ce395f151b000000.png" alt="Block diagram of an I2C system"></p>
+<h2 id="i2c-signals">I2C Signals</h2>
+<p>Each I2C bus consists of two signals: SCL and SDA.</p>
+<ul>
+<li>SCL is the clock signal, and SDA is the data signal.</li>
+<li>The clock signal is always generated by the current bus master; some slave devices may force the clock low at times to delay the master sending more data (or to require more time to prepare data before the master attempts to clock it out). This is called &ldquo;clock stretching&rdquo;.</li>
+</ul>
+<h1 id="pwm">PWM</h1>
+<p>PWM is a digital (i.e. square wave) signal that oscillates according to a given <strong>frequency</strong> and <strong>duty cycle</strong>.</p>
+<ul>
+<li>The frequency (expressed in Hz) describes how often the output pulse repeats.</li>
+<li>The period is the time each cycle takes and is the inverse of frequency.</li>
+<li>The duty cycle (expressed as a percentage) describes the width of the pulse within that frequency window.</li>
+</ul>
+<p><img src="https://developer.android.com/things/images/pwm-signal.png" alt="img"></p>
+<p>You can adjust the duty cycle to increase or decrease the average &ldquo;on&rdquo; time of the signal. The following diagram shows pulse trains at 0%, 25%, and 100% duty:</p>
+<p><img src="https://developer.android.com/things/images/pwm-duty.png" alt="img"></p>
+<blockquote>
+<p><strong>Note:</strong> Most PWM hardware has to toggle at least once per cycle, so even duty values of 0% and 100% will have a small transition at the beginning of each cycle.</p>
+</blockquote>
+<h3 id="example-led-brightness">Example: LED Brightness</h3>
+<ul>
+<li>20% duty cycle at 100 Hz or above will just look dimmer than fully on</li>
+</ul>
+<p><img src="https://cdn.sparkfun.com/assets/4/a/f/c/e/512e8754ce395fac64000000.jpg" alt="Three dim LEDs"></p>
+<h2 id="pca9865">PCA9865</h2>
+<p><img src="C:%5CUsers%5Cori%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570137158265.png" alt="1570137158265"></p>
+<ul>
+<li>
+<p>Adjustable frequency PWM up to about 1.6 KHz</p>
+</li>
+<li>
+<p>12-bit resolution for each output - for servos, that means about 4us resolution at 60Hz update rate, 4096 levels</p>
+</li>
+<li>
+<p>Multiple Drivers (up to 62) can be chained to control still more servos.  With headers at both ends of the board, the wiring is as simple as connecting a <a href="https://www.adafruit.com/products/206">6-pin parallel cable</a> from one board to the next.</p>
+<p><img src="https://cdn-learn.adafruit.com/assets/assets/000/002/223/medium800/adafruit_products_MultiBoard_bb-1024.jpg?1396780621" alt="adafruit_products_MultiBoard_bb-1024.jpg"  /></p>
+</li>
+<li>
+<p>Board 0:  Address = 0x40  Offset = binary 00000 (no jumpers required)</p>
+</li>
+<li>
+<p>Board 1:  Address = 0x41  Offset = binary 00001 (bridge A0)</p>
+</li>
+<li>
+<p>Board 2:  Address = 0x42  Offset = binary 00010 (bridge A1)</p>
+</li>
+<li>
+<p>Board 3:  Address = 0x43  Offset = binary 00011 (bridge A0 &amp; A1)</p>
+</li>
+<li>
+<p>Board 4:  Address = 0x44  Offset = binary 00100 (bridge A2)</p>
+</li>
+<li>
+<p>Board 5: &hellip;</p>
+<p><img src="https://cdn-learn.adafruit.com/assets/assets/000/002/263/medium800/adafruit_products_2012_10_13_IMG_0692-1024.jpg?1396781108" alt="adafruit_products_2012_10_13_IMG_0692-1024.jpg"></p>
+</li>
+</ul>
+<h2 id="pwm-controlled-servo">PWM Controlled Servo</h2>
+<ol>
+<li>PWM signals go into the signal demodulation circuit through the receiving channel, so to generate a DC bias voltage.</li>
+<li>It will then be compared with the voltage of the potentiometer, and thus a voltage gap is obtained and input into the motor driver IC to drive the motors to rotate clockwise or anticlockwise.</li>
+<li>When the speed reaches to a certain number, it will drive the potentiometer R to rotate by the cascaded reduction gear, until the gap is reduced to 0 and the servo stops spinning.</li>
+<li>A servo is controlled by PWM signals, and the change of duty cycle control that of the position the servo rotates to.</li>
+</ol>
+<p>A typical servo motor expects to be updated every 20 ms with a pulse between 1 ms and 2 ms, or in other words, between a 5 and 10% duty cycle on a 50 Hz waveform.</p>
+<p>The period of 20 ms (50 Hz) comes from the days where the signal was encoded in PPM format to be sent over the air.</p>
+<p>The PPM period was around 22.5 ms, and the conversion to PWM was trivial: the time of the PWM high state was the time position of the PPM pulse for that servo.</p>
+<h2 id="rc-servo">RC Servo</h2>
+<ul>
+<li>
+<p>Modern RC servo position is not defined by the PWM duty cycle (ON/OFF time) but only by the width of the pulse.</p>
+</li>
+<li>
+<p>The frequency doesn't matter as long as it is between 40 Hz and 200 Hz.</p>
+</li>
+<li>
+<p>Typically expects around 4.8V to 6V input on the power wire (varies by car) and a PWM control signal on the signal wire.</p>
+</li>
+<li>
+<p>Three wires are colored black-red-white, or brown-red-yellow, where the dark wire (black/brown) is ground, and the center wire (red) is power, and the light wire (white/yellow) is control.</p>
+</li>
+<li>
+<p><strong>RC-style PWM:</strong></p>
+<ul>
+<li>One pulse is sent 60 times a second, and the width of this pulse controls how left/right the servo turns.</li>
+<li>1500 microseconds - the servo is centered;</li>
+<li>1000 microseconds - the servo is turned all the way left (or right);</li>
+<li>2000 microseconds - the servo is turned all the way in the other direction</li>
+</ul>
+<p><img src="https://www.digikey.in/-/media/Images/Article%20Library/TechZone%20Articles/2017/March/Servo%20Motors%20and%20Control%20with%20Arduino%20Platforms/article-2017march-servo-motors-and-control-fig2.jpg?ts=7e4dd0f5-a73a-4dac-bf4a-46d354a1e3b6&amp;la=en-IN" alt="Image result for servo pwm"></p>
+</li>
+</ul>
+<h2 id="rc-esc">RC ESC</h2>
+<ul>
+<li>Pulse between 1000 and 2000 microseconds</li>
+<li>Controls the power to the motor so the motor spins with different amounts of power in forward or reverse.</li>
+<li>Again, 1500 microseconds typically means &ldquo;center&rdquo; which for the motor means &ldquo;dead stop.&rdquo;</li>
+</ul>
+<h3 id="my-schematic">My schematic:</h3>
+<p>![PCA9865 assembly_bb](C:\Users\ori\Desktop\Masters\sketches and docs\PCA9865 assembly_bb.png)</p>
+<blockquote>
+<p>Note to self: It is not a good idea to use the Jetson 5v pin to power your servos. Electrical noise and &lsquo;brownouts&rsquo; from excess current draw can cause the Nano to act erratically, reset and/or overheat.</p>
+</blockquote>
+<h2 id="calibrating-the-rc">Calibrating the RC</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Find the i2c bus</span>
+sudo i2cdetect -l
+
+<span style="color:#75715e"># PCA9865 default address is 0x40 @ the connected bus</span>
+sudo i2cdetect -r -y 1
+
+<span style="color:#75715e"># Donkey calibration utility</span>
+donkey calibrate --channel n --bus<span style="color:#f92672">=</span>n
+</code></pre></div><p><a href="C:%5CUsers%5Cori%5CDesktop%5CMasters%5Cprojects%5Cdonkeycar%5Cdonkeycar%5Cmanagement%5Cbase.py">Calibrate utility source</a></p>
+<p><a href="C:%5CUsers%5Cori%5CDesktop%5CMasters%5Cprojects%5Cdonkeycar%5Cdonkeycar%5Cparts%5Cactuator.py">The function for setting the pulse: set_pulse</a></p>
+<p><a href="https://github.com/adafruit/Adafruit_Python_PCA9685/blob/master/Adafruit_PCA9685/PCA9685.py#L102">Manufacturer lib</a></p>
+<h2 id="the-neural-net">The Neural Net</h2>
+<p><img src="https://paperswithcode.com/media/thumbnails/task/task-0000001046-2cae9a89_l2pCrK7.gif" alt="img"></p>
+<p><a href="https://paperswithcode.com/task/lane-detection/codeless">https://paperswithcode.com/task/lane-detection/codeless</a></p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/hardware-assembly/assembling-the-nano/" title="Assembling the Jetson Nano"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/hardware-installation/" title="Hardware installation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1577732520"></script>
+    <script src="/js/perfect-scrollbar.min.js?1577732520"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1577732520"></script>
+    <script src="/js/jquery.sticky.js?1577732520"></script>
+    <script src="/js/featherlight.min.js?1577732520"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1577732520"></script>
+    <script src="/js/highlight.pack.js?1577732520"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1577732520"></script>
+    <script src="/js/learn.js?1577732520"></script>
+    <script src="/js/hugo-learn.js?1577732520"></script>
+
+    <link href="/mermaid/mermaid.css?1577732520" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1577732520"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

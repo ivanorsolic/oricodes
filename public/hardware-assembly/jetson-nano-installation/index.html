@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.61.0" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Preparing the Jetson Nano :: Ori Engineering</title>
+
+    
+    <link href="/css/nucleus.css?1577732520" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1577732520" rel="stylesheet">
+    <link href="/css/hybrid.css?1577732520" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1577732520" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1577732520" rel="stylesheet">
+    <link href="/css/auto-complete.css?1577732520" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1577732520" rel="stylesheet">
+    <link href="/css/theme.css?1577732520" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1577732520" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css?1577732520" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1577732520"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/hardware-assembly/jetson-nano-installation/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.engineering/">
+  <img src="/images/logo.png">
+</a>
+
+	  230 words.<br>
+	  Reading time: 2 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1577732520"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1577732520"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.engineering\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1577732520"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware-assembly/" title="Hardware assembly" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/hardware-assembly/">
+          <b>2. </b>Hardware assembly
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware-assembly/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware-assembly/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware-assembly/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item active">
+        <a href="/hardware-assembly/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware-assembly/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-assembly/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware-assembly/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware-installation/" title="Hardware installation" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware-installation/">
+          <b>3. </b>Hardware installation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-installation/jetson-nano-installation/" title="Jetson Nano installation" class="dd-item ">
+        <a href="/hardware-installation/jetson-nano-installation/">
+        Jetson Nano install
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware-installation/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/hardware-installation/kernel-hacking/">
+        Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/host-pc/" title="Host PC" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/host-pc/">
+          <b>4. </b>Host PC
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/host-pc/donkeycar/" title="DonkeyCar installation" class="dd-item ">
+        <a href="/host-pc/donkeycar/">
+        DonkeyCar installation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/host-pc/simulator/" title="Simulator installation" class="dd-item ">
+        <a href="/host-pc/simulator/">
+        Simulator installation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.engineering/hardware-assembly/jetson-nano-installation/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Preparing the Jetson Nano 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#preparing-the-microsd">Preparing the microSD</a></li>
+    <li><a href="#first-boot">First boot</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Preparing the Jetson Nano
+            </h1>
+          
+
+        
+
+
+
+<p>Before we begin assembling our hardware together, we should first prepare our Jetson Nano by installing an OS on it and verifying everything works before it gets buried among all the other hardware on the RC.</p>
+<h2 id="preparing-the-microsd">Preparing the microSD</h2>
+<p>First, we'll prepare the microSD by installing an OS on it for the Nano to run.</p>
+
+<div class="notices tip" ><p>The <a href="https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit">official Jetson Nano docs</a> are great and you can just follow them until the <em>Next Steps</em> step.</p>
+</div>
+
+<p>If you want a TL;DR version:</p>
+<ul>
+<li>
+<p><a href="https://developer.nvidia.com/jetson-nano-sd-card-image-r322">Download</a> the Jetson Nano Developer Kit SD Card Image</p>
+</li>
+<li>
+<p>Format your microSD card and then flash the image on it using whatever tool you’d like.</p>
+<ul>
+<li>You can use <a href="https://www.balena.io/etcher">Etcher</a></li>
+</ul>
+</li>
+<li>
+<p>Insert the microSD into the Jetson and connect your peripherals to it: monitor, keyboard, mouse and an ethernet cable.</p>
+</li>
+</ul>
+<p><img src="/images/jetson%20animation.gif" alt="Jetson"></p>
+
+<div class="notices tip" ><p>If you’re using Windows, after the flashing it’ll complain you need to <a href="https://github.com/balena-io/etcher/issues/2024">format the microSD before you use it</a>, since it doesn’t recognize the Linux filesystem you just flashed on it. Don’t format it, just ignore the warning.</p>
+</div>
+
+<h2 id="first-boot">First boot</h2>
+<p>The TL;DR version would be:</p>
+<ul>
+<li>Carefully read through the NVIDIA Jetson software EULA and decide if you’ll accept it 🙃</li>
+<li>Select the system language, keyboard layout and time zone</li>
+<li>Create your user and name your Jetson</li>
+<li>Log in</li>
+</ul>
+<p>If all went well, you should see the following screen:</p>
+<p><img src="/images/first%20boot.png" alt="First boot"></p>
+<p>Congrats, you’ve set up the base OS for the Jetson. On to the fun part!</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/hardware-assembly/mounting-plates/" title="Building the mounting plates for the hardware"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/hardware-assembly/assembling-the-nano/" title="Assembling the Jetson Nano" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1577732520"></script>
+    <script src="/js/perfect-scrollbar.min.js?1577732520"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1577732520"></script>
+    <script src="/js/jquery.sticky.js?1577732520"></script>
+    <script src="/js/featherlight.min.js?1577732520"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1577732520"></script>
+    <script src="/js/highlight.pack.js?1577732520"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1577732520"></script>
+    <script src="/js/learn.js?1577732520"></script>
+    <script src="/js/hugo-learn.js?1577732520"></script>
+
+    <link href="/mermaid/mermaid.css?1577732520" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1577732520"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

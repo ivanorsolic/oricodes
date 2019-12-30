@@ -103,3 +103,6 @@ weight = 12
 name = "<i class='fas fa-file'></i> My CV"
 url = "https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"
 weight = 20
+
+[markup.goldmark.renderer]
+unsafe= true

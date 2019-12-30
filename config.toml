@@ -1,6 +1,6 @@
 baseURL = "https://ori.codes/"
 languageCode = "en-us"
-title = "Ori Engineering"
+title = "Ori Codes"
 theme = "hugo-theme-learn"
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
@@ -35,7 +35,7 @@ home = [ "HTML", "RSS", "JSON"]
 
   # Set this to true to disable this behavior (some proxies don't handle well this optimization)
 
-  disableAssetsBusting = false
+  disableAssetsBusting = true
 
   # Set this to true to disable copy-to-clipboard button for inline code.
 

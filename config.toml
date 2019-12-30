@@ -1,4 +1,4 @@
-baseURL = "https://ori.engineering/"
+baseURL = "https://ori.codes/"
 languageCode = "en-us"
 title = "Ori Engineering"
 theme = "hugo-theme-learn"

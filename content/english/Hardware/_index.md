@@ -1,13 +1,11 @@
 +++
-title = "Hardware assembly"
+title = "Hardware"
 date = 2019-07-27T16:24:11+02:00
 weight = 2
 chapter = true
 pre = "<b>2. </b>"
 
 +++
-
-### Hands on hardware
 
 # Assembling the hardware
 

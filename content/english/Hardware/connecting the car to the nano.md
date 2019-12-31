@@ -51,7 +51,7 @@ There's also a pretty neat primer you can [read on the i2c-bus.org site](https:/
 
 {{% notice tip %}}
 
-Feel free to skip this part if you aren't interested in the alternatives to I²C and why were using it. You don't need to know it to be able to continue with the tutorial. That being said, it wouldn't hurt to pick up a few other protocol names, just to know what's out there and how they differ.
+Feel free to skip this part if you aren't interested in the alternatives to I²C and why we're using it. You don't need to understand this stuff in order to continue with the tutorial. That being said, it wouldn't hurt to get to know a few other protocols, just to know what's out there and how they differ.
 
 {{% /notice %}}
 
@@ -86,7 +86,7 @@ If you are interested in this kinda stuff, but haven't really done any embedded/
 ### I2C
 
 - I2C requires a mere two wires, like asynchronous serial, but those two wires can support up to 1008 slave devices. 
-- Also, unlike SPI, I2C can support a multi-master system, allowing more than one master to communicate with all devices on the bus (although the master devices can't talk to each other over the bus and must take turns using the bus lines).
+- Unlike SPI, I2C can support a multi-master system, allowing more than one master to communicate with all devices on the bus (although the master devices can't talk to each other over the bus and must take turns using the bus lines).
 - Data rates fall between asynchronous serial and SPI; most I2C devices can communicate at 100kHz or 400kHz. There is some overhead with I2C; for every 8 bits of data to be sent, one extra bit of meta data (the "ACK/NACK" bit) must be transmitted.
 - The hardware required to implement I2C is more complex than SPI, but less than asynchronous serial. It can be fairly trivially implemented in software.
 
@@ -190,7 +190,7 @@ The PPM period was around 22.5 ms, and the conversion to PWM was trivial: the ti
 
 {{% notice warning %}}
 
-Note to self: It is **not a good idea** to use the Jetson 5V pin to power your servos. Electrical noise and 'brownouts' from excess current draw can cause the Nano to act erratically, reset and/or overheat. The PCA9685 should get its own, separate power supply.
+Note to self: It is **not a good idea** to use the Jetson 5V pin to power your PCA9865. Electrical noise and 'brownouts' from excess current draw can cause the Nano to act erratically, reset and/or overheat. The PCA9685 should get its own, separate power supply.
 
 {{% /notice %}}
 
@@ -222,4 +222,4 @@ I've connected mine to the first bus (Bus 0):
 
 ![Pinout 2](/images/hardware/pinout2.png)
 
-# The hardware part is done!
+# The hardware part is done!a

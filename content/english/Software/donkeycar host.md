@@ -8,8 +8,20 @@ weight=12
 
 # Donkey installation
 
-- Install [miniconda Python 3.7](https://conda.io/miniconda.html)
-- Install [git](https://git-scm.com/download)
+Let's install the Donkey software on your host pc. The only part where this differs between the three platforms, Mac OS X, Linux and Windows, is in the Miniconda software installation, so we'll get that out of the way first:
+
+- If you're on a Mac: [download Miniconda here](https://docs.conda.io/en/latest/miniconda.html#macosx-installers), [git here](https://www.atlassian.com/git/tutorials/install-git) and install them
+
+- If you're on Windows: [download Miniconda here](https://docs.conda.io/en/latest/miniconda.html#windows-installers), [git here](https://git-scm.com/download/win) and install them
+
+- If you're on Linux: [download Miniconda here](https://docs.conda.io/en/latest/miniconda.html#linux-installers) and install it
+
+- If you're on Mac/Linux open up a terminal and follow the rest of the tutorial
+
+- If you're on Windows, open an Anaconda Prompt via Start Menu and follow the rest of the tutorial:
+
+- Go to a place where you want the stuff we'll be working on to be.
+
 - Make a folder for your projects:
 
     ```bash
@@ -32,6 +44,8 @@ weight=12
     conda activate donkey
     pip install -e .[pc]
     ```
+
+- If you're using a GPU and not using a Mac (sorry, no GPU support for you folks):
 
 - Install Tensorflow GPU:
 

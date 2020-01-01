@@ -7,9 +7,9 @@ pre = "<b>3. </b>"
 
 +++
 
-### Hardware meets software
+### Making hardware do stuff
 
-# Actually telling the hardware what to do
+# Software
 
-In this chapter we’ll go through the installation of all things software, and the calibration of the connected hardware parts.
+In this chapter we’ll go deal with all things software we need before starting our ML/DL work.
 

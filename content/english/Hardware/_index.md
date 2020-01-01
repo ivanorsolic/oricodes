@@ -7,7 +7,8 @@ pre = "<b>2. </b>"
 
 +++
 
-# Assembling the hardware
+### Assembling the real-world stuff
+
+# Hardware
 
 Through this chapter we'll go through assembling the hardware platform, all things hardware.
-

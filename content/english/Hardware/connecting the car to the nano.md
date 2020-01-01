@@ -35,7 +35,15 @@ It doesn't matter which channel you connect the servo to, and which one the ESC 
 
 Okay, so we hooked up our car to the PCA9685. Now we need to hook it up to our Nano to be able to control the car through it. 
 
-To do that, we first have to learn a bit about the way the Nano communicates with the RC through the PCA9685, using a protocol called I²C (**Inter-Integrated Circuit**) (pronounced: I-squared-C).
+But first, let's talk a bit about the way the Nano communicates with the RC through the PCA9685, using a protocol called I²C (**Inter-Integrated Circuit**) (pronounced: I-squared-C).
+
+{{% notice tip %}}
+
+Feel free to skip this part if you aren't interested in the alternatives to I²C and why we're using it. You don't need to understand this stuff in order to continue with the tutorial. That being said, it wouldn't hurt to get to know a few other protocols, just to know what's out there and how they differ.
+
+{{% /notice %}}
+
+# [**CLICK HERE TO SKIP**](#connecting-the-pca9865-to-the-nano)
 
 ## I2C
 
@@ -49,12 +57,6 @@ There's also a pretty neat primer you can [read on the i2c-bus.org site](https:/
 
 ### Why I2C? Alternatives?
 
-{{% notice tip %}}
-
-Feel free to skip this part if you aren't interested in the alternatives to I²C and why we're using it. You don't need to understand this stuff in order to continue with the tutorial. That being said, it wouldn't hurt to get to know a few other protocols, just to know what's out there and how they differ.
-
-{{% /notice %}}
-
 This is basically a TL;DR of [the awesome SparkFun I²C tutorial](https://learn.sparkfun.com/tutorials/i2c/all), be sure to check it out if you wanna go into more depth. I'll assume you have some basics of UART and SPI while going through them.
 
 {{% notice tip %}}
@@ -62,8 +64,6 @@ This is basically a TL;DR of [the awesome SparkFun I²C tutorial](https://learn.
 If you are interested in this kinda stuff, but haven't really done any embedded/electronics work before, please do check out [**the Engineering Essentials tutorials on SparkFun**](https://www.sparkfun.com/engineering_essentials), they're great.
 
 {{% /notice %}}
-
-# [**CLICK HERE TO SKIP**](#connecting-the-pca9865-to-the-nano)
 
 ### Serial UART:
 

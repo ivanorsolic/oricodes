@@ -47,5 +47,3 @@ If all went well, you should see the following screen:
 
 ![First boot](/images/first%20boot.png)
 
-Congrats, you’ve set up the base OS for the Jetson. On to the fun part!
-

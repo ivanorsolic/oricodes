@@ -1,10 +1,98 @@
 +++
-title = "Installing DonkeyCar on your RC car"
+title = "DonkeyCar installation: RC car"
 menuTitle = "DonkeyCar: RC car"
 draft = false
 weight=14
 
 +++
+
+## Connecting to your RC via SSH
+
+To connect and work with your RC throughout the rest of the project, you'll need two things:
+
+- An SSH client
+- The IP address of your RC
+
+### SSH Clients:
+
+If you're using Linux or a Mac, you're all set. They come with a SSH client pre-installed, and you just need to open up a terminal and type:
+
+```bash
+ssh username@ipAddress
+```
+
+If you're using Windows, you need to install one. I'd recommend using [MobaXTerm](https://mobaxterm.mobatek.net/):
+
+- Download [the installer](https://download.mobatek.net/1242019111120613/MobaXterm_Installer_v12.4.zip) or [the portable version](https://download.mobatek.net/1242019111120613/MobaXterm_Portable_v12.4.zip) and install/unpack it
+
+- To SSH to a device:
+
+  - Open MobaXTerm
+
+  - Press on the *Start local terminal* button
+
+  - ```bash
+    ssh username@ipAddress
+    ```
+
+### SSH via Ethernet:
+
+If you're connected via an ethernet cable, you should be able to find your IP address:
+
+- Through your Router/Gateway interface;
+
+- Or by connecting your Nano to a monitor, keyboard and mouse, opening up a terminal and writing:
+
+  ```bash
+  ip addr show
+  ```
+
+### SSH via WiFi:
+
+I would highly recommend this approach, so you can connect your RC to a WiFi network and take it and your laptop with you and connect to it on the fly. 
+
+To connect it to a WiFi network, you either need to first SSH into it over ethernet, or connect it to a monitor, keyboard and mouse, and do the following:
+
+- Connect to a WiFi network:
+
+  ```bash
+  nmcli device wifi connect YOUR-SSID password YOUR-PASSWORD
+  ```
+
+- Or make the Jetson into a hotspot so you can connect your laptop to it:
+
+  ```bash
+  nmcli dev wifi hotspot ifname wlan0 ssid HOTSPOT-SSID password HOTSPOT-PASSWORD
+  ```
+
+What I like to do is connect it to both my home network, and a hotspot on my mobile phone, so I can use it anywhere and still have Internet access on both it and my laptop. 
+
+To do so, I use the `nmcli autoconnect.priority` property, so my home network has a higher priority than my phone hotspot, in case I forget to turn it off while I'm at home, so it doesn't eat up my data plan.
+
+You can find all of your network connections saved in `/etc/NetworkManager/system-connections/`, which you can open up with a text editor and edit the `autoconnect.priority` property for each network. The higher the integer you assign to it, the higher the priority. 
+
+As an example, the network connection profile for my hotspot looks something like:
+
+```bash
+[connection]
+id=Hotspot
+uuid=random-long-string
+type=wifi
+autoconnect_priority=2 # The home network has a priority of 3, in my case
+permissions=
+```
+
+If your Nano keeps dropping the connection for some reason, try disabling the power saving mode found in `/etc/NetworkManager/conf.d`, using a text editor.
+
+Also, I assumed your Nano already has the `nmcli` or the `NetworkManager` utility installed, since it, at the time of writing, comes pre-installed with any Ubuntu distro. If, for some reason, you don't have it, you can install it using `sudo apt install network-manager`.
+
+After connecting your Nano to a WiFi network you want, find out its IP Address by opening up a terminal and typing:
+
+```bash
+ip addr show
+```
+
+#### Now you can use your SSH client and SSH into the Nano, type in your username and password and you're ready to follow the rest of the tutorial.
 
 ## Dependencies
 
@@ -113,18 +201,18 @@ The `cmake` command shows a summary of its configuration, and you should make su
 
 Now, to compile the code from the build folder, run the following:
 
-{{% notice warning %}}
-
-This will take a while. And by a while, I mean: *Go grab a cup of coffee and watch a TV Show or a movie or something* while.
-
-{{% /notice %}}
-
 ```bash
 make -j2
 # Install OpenCV
 sudo make install
 sudo ldconfig
 ```
+
+{{% notice warning %}}
+
+This will take a while. And by a while, I mean: **Go grab a cup of coffee and watch a TV Show or a movie or something** while.
+
+{{% /notice %}}
 
 Now we just need to link it to our virtual environment:
 

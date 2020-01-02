@@ -12,7 +12,7 @@ Even if you don't have an RC car, you can start here and follow the rest of the 
 
 {{% /notice %}}
 
-<center><video controls src="/video/simulator_trim.mp4" autoplay loop height="500px"></video></center>
+<center><video controls src="/video/simulator_trim.mp4" autoplay loop width=100%></video></center>
 This is one of the coolest parts of DonkeyCar for me, and probably one of the most useful ones. 
 
 It's also a good way to get your feet wet with this kind of a project without building an actual RC. If it turns out you like it, you can always go back to the beginning and build an actual platform.

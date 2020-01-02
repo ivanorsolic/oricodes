@@ -178,6 +178,185 @@ sudo nano /etc/rc.local
 /home/YOUR-USERNAME/env/bin/ds4drv --led 00ff00
 ```
 
+## Any other gamepad/joystick/controller
+
+If it's a Bluetooth one, try pairing it via bluetoothctl and see if it mounts at `/dev/input/js0`. If it does, great, you can move on. 
+
+If not, try connecting it via USB and see if it mounts at  `/dev/input/js0`, if it does, you're good.
+
+If neither goes, try searching how to connect that particular controller to a Linux device online, if there's a way (mostly there is), it should mount at the above mentioned `js0` and you should be able to follow along.
+
 ## Creating a Button/Axis mapping:
 
-- TODO
+After your controller is connected, run:
+
+```bash
+donkey createjs
+```
+
+The output should be:
+
+```bash
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+## Welcome to Joystick Creator Wizard. ##
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+This will generate code to use your joystick with a Donkey car.
+
+Overview:
+
+First we name each button, then each axis control.
+Next we map names to actions.
+Finally we output a python file you can use in your project.
+
+Hit Enter to continue
+
+# After pressing Enter
+Please plug-in your controller via USB or bluetooth. Make sure status lights are on and device is mapped.
+Enter to continue
+# You can press enter since we've already gone through connecting your controller
+Where can we find the device file for your joystick?
+Hit Enter for default: /dev/input/js0 or type alternate path:
+# Should be /dev/input/js0 if it's a PS3/PS4/Xbox/Standard USB one
+# Hit enter and see if it finds it (it will if its on /dev/input/js0)
+Attempting to open device at that file...
+Opening /dev/input/js0...
+Device name: The type of Controller you're using
+Found and accessed input device.
+# After pressing Enter
+Next we are going to look for gyroscope data.
+For 5 seconds, move controller and rotate on each axis. Hit Enter then start moving:
+# You can skip this, since you most probably won't be using it
+Ok, we didn't see any events. So perhaps your controller doesn't emit gyroscope data. No problem.
+```
+
+Finally, you'll get to this part:
+
+```bash
+We will display the current progress in this set of tables:
+
+Button Map:
++-------------+-------------+
+| button code | button name |
++-------------+-------------+
++-------------+-------------+
+Axis Map:
++-----------+-----------+
+| axis code | axis name |
++-----------+-----------+
++-----------+-----------+
+Control Map:
++---------+--------+
+| control | action |
++---------+--------+
++---------+--------+
+
+As you name buttons and map them to controls this table will be updated.
+
+```
+
+While in here, you should go through pressing every button on your controller, and giving it a name.
+
+Note: during this first step, you can only map buttons, the axes, such as triggers or analog sticks will come next.
+
+For my Xbox One Controller, I made the following button map:
+
+```bash
+Button Map:
++-------------+-------------+
+| button code | button name |
++-------------+-------------+
+|    0x130    |      A      |
+|    0x131    |      B      |
+|    0x133    |      Y      |
+|    0x132    |      X      |
+|    0x137    |    Start    |
+|    0x136    |    Select   |
+|    0x135    |      R1     |
+|    0x134    |      L1     |
+|    0x139    |      RS     |
+|    0x138    |      LS     |
++-------------+-------------+
+```
+
+After mapping all the buttons, wait for 10 seconds and enter `Y` when the program asks you if you've finished mapping all the buttons.
+
+This is what my axis map looks like:
+
+```bash
+Axis Map:
++-----------+-------------------------+
+| axis code |        axis name        |
++-----------+-------------------------+
+|    0x5    |            RT           |
+|    0x2    |            LT           |
+|    0x0    |  Left Stick: Horizontal |
+|    0x1    |   Left Stick: Vertical  |
+|    0x4    |  Right Stick: Vertical  |
+|    0x3    | Right Stick: Horizontal |
++-----------+-------------------------+
+```
+
+You can enter `D` when you're done and move on to the control map, through which we'll map buttons and axes to specific car controls.
+
+This is what my control map looks like:
+
+```bash
+Control Map:
++------------------------+--------------------------+
+|        control         |          action          |
++------------------------+--------------------------+
+|         Start          |       toggle_mode        |
+|         Select         |   erase_last_N_records   |
+|           A            |      emergency_stop      |
+|           R1           |  increase_max_throttle   |
+|           L1           |  decrease_max_throttle   |
+|           B            | toggle_constant_throttle |
+|           X            | toggle_manual_recording  |
+| Left Stick: Horizontal |       set_steering       |
+| Right Stick: Vertical  |       set_throttle       |
++------------------------+--------------------------+
+```
+
+If you've messed something up, don't worry, at the next menu you can go back to any step you'd like:
+
+```bash
+Now we are nearly done! Are you happy with this config or would you like to revisit a topic?
+H)appy, please continue to write out python file.
+B)uttons need renaming.
+A)xes need renaming.
+T)hrottle and steering need remap.
+R)emap buttons to controls.
+```
+
+If you're happy with your maps, enter `H` and it will prompt you for a name under which to save your mapping. The default one is `my_joystick.py`, but you can enter a custom one, if you're planning to use multiple different controllers, or just for non-generic-namings sake:
+
+```bash
+Now we will write these values to a new python file.
+What is the name of python file to create joystick code? [default: my_joystick.py] xbox_one_controller.py
+```
+
+It will then ask what to name the custom Python class of the controller you've just created:
+
+```bash
+What is the name of joystick class? [default: MyJoystick] XboxOneController
+xbox_one_controller.py written.
+Check your new python file to see the controller implementation. Import this in manage.py and use for control.
+```
+
+Almost there, we just need to import our custom mapping in the `manage.py` script to be able to use it with our RC.
+
+Open up `manage.py` (`nano` or `vim`) and at the end of the imports, add the following line:
+
+```python
+# This assumes you haven't changed the default names
+from my_joystick import MyJoystick
+```
+
+Or if you've defined a custom name for the python file containing your mapping, and the class it contains, which I did, then modify the import line so it imports the with your name:
+
+```python
+# In my case
+from xbox_one_controller import XboxOneController
+```
+
+And you're done! Now we can start actually driving the car using our controller!

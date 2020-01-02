@@ -69,7 +69,7 @@ The different types of camera are:
 - CVCAM: a USB camera connected to the Nano, I'm using this for my GoPro clone
 - WEBCAM: also for USB cameras, but this requires further setup since it uses pygame
 - V4L: Video4Linux
-- MOCK: No idea, sorry.
+- MOCK: A fake camera that outputs a static frame.
 
 If your image is flipped, or you want to mount your camera in a rotated position, use:
 

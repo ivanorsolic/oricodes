@@ -14,7 +14,7 @@ weight=16
 
 ## Calibrating the throttle:
 
-<center><video controls src="/video/throttle_calibration.mp4" autoplay loop width="500px"></video></center>
+<center><video controls src="/video/throttle_calibration.mp4" autoplay muted loop width=100%></video></center>
 
 **First, you'll need to turn on your car**; the actual RC, not the Nano.
 
@@ -63,8 +63,7 @@ To detect your reverse values for the throttle:
 
 ## Calibrating the steering
 
-<center><video controls src="/video/steering_calibration.mp4" autoplay loop width="500px"></video></center>
-
+<center><video controls src="/video/steering_calibration.mp4" autoplay muted loop width=100%></video></center>
 Once again, run the following:
 
 ```bash

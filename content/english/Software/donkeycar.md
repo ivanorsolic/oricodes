@@ -50,9 +50,11 @@ We'll continue our project by explaining how to:
 
 Before we get to work, here are some links to Donkey resources you can check out to get familiar with it, and maybe better understand how it works:
 
-#### [The official Donkey documentation](http://docs.donkeycar.com/) and the Slack channel
+#### [The official Donkey documentation](http://docs.donkeycar.com/) and the [Slack channel](http://donkeycar.slack.com/)/[Discourse group](https://donkey.discourse.group/)
 
 I highly recommend going through these two. The docs are great and the Slack channel has a bunch of people trying to do the same thing you are, who love helping one another solve issues and bounce ideas. I love the Donkey community and can't recommend enough going over to the channel and just saying hi.
+
+One more thing; The Slack channel for the Donkey community is getting too big to be usable with the free plan, so you can only see messages going back a couple of months. That's why they're trying to migrate to [the new Discourse group](https://donkey.discourse.group/), so I'd recommend going there instead of the Slack channel.
 
 The following videos are also an interesting watch, albeit not necessary to continue with the tutorial. One of the reasons why we're using Donkey is so we don't have to worry about all of the details it solves for us. But if you're like me, you're gonna wanna know a bit how it works before using it to piece your RC together. :) 
 

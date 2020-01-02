@@ -25,11 +25,11 @@ Okay, we found the connectors, how do we hook them up to our car?
 
 ## Enter: the PCA9685
 
-We connect them to the first two channels of our PCA9685, highlighted in green and blue:
+We connect them to the first two channels (0 and 1) of our PCA9685, highlighted in green and blue:
 
 <img src="/images/hardware/pca2.png" alt="Photo of my ESC and wireless receiver" style="zoom:50%;" />
 
-It doesn't matter which channel you connect the servo to, and which one the ESC to, just take note which one went where, you'll need it later on:
+It doesn't matter which channel you connect the servo to, and which one the ESC to, just take note which one went where, you'll need it later on. You can see the numbers denoting the channels above the three pins. I've connected mine to the zeroth and first channel:
 
 <img src="/images/hardware/pca3.png" alt="Photo of my ESC and wireless receiver" style="zoom:50%;" />
 
@@ -200,13 +200,13 @@ We'll be using the SCL, SDA I2C pins from the PCA9865, along with the GND and VC
 
 ![PCA pins](/images/hardware/pca5.png)
 
-To connect them to the Nano, we first have to find out which of the Nano pins on its J41 header we should use. Luckily, the Jetson Nano J41 header has the same pinout as the Raspberry Pi, so after a little Web searching, it's easy to label the pins we need:
+To connect them to the Nano, we first have to find out which of the Nano pins on its J41 header we should use. Luckily, the Jetson Nano J41 header has the same pinout as the Raspberry Pi, [which you can see here](https://www.jetsonhacks.com/nvidia-jetson-nano-j41-header-pinout/), or just use the TL;DR below:
 
 - 3V3: labeled red, position 1 and 17, connect PCA VCC pin to either of them
 - GND: labeled black, all over the place, connect PCA GND pin to any of them
 - I2C busses: labeled yellow, there are two of them:
-  - Bus 0: position 3 (SDA) and position 5 (SCL)
-  - Bus 1: position 27 (SDA) and position 28 (SCL)
+  - Bus 0: position 27 (SDA) and position 28 (SCL)
+  - Bus 1: position 3 (SDA) and position 5 (SCL)
   - Connect the PCA SDA and SCL pins to either bus
   - Note: the SDA/SCL pins come in pairs, you have to choose a pair/bus which you'll use
 

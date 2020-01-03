@@ -6,6 +6,8 @@ weight=17
 
 +++
 
+![Gamepad](/images/software/gamepad.png?width=100%)
+
 You can, and should, use a gamepad to control your RC. It's much easier to generate good training data using a gamepad, and it's much easier to drive the thing compared to the Web interface that Donkey provides. 
 
 So how do we connect and use one?
@@ -32,9 +34,11 @@ CONTROLLER_TYPE='xbox'               #(ps3|ps4|xbox|nimbus|wiiu|F710|rc3)
 
 If your gamepad isn't *officially* supported, try following the rest of the tutorial and connecting it to the Nano. If it shows up as `/dev/input/js0`, you should be able to use it, since the Donkey platform just uses that OS device mount as the gamepad.
 
-## Connecting your gamepad (via Bluetooth)
+## Connecting your controller
 
 ### Xbox (One) Controller
+
+![Xbox One Controller](/images/software/xbone.png?height=15pc)
 
 The Xbox controller doesn't like the *Enhanced Re-Transmission Mode*, so we'll disable it first.
 
@@ -96,47 +100,9 @@ quit
 
 Once connected, it should automatically reconnect anytime the Jetson and it are both powered on. If it doesn't, you'll have to run the steps above again.
 
-### PS3 Controller
-
-The Donkey docs say to follow [this guide](https://pythonhosted.org/triangula/sixaxis.html), or you can just run:
-
-```bash
-sudo apt-get install bluetooth libbluetooth3 libusb-dev
-sudo systemctl enable bluetooth.service
-sudo usermod -G bluetooth -a pi
-sudo reboot
-```
-
-After rebooting, plug in the controller with an USB cable, press the **PS button** and:
-
-```bash
-wget http://www.pabr.org/sixlinux/sixpair.c
-gcc -o sixpair sixpair.c -lusb
-sudo ./sixpair
-```
-
-Run bluetoothctl as a super user and pair your controller:
-
-```bash
-sudo bluetoothctl
-```
-
-```bash
-# Enable the default agent
-agent on
-# List all found devices and get your controller's MAC address
-devices
-# Trust your controller
-trust <MAC ADDRESS>
-# Default agent request
-default-agent
-# Quit
-quit
-```
-
-Unplug the USB cable and press the **PS button**. Your controller should be mounted at `ls /dev/input/js0`.
-
 ### PS4 Controller
+
+![](/images/software/ps4.png?height=15pc)
 
 Install ds4drv:
 
@@ -177,6 +143,46 @@ sudo nano /etc/rc.local
 # Paste in (with or without --hidraw and --led):
 /home/YOUR-USERNAME/env/bin/ds4drv --led 00ff00
 ```
+
+### PS3 Controller
+
+The Donkey docs say to follow [this guide](https://pythonhosted.org/triangula/sixaxis.html), or you can just run:
+
+```bash
+sudo apt-get install bluetooth libbluetooth3 libusb-dev
+sudo systemctl enable bluetooth.service
+sudo usermod -G bluetooth -a pi
+sudo reboot
+```
+
+After rebooting, plug in the controller with an USB cable, press the **PS button** and:
+
+```bash
+wget http://www.pabr.org/sixlinux/sixpair.c
+gcc -o sixpair sixpair.c -lusb
+sudo ./sixpair
+```
+
+Run bluetoothctl as a super user and pair your controller:
+
+```bash
+sudo bluetoothctl
+```
+
+```bash
+# Enable the default agent
+agent on
+# List all found devices and get your controller's MAC address
+devices
+# Trust your controller
+trust <MAC ADDRESS>
+# Default agent request
+default-agent
+# Quit
+quit
+```
+
+Unplug the USB cable and press the **PS button**. Your controller should be mounted at `ls /dev/input/js0`.
 
 ## Any other gamepad/joystick/controller
 

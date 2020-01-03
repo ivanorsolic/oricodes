@@ -15,7 +15,6 @@ weight=16
 ## Calibrating the throttle:
 
 <center><video controls src="/video/throttle_calibration.mp4" autoplay muted loop width=100%></video></center>
-
 **First, you'll need to turn on your car**; the actual RC, not the Nano.
 
 Depending on your RC, it'll probably beep because it's turned on and the controller isn't connected to it, but don't worry, it'll stop once we connect to it via the I2C bus.

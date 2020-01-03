@@ -222,4 +222,4 @@ I've connected mine to the first bus (Bus 0):
 
 ![Pinout 2](/images/hardware/pinout2.png)
 
-# The hardware part is done!a
+# The hardware part is done!

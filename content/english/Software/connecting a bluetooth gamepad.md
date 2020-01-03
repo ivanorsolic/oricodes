@@ -6,7 +6,7 @@ weight=17
 
 +++
 
-![Gamepad](/images/software/gamepad.png?width=100%)
+![Gamepad](/images/software/gamepad.png)
 
 You can, and should, use a gamepad to control your RC. It's much easier to generate good training data using a gamepad, and it's much easier to drive the thing compared to the Web interface that Donkey provides. 
 

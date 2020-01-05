@@ -148,7 +148,7 @@ PCA9685_I2C_BUSNUM = 1
 
 We also need to specify to which PCA channels our steering servo and our ESC are connected to. 
 
-[See this to refresh your memory](/hardware/connecting-the-car-to-the-nano/#enter-the-pca9685) or just look at the numbers on the PCA, above the places you've connected your servo and esc connectors to, they correspond to their respective channel numbers.
+[See this to refresh your memory](/hardware/connecting-the-car-to-the-nano/#enter-the-pca9685) or just look at the numbers on the PCA, above the places you've connected your servo and ESC connectors to, they correspond to their respective channel numbers.
 
 In the settings, find and fill out the steering:
 
@@ -169,16 +169,16 @@ In my case, the throttle/ESC is the zeroth channel and the steering/servo is the
 We will also need to fill out the following values for steering:
 
 ```bash
-STEERING_LEFT_PWM = 295         #pwm value for full left steering
-STEERING_RIGHT_PWM = 395        #pwm value for full right steering
+STEERING_LEFT_PWM = ???         #pwm value for full left steering
+STEERING_RIGHT_PWM = ???        #pwm value for full right steering
 ```
 
 And throttle:
 
 ```bash
-THROTTLE_FORWARD_PWM = 310      #pwm value for max forward throttle
-THROTTLE_STOPPED_PWM = 370      #pwm value for no movement
-THROTTLE_REVERSE_PWM = 390      #pwm value for max reverse throttle
+THROTTLE_FORWARD_PWM = ???      #pwm value for max forward throttle
+THROTTLE_STOPPED_PWM = ???      #pwm value for no movement
+THROTTLE_REVERSE_PWM = ???      #pwm value for max reverse throttle
 ```
 
 To do so, we'll need to calibrate our steering and throttle first, and then come back with the values we've found and fill them in.

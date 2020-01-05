@@ -220,18 +220,22 @@ Hit Enter to continue
 Please plug-in your controller via USB or bluetooth. Make sure status lights are on and device is mapped.
 Enter to continue
 # You can press enter since we've already gone through connecting your controller
+
 Where can we find the device file for your joystick?
 Hit Enter for default: /dev/input/js0 or type alternate path:
 # Should be /dev/input/js0 if it's a PS3/PS4/Xbox/Standard USB one
 # Hit enter and see if it finds it (it will if its on /dev/input/js0)
+
 Attempting to open device at that file...
 Opening /dev/input/js0...
 Device name: The type of Controller you're using
 Found and accessed input device.
 # After pressing Enter
+
 Next we are going to look for gyroscope data.
 For 5 seconds, move controller and rotate on each axis. Hit Enter then start moving:
 # You can skip this, since you most probably won't be using it
+
 Ok, we didn't see any events. So perhaps your controller doesn't emit gyroscope data. No problem.
 ```
 
@@ -334,7 +338,7 @@ T)hrottle and steering need remap.
 R)emap buttons to controls.
 ```
 
-If you're happy with your maps, enter `H` and it will prompt you for a name under which to save your mapping. The default one is `my_joystick.py`, but you can enter a custom one, if you're planning to use multiple different controllers, or just for non-generic-namings sake:
+If you're happy with your maps, enter `H` and it will prompt you for a name under which to save your mapping. The default one is `my_joystick.py`, but you can enter a custom one, if you're planning to use multiple different controllers, or just for non-generic-naming's sake:
 
 ```bash
 Now we will write these values to a new python file.
@@ -373,7 +377,7 @@ ctr = MyJoystick(throttle_dir=cfg.JOYSTICK_THROTTLE_DIR,
 ctr.set_deadzone(cfg.JOYSTICK_DEADZONE)
 ```
 
-Or if you've defined a custom name for the python file containing your mapping, and the class it contains, which I did, then modify the import line so it imports the with your name:
+Or if you've defined a custom name for the python file containing your mapping, and the class it contains, which I did, then modify the import line so it uses your custom script and class name:
 
 ```python
 # In my case

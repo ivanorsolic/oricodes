@@ -37,9 +37,9 @@ If you're using Windows, you need to install one. I'd recommend using [MobaXTerm
 
 ### SSH via Ethernet:
 
-If you're connected via an ethernet cable, you should be able to find your IP address:
+If your RC is connected to your network via an ethernet cable, you should be able to find your IP address:
 
-- Through your Router/Gateway interface;
+- Through your Router/Gateway interface, by looking at the DHCP leases;
 
 - Or by connecting your Nano to a monitor, keyboard and mouse, opening up a terminal and writing:
 
@@ -107,15 +107,17 @@ sudo apt-get install build-essential python3 python3-dev python3-pip libhdf5-ser
 ## Set up a Virtual Env
 
 ```bash
+# Install the venv package
 pip3 install virtualenv
 python3 -m virtualenv -p python3 env --system-site-packages
+# Activate the venv automatically at boot
 echo "source env/bin/activate" >> ~/.bashrc
 source ~/.bashrc
 ```
 
 ## Compiling and installing OpenCV
 
-First, since OpenCV needs more than 4GB of RAM to be build from source, and our Jetson Nano just doesn't have that much RAM, we have to define some swap space to prevent it from going bonkers while compiling it:
+First, since OpenCV needs more than 4GB of RAM to be built from source, and our Jetson Nano just doesn't have that much RAM, we have to define some swap space to prevent it from going bonkers while compiling it:
 
 ```bash
 # Allocates 4G of additional swap space at /var/swapfile
@@ -252,8 +254,10 @@ cd ~/projects
 Install the latest Donkey from GitHub:
 
 ```bash
+# Clone it from GitHub
 git clone https://github.com/autorope/donkeycar
 cd donkeycar
+# Checkout the master branch
 git checkout master
 pip install -e .[nano]
 pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu==1.13.1+nv19.3

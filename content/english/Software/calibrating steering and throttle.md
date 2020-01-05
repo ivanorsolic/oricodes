@@ -55,7 +55,7 @@ To detect your reverse values for the throttle:
 - If your forward values were larger than 370:
   - Enter 330, then 370, then 330.
 - If your forward values were smaller than 370:
-  - Enter 400, then 370, then 330.
+  - Enter 400, then 370, then 400.
 - After confirming how to get your car in reverse throttle, once again start from 370 and enter values +/- 10 and choose a value that you'd like your max reverse throttle to be, and write it down.
 
 **You can now enter q to finish the throttle calibration procedure.**

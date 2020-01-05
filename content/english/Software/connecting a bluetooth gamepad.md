@@ -351,11 +351,26 @@ Check your new python file to see the controller implementation. Import this in 
 
 Almost there, we just need to import our custom mapping in the `manage.py` script to be able to use it with our RC.
 
-Open up `manage.py` (`nano` or `vim`) and at the end of the imports, add the following line:
+Open up `manage.py` (`nano` or `vim`) and at the end of the imports, find the following line:
+
+```python
+from donkeycar.parts.controller import get_js_controller
+
+ctr = get_js_controller(cfg)
+```
+
+And replace it with:
 
 ```python
 # This assumes you haven't changed the default names
 from my_joystick import MyJoystick
+
+ctr = MyJoystick(throttle_dir=cfg.JOYSTICK_THROTTLE_DIR,
+                                throttle_scale=cfg.JOYSTICK_MAX_THROTTLE,
+                                steering_scale=cfg.JOYSTICK_STEERING_SCALE,
+                                auto_record_on_throttle=cfg.AUTO_RECORD_ON_THROTTLE)
+
+ctr.set_deadzone(cfg.JOYSTICK_DEADZONE)
 ```
 
 Or if you've defined a custom name for the python file containing your mapping, and the class it contains, which I did, then modify the import line so it imports the with your name:
@@ -363,6 +378,13 @@ Or if you've defined a custom name for the python file containing your mapping, 
 ```python
 # In my case
 from xbox_one_controller import XboxOneController
+
+ctr = XboxOneController(throttle_dir=cfg.JOYSTICK_THROTTLE_DIR,
+                                throttle_scale=cfg.JOYSTICK_MAX_THROTTLE,
+                                steering_scale=cfg.JOYSTICK_STEERING_SCALE,
+                                auto_record_on_throttle=cfg.AUTO_RECORD_ON_THROTTLE)
+
+ctr.set_deadzone(cfg.JOYSTICK_DEADZONE)
 ```
 
 And you're done! Now we can start actually driving the car using our controller!

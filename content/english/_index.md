@@ -1,5 +1,5 @@
 +++
-title = "Ori Engineering"
+title = "Home Page"
 menuTitle = "Home"
 draft = false
 

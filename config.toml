@@ -72,13 +72,13 @@ defaultContentLanguageInSubdir= true
 
 [Languages]
 	[Languages.en]
-	title = "Ori Engineering"
+	title = "Ori Codes"
 	weight = 1
 	languageName = "English"
 	contentDir = "content/english"
 
 	[Languages.hr]
-	title = "Ori Engineering"
+	title = "Ori Codes"
 	weight = 2
 	languageName = "Hrvatski"
 	contentDir = "content/hrvatski"

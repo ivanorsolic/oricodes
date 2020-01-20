@@ -28,15 +28,15 @@ First things first, let's see how the architectures we get out of the box with D
 
 {{% notice tip %}}
 
-**You don't have to, and usually probably won't, do this the way I'm doing it, which is going through the source code files and seeing what happens.** You can consult the documentation or ask for help on the official project channels, but I love this approach since I believe you'll get a better sense of how something works if you look at the insides of it. I'm also used to hacking and taking things apart just to see how they work, (see ivanorsolic.github.io for examples) and sometimes you don't have the luxury of good docs and people willing to help you, so it's useful to be able to dive into the internals of something and make sense out of it. I also just think this way is much more fun 🤓, but YMMV.
+**You don't have to, and usually probably won't, do this the way I'm doing it, which is going through the source code files and seeing what happens.** You can consult the documentation or ask for help on the official project channels, but I love this approach since I believe you'll get a better sense of how something works if you look at the insides of it. I'm also used to hacking and taking things apart just to see how they work, (see [ivanorsolic.github.io](https://ivanorsolic.github.io) for examples) and sometimes you don't have the luxury of good docs and people willing to help you, so it's useful to be able to dive into the internals of something and make sense out of it. I also just think this way is much more fun 🤓, but YMMV.
 
 {{% /notice %}}
 
 # [**SKIP TO THE TL;DR**](#tldr-how-to-implement-your-own-architecture)
 
-When we wanted to train our first autopilot with Donkey, we used the `--train` flag to tell the `manage.py` script to train a model. 
+When we wanted to train our first autopilot with Donkey, we used the `train` flag to tell the `manage.py` script to train a model. 
 
-So if we open up the `manage.py` script and look at the main method, we can see how the script handles the `--train` flag:
+So if we open up the `manage.py` script and look at the main method, we can see how the script handles the `train` flag:
 
 ```python
 if args['train']:
@@ -75,7 +75,7 @@ We can see that it chooses the `train` function as the default function for trai
 
 Since we won't be implementing a custom sequential network, we'll take a look at the default `train` function. There's a lot going on inside the function, from managing the data and creating generators to split it into batches for training to handling different model filetypes, but we don't have to, and won't go through all the details. That's one of the reasons we're using Donkey, so we don't have to everything by ourselves.
 
-Our goal is using a custom architecture with Donkey, and we're trying to find out how it uses the pre-defined architectures, so this line is very much of interest to us:
+Our goal is to use a custom architecture with Donkey, and we're trying to find out how Donkey uses the pre-defined architectures, so this line is very much of interest to us:
 
 ```python
  kl = get_model_by_type(train_type, cfg=cfg)
@@ -121,7 +121,7 @@ This is exactly what we were looking for. We can see that the function:
 - Creates a model using the appropriate architecture (based on the name)
 - Returns the created model
 
-It also defines the image shape and the region of interest crop that some models use, and set's the model type to the default type (defined in `myconfig.py`) if the type isn't explicitly passed through the type flag.
+It also defines the image shape and the region of interest crop that some models use, and sets the model type to the default type (defined in `myconfig.py`) if the type isn't explicitly passed through the type flag.
 
 Okay, so now we know how the `manage.py` script gets the Keras model it then trains. 
 
@@ -276,7 +276,7 @@ As Nvidia states [on their blog](https://devblogs.nvidia.com/deep-learning-self-
 
 Hey, would you look at that! Back in 2004, DARPA had a seedling project which had an RC car autonomously drive through a junk-filled alley way. It was around the time the first DARPA Grand Challenge took place, in which a full-sized car had to autonomously navigate a 240 km route in the Mojave desert.
 
-No cars managed to finish the course that year, with the best competitors car (Carnegie Mellon) traveling a mere 11.78 kilometers.
+No cars managed to finish the course that year, with the best competitor's car (Carnegie Mellon) traveling a mere 11.78 kilometers.
 
 Here's a picture of DAVE, taken from the DARPA-IPTO [*Autonomous Off-Road Vehicle Control using End-to-End learning*](http://net-scale.com/doc/net-scale-dave-report.pdf) report.
 
@@ -304,7 +304,7 @@ Pretty cool. Let's implement it in Keras!
 
 I've created a new Python source file in the `donkeycar/parts` folder, named `nvidia.py`. 
 
-I used the `KerasLinear` class as a starting point, using it's `adjust_input_shape` method to crop the image to the ROI passed to the model, since I think that's a good way to get better performance.
+I used the `KerasLinear` class as a starting point, using its `adjust_input_shape` method to crop the image to the ROI passed to the model, since I think that's a good way to get better performance.
 
 I've also made the following adjustments to the original architecture:
 

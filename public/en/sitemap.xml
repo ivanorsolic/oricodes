@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://ori.codes/rc-car/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/parts_list/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/parts_list/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/parts_list/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/scale/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/scale/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/scale/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/body_type/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/body_type/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/body_type/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/electric_motors/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/electric_motors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/electric_motors/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/servo/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/servo/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/servo/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/electronic_speed_controller/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/electronic_speed_controller/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/electronic_speed_controller/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/receiver/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/receiver/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/receiver/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/rc-car/batteries/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/rc-car/batteries/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/rc-car/batteries/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/inventory/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/kernel-hacking/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/building-the-car/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/donkeycar/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/donkeycar-host/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/mounting-plates/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/donkeycar-simulator/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/donkeycar-rc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/jetson-nano-installation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/assembling-the-nano/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/hardware/connecting-the-car-to-the-nano/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/setting-up-donkeycar-on-the-rc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/calibrating-steering-and-throttle/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/connecting-a-bluetooth-gamepad/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/test-driving-the-rc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/software/sanity-check-first-autopilot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="hr"
+                href="https://ori.codes/hr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ori.codes/tags/"
+                />
+  </url>
+  
+</urlset>

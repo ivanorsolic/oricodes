@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="hr" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.62.1" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Electric motors :: Ori Engineering</title>
+
+    
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hugo-theme.css" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/hr/rc-car/electric_motors/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.codes/">
+  <img src="/images/logo.png">
+</a>
+
+	  96 words.<br>
+	  Reading time: 1 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.codes\/\/hr";
+    
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hr/rc-car/" title="RC Car" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/hr/rc-car/">
+          <b>1. </b>RC Car
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/parts_list/" title="Parts list" class="dd-item ">
+        <a href="/hr/rc-car/parts_list/">
+        Parts
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/car_model/" title="Car model" class="dd-item ">
+        <a href="/hr/rc-car/car_model/">
+        Model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/hr/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/hr/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/electric_motors/" title="Electric motors" class="dd-item active">
+        <a href="/hr/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/hr/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/hr/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/hr/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hr/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/hr/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.codes/rc-car/electric_motors/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="hr" value="https://ori.codes/hr/rc-car/electric_motors/" selected>Hrvatski</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Electric motors 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#the-main-question-concerning-electric-motors-is-brushed-or-brushless">The main question concerning electric motors is: brushed or brushless?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Electric motors
+            </h1>
+          
+
+        
+
+
+
+<h3 id="the-main-question-concerning-electric-motors-is-brushed-or-brushless">The main question concerning electric motors is: <strong>brushed or brushless?</strong></h3>
+<p><img src="/images/rc_car/brushed_brushless.jpg" alt="Related image"></p>
+<ul>
+<li>
+<p><strong>Brushed pros:</strong> cheaper, simpler, better for off-road.</p>
+</li>
+<li>
+<p><strong>Brushed cons:</strong> heavier, bigger, worse power efficiency (75-80%), they wear out in time.</p>
+</li>
+<li>
+<p><strong>Brushless pros:</strong> long lifespan, much better speed and handling, better power efficiency (85-90%).</p>
+</li>
+<li>
+<p><strong>Brushless cons:</strong> much more expensive, worse for off-road.</p>
+</li>
+</ul>
+<p>So what should we get? It depends on your budget, but brushed motors work just fine, and besides, for self-driving purposes, you don’t need a RC car that drives 100 KPH. 
+
+<div class="notices tip" ><p>It’s always possible to swap out a brushed motor for a brushless later on.</p>
+</div>
+</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+<script src="https://utteranc.es/client.js"
+        repo="ivanorsolic/oriengineering"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/hr/rc-car/body_type/" title="RC Car body types"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/hr/rc-car/servo/" title="Steering servo" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    <link href="/mermaid/mermaid.css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

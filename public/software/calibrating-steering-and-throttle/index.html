@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.62.1" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Calibrating steering and throttle :: Ori Engineering</title>
+
+    
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hugo-theme.css" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/software/calibrating-steering-and-throttle/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.codes/">
+  <img src="/images/logo.png">
+</a>
+
+	  506 words.<br>
+	  Reading time: 3 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.codes\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware/" title="Hardware" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware/">
+          <b>2. </b>Hardware
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/software/" title="Software" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/software/">
+          <b>3. </b>Software
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/software/kernel-hacking/">
+        OPTIONAL: Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar/" title="DonkeyCar" class="dd-item ">
+        <a href="/software/donkeycar/">
+        DonkeyCar: Explained
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-host/" title="DonkeyCar installation: Host PC" class="dd-item ">
+        <a href="/software/donkeycar-host/">
+        DonkeyCar: Host PC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-simulator/" title="DonkeyCar Installation: The Simulator" class="dd-item ">
+        <a href="/software/donkeycar-simulator/">
+        DonkeyCar: Simulator
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-rc/" title="DonkeyCar installation: RC car" class="dd-item ">
+        <a href="/software/donkeycar-rc/">
+        DonkeyCar: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/setting-up-donkeycar-on-the-rc/" title="DonkeyCar configuration: RC car" class="dd-item ">
+        <a href="/software/setting-up-donkeycar-on-the-rc/">
+        DonkeyCar configuration: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/calibrating-steering-and-throttle/" title="Calibrating steering and throttle" class="dd-item active">
+        <a href="/software/calibrating-steering-and-throttle/">
+        Calibrating steering and throttle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/connecting-a-bluetooth-gamepad/" title="Using a gamepad" class="dd-item ">
+        <a href="/software/connecting-a-bluetooth-gamepad/">
+        Using a gamepad
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/test-driving-the-rc/" title="Test drive" class="dd-item ">
+        <a href="/software/test-driving-the-rc/">
+        Test drive
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/sanity-check-first-autopilot/" title="First Autopilot: sanity check" class="dd-item ">
+        <a href="/software/sanity-check-first-autopilot/">
+        First Autopilot: sanity check
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/" title="Artificial Intelligence" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/">
+          <b>4. </b>Artificial Intelligence
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.codes/software/calibrating-steering-and-throttle/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Calibrating steering and throttle 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#calibrating-the-throttle">Calibrating the throttle:</a></li>
+    <li><a href="#calibrating-the-steering">Calibrating the steering</a></li>
+    <li><a href="#entering-the-values-in-the-config-file">Entering the values in the config file</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Calibrating steering and throttle
+            </h1>
+          
+
+        
+
+
+
+
+<div class="notices warning" ><p><strong>Make sure your car wheels are not touching the ground.</strong> Prop it up using a shoebox, or in my case, an eGPU dock. We will be calibrating the throttle which means your car will start accelerating very fast, without warning, so you wouldn't want it slamming into a wall at full throttle.</p>
+</div>
+
+<h2 id="calibrating-the-throttle">Calibrating the throttle:</h2>
+<center><video controls src="/video/throttle_calibration.mp4" autoplay muted loop width=100%></video></center>
+**First, you'll need to turn on your car**; the actual RC, not the Nano.
+<p>Depending on your RC, it'll probably beep because it's turned on and the controller isn't connected to it, but don't worry, it'll stop once we connect to it via the I2C bus.</p>
+<p>Run the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey calibrate --channel YOUR_ESC<span style="color:#ae81ff">\T</span>HROTTLE_CHANNEL --bus<span style="color:#f92672">=</span>YOUR_I2C_PCA_BUS
+</code></pre></div><p>The output should look like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">using donkey v3.1.1 ...
+init PCA9685 on channel <span style="color:#ae81ff">0</span> address 0x40 bus 0
+Using PWM freq: 60
+
+Enter a PWM setting to test <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;q&#39;</span> <span style="color:#66d9ef">for</span> quit<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>0-1500<span style="color:#f92672">)</span>:
+</code></pre></div><p>If you're using the wrong bus, you'll probably get a <code>OSError: [Errno 121] Remote I/O error</code></p>
+<p>Type in <code>370</code> and press enter. The ESC should stop beeping, indicating it is calibrated to the neutral throttle position.</p>
+<p>To detect your forward values for the throttle:</p>
+<ul>
+<li>Try entering 400 and seeing if your car starts throttling forwards.</li>
+<li>If it's not, then try entering 330 instead.</li>
+<li>After finding out which <em>direction</em> forwards is:
+<ul>
+<li>Number larger than 370</li>
+<li>Number smaller than 370</li>
+</ul>
+</li>
+<li>Start from 370 and enter values +/- 10 and choose a value that you want your maximum forward throttle to be and write it down.</li>
+</ul>
+<p>To detect your reverse values for the throttle:</p>
+<ul>
+<li>
+<p>In order to go in reverse, the RC needs to get a reverse throttle value, followed by the neutral throttle value, followed by the reverse throttle value again.</p>
+</li>
+<li>
+<p>If your forward values were larger than 370:</p>
+<ul>
+<li>Enter 330, then 370, then 330.</li>
+</ul>
+</li>
+<li>
+<p>If your forward values were smaller than 370:</p>
+<ul>
+<li>Enter 400, then 370, then 400.</li>
+</ul>
+</li>
+<li>
+<p>After confirming how to get your car in reverse throttle, once again start from 370 and enter values +/- 10 and choose a value that you'd like your max reverse throttle to be, and write it down.</p>
+</li>
+</ul>
+<p><strong>You can now enter q to finish the throttle calibration procedure.</strong></p>
+<h2 id="calibrating-the-steering">Calibrating the steering</h2>
+<center><video controls src="/video/steering_calibration.mp4" autoplay muted loop width=100%></video></center>
+Once again, run the following:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey calibrate --channel YOUR_STEERING_CHANNEL --bus<span style="color:#f92672">=</span>YOUR_I2C_PCA_BUS
+</code></pre></div><ul>
+<li>Enter 360, and you should see your car slightly steering. If you don't, try 350 or 370.</li>
+<li>Once again, enter +/- 10 values to find out what values steer your car completely to the left and to the right and write them down.</li>
+</ul>
+<p><strong>You can now enter q to finish the steering calibration procedure.</strong></p>
+<h2 id="entering-the-values-in-the-config-file">Entering the values in the config file</h2>
+<p>Open up the <code>myconfig.py</code> in the editor of your choice:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/mycar/myconfig.py
+</code></pre></div><p>Find the <code>THROTTLE</code> and <code>STEERING</code> sections and enter the values you wrote down during calibration:</p>
+<ul>
+<li>STEERING_RIGHT_PWM: the value which steers your car completely to the right.</li>
+<li>STEERING_LEFT_PWM: the value which steers your car completely to the right.</li>
+<li>THROTTLE_STOPPED_PWM: the neutral throttle value.</li>
+<li>THROTTLE_FORWARD_PWM: the maximum forward throttle value.</li>
+<li>THROTTLE_REVERSE_PWM: the maximum reverse throttle value.</li>
+</ul>
+<p>Save the file and exit the editor and you're done!</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+<script src="https://utteranc.es/client.js"
+        repo="ivanorsolic/oriengineering"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/software/setting-up-donkeycar-on-the-rc/" title="DonkeyCar configuration: RC car"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/software/connecting-a-bluetooth-gamepad/" title="Using a gamepad" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    <link href="/mermaid/mermaid.css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

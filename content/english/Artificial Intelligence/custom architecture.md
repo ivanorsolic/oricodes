@@ -12,7 +12,7 @@ Well, I think it'd be a good idea to get the details of plugging a custom networ
 
 If you remember the first autopilot we trained for sanity checking purposes, you'll recall we've used an architecture that came with Donkey, whose source can be found at `donkeycar/parts/keras.py`. 
 
-And that's pretty cool, we've already got a fair number of architectures to play around with out of the box. But we'll want to do things our way, make some custom architectures and play around with all sorts of stuff. It's also beneficial to be able to visualize how all of the pieces of your project come together before you deep all the way down into the details of it.
+And that's pretty cool, we've already got a fair number of architectures to play around with out of the box. But we'll want to do things our way, make some custom architectures and play around with all sorts of stuff. It's also beneficial to be able to visualize how all of the pieces of your project come together before you dive all the way down into the details of it.
 
 {{% notice info %}}
 

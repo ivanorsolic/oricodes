@@ -203,7 +203,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 from IPython.display import display, HTML
 
-def save_movie_mp4(image_array, filename='output.mp4', fps=30):
+def save_movie_mp4(image_array, filename='output.gif', fps=30):
     dpi = 72.0
     xpixels, ypixels = image_array[0].shape[0], image_array[0].shape[1]
     fig = plt.figure(figsize=(ypixels/dpi, xpixels/dpi), dpi=dpi)
@@ -213,25 +213,27 @@ def save_movie_mp4(image_array, filename='output.mp4', fps=30):
         im.set_array(image_array[i])
         return (im,)
     
-    Writer = animation.writers['ffmpeg']
-    writer = Writer(fps, metadata=dict(artist='Me'), bitrate=1800)
+    writer = animation.PillowWriter(fps=fps)
     anim = animation.FuncAnimation(fig, animate, frames=len(image_array))
     anim.save(filename, writer=writer)
-    display(HTML(anim.to_html5_video()))
 ```
 
 We can now finally pass our model and our input data to the program and let it create the Saliency Map video for us:
 
 ```python
-from glob import iglob
+import glob, re, time, datetime
 # The path to your dataset
 pathToData = 'data/tub/'
-# Output video name
-output = "saliency.mp4"
-# Output FPS
-fps = 30
 
-# To correctly sort numbers, and avoid e.g. 1, 10, 100, 1000, 2, 20, ...
+# Output video name
+output = "saliency.gif"
+
+# Output FPS
+fps = 60
+
+# Number of frames you want to use
+numberOfFrames = 600
+
 def sort_human(l):
     convert = lambda text: float(text) if text.isdigit() else text
     alphanum = lambda key: [convert(c) for c in re.split('([-+]?[0-9]*\.?[0-9]*)', key)]
@@ -242,6 +244,9 @@ inputImages = []
 alpha = 0.004
 beta = 1.0 - alpha
 counter = 0
+print("Generating %ds of video." % (numberOfFrames/fps))
+accumulatedTime = 0
+start = time.time()
 for path in sort_human(glob.glob(pathToData + '*.jpg')):
     inputImage = cv2.imread(path)
     salient_mask = compute_visualisation_mask(inputImage)
@@ -250,10 +255,23 @@ for path in sort_human(glob.glob(pathToData + '*.jpg')):
     blend = cv2.addWeighted(inputImage.astype('float32'), alpha, salient_mask_stacked, beta, 0.0)
     inputImages.append(blend)
     counter += 1
-    if counter >= 400:
+
+    if counter >= numberOfFrames:
         break
-       
-save_movie_mp4(imgs, output, fps)
+
+    elif counter % 5 == 0:
+        loopEnd = time.time()
+        accumulatedTime += loopEnd - start
+        remainingSeconds = ((loopEnd-start)/5)*(numberOfFrames-counter)
+        print("Generated %d/%d frames." % (counter, numberOfFrames))
+        print("Estimated time left: %dm:%ds." % divmod(remainingSeconds, 60))
+        print("Runtime so far: %dm:%ds." % divmod(accumulatedTime, 60))
+```
+
+And save the gif:
+
+```python
+save_movie_mp4(inputImages, "saliency.gif", fps)
 ```
 
 {{%attachments style="grey" title="You can download the above code as an ipynb here." pattern=".*ipynb" /%}}

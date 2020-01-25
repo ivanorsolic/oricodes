@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>First Autopilot: sanity check :: Ori Engineering</title>
+    <title>First Autopilot: sanity check :: Ori Codes</title>
 
     
     <link href="/css/nucleus.css" rel="stylesheet">
@@ -26,11 +26,42 @@
     
 
     <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [["$","$"],["\\(","\\)"]],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
     <style>
       :root #header + #content > #left > #rlblock_left{
           display:none !important;
       }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
       
     </style>
     
@@ -46,7 +77,7 @@
   <img src="/images/logo.png">
 </a>
 
-	  869 words.<br>
+	  870 words.<br>
 	  Reading time: 5 minutes.
 	  
     </div>
@@ -650,6 +681,73 @@
           
       </a>
       
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/custom-architecture/" title="Creating our first custom network architecture" class="dd-item ">
+        <a href="/artificial-intelligence/custom-architecture/">
+        First custom network architecture
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/analyzing-our-model/" title="Analyzing our model" class="dd-item ">
+        <a href="/artificial-intelligence/analyzing-our-model/">
+        Analyzing our model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/custom-architecture-copy/" title="Analyzing our model" class="dd-item ">
+        <a href="/artificial-intelligence/custom-architecture-copy/">
+        Analyzing our model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
               
     </li>
   
@@ -782,7 +880,6 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
     <li><a href="#training-your-first-model">Training your first model</a></li>
     <li><a href="#moving-the-trained-model-back-to-your-rc">Moving the trained model back to your RC:</a></li>
     <li><a href="#let-the-autopilot-drive-by-itself">Let the autopilot drive by itself</a></li>
-    <li><a href="#whats-next">What's next?</a></li>
   </ul>
 </nav>
     </div>
@@ -821,7 +918,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p>After your RC is on the track, connect your gamepad to it and from the <code>~/mycar</code> directory run:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --js
 </code></pre></div><p>Now, try driving one lap around the track. It should be collecting records. If it is, you're good to go.</p>
-<center><video controls src="/video/collecting_data.mp4" autoplay loop width=100%></video></center>
+<center><video controls src="/video/collecting_data.mp4" autoplay muted loop width=100%></video></center>
 <p>You should now learn how to drive around the test track without making any errors. After you're confident in your driving abilities, you should stop the <code>manage.py</code> script, position your car on the track and start it up again.</p>
 <p>To get your training data:</p>
 <ul>
@@ -868,7 +965,7 @@ New tub created at: /home/your_username/mycar/data/tub_**_**-**-**
 </ul>
 <h2 id="training-your-first-model">Training your first model</h2>
 <center><video controls src="/video/training.mp4" autoplay loop width=100%></video></center>
-<p>As mentioned previously, Donkey comes with a number of different neural network architectures you can use to train your autopilot. You can find them at the directory where you've cloned the donkey repository, inside the <code>parts\keras.py</code> script.</p>
+As mentioned previously, Donkey comes with a number of different neural network architectures you can use to train your autopilot. You can find them at the directory where you've cloned the donkey repository, inside the `parts\keras.py` script.
 <p>The usual location, if you've followed the tutorials and used the suggested directory, would be:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Linux/Mac OS X</span>
 ~/projects/donkeycar/donkeycar/parts/keras.py
@@ -911,8 +1008,8 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\y</span>
 </code></pre></div><p>Go to the Web interface by opening up a browser and entering yourNanoIP:8887 into the address bar.</p>
 <p>I'd recommend setting the <em>Mode &amp; Pilot</em> to <strong>Local Angle</strong>, starting the vehicle and either giving the throttle by yourself, using the blue touch/click area on the right, or by giving it a constant throttle by setting the <em>Max Throttle</em> to <strong>50%</strong> and setting the <em>Throttle Mode</em> to <strong>Constant</strong>.</p>
 <p>After making sure your model doesn't just ram your RC into a wall, you can use the <strong>Local Pilot</strong> mode and it'll control the throttle by itself.</p>
-<center><video controls src="/video/autopilot.mp4" autoplay loop height=500px></video></center>
-<h2 id="whats-next">What's next?</h2>
+<center><video controls src="/video/autopilot.mp4" autoplay muted loop height=500px></video></center>
+## What's next?
 <p>The autopilot works, but it's far from perfect. But it's still pretty impressive considering we started out with a regular RC, and now we have a thing that can drive around a track on its own. :)</p>
 <p>The more important thing is, we now have everything we need in order to make a complex self-driving model. We can automatically collect data by just driving our RC around a track, we have a pipeline established that can take that data, run it through an architecture we've defined and spit out a model we can just plug our car into and it'll control it via it's output. That's pretty sweet.</p>
 <p>Now we can go onto the most interesting part of this project, the machine (and deep) learning part.</p>
@@ -1412,6 +1509,54 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\y</span>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
             
         

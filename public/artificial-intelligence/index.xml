@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Artificial Intelligence on Ori Engineering</title>
+    <title>Artificial Intelligence on Ori Codes</title>
     <link>https://ori.codes/artificial-intelligence/</link>
-    <description>Recent content in Artificial Intelligence on Ori Engineering</description>
+    <description>Recent content in Artificial Intelligence on Ori Codes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
     
 	<atom:link href="https://ori.codes/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating our first custom network architecture</title>
+      <link>https://ori.codes/artificial-intelligence/custom-architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/custom-architecture/</guid>
+      <description>Where do we even begin with the AI part of the project?
+Well, I think it&#39;d be a good idea to get the details of plugging a custom network into Donkey out of the way first.
+If you remember the first autopilot we trained for sanity checking purposes, you&#39;ll recall we&#39;ve used an architecture that came with Donkey, whose source can be found at donkeycar/parts/keras.py.
+And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures to play around with out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing our model</title>
+      <link>https://ori.codes/artificial-intelligence/analyzing-our-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/analyzing-our-model/</guid>
+      <description>We already saw that the custom architecture/model works, but it&#39;s surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?
+Seeing what the network sees One useful visual tool we could use is Donkey&#39;s built in cnnactivations command. Per the official docs, it shows us the feature maps for each convolutional layer in the model we pass to it.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing our model</title>
+      <link>https://ori.codes/artificial-intelligence/custom-architecture-copy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/custom-architecture-copy/</guid>
+      <description>We already saw that the custom architecture/model works, but it&#39;s surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?
+Seeing what the network sees One useful visual tool we could use is Donkey&#39;s built in cnnactivations command. Per the official docs, it shows us the feature maps for each convolutional layer in the model we pass to it.</description>
+    </item>
     
   </channel>
 </rss>

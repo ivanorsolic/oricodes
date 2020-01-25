@@ -34,7 +34,7 @@ python manage.py drive --js
 
 Now, try driving one lap around the track. It should be collecting records. If it is, you're good to go.
 
-<center><video controls src="/video/collecting_data.mp4" autoplay loop width=100%></video></center>
+<center><video controls src="/video/collecting_data.mp4" autoplay muted loop width=100%></video></center>
 
 You should now learn how to drive around the test track without making any errors. After you're confident in your driving abilities, you should stop the `manage.py` script, position your car on the track and start it up again.
 
@@ -76,7 +76,6 @@ Now we just need to transfer our training data to our host PC:
 ## Training your first model
 
 <center><video controls src="/video/training.mp4" autoplay loop width=100%></video></center>
-
 As mentioned previously, Donkey comes with a number of different neural network architectures you can use to train your autopilot. You can find them at the directory where you've cloned the donkey repository, inside the `parts\keras.py` script.
 
 The usual location, if you've followed the tutorials and used the suggested directory, would be:
@@ -126,6 +125,7 @@ After the training script has finished, we just need to move our model(s) back t
     ```
 
 - Windows (MobaXTerm):
+  
   - Navigate to the`/home/mycar/models/` on the Nano, using the built-in SFTP viewer and just drag and drop all of the models (.h5 files) you've trained from your host PC to the Nano.
 
 ## Let the autopilot drive by itself
@@ -142,8 +142,7 @@ I'd recommend setting the *Mode & Pilot* to **Local Angle**, starting the vehicl
 
 After making sure your model doesn't just ram your RC into a wall, you can use the **Local Pilot** mode and it'll control the throttle by itself.
 
-<center><video controls src="/video/autopilot.mp4" autoplay loop height=500px></video></center>
-
+<center><video controls src="/video/autopilot.mp4" autoplay muted loop height=500px></video></center>
 ## What's next?
 
 The autopilot works, but it's far from perfect. But it's still pretty impressive considering we started out with a regular RC, and now we have a thing that can drive around a track on its own. :)

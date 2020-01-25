@@ -259,19 +259,20 @@ for path in sort_human(glob.glob(pathToData + '*.jpg')):
     if counter >= numberOfFrames:
         break
 
-    elif counter % 5 == 0:
-        loopEnd = time.time()
-        accumulatedTime += loopEnd - start
-        remainingSeconds = ((loopEnd-start)/5)*(numberOfFrames-counter)
+    elif counter % 100 == 0:
+        end = time.time()
+        accumulatedTime += end - start
+        remainingSeconds = (accumulatedTime/counter)*(numberOfFrames-counter)
         print("Generated %d/%d frames." % (counter, numberOfFrames))
         print("Estimated time left: %dm:%ds." % divmod(remainingSeconds, 60))
         print("Runtime so far: %dm:%ds." % divmod(accumulatedTime, 60))
+        start = time.time()
 ```
 
 And save the gif:
 
 ```python
-save_movie_mp4(inputImages, "saliency.gif", fps)
+save_movie_mp4(inputImages, output, fps)
 ```
 
 {{%attachments style="grey" title="You can download the above code as an ipynb here." pattern=".*ipynb" /%}}

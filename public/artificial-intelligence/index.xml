@@ -1,89 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Artificial Intelligence on Ori Codes</title>
-    <link>https://ori.codes/artificial-intelligence/</link>
-    <description>Recent content in Artificial Intelligence on Ori Codes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
-    
-	<atom:link href="https://ori.codes/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Camera calibration: Explaining camera distortions</title>
-      <link>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</guid>
-      <description>Since we&#39;re using only cameras to obtain the entirety of data we&#39;ll use to drive our car around the real world, we&#39;re sure trusting them a lot. We&#39;re trusting that they&#39;ll provide us with accurate representations of real world 3D objects as 2D images we&#39;ll feed into our neural network.
-But we shouldn&#39;t take that for granted. Cameras, albeit cheap and easy to use, come with all sorts of issues when it comes to mapping the 3D world onto a 2D sensor/image correctly.</description>
-    </item>
-    
-    <item>
-      <title>Creating our first custom network architecture</title>
-      <link>https://ori.codes/artificial-intelligence/custom-architecture/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/custom-architecture/</guid>
-      <description>Where do we even begin with the AI part of the project?
-Well, I think it&#39;d be a good idea to get the details of plugging a custom network into Donkey out of the way first.
-If you remember the first autopilot we trained for sanity checking purposes, you&#39;ll recall we&#39;ve used an architecture that came with Donkey, whose source can be found at donkeycar/parts/keras.py.
-And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures to play around with out of the box.</description>
-    </item>
-    
-    <item>
-      <title>Simulator mod: High resolution images</title>
-      <link>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</guid>
-      <description>If we want to use the simulator to gather training data that&#39;s larger than the default 160x120 image size, we&#39;ll need to create a modified version of it.
-Setting up the simulator locally First off, let&#39;s clone (or fork) the original simulator Tawn Kramer made for Donkey from GitHub.
-git clone --single-branch --branch donkey https://github.com/tawnkramer/sdsandbox If you&#39;re wondering why aren&#39;t I just using the git clone --branch command: it clones all branches, but checks out just the one you&#39;ve passed to the flag.</description>
-    </item>
-    
-    <item>
-      <title>Camera calibration: Implementing the calibration and undistortion</title>
-      <link>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</guid>
-      <description>First we&#39;ll import the stuff we need and declare some variables:
-import numpy as npimport cv2, os, globobjectPoints = []imagePoints = []cameraIntrinsicValues = []# Distortion coefficients cameraExtrinsicValues = []Now we&#39;ll implement the function that finds and returns the object and image points, given images of a chessboard:
-def getObjectAndImagePoints():global objectPoints, imagePoints# Number of inside corners per row and column cornersPerRow = 10cornersPerColumn = 7# Initializing the object points to zero chessboardObjectPoints = np.</description>
-    </item>
-    
-    <item>
-      <title>Simulator mod: Custom RC model</title>
-      <link>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</guid>
-      <description>If you want to get better data for your RC, you should edit the default model that comes with the simulator. Most notably, you should edit the camera position, resolution and field of view. You can also add multiple cameras and edit the center of mass of your vehicle, as well as any other properties you think would make a difference if you wanted to use the simulator to pre-train the weights for your RC.</description>
-    </item>
-    
-    <item>
-      <title>Camera calibration: Calibrating the camera and undistorting images</title>
-      <link>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</guid>
-      <description>Finally, we can actually calibrate our camera and undistort our images!
-We&#39;ll start with the real camera on our RC and then we&#39;ll also calibrate our simulator camera!
-Once calibrated on the calibration images, you can use the same undistortion matrix for any other image that the same camera takes (given the focal length hasn&#39;t changed)!
- Calibrating your real camera I&#39;ll be using my RC camera, the EleCam Explorer 4K, which has an advertised 170 degree FOV.</description>
-    </item>
-    
-    <item>
-      <title>Computer Vision: Lane Finding</title>
-      <link>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
-      <description>Coming up tomorrow </description>
-    </item>
-    
-  </channel>
-</rss>

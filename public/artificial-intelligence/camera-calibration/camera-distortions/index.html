@@ -1185,11 +1185,9 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p>OpenCV works with up to six ($k_1$, $k_2$, $k_3$, $k_4$, $k_5$ and $k_6$) radial distortion coefficients, which should be more than enough for us, and with two ($p_1$, $p_2$) tangential distortion coefficients.</p>
 <p>If we have the barrel radial distortion type, $k_1$ will typically be larger than zero. If we have the pincushion distortion, $k_1$ will typically be smaller than zero.</p>
 <p><a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#camera-calibration-and-3d-reconstruction">OpenCV uses a pinhole camera model to describe how an image is created by projecting 3D points into the image plane using a perspective transformation:</a></p>
-<div>
-++
-s \begin{bmatrix}{u}\\{v}\\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&{0}&{c_x}\\{0}&{f_y}&{c_y}\\{0}&{0}&{1}\end{bmatrix} \begin{bmatrix} r_{11} & r_{12} & r_{13} & t_1  \\ r_{21} & r_{22} & r_{23} & t_2  \\ r_{31} & r_{32} & r_{33} & t_3 \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
-++
-</div>
+<p>++
+s \begin{bmatrix}{u}\{v}\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&amp;{0}&amp;{c_x}\{0}&amp;{f_y}&amp;{c_y}\{0}&amp;{0}&amp;{1}\end{bmatrix} \begin{bmatrix} r_{11} &amp; r_{12} &amp; r_{13} &amp; t_1  \ r_{21} &amp; r_{22} &amp; r_{23} &amp; t_2  \ r_{31} &amp; r_{32} &amp; r_{33} &amp; t_3 \end{bmatrix} \begin{bmatrix} X \ Y \ Z \ 1 \end{bmatrix}
+++</p>
 <ul>
 <li>$(X, Y, Z)$ are the coordinates of a 3D point we're imaging</li>
 <li>$(u,v)$ are the 2D coordinates of the projection point in pixels</li>

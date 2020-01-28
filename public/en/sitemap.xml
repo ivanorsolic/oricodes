@@ -18,7 +18,15 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/artificial-intelligence/custom-architecture/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</loc>
   </url>
   
   <url>
@@ -27,7 +35,12 @@
   </url>
   
   <url>
-    <loc>https://ori.codes/artificial-intelligence/analyzing-our-model/</loc>
+    <loc>https://ori.codes/artificial-intelligence/visualization/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</loc>
   </url>
   
   <url>
@@ -45,8 +58,24 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/visualization/cnn-activations/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/software/</loc>
     <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/visualization/saliency-maps/</loc>
   </url>
   
   <url>
@@ -69,6 +98,10 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/artificial-intelligence/visualization/donkey-makemovie/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/rc-car/body_type/</loc>
     <xhtml:link
                 rel="alternate"
@@ -80,6 +113,10 @@
                 hreflang="en"
                 href="https://ori.codes/rc-car/body_type/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</loc>
   </url>
   
   <url>

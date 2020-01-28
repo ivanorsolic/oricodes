@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.62.1" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Visualization: Saliency Maps :: Ori Codes</title>
+
+    
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hugo-theme.css" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/artificial-intelligence/visualization/saliency-maps/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.codes/">
+  <img src="/images/logo.png">
+</a>
+
+	  1386 words.<br>
+	  Reading time: 7 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.codes\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware/" title="Hardware" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware/">
+          <b>2. </b>Hardware
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/software/" title="Software" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/software/">
+          <b>3. </b>Software
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/software/kernel-hacking/">
+        OPTIONAL: Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar/" title="DonkeyCar" class="dd-item ">
+        <a href="/software/donkeycar/">
+        DonkeyCar: Explained
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-host/" title="DonkeyCar installation: Host PC" class="dd-item ">
+        <a href="/software/donkeycar-host/">
+        DonkeyCar: Host PC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-simulator/" title="DonkeyCar Installation: The Simulator" class="dd-item ">
+        <a href="/software/donkeycar-simulator/">
+        DonkeyCar: Simulator
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-rc/" title="DonkeyCar installation: RC car" class="dd-item ">
+        <a href="/software/donkeycar-rc/">
+        DonkeyCar: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/setting-up-donkeycar-on-the-rc/" title="DonkeyCar configuration: RC car" class="dd-item ">
+        <a href="/software/setting-up-donkeycar-on-the-rc/">
+        DonkeyCar configuration: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/calibrating-steering-and-throttle/" title="Calibrating steering and throttle" class="dd-item ">
+        <a href="/software/calibrating-steering-and-throttle/">
+        Calibrating steering and throttle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/connecting-a-bluetooth-gamepad/" title="Using a gamepad" class="dd-item ">
+        <a href="/software/connecting-a-bluetooth-gamepad/">
+        Using a gamepad
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/test-driving-the-rc/" title="Test drive" class="dd-item ">
+        <a href="/software/test-driving-the-rc/">
+        Test drive
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/sanity-check-first-autopilot/" title="First Autopilot: sanity check" class="dd-item ">
+        <a href="/software/sanity-check-first-autopilot/">
+        First Autopilot: sanity check
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/" title="Artificial Intelligence" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/">
+          <b>4. </b>Artificial Intelligence
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/camera-distortions/" title="Camera calibration: Explaining camera distortions" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/camera-distortions/">
+        Camera distortions
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/custom-architecture/" title="Creating our first custom network architecture" class="dd-item ">
+        <a href="/artificial-intelligence/custom-architecture/">
+        First custom network architecture
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/high-resolution-images/" title="Simulator mod: High resolution images" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/high-resolution-images/">
+        High res images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/visualization/" title="Visualization" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/visualization/">
+          Visualization
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/cnn-activations/" title="Visualization: CNN Activations" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/cnn-activations/">
+        CNN Activations
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/saliency-maps/" title="Visualization: Saliency Maps" class="dd-item active">
+        <a href="/artificial-intelligence/visualization/saliency-maps/">
+        Saliency Maps
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/donkey-makemovie/" title="Visualization: donkey makemovie" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/donkey-makemovie/">
+        Donkey makemovie
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/implementing-camera-calibration/" title="Camera calibration: Implementing the calibration and undistortion" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/implementing-camera-calibration/">
+        Calibration implementation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/custom-rc-model/" title="Simulator mod: Custom RC model" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/custom-rc-model/">
+        Custom RC model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/calibrating-the-camera/" title="Camera calibration: Calibrating the camera and undistorting images" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/calibrating-the-camera/">
+        Calibrating your camera and undistorting images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/computer-vision-lane-finding/" title="Computer Vision: Lane Finding" class="dd-item ">
+        <a href="/artificial-intelligence/computer-vision-lane-finding/">
+        Computer Vision: Lane Finding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.codes/artificial-intelligence/visualization/saliency-maps/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Visualization: Saliency Maps 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#implementing-the-saliency-map-vizualization">Implementing the Saliency Map vizualization</a></li>
+    <li><a href="#the-results">The results</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Visualization: Saliency Maps
+            </h1>
+          
+
+        
+
+
+
+<p>Another useful visual tool to see how your network works is a saliency map. They were proposed back in 1998 by Itti, Koch and Niebur, a group of neuroscientists working on feature extraction in images, in a paper titled <em><a href="http://www.lira.dist.unige.it/teaching/SINA_08-09/papers/itti98model.pdf">A Model of Saliency-based Visaul Attention for Rapid Scene Analysis</a></em>.</p>
+<p>In the context of Deep Learning and convolutional neural networks, they were first mentioned by the Visual Geometry Group at the University of Oxford, in a paper called <em><a href="https://arxiv.org/pdf/1312.6034.pdf">Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</a></em></p>
+<p>I won't go into excessive detail on how it works, but in our case, a saliency map will show us which pixels on the input image make the most impact on the output inferred by the network. We will make a heat map that shows us which visual features the car uses the most, in order to steer and throttle correctly. Hopefully, it should be the lane lines.</p>
+<p>Now, just a day after I've implemented a script that generates a video with a saliency map, given a trained model and some input data, I've noticed that Tawn Kramer (of Donkey) has already implemented a saliency map visualization, which you can generate using the <code>donkey makemovie</code> command. But since I've already made my implementation, we'll walk through it.</p>
+<p>As a starting point, I've used this <a href="https://github.com/ermolenkodev/keras-salient-object-visualisation/blob/fix_tf1.8/keras-salient-object-visualisation.ipynb">Jupyter Notebook</a> made by <a href="https://github.com/ermolenkodev/keras-salient-object-visualisation/blob/fix_tf1.8">ermolenkodev</a>.</p>
+<p>I'll be using the Nvidia model we made earlier throughout the implementation. Feel free to use your own stuff in here.</p>
+<h2 id="implementing-the-saliency-map-vizualization">Implementing the Saliency Map vizualization</h2>
+<p>First off, we need to import all the Keras stuff we use in our model:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> donkeycar.parts.keras <span style="color:#f92672">import</span> KerasPilot
+<span style="color:#f92672">from</span> tensorflow.python.keras.layers <span style="color:#f92672">import</span> Input, Dense
+<span style="color:#f92672">from</span> tensorflow.python.keras.models <span style="color:#f92672">import</span> Model, Sequential
+<span style="color:#f92672">from</span> tensorflow.python.keras.layers <span style="color:#f92672">import</span> Convolution2D, Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+<span style="color:#f92672">from</span> tensorflow.python.keras.layers <span style="color:#f92672">import</span> Activation, Dropout, Flatten, Cropping2D, Lambda
+</code></pre></div><p>Then we can copy the function that implements our model:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># The ROI crop helper function</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">adjust_input_shape</span>(input_shape, roi_crop):
+    height <span style="color:#f92672">=</span> input_shape[<span style="color:#ae81ff">0</span>]
+    new_height <span style="color:#f92672">=</span> height <span style="color:#f92672">-</span> roi_crop[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> roi_crop[<span style="color:#ae81ff">1</span>]
+    <span style="color:#66d9ef">return</span> (new_height, input_shape[<span style="color:#ae81ff">1</span>], input_shape[<span style="color:#ae81ff">2</span>])
+
+<span style="color:#75715e"># The definition of our model</span>
+<span style="color:#75715e"># Also, be sure to name every convolutional layer you have as &#34;convx&#34; (x ∈ ℕ)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">customModel</span>(num_outputs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">120</span>,<span style="color:#ae81ff">3</span>), roi_crop<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)):
+
+    input_shape <span style="color:#f92672">=</span> adjust_input_shape(input_shape, roi_crop)
+    img_in <span style="color:#f92672">=</span> Input(shape<span style="color:#f92672">=</span>input_shape, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">img_in</span><span style="color:#e6db74">&#39;</span>)
+    x <span style="color:#f92672">=</span> img_in
+    
+    <span style="color:#75715e"># Dropout rate</span>
+    keep_prob <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+    rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> keep_prob
+    
+    <span style="color:#75715e"># Convolutional Layer 1</span>
+    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv1</span><span style="color:#e6db74">&#34;</span>)(x)
+    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+
+    <span style="color:#75715e"># Convolutional Layer 2</span>
+    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2</span><span style="color:#e6db74">&#34;</span>)(x)
+    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+
+    <span style="color:#75715e"># Convolutional Layer 3</span>
+    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">48</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv3</span><span style="color:#e6db74">&#34;</span>)(x)
+    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+
+    <span style="color:#75715e"># Convolutional Layer 4</span>
+    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv4</span><span style="color:#e6db74">&#34;</span>)(x)
+    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+
+    <span style="color:#75715e"># Convolutional Layer 5</span>
+    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv5</span><span style="color:#e6db74">&#34;</span>)(x)
+    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+
+    <span style="color:#75715e"># Flatten Layers</span>
+    x <span style="color:#f92672">=</span> Flatten()(x)
+
+    <span style="color:#75715e"># Fully Connected Layer 1</span>
+    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+
+    <span style="color:#75715e"># Fully Connected Layer 2</span>
+    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">50</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+
+    <span style="color:#75715e"># Fully Connected Layer 3</span>
+    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">25</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">5</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    outputs <span style="color:#f92672">=</span> []
+    
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_outputs):
+        outputs<span style="color:#f92672">.</span>append(Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">linear</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">n_outputs</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(i))(x))
+        
+    model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>[img_in], outputs<span style="color:#f92672">=</span>outputs)
+    
+    <span style="color:#66d9ef">return</span> model
+</code></pre></div><p>We can then initialize the model and pass the weights we previously trained to it:</p>
+<pre><code>model = customModel()
+# Pass the path to your trained .h5 file here
+model.load_weights('nvidia.h5')
+</code></pre><p>Now we can define just the convolutional layers we're interested in visualizing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">img_in <span style="color:#f92672">=</span> Input(shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">120</span>,<span style="color:#ae81ff">3</span>), name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">img_in</span><span style="color:#e6db74">&#39;</span>)
+
+x <span style="color:#f92672">=</span> img_in
+x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv1</span><span style="color:#e6db74">&#34;</span>)(x)
+x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2</span><span style="color:#e6db74">&#34;</span>)(x)
+x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">48</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv3</span><span style="color:#e6db74">&#34;</span>)(x)
+x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv4</span><span style="color:#e6db74">&#34;</span>)(x)
+lastConvLayer <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv5</span><span style="color:#e6db74">&#34;</span>)(x)  
+
+convolution_part <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>[img_in], outputs<span style="color:#f92672">=</span>[lastConvLayer])
+</code></pre></div><p>We can now set the weights of the convolutional layers we just created to the actual weights our model contains:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># If you have more than 5 layers, or less than 5 layers, edit the number here</span>
+numberOfConvLayers <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#66d9ef">for</span> layer_num <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, numberOfConvLayers):
+    convolution_part<span style="color:#f92672">.</span>get_layer(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">conv</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(layer_num))<span style="color:#f92672">.</span>set_weights(model<span style="color:#f92672">.</span>get_layer(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">conv</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(layer_num))<span style="color:#f92672">.</span>get_weights())
+</code></pre></div><p>To get the activation values from each layer, we need to define functors for them:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> tensorflow.python.keras <span style="color:#f92672">import</span> backend <span style="color:#66d9ef">as</span> K
+
+inp <span style="color:#f92672">=</span> convolution_part<span style="color:#f92672">.</span>input  <span style="color:#75715e"># input placeholder</span>
+outputs <span style="color:#f92672">=</span> [layer<span style="color:#f92672">.</span>output <span style="color:#66d9ef">for</span> layer <span style="color:#f92672">in</span> convolution_part<span style="color:#f92672">.</span>layers[<span style="color:#ae81ff">1</span>:]] <span style="color:#75715e"># all layer outputs</span>
+functors <span style="color:#f92672">=</span> K<span style="color:#f92672">.</span>function([inp], outputs)
+</code></pre></div><p>We'll also define some helper variables that we'll use for the strides, padding and the kernels while computing the visualization masks:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> tensorflow <span style="color:#f92672">as</span> tf
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pdb
+
+<span style="color:#75715e"># 3x3 kernel with all ones</span>
+kernel_3x3 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant(np<span style="color:#f92672">.</span>array([
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]], 
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]], 
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]]
+]), tf<span style="color:#f92672">.</span>float32)
+
+<span style="color:#75715e"># 5x5 kernel with all ones</span>
+kernel_5x5 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant(np<span style="color:#f92672">.</span>array([
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]], 
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]], 
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]],
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]],
+        [[[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]], [[<span style="color:#ae81ff">1</span>]]]
+]), tf<span style="color:#f92672">.</span>float32)
+
+<span style="color:#75715e"># Based on the layers in your model, you should assign the kernel sizes you&#39;re using at each layer here.</span>
+<span style="color:#75715e"># E.g. I&#39;m using a 3x3 kernel in my last two layers, and a 3x3 in my first three layers</span>
+layers_kernels <span style="color:#f92672">=</span> {<span style="color:#ae81ff">5</span>: kernel_3x3, <span style="color:#ae81ff">4</span>: kernel_3x3, <span style="color:#ae81ff">3</span>: kernel_5x5, <span style="color:#ae81ff">2</span>: kernel_5x5, <span style="color:#ae81ff">1</span>: kernel_5x5}
+
+<span style="color:#75715e"># Same goes here for the strides you&#39;re using in your layers</span>
+layers_strides <span style="color:#f92672">=</span> {<span style="color:#ae81ff">5</span>: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">4</span>: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">3</span>: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">2</span>: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">1</span>: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]}
+</code></pre></div><p>And we can finally compute the visualization masks using  <a href="https://github.com/ermolenkodev/keras-salient-object-visualisation/blob/fix_tf1.8">ermolenkodev's</a> function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_visualisation_mask</span>(input_image):
+    activations <span style="color:#f92672">=</span> functors([np<span style="color:#f92672">.</span>array([input_image])])
+    activations <span style="color:#f92672">=</span> [np<span style="color:#f92672">.</span>reshape(input_image, (<span style="color:#ae81ff">1</span>, input_image<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], input_image<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>], input_image<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>]))] <span style="color:#f92672">+</span> activations
+    upscaled_activation <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>ones((<span style="color:#ae81ff">53</span>, <span style="color:#ae81ff">73</span>))
+    <span style="color:#66d9ef">for</span> layer <span style="color:#f92672">in</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]: <span style="color:#75715e"># Edit if you have a different # of layers </span>
+        averaged_activation <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(activations[layer], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">.</span>squeeze(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) <span style="color:#f92672">*</span> upscaled_activation
+        output_shape <span style="color:#f92672">=</span> (activations[layer <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>], activations[layer <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>])
+        x <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant(
+            np<span style="color:#f92672">.</span>reshape(averaged_activation, (<span style="color:#ae81ff">1</span>,averaged_activation<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>],averaged_activation<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>],<span style="color:#ae81ff">1</span>)),
+            tf<span style="color:#f92672">.</span>float32
+        )
+        conv <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>conv2d_transpose(
+        	x, layers_kernels[layer],
+            output_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>,output_shape[<span style="color:#ae81ff">0</span>],output_shape[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">1</span>), 
+            strides<span style="color:#f92672">=</span>layers_strides[layer], 
+            padding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">VALID</span><span style="color:#e6db74">&#39;</span>
+        )
+        <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Session() <span style="color:#66d9ef">as</span> session:
+            result <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>run(conv)
+        upscaled_activation <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>reshape(result, output_shape)
+    final_visualisation_mask <span style="color:#f92672">=</span> upscaled_activation
+    <span style="color:#66d9ef">return</span> (final_visualisation_mask <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(final_visualisation_mask))<span style="color:#f92672">/</span>(np<span style="color:#f92672">.</span>max(final_visualisation_mask) <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(final_visualisation_mask))
+</code></pre></div><p>And the only thing we need to implement is the code to animate the results and save them as a video:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cv2
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> animation
+<span style="color:#f92672">from</span> IPython.display <span style="color:#f92672">import</span> display, HTML
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save_movie_mp4</span>(image_array, filename<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">output.gif</span><span style="color:#e6db74">&#39;</span>, fps<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>):
+    dpi <span style="color:#f92672">=</span> <span style="color:#ae81ff">72.0</span>
+    xpixels, ypixels <span style="color:#f92672">=</span> image_array[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], image_array[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]
+    fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(ypixels<span style="color:#f92672">/</span>dpi, xpixels<span style="color:#f92672">/</span>dpi), dpi<span style="color:#f92672">=</span>dpi)
+    im <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figimage(image_array[<span style="color:#ae81ff">0</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">animate</span>(i):
+        im<span style="color:#f92672">.</span>set_array(image_array[i])
+        <span style="color:#66d9ef">return</span> (im,)
+    
+    writer <span style="color:#f92672">=</span> animation<span style="color:#f92672">.</span>PillowWriter(fps<span style="color:#f92672">=</span>fps)
+    anim <span style="color:#f92672">=</span> animation<span style="color:#f92672">.</span>FuncAnimation(fig, animate, frames<span style="color:#f92672">=</span>len(image_array))
+    anim<span style="color:#f92672">.</span>save(filename, writer<span style="color:#f92672">=</span>writer)
+</code></pre></div><p>We can now finally pass our model and our input data to the program and let it create the Saliency Map video for us:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> glob<span style="color:#f92672">,</span> re<span style="color:#f92672">,</span> time<span style="color:#f92672">,</span> datetime
+<span style="color:#75715e"># The path to your dataset</span>
+pathToData <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">data/tub/</span><span style="color:#e6db74">&#39;</span>
+
+<span style="color:#75715e"># Output video name</span>
+output <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">saliency.gif</span><span style="color:#e6db74">&#34;</span>
+
+<span style="color:#75715e"># Output FPS</span>
+fps <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>
+
+<span style="color:#75715e"># Number of frames you want to use</span>
+numberOfFrames <span style="color:#f92672">=</span> <span style="color:#ae81ff">600</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sort_human</span>(l):
+    convert <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> text: float(text) <span style="color:#66d9ef">if</span> text<span style="color:#f92672">.</span>isdigit() <span style="color:#66d9ef">else</span> text
+    alphanum <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> key: [convert(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> re<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">([-+]?[0-9]*</span><span style="color:#e6db74">\</span><span style="color:#e6db74">.?[0-9]*)</span><span style="color:#e6db74">&#39;</span>, key)]
+    l<span style="color:#f92672">.</span>sort(key<span style="color:#f92672">=</span>alphanum)
+    <span style="color:#66d9ef">return</span> l
+
+inputImages <span style="color:#f92672">=</span> []
+alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.004</span>
+beta <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> alpha
+counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Generating </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">s of video.</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (numberOfFrames<span style="color:#f92672">/</span>fps))
+accumulatedTime <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+<span style="color:#66d9ef">for</span> path <span style="color:#f92672">in</span> sort_human(glob<span style="color:#f92672">.</span>glob(pathToData <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*.jpg</span><span style="color:#e6db74">&#39;</span>)):
+    inputImage <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(path)
+    salient_mask <span style="color:#f92672">=</span> compute_visualisation_mask(inputImage)
+    salient_mask_stacked <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dstack((salient_mask,salient_mask))
+    salient_mask_stacked <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dstack((salient_mask_stacked,salient_mask))
+    blend <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>addWeighted(inputImage<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float32</span><span style="color:#e6db74">&#39;</span>), alpha, salient_mask_stacked, beta, <span style="color:#ae81ff">0.0</span>)
+    inputImages<span style="color:#f92672">.</span>append(blend)
+    counter <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">if</span> counter <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> numberOfFrames:
+        <span style="color:#66d9ef">break</span>
+
+    <span style="color:#66d9ef">elif</span> counter <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+        accumulatedTime <span style="color:#f92672">+</span><span style="color:#f92672">=</span> end <span style="color:#f92672">-</span> start
+        remainingSeconds <span style="color:#f92672">=</span> (accumulatedTime<span style="color:#f92672">/</span>counter)<span style="color:#f92672">*</span>(numberOfFrames<span style="color:#f92672">-</span>counter)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Generated </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> frames.</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (counter, numberOfFrames))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Estimated time left: </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">m:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">s.</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> divmod(remainingSeconds, <span style="color:#ae81ff">60</span>))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Runtime so far: </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">m:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">s.</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> divmod(accumulatedTime, <span style="color:#ae81ff">60</span>))
+        start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</code></pre></div><p>And save the gif:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">save_movie_mp4(inputImages, output, fps)
+</code></pre></div>
+<section class="attachments grey">
+	<label>
+		<i class="fas fa-paperclip" aria-hidden="true"></i>
+		You can download the above code as an ipynb here.
+	</label>
+	
+		
+	
+	<div class="attachments-files">
+	
+		
+		
+			
+				<li>
+					<a href="/Artificial%20Intelligence/visualization/saliency%20maps.files/SaliencyMap.ipynb" >
+						SaliencyMap.ipynb
+					</a>
+					(11 ko)
+				</li>
+			
+		
+	
+	<div>
+	
+</section>
+
+
+<h2 id="the-results">The results</h2>
+<p>The output video I got using the Nvidia model we made earlier and the dataset we downloaded:</p>
+<center><video controls src="/images/ai/saliency.mp4" autoplay loop></video></center>
+We can see that the car indeed uses the lane lines, but it also uses the horizon as a feature a lot. That's quite interesting. We can get rid of that problem using a ROI crop or by implementing some computer vision feature extraction/engineering, which we'll do right after we make a high res version of the simulator. :)
+<p>We can also see that it's far more interested in the right line, than the middle (left) one. That's because, in general, the car tends to go to the right, since we're driving around the circuit clockwise. We need to do some data augmentation to solve this issue, which we'll also do a bit later.</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+<script src="https://utteranc.es/client.js"
+        repo="ivanorsolic/oriengineering"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/artificial-intelligence/visualization/cnn-activations/" title="Visualization: CNN Activations"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/artificial-intelligence/visualization/donkey-makemovie/" title="Visualization: donkey makemovie" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    <link href="/mermaid/mermaid.css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

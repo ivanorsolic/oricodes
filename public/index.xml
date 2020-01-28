@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>Camera calibration: Explaining camera distortions</title>
+      <link>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</guid>
+      <description>Since we&#39;re using only cameras to obtain the entirety of data we&#39;ll use to drive our car around the real world, we&#39;re sure trusting them a lot. We&#39;re trusting that they&#39;ll provide us with accurate representations of real world 3D objects as 2D images we&#39;ll feed into our neural network.
+But we shouldn&#39;t take that for granted. Cameras, albeit cheap and easy to use, come with all sorts of issues when it comes to mapping the 3D world onto a 2D sensor/image correctly.</description>
+    </item>
+    
+    <item>
       <title>Creating our first custom network architecture</title>
       <link>https://ori.codes/artificial-intelligence/custom-architecture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -23,23 +33,25 @@ And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures
     </item>
     
     <item>
-      <title>Analyzing our model</title>
-      <link>https://ori.codes/artificial-intelligence/analyzing-our-model/</link>
+      <title>Simulator mod: High resolution images</title>
+      <link>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://ori.codes/artificial-intelligence/analyzing-our-model/</guid>
-      <description>We already saw that the custom architecture/model works, but it&#39;s surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?
-Seeing what the network sees One useful visual tool we could use is Donkey&#39;s built in cnnactivations command. Per the official docs, it shows us the feature maps for each convolutional layer in the model we pass to it.</description>
+      <guid>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</guid>
+      <description>If we want to use the simulator to gather training data that&#39;s larger than the default 160x120 image size, we&#39;ll need to create a modified version of it.
+Setting up the simulator locally First off, let&#39;s clone (or fork) the original simulator Tawn Kramer made for Donkey from GitHub.
+git clone --single-branch --branch donkey https://github.com/tawnkramer/sdsandbox If you&#39;re wondering why aren&#39;t I just using the git clone --branch command: it clones all branches, but checks out just the one you&#39;ve passed to the flag.</description>
     </item>
     
     <item>
-      <title>Analyzing our model</title>
-      <link>https://ori.codes/artificial-intelligence/custom-architecture-copy/</link>
+      <title>Camera calibration: Implementing the calibration and undistortion</title>
+      <link>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://ori.codes/artificial-intelligence/custom-architecture-copy/</guid>
-      <description>We already saw that the custom architecture/model works, but it&#39;s surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?
-Seeing what the network sees One useful visual tool we could use is Donkey&#39;s built in cnnactivations command. Per the official docs, it shows us the feature maps for each convolutional layer in the model we pass to it.</description>
+      <guid>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</guid>
+      <description>First we&#39;ll import the stuff we need and declare some variables:
+import numpy as npimport cv2, os, globobjectPoints = []imagePoints = []cameraIntrinsicValues = []# Distortion coefficients cameraExtrinsicValues = []Now we&#39;ll implement the function that finds and returns the object and image points, given images of a chessboard:
+def getObjectAndImagePoints():global objectPoints, imagePoints# Number of inside corners per row and column cornersPerRow = 10cornersPerColumn = 7# Initializing the object points to zero chessboardObjectPoints = np.</description>
     </item>
     
     <item>
@@ -50,6 +62,47 @@ Seeing what the network sees One useful visual tool we could use is Donkey&#39;s
       <guid>https://ori.codes/rc-car/parts_list/</guid>
       <description>There’s a lot of, and I mean a lot of parts when it comes to building an RC car on your own. But in the context of building a self-driving RC car, here’s a brief overview of some of the stuff we’ll need:
 You&#39;ll want to have:  A RC car (with some batteries) A PWM/Servo Driver (I2C + some jumper cables) A Jetson Nano A powerbank (+ some usb cables) A microSD card (and optionally an external SSD) A WiFi/BT m.</description>
+    </item>
+    
+    <item>
+      <title>Simulator mod: Custom RC model</title>
+      <link>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</guid>
+      <description>If you want to get better data for your RC, you should edit the default model that comes with the simulator. Most notably, you should edit the camera position, resolution and field of view. You can also add multiple cameras and edit the center of mass of your vehicle, as well as any other properties you think would make a difference if you wanted to use the simulator to pre-train the weights for your RC.</description>
+    </item>
+    
+    <item>
+      <title>Visualization: CNN Activations</title>
+      <link>https://ori.codes/artificial-intelligence/visualization/cnn-activations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/visualization/cnn-activations/</guid>
+      <description>We already saw that the custom architecture/model works, but it&#39;s surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?
+Seeing what the network sees One useful visual tool we could use is Donkey&#39;s built in cnnactivations command. Per the official docs, it shows us the feature maps for each convolutional layer in the model we pass to it.</description>
+    </item>
+    
+    <item>
+      <title>Camera calibration: Calibrating the camera and undistorting images</title>
+      <link>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</guid>
+      <description>Finally, we can actually calibrate our camera and undistort our images!
+We&#39;ll start with the real camera on our RC and then we&#39;ll also calibrate our simulator camera!
+Once calibrated on the calibration images, you can use the same undistortion matrix for any other image that the same camera takes (given the focal length hasn&#39;t changed)!
+ Calibrating your real camera I&#39;ll be using my RC camera, the EleCam Explorer 4K, which has an advertised 170 degree FOV.</description>
+    </item>
+    
+    <item>
+      <title>Visualization: Saliency Maps</title>
+      <link>https://ori.codes/artificial-intelligence/visualization/saliency-maps/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/visualization/saliency-maps/</guid>
+      <description>Another useful visual tool to see how your network works is a saliency map. They were proposed back in 1998 by Itti, Koch and Niebur, a group of neuroscientists working on feature extraction in images, in a paper titled A Model of Saliency-based Visaul Attention for Rapid Scene Analysis.
+In the context of Deep Learning and convolutional neural networks, they were first mentioned by the Visual Geometry Group at the University of Oxford, in a paper called Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</description>
     </item>
     
     <item>
@@ -65,6 +118,18 @@ It&#39;s pretty simple:
     </item>
     
     <item>
+      <title>Visualization: donkey makemovie</title>
+      <link>https://ori.codes/artificial-intelligence/visualization/donkey-makemovie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/visualization/donkey-makemovie/</guid>
+      <description>The makemovie command is a great tool to visually inspect and debug your model. Here are some example uses:
+  To create just a video of the training data, with an overlay that shows steering: donkey makemovie --tub=pathToYour/data/ --out=outputVideo.mp4
+  To create a video with an overlay of your model steering and the training data steering: donkey makemovie --tub=pathToYour/data/ --out=outputVideo.mp4  --model=yourModel.h5 --type=modelType
+  To create a video with a saliency map and both overlays: donkey makemovie --tub=pathToYour/data/ --out=outputVideo.</description>
+    </item>
+    
+    <item>
       <title>RC Car body types</title>
       <link>https://ori.codes/rc-car/body_type/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -73,6 +138,15 @@ It&#39;s pretty simple:
       <description>The best body type for on road self-driving purposes is the standard race body type.
  But to be thorough, we could roughly group all of the RC cars in 4 distinct categories:
 RACE/STREET Probably the first thing that comes to mind when thinking of an RC car, a standard race car. This body type is the fastest and the best on paved, flat surfaces and is meant for on road use only.</description>
+    </item>
+    
+    <item>
+      <title>Computer Vision: Lane Finding</title>
+      <link>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
+      <description>Coming up tomorrow </description>
     </item>
     
     <item>

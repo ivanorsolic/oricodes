@@ -67,7 +67,7 @@ Now go to the *Scenes* folder and open the ***menu*** scene and add a Dropdown e
 
 We'll be using this dropdown as our resolution picker, so go ahead and click on it, and inside the inspector panel add all of the resolutions you'd like to be able to use as options:
 
-![Options](/images/ai/dropdown)
+![Options](/images/ai/dropdown.png)
 
 Then resize and position the dropdown on a place you'd like it to be on the menu:
 

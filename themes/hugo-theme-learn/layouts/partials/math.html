@@ -6,9 +6,7 @@
     displayMath: [['++','++']],
     processEscapes: true,
     processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
   });
   MathJax.Hub.Queue(function() {
@@ -19,10 +17,5 @@
     for(i = 0; i < all.length; i += 1) {
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
-  });
-
-  MathJax.Hub.Config({
-  // Autonumbering by mathjax
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
   });
 </script>

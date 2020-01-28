@@ -72,11 +72,11 @@ OpenCV works with up to six ($k_1$, $k_2$, $k_3$, $k_4$, $k_5$ and $k_6$) radial
 If we have the barrel radial distortion type, $k_1$ will typically be larger than zero. If we have the pincushion distortion, $k_1$ will typically be smaller than zero.
 
 [OpenCV uses a pinhole camera model to describe how an image is created by projecting 3D points into the image plane using a perspective transformation:](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#camera-calibration-and-3d-reconstruction)
-
+<div>
 ++
 s \begin{bmatrix}{u}\\{v}\\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&{0}&{c_x}\\{0}&{f_y}&{c_y}\\{0}&{0}&{1}\end{bmatrix} \begin{bmatrix} r_{11} & r_{12} & r_{13} & t_1  \\ r_{21} & r_{22} & r_{23} & t_2  \\ r_{31} & r_{32} & r_{33} & t_3 \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
 ++
-
+</div>
 
 - $(X, Y, Z)$ are the coordinates of a 3D point we're imaging
 - $(u,v)$ are the 2D coordinates of the projection point in pixels

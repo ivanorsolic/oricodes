@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.62.1" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Visualization: CNN Activations :: Ori Codes</title>
+
+    
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hugo-theme.css" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/artificial-intelligence/visualization/cnn-activations/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.codes/">
+  <img src="/images/logo.png">
+</a>
+
+	  531 words.<br>
+	  Reading time: 3 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.codes\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware/" title="Hardware" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware/">
+          <b>2. </b>Hardware
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/software/" title="Software" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/software/">
+          <b>3. </b>Software
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/software/kernel-hacking/">
+        OPTIONAL: Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar/" title="DonkeyCar" class="dd-item ">
+        <a href="/software/donkeycar/">
+        DonkeyCar: Explained
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-host/" title="DonkeyCar installation: Host PC" class="dd-item ">
+        <a href="/software/donkeycar-host/">
+        DonkeyCar: Host PC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-simulator/" title="DonkeyCar Installation: The Simulator" class="dd-item ">
+        <a href="/software/donkeycar-simulator/">
+        DonkeyCar: Simulator
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-rc/" title="DonkeyCar installation: RC car" class="dd-item ">
+        <a href="/software/donkeycar-rc/">
+        DonkeyCar: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/setting-up-donkeycar-on-the-rc/" title="DonkeyCar configuration: RC car" class="dd-item ">
+        <a href="/software/setting-up-donkeycar-on-the-rc/">
+        DonkeyCar configuration: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/calibrating-steering-and-throttle/" title="Calibrating steering and throttle" class="dd-item ">
+        <a href="/software/calibrating-steering-and-throttle/">
+        Calibrating steering and throttle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/connecting-a-bluetooth-gamepad/" title="Using a gamepad" class="dd-item ">
+        <a href="/software/connecting-a-bluetooth-gamepad/">
+        Using a gamepad
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/test-driving-the-rc/" title="Test drive" class="dd-item ">
+        <a href="/software/test-driving-the-rc/">
+        Test drive
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/sanity-check-first-autopilot/" title="First Autopilot: sanity check" class="dd-item ">
+        <a href="/software/sanity-check-first-autopilot/">
+        First Autopilot: sanity check
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/" title="Artificial Intelligence" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/">
+          <b>4. </b>Artificial Intelligence
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/custom-architecture/" title="Creating our first custom network architecture" class="dd-item ">
+        <a href="/artificial-intelligence/custom-architecture/">
+        First custom network architecture
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/visualization/" title="Visualization" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/visualization/">
+          Visualization
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/cnn-activations/" title="Visualization: CNN Activations" class="dd-item active">
+        <a href="/artificial-intelligence/visualization/cnn-activations/">
+        CNN Activations
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/saliency-maps/" title="Visualization: Saliency Maps" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/saliency-maps/">
+        Saliency Maps
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/donkey-makemovie/" title="Visualization: donkey makemovie" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/donkey-makemovie/">
+        Donkey makemovie
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/simulator-mod/" title="Simulator modding" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/simulator-mod/">
+          Simulator modding
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/high-resolution-images/" title="Simulator mod: High resolution images" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/high-resolution-images/">
+        High res images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/custom-rc-model/" title="Simulator mod: Custom RC model" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/custom-rc-model/">
+        Custom RC model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/camera-calibration/" title="Camera calibration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/camera-calibration/">
+          Camera calibration
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/camera-distortions/" title="Camera calibration: Explaining camera distortions" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/camera-distortions/">
+        Camera distortions
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/implementing-camera-calibration/" title="Camera calibration: Implementing the calibration and undistortion" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/implementing-camera-calibration/">
+        Calibration implementation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/calibrating-the-camera/" title="Camera calibration: Calibrating the camera and undistorting images" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/calibrating-the-camera/">
+        Calibrating your camera and undistorting images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/computer-vision-lane-finding/" title="Computer Vision: Lane Finding" class="dd-item ">
+        <a href="/artificial-intelligence/computer-vision-lane-finding/">
+        Computer Vision: Lane Finding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.codes/artificial-intelligence/visualization/cnn-activations/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other stuff</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Visualization: CNN Activations 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#seeing-what-the-network-sees">Seeing what the network sees</a>
+      <ul>
+        <li><a href="#input-resolution">Input resolution?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Visualization: CNN Activations
+            </h1>
+          
+
+        
+
+
+
+<p>We already saw that the custom architecture/model works, but it's surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?</p>
+<h2 id="seeing-what-the-network-sees">Seeing what the network <em>sees</em></h2>
+<p>One useful visual tool we could use is Donkey's built in <code>cnnactivations</code> command. Per the <a href="https://docs.donkeycar.com/utility/donkey/#visualize-cnn-filter-activations">official docs</a>, it shows us the feature maps for each convolutional layer in the model we pass to it. The feature maps show us how each filter in every conv layer activates, given the input image we pass to it.</p>
+
+<div class="notices note" ><p>The tool currently works with only 2D convolutional layers.</p>
+</div>
+
+<p>You can use the command as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey cnnactivations --model pathTo/yourModel.h5 --image pathTo/anImage.jpg
+</code></pre></div><p>Here are the results I got while running this picture through the Nvidia model we've trained previously:</p>
+<p><img src="/images/ai/testImage.png" alt="Conv2D First Layer" style="zoom: 80%;" /></p>
+<p><img src="/images/ai/nvidiaFirstLayer.png" alt="Conv2D First Layer" style="zoom: 80%;" /></p>
+<p><img src="/images/ai/nvidiaSecondLayer.png" alt="Figure_2" style="zoom: 80%;" /></p>
+<p><img src="/images/ai/nvidiaThirdLayer.png" alt="Conv2D Third" style="zoom: 80%;" /></p>
+<p><img src="/images/ai/nvidiaFourthLayer.png" alt="Conv2D Fourth layer" style="zoom: 80%;" /></p>
+<p><img src="/images/ai/nvidiaFifthLayer.png" alt="Conv2D Fifth layer" style="zoom: 80%;" /></p>
+<h3 id="input-resolution">Input resolution?</h3>
+<p>Now, we can see a couple of things, but most notably, that it's hard to actually see things on these images. And in case you're wondering, it's not because they're resized. They're pretty low res, since the input image is only 160x120 and due to the nature of convolutions it only gets smaller.</p>
+<p>The formula for the output size of a convolutional layer is:
+$$
+\Big\lfloor{\frac{n+2p-f}{s}+1}\Big\rfloor
+$$
+Where $n$ is an input dimension, $p$ is the padding, $f$ is the number of filters and $s$ is the stride size.</p>
+<p>Let's calculate the output size of our first convolutional layer, which was:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), input_shape <span style="color:#f92672">=</span> input_shape, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Conv2D_First_layer</span><span style="color:#e6db74">&#34;</span>)(x)
+</code></pre></div><p>The input dimensions of our image are 160 and 120, the other parameters are easily seen, except for the padding, which is valid (aka zero), since we didn't specify it explicitly.</p>
+<p>$$
+width=\Big\lfloor{\frac{160-5}{2}+1}\Big\rfloor = \Big\lfloor{78.5}\Big\rfloor = 78
+$$</p>
+<p>$$
+height=\Big\lfloor{\frac{120-5}{2}+1}\Big\rfloor = \Big\lfloor{58.5}\Big\rfloor = 58
+$$</p>
+<p>So after the first layer, we'll have 12 filters (or images) with the size of 78x58. Let's look at the other layers:</p>
+<ul>
+<li>Second layer: 37x27, 24 filters</li>
+<li>Third layer: 17x12, 48 filters</li>
+<li>Fourth layer: 8x5, 64 filters</li>
+<li>Fifth layer: 3x2, 64 filters</li>
+</ul>
+<p>So yeah, those are some small resolutions. I mean, it will work, but when you think about it, would you be able to perfectly drive a car, if your eyes saw this:</p>
+<center><video controls src="/images/ai/smallRes.mp4" autoplay loop></video></center>
+Or this:
+<center><video controls src="/images/ai/highRes.mp4" autoplay loop></video></center>
+The smaller video is made out of 160x120 images, and the higher res one is made out of 640x360 images. 
+<p>The smaller images are around 3.2KB each, and the bigger ones are around 22KB each, which is almost seven times as big, for a fourfold increase in resolution. So you can probably imagine, it's more expensive computationally, but it also offers way more data to the network to work with.</p>
+<p>The images are by default smaller because Donkey was originally made for the Raspberry Pi, which doesn't have a discrete GPU, so it can handle a lot less computationally intensive tasks. But since we're working with a Jetson, we should be able to increase the resolution a bit, and if necessary implement some feature engineering and preprocessing to speed things up a little on higher res inputs.</p>
+<p>So we'll be increasing the input resolution to be able to train more complex models.</p>
+<p>Let's move on to another visualization technique: saliency maps!</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+<script src="https://utteranc.es/client.js"
+        repo="ivanorsolic/oriengineering"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/artificial-intelligence/visualization/" title="Visualization"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/artificial-intelligence/visualization/saliency-maps/" title="Visualization: Saliency Maps" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    <link href="/mermaid/mermaid.css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

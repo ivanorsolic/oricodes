@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Artificial Intelligence on Ori Codes</title>
+    <link>https://ori.codes/artificial-intelligence/</link>
+    <description>Recent content in Artificial Intelligence on Ori Codes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
+    
+	<atom:link href="https://ori.codes/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating our first custom network architecture</title>
+      <link>https://ori.codes/artificial-intelligence/custom-architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/custom-architecture/</guid>
+      <description>Where do we even begin with the AI part of the project?
+Well, I think it&#39;d be a good idea to get the details of plugging a custom network into Donkey out of the way first.
+If you remember the first autopilot we trained for sanity checking purposes, you&#39;ll recall we&#39;ve used an architecture that came with Donkey, whose source can be found at donkeycar/parts/keras.py.
+And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures to play around with out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Computer Vision: Lane Finding</title>
+      <link>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
+      <description>Coming up tomorrow </description>
+    </item>
+    
+  </channel>
+</rss>

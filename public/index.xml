@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home Page on Ori Codes</title>
+    <link>https://ori.codes/</link>
+    <description>Recent content in Home Page on Ori Codes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://ori.codes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Camera calibration: Explaining camera distortions</title>
+      <link>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</guid>
+      <description>Since we&#39;re using only cameras to obtain the entirety of data we&#39;ll use to drive our car around the real world, we&#39;re sure trusting them a lot. We&#39;re trusting that they&#39;ll provide us with accurate representations of real world 3D objects as 2D images we&#39;ll feed into our neural network.
+But we shouldn&#39;t take that for granted. Cameras, albeit cheap and easy to use, come with all sorts of issues when it comes to mapping the 3D world onto a 2D sensor/image correctly.</description>
+    </item>
+    
+    <item>
+      <title>Creating our first custom network architecture</title>
+      <link>https://ori.codes/artificial-intelligence/custom-architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/custom-architecture/</guid>
+      <description>Where do we even begin with the AI part of the project?
+Well, I think it&#39;d be a good idea to get the details of plugging a custom network into Donkey out of the way first.
+If you remember the first autopilot we trained for sanity checking purposes, you&#39;ll recall we&#39;ve used an architecture that came with Donkey, whose source can be found at donkeycar/parts/keras.py.
+And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures to play around with out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Simulator mod: High resolution images</title>
+      <link>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</guid>
+      <description>If we want to use the simulator to gather training data that&#39;s larger than the default 160x120 image size, we&#39;ll need to create a modified version of it.
+Setting up the simulator locally First off, let&#39;s clone (or fork) the original simulator Tawn Kramer made for Donkey from GitHub.
+git clone --single-branch --branch donkey https://github.com/tawnkramer/sdsandbox If you&#39;re wondering why aren&#39;t I just using the git clone --branch command: it clones all branches, but checks out just the one you&#39;ve passed to the flag.</description>
+    </item>
+    
+    <item>
+      <title>Camera calibration: Implementing the calibration and undistortion</title>
+      <link>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</guid>
+      <description>First we&#39;ll import the stuff we need and declare some variables:
+import numpy as npimport cv2, os, globobjectPoints = []imagePoints = []cameraIntrinsicValues = []# Distortion coefficients cameraExtrinsicValues = []Now we&#39;ll implement the function that finds and returns the object and image points, given images of a chessboard:
+def getObjectAndImagePoints():global objectPoints, imagePoints# Number of inside corners per row and column cornersPerRow = 10cornersPerColumn = 7# Initializing the object points to zero chessboardObjectPoints = np.</description>
+    </item>
+    
+    <item>
+      <title>Parts: an overview</title>
+      <link>https://ori.codes/rc-car/parts_list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/parts_list/</guid>
+      <description>There’s a lot of, and I mean a lot of parts when it comes to building an RC car on your own. But in the context of building a self-driving RC car, here’s a brief overview of some of the stuff we’ll need:
+You&#39;ll want to have:  A RC car (with some batteries) A PWM/Servo Driver (I2C + some jumper cables) A Jetson Nano A powerbank (+ some usb cables) A microSD card (and optionally an external SSD) A WiFi/BT m.</description>
+    </item>
+    
+    <item>
+      <title>Simulator mod: Custom RC model</title>
+      <link>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</guid>
+      <description>If you want to get better data for your RC, you should edit the default model that comes with the simulator. Most notably, you should edit the camera position, resolution and field of view. You can also add multiple cameras and edit the center of mass of your vehicle, as well as any other properties you think would make a difference if you wanted to use the simulator to pre-train the weights for your RC.</description>
+    </item>
+    
+    <item>
+      <title>Visualization: CNN Activations</title>
+      <link>https://ori.codes/artificial-intelligence/visualization/cnn-activations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/visualization/cnn-activations/</guid>
+      <description>We already saw that the custom architecture/model works, but it&#39;s surely not the best we could come up with. The question is, how can we improve its performance and get some intuition on how it works?
+Seeing what the network sees One useful visual tool we could use is Donkey&#39;s built in cnnactivations command. Per the official docs, it shows us the feature maps for each convolutional layer in the model we pass to it.</description>
+    </item>
+    
+    <item>
+      <title>Camera calibration: Calibrating the camera and undistorting images</title>
+      <link>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</guid>
+      <description>Finally, we can actually calibrate our camera and undistort our images!
+We&#39;ll start with the real camera on our RC and then we&#39;ll also calibrate our simulator camera!
+Once calibrated on the calibration images, you can use the same undistortion matrix for any other image that the same camera takes (given the focal length hasn&#39;t changed)!
+ Calibrating your real camera I&#39;ll be using my RC camera, the EleCam Explorer 4K, which has an advertised 170 degree FOV.</description>
+    </item>
+    
+    <item>
+      <title>Visualization: Saliency Maps</title>
+      <link>https://ori.codes/artificial-intelligence/visualization/saliency-maps/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/visualization/saliency-maps/</guid>
+      <description>Another useful visual tool to see how your network works is a saliency map. They were proposed back in 1998 by Itti, Koch and Niebur, a group of neuroscientists working on feature extraction in images, in a paper titled A Model of Saliency-based Visaul Attention for Rapid Scene Analysis.
+In the context of Deep Learning and convolutional neural networks, they were first mentioned by the Visual Geometry Group at the University of Oxford, in a paper called Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</description>
+    </item>
+    
+    <item>
+      <title>Scale</title>
+      <link>https://ori.codes/rc-car/scale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/scale/</guid>
+      <description> Most RC cars are scaled down versions of their real-life equivalent, so they&#39;re expressed in ratios, the most common ones being (real-life size : RC model size):
+  1:18 1:16 1:10 1:8 there are also all sorts of scales in between those (and above/below)  Of course, the question is: why do we care, and what&#39;s better for a self-driving RC car?
+It&#39;s pretty simple:
+ a bigger RC car equals more real estate and more power to carry all of our gadgets on top of it, without damaging the motors while struggling with all of the weight, but a bigger car needs a bigger race track and road size we want to drive it on  </description>
+    </item>
+    
+    <item>
+      <title>Visualization: donkey makemovie</title>
+      <link>https://ori.codes/artificial-intelligence/visualization/donkey-makemovie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/visualization/donkey-makemovie/</guid>
+      <description>The makemovie command is a great tool to visually inspect and debug your model. Here are some example uses:
+  To create just a video of the training data, with an overlay that shows steering: donkey makemovie --tub=pathToYour/data/ --out=outputVideo.mp4
+  To create a video with an overlay of your model steering and the training data steering: donkey makemovie --tub=pathToYour/data/ --out=outputVideo.mp4  --model=yourModel.h5 --type=modelType
+  To create a video with a saliency map and both overlays: donkey makemovie --tub=pathToYour/data/ --out=outputVideo.</description>
+    </item>
+    
+    <item>
+      <title>RC Car body types</title>
+      <link>https://ori.codes/rc-car/body_type/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/body_type/</guid>
+      <description>The best body type for on road self-driving purposes is the standard race body type.
+ But to be thorough, we could roughly group all of the RC cars in 4 distinct categories:
+RACE/STREET Probably the first thing that comes to mind when thinking of an RC car, a standard race car. This body type is the fastest and the best on paved, flat surfaces and is meant for on road use only.</description>
+    </item>
+    
+    <item>
+      <title>Computer Vision: Lane Finding</title>
+      <link>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
+      <description>Coming up tomorrow </description>
+    </item>
+    
+    <item>
+      <title>Electric motors</title>
+      <link>https://ori.codes/rc-car/electric_motors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/electric_motors/</guid>
+      <description>The main question concerning electric motors is: brushed or brushless?   Brushed pros: cheaper, simpler, better for off-road.
+  Brushed cons: heavier, bigger, worse power efficiency (75-80%), they wear out in time.
+  Brushless pros: long lifespan, much better speed and handling, better power efficiency (85-90%).
+  Brushless cons: much more expensive, worse for off-road.
+  So what should we get? It depends on your budget, but brushed motors work just fine, and besides, for self-driving purposes, you don’t need a RC car that drives 100 KPH.</description>
+    </item>
+    
+    <item>
+      <title>Steering servo</title>
+      <link>https://ori.codes/rc-car/servo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/servo/</guid>
+      <description>An RC servo is used for controlling the steering wheels of the car. It almost always comes with the RC car, so you shouldn’t worry about getting one.
+It typically expects around 4.8V to 6V input on the power wire (varies by car) and a PWM control signal on the signal wire. Typically, the three wires are colored black-red-white, or brown-red-yellow, where:
+ the dark wire (black/brown) is ground, and the center wire (red) is power, and the light wire (white/yellow) is control.</description>
+    </item>
+    
+    <item>
+      <title>Electronic Speed Controller</title>
+      <link>https://ori.codes/rc-car/electronic_speed_controller/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/electronic_speed_controller/</guid>
+      <description>The role of the ESC is to take a RC PWM control signal (pulse between 1000 and 2000 microseconds) in, and use that to control the power to the motor so the motor spins with different amounts of power in forward or reverse. Many RC car kits come with an ESC preinstalled, in which case you should be just fine.
+Again, 1500 microseconds typically means &amp;ldquo;center&amp;rdquo; which for the motor means &amp;ldquo;dead stop.</description>
+    </item>
+    
+    <item>
+      <title>Receiver</title>
+      <link>https://ori.codes/rc-car/receiver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/receiver/</guid>
+      <description>If you buy a &amp;ldquo;kit car&amp;rdquo; that is listed as &amp;ldquo;needs a receiver,&amp;rdquo; then you don&#39;t need to buy a receiver.
+ The Jetson Nano and the PWM/Servo driver will replace the receiver, outputting control signals to the car. If you’re buying a kit with a steering servo, motor, and ESC, you should actually try to not get a receiver, since the RC car could be specifically designed for that receivers PWM signals, and you’ll be taking it apart anyways.</description>
+    </item>
+    
+    <item>
+      <title>Batteries</title>
+      <link>https://ori.codes/rc-car/batteries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/rc-car/batteries/</guid>
+      <description>There are two types of batteries used for RC cars: Nickel Metal Hydride batteries (NiMH) and Lithium Polymer batteries (LiPo).
+TL;DR: LiPo batteries are much better, but also more expensive.
+Lithium Polymer batteries generally have higher current capacity (the amount of Amps the battery can deliver at one point while driving) as well as energy storage (the number of Amp Hours the battery stores when fully charged) so it may also last longer.</description>
+    </item>
+    
+    <item>
+      <title>Hardware inventory</title>
+      <link>https://ori.codes/hardware/inventory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/hardware/inventory/</guid>
+      <description>Let’s start with a list of all of the hardware I’ll be using through this tutorial, and of course, with the money shot:
+RC Car kit The RC Car I went with was the Tamiya TT-02, which came prebuilt and even included an receiver and a remote, for just a bit over 100€. Very lucky!
+The reason I went with this is that it was just such a good deal for such a car.</description>
+    </item>
+    
+    <item>
+      <title>Running the OS from an external SSD using a custom kernel</title>
+      <link>https://ori.codes/software/kernel-hacking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/kernel-hacking/</guid>
+      <description>This is the technical, optional upgrade that will enable you to boot your OS from an external SSD.
+Syonyk has an awesome Jetson Nano guide with all of this stuff explained and was the primary source of info while researching how to do this.
+ JetsonHacks also have a guide that should make this much easier to do, as they’ve prepared scripts that do all of the work for you, but I haven’t tried it so I can’t say it works for sure, but it should!</description>
+    </item>
+    
+    <item>
+      <title>Assembling the RC Car</title>
+      <link>https://ori.codes/hardware/building-the-car/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/hardware/building-the-car/</guid>
+      <description>Now to the fun part: building the RC car. This will vary very much based on your RC Car kit. If it’s ready-to-run (RTR), you should be good out of the box. If it’s an unassembled kit, you’ve got a ton of work ahead, just follow the instructions that came with the car. If you’re like me, and got something in between, you’ll have just a bit of work before running it.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar</title>
+      <link>https://ori.codes/software/donkeycar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar/</guid>
+      <description>Donkey is a high level self driving library written in Python. It was developed with a focus on enabling fast experimentation and easy contribution.
+Source: Official Donkey docs
+ We&#39;ll be using Donkey® as an interface between our RC car and the neural net we&#39;d like to drive it for us.
+As you can see above, we&#39;d like to send the camera data from our RC to a model which would analyse it and tell the RC where to steer and how fast to go, in order to stay on the road.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar installation: Host PC</title>
+      <link>https://ori.codes/software/donkeycar-host/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar-host/</guid>
+      <description>Let&#39;s install the Donkey software on your host PC. The only part where this differs between the three platforms, Mac OS X, Linux and Windows, is in the Miniconda software installation, so we&#39;ll get that out of the way first.
+Mac OS X  Download and install:  Miniconda here, git here   Open up a terminal and follow the rest of the tutorial  Windows  Download and install:  Miniconda here, git here   Open an Anaconda Prompt via Start Menu and follow the rest of the tutorial  Linux  Download Miniconda here and install it Open up a terminal and follow the rest of the tutorial  The rest of the tutorial:   Go to a place where you want the stuff we&#39;ll be working on to be.</description>
+    </item>
+    
+    <item>
+      <title>Building the mounting plates for the hardware</title>
+      <link>https://ori.codes/hardware/mounting-plates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/hardware/mounting-plates/</guid>
+      <description>There are many options to go for when it comes to mounting your Nano and the rest of the hardware to your RC car.
+Option 1: 3D printing If you’re planning on 3D printing your parts, take a look at:
+ The official DonkeyCar docs which contain a lot of 3D models for printing: chassis and adapters, mounting plates, more mounting plates, etc. Markku.ai’s Chilicorn Rail for the Tamiya cars  I actually used the Chilicorn Rail for the first iteration of my build, and was very lucky to have been introduced by my mentor to Mitch, who printed out the parts and helped me out with a ton of stuff since then:</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar Installation: The Simulator</title>
+      <link>https://ori.codes/software/donkeycar-simulator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar-simulator/</guid>
+      <description>Even if you don&#39;t have an RC car, you can start here and follow the rest of the project by just substituting the RC car with the simulator!
+ This is one of the coolest parts of DonkeyCar for me, and probably one of the most useful ones. It&#39;s also a good way to get your feet wet with this kind of a project without building an actual RC.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar installation: RC car</title>
+      <link>https://ori.codes/software/donkeycar-rc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar-rc/</guid>
+      <description>Connecting to your RC via SSH To connect and work with your RC throughout the rest of the project, you&#39;ll need two things:
+ An SSH client The IP address of your RC  SSH Clients: If you&#39;re using Linux or a Mac, you&#39;re all set. They come with a SSH client pre-installed, and you just need to open up a terminal and type:
+ssh username@ipAddressIf you&#39;re using Windows, you need to install one.</description>
+    </item>
+    
+    <item>
+      <title>Preparing the Jetson Nano</title>
+      <link>https://ori.codes/hardware/jetson-nano-installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/hardware/jetson-nano-installation/</guid>
+      <description>Before we begin assembling our hardware together, we should first prepare our Jetson Nano by installing an OS on it and verifying everything works before it gets buried among all the other hardware on the RC.
+Preparing the microSD First, we&#39;ll prepare the microSD by installing an OS on it for the Nano to run.
+The official Jetson Nano docs are great and you can just follow them until the Next Steps step.</description>
+    </item>
+    
+    <item>
+      <title>Assembling the Jetson Nano</title>
+      <link>https://ori.codes/hardware/assembling-the-nano/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/hardware/assembling-the-nano/</guid>
+      <description>Now we can finish up our Nano by connecting the WLAN card, microSD and the fan to it.
+Plugging in the microSD I actually already did a lot of assembly some time ago, and I&#39;m writing this in retrospect, so don&#39;t be worried if my Nano has a lot of stuff already hooked up to it and if it looks a bit different than yours, just focus on the stuff we&#39;re going through and disregard the rest.</description>
+    </item>
+    
+    <item>
+      <title>Connecting the RC to the Nano</title>
+      <link>https://ori.codes/hardware/connecting-the-car-to-the-nano/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/hardware/connecting-the-car-to-the-nano/</guid>
+      <description>Now comes the part that should differ the most, based on the RC you got. But don&#39;t worry, it&#39;s very much doable no matter the RC you got!
+Finding your ESC/Servo The first thing you should do is find your ESC and your Servo connectors, which should be a three wire connector coming from your RC car.
+If you&#39;ve bought a car that came with a wireless receiver, both the connectors should be connected to it.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar configuration: RC car</title>
+      <link>https://ori.codes/software/setting-up-donkeycar-on-the-rc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/setting-up-donkeycar-on-the-rc/</guid>
+      <description>From now until the end of this chapter, I&#39;ll assume you&#39;re working on your car via SSH.
+ Creating a DonkeyCar application First, we&#39;ll run the createcar command, which will create a new directory with all of the files needed to run and train our RC.
+Command usage from the docs:
+donkey createcar --path &amp;lt;dir&amp;gt; [--overwrite] [--template &amp;lt;donkey2&amp;gt;]Run the following command to create a new donkeycar application:
+donkey createcar --path ~/mycarOpen the newly created directory:</description>
+    </item>
+    
+    <item>
+      <title>Calibrating steering and throttle</title>
+      <link>https://ori.codes/software/calibrating-steering-and-throttle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/calibrating-steering-and-throttle/</guid>
+      <description>Make sure your car wheels are not touching the ground. Prop it up using a shoebox, or in my case, an eGPU dock. We will be calibrating the throttle which means your car will start accelerating very fast, without warning, so you wouldn&#39;t want it slamming into a wall at full throttle.
+ Calibrating the throttle: **First, you&#39;ll need to turn on your car**; the actual RC, not the Nano.</description>
+    </item>
+    
+    <item>
+      <title>Using a gamepad</title>
+      <link>https://ori.codes/software/connecting-a-bluetooth-gamepad/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/connecting-a-bluetooth-gamepad/</guid>
+      <description>You can, and should, use a gamepad to control your RC. It&#39;s much easier to generate good training data using a gamepad, and it&#39;s much easier to drive the thing compared to the Web interface that Donkey provides.
+So how do we connect and use one?
+Compatible controllers First, let&#39;s make sure you have one that&#39;ll actually work
+The official Donkey docs list that the following are known to work:</description>
+    </item>
+    
+    <item>
+      <title>Test drive</title>
+      <link>https://ori.codes/software/test-driving-the-rc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/test-driving-the-rc/</guid>
+      <description>First of all: congrats on getting this far! Let&#39;s spin our RC for a ride.
+Before continuing:
+ Make sure your RC is powered up (not the Jetson Nano, the actual RC). Make sure that the camera is connected and powered up (if you&#39;re using a USB camera). Make sure that your RC has enough space around it, depending on what throttle values you&#39;ve defined.  Test drive using a gamepad Change to the directory you&#39;ve created with the donkey createcar command:</description>
+    </item>
+    
+    <item>
+      <title>First Autopilot: sanity check</title>
+      <link>https://ori.codes/software/sanity-check-first-autopilot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/sanity-check-first-autopilot/</guid>
+      <description>After doing a bunch of work like we just did, it&#39;s always important to periodically check that everything works as intended, before moving on to even more complex stuff.
+So that&#39;s what we&#39;ll be doing.
+Building a test track First, you need to build a test track. For this sanity checking, I wouldn&#39;t do anything over the top. Just take some duct-tape and make a circular track that&#39;s easy to drive around.</description>
+    </item>
+    
+  </channel>
+</rss>

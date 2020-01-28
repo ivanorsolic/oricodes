@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simulator modding on Ori Codes</title>
+    <link>https://ori.codes/artificial-intelligence/simulator-mod/</link>
+    <description>Recent content in Simulator modding on Ori Codes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
+    
+	<atom:link href="https://ori.codes/artificial-intelligence/simulator-mod/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Simulator mod: High resolution images</title>
+      <link>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</guid>
+      <description>If we want to use the simulator to gather training data that&#39;s larger than the default 160x120 image size, we&#39;ll need to create a modified version of it.
+Setting up the simulator locally First off, let&#39;s clone (or fork) the original simulator Tawn Kramer made for Donkey from GitHub.
+git clone --single-branch --branch donkey https://github.com/tawnkramer/sdsandbox If you&#39;re wondering why aren&#39;t I just using the git clone --branch command: it clones all branches, but checks out just the one you&#39;ve passed to the flag.</description>
+    </item>
+    
+    <item>
+      <title>Simulator mod: Custom RC model</title>
+      <link>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</guid>
+      <description>If you want to get better data for your RC, you should edit the default model that comes with the simulator. Most notably, you should edit the camera position, resolution and field of view. You can also add multiple cameras and edit the center of mass of your vehicle, as well as any other properties you think would make a difference if you wanted to use the simulator to pre-train the weights for your RC.</description>
+    </item>
+    
+  </channel>
+</rss>

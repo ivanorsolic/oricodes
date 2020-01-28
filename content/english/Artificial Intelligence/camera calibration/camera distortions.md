@@ -73,9 +73,9 @@ If we have the barrel radial distortion type, $k_1$ will typically be larger tha
 
 [OpenCV uses a pinhole camera model to describe how an image is created by projecting 3D points into the image plane using a perspective transformation:](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#camera-calibration-and-3d-reconstruction)
 <div>
-$$
+++
 s \begin{bmatrix}{u}\\{v}\\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&{0}&{c_x}\\{0}&{f_y}&{c_y}\\{0}&{0}&{1}\end{bmatrix} \begin{bmatrix} r_{11} & r_{12} & r_{13} & t_1  \\ r_{21} & r_{22} & r_{23} & t_2  \\ r_{31} & r_{32} & r_{33} & t_3 \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
-$$
+++
 </div>
 
 - $(X, Y, Z)$ are the coordinates of a 3D point we're imaging
@@ -87,19 +87,19 @@ $$
 
 Since we're imaging 2D images, we'd like to map the 3D coordinates to a coordinate system:
 <div>
-$$
+++
 \begin{bmatrix}{x}\\{y}\\{z}\end{bmatrix} = R  \\
 \begin{bmatrix}{X}\\{Y}\\{Z}\end{bmatrix} + t \\
 x' = x/z \\
 y' = y/z \\
 u = f_x*x' + c_x \\
 v = f_y*y' + c_y
-$$
+++
 </div>
 
 Also, since we're not using a pinhole camera, we need to add the distortion coefficients to our model:
 <div>
-$$
+++
 x' = x/z \\ 
 y' = y/z \\ 
 x'' = x'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + 2 p_1 x' y' + p_2  \\ 
@@ -107,7 +107,7 @@ y'' = y'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6
 \\ \text{where} \quad r^2 = x'^2 + y'^2  \\ 
 u = f_x*x'' + c_x \\
 v = f_y*y'' + c_y
-$$
+++
 </div>
 
 Since we're primarily interested in efficiently removing the radial distortion, we'll be using Fitzgibbon's [division model](http://www.robots.ox.ac.uk/~vgg/publications/papers/fitzgibbon01b.pdf) as opposed to Brown-Conrady's [even-order polynomial](https://eserv.asprs.org/PERS/1966journal/may/1966_may_444-462.pdf) model, since it requires fewer terms in cases of severe distortion. It is also a bit easier to work with, since inverting the single parameter division model requires solving a one degree less polynomial than inverting the single-parameter polynomial model. [^Bukhari]

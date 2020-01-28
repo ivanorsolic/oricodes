@@ -31,7 +31,7 @@
     MathJax.Hub.Config({
   tex2jax: {
     inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
+    displayMath: [['++','++']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -1166,19 +1166,21 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <h3 id="input-resolution">Input resolution?</h3>
 <p>Now, we can see a couple of things, but most notably, that it's hard to actually see things on these images. And in case you're wondering, it's not because they're resized. They're pretty low res, since the input image is only 160x120 and due to the nature of convolutions it only gets smaller.</p>
 <p>The formula for the output size of a convolutional layer is:
-$$
+++
 \Big\lfloor{\frac{n+2p-f}{s}+1}\Big\rfloor
-$$
+++
 Where $n$ is an input dimension, $p$ is the padding, $f$ is the number of filters and $s$ is the stride size.</p>
 <p>Let's calculate the output size of our first convolutional layer, which was:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), input_shape <span style="color:#f92672">=</span> input_shape, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Conv2D_First_layer</span><span style="color:#e6db74">&#34;</span>)(x)
 </code></pre></div><p>The input dimensions of our image are 160 and 120, the other parameters are easily seen, except for the padding, which is valid (aka zero), since we didn't specify it explicitly.</p>
-<p>$$
+<div>
+<p>++
 width=\Big\lfloor{\frac{160-5}{2}+1}\Big\rfloor = \Big\lfloor{78.5}\Big\rfloor = 78
-$$</p>
-<p>$$
+++</p>
+<p>++
 height=\Big\lfloor{\frac{120-5}{2}+1}\Big\rfloor = \Big\lfloor{58.5}\Big\rfloor = 58
-$$</p>
+++</p>
+</div>
 <p>So after the first layer, we'll have 12 filters (or images) with the size of 78x58. Let's look at the other layers:</p>
 <ul>
 <li>Second layer: 37x27, 24 filters</li>

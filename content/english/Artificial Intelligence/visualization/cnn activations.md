@@ -47,9 +47,9 @@ Here are the results I got while running this picture through the Nvidia model w
 Now, we can see a couple of things, but most notably, that it's hard to actually see things on these images. And in case you're wondering, it's not because they're resized. They're pretty low res, since the input image is only 160x120 and due to the nature of convolutions it only gets smaller.
 
 The formula for the output size of a convolutional layer is:
-$$
+++
 \Big\lfloor{\frac{n+2p-f}{s}+1}\Big\rfloor
-$$
+++
 Where $n$ is an input dimension, $p$ is the padding, $f$ is the number of filters and $s$ is the stride size.
 
 Let's calculate the output size of our first convolutional layer, which was:
@@ -60,14 +60,18 @@ x = Convolution2D(filters=12, kernel_size=5, strides=(2, 2), input_shape = input
 
 The input dimensions of our image are 160 and 120, the other parameters are easily seen, except for the padding, which is valid (aka zero), since we didn't specify it explicitly. 
 
+<div>
 
-$$
+
+++
 width=\Big\lfloor{\frac{160-5}{2}+1}\Big\rfloor = \Big\lfloor{78.5}\Big\rfloor = 78
-$$
+++
 
-$$
+++
 height=\Big\lfloor{\frac{120-5}{2}+1}\Big\rfloor = \Big\lfloor{58.5}\Big\rfloor = 58
-$$
+++
+
+</div>
 
 So after the first layer, we'll have 12 filters (or images) with the size of 78x58. Let's look at the other layers:
 

@@ -133,8 +133,8 @@ So, we print out a chessboard, take multiple pictures of it from different angle
 The calibrateCamera function, given the object points and image points by the *findChessboardCorners function*, performs the following:
 
 1. Computes the initial intrinsic parameters. The distortion coefficients are all set to zeros initially.
-2. Estimates the initial camera pose as if the intrinsic parameters have been already known. This is done using [`solvePnP()`](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#bool solvePnP(InputArray objectPoints, InputArray imagePoints, InputArray cameraMatrix, InputArray distCoeffs, OutputArray rvec, OutputArray tvec, bool useExtrinsicGuess, int flags)) .
-3. Runs the global [Levenberg-Marquardt](https://cs.uwaterloo.ca/~y328yu/classics/levenberg.pdf) optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points `imagePoints` and the projected (using the current estimates for camera parameters and the poses) object points `objectPoints`. See [`projectPoints()`](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#void projectPoints(InputArray objectPoints, InputArray rvec, InputArray tvec, InputArray cameraMatrix, InputArray distCoeffs, OutputArray imagePoints, OutputArray jacobian, double aspectRatio)) for details.
+2. Estimates the initial camera pose as if the intrinsic parameters have been already known.
+3. Runs the global [Levenberg-Marquardt](https://cs.uwaterloo.ca/~y328yu/classics/levenberg.pdf) optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points `imagePoints` and the projected (using the current estimates for camera parameters and the poses) object points `objectPoints`.
 
 The function returns a matrix with the intrinsic camera parameters and a matrix with the distortion coefficients, which we can use to undistort our images.
 
@@ -148,6 +148,6 @@ I'd recommend at least reading about the two most important parameters of optica
 
 It's useful to know how different focal lengths affect the represented size of distant objects, for example:
 
-![https://upload.wikimedia.org/wikipedia/commons/e/e5/Focal_length.jpg?1580214480612](/images/ai/focal length.jpg)
+![https://upload.wikimedia.org/wikipedia/commons/e/e5/Focal_length.jpg?1580214480612](/images/ai/focallength.jpg)
 
 You can also learn a lot by reading how the focal length determines the angle of view, how the focal ratio (or f-number) defines the maximum usable aperture of a lens and so on. It's really interesting.

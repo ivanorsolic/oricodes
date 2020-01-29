@@ -410,6 +410,8 @@ elif model_type == "nvidia":
 And that's it! We can now train a model using the `manage.py` script. Here's the result of training the architecture using [this test dataset](https://drive.google.com/open?id=1A5sTSddFsf494UDtnvYQBaEPYX87_LMp) and running it in the simulator:
 
 <center><video controls src="/video/nvidia_architecture_test.mp4" autoplay muted loop width=100%></video></center>
+
+
 Not bad, considering it's trained on a really small dataset. Also, it's not the best driving data around. You can see it on the sharp 90 degree turns. It first goes as near as it can to the middle line, to *take a swing* so it can enter the turn faster. If we'd trained it on a much bigger dataset, with better driving data, it'd work better. 
 
 Let's move on to the next chapter, how to train your model.

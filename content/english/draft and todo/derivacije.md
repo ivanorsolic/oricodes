@@ -2,7 +2,7 @@
 title = "Raspisivanje math-a"
 menuTitle = "Random math stuff"
 draft = false
-weight=2
+weight=10
 
 +++
 {{% notice warning %}}

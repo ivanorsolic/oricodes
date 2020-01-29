@@ -2,7 +2,7 @@
 title = "Raspisivanje Hough transform-a"
 menuTitle = "Hough transform stuff"
 draft = false
-weight=3
+weight=11
 
 +++
 {{% notice warning %}}

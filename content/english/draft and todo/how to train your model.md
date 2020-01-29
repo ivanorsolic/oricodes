@@ -152,7 +152,7 @@ To stop our model from overfitting our data, we can randomly knock-out some neur
 
 Let's say we're training our car on the following track:
 
-![Untitled design](/images/howtotrain/Untitled design (1)-1574780814518.png)
+![Untitled design](/images/howtotrain/first.png)
 
 We run a few laps on the track and save our data. If we've only driven in the usual, counter-clockwise direction, we have inadvertently caused our model to be slightly biased to always turn a bit to the left.
 
@@ -166,7 +166,7 @@ We can see that, globally, the car is always turning a bit to the left. So if yo
 
 Other than driving the very same track, just in the opposite direction, you can simply mitigate this issue by augmenting your data with the same images, just horizontally flipped, thus getting:
 
-![Untitled design](/images/howtotrain/Untitled design-1574781029377.png)
+![Untitled design](/images/howtotrain/second.png)
 
 Now your car shouldn't be inclined much to steer to one side or the other for no reason.
 

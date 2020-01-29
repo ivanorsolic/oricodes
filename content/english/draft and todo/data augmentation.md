@@ -10,5 +10,9 @@ Augmenting the data by generating mirrored images to counter (counter)clockwise 
 
 Using neural style transfers to make the model more robust to lighting changes and real life track reflectiveness!
 
+![Van Gogh](/images/ai/vangogh.jpg)
+
+![Picasso](/images/ai/picasso.jpg)
+
 # Will publish next week!
 

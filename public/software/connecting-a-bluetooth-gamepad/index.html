@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1161,22 +1218,22 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <li><a href="https://www.amazon.com/gp/product/B01AZC3III">SteelSeries Nimbus</a> (works only on TX2 jetpack 4.2+, may work on the Nano)</li>
 </ul>
 <p>Depending on the controller you're going to use, open up the <code>myconfig.py</code> file and find the <code># JOYSTICK</code> section and uncomment and fill the following (using one of the types suggested inline with the setting):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">CONTROLLER_TYPE<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xbox&#39;</span>               <span style="color:#75715e">#(ps3|ps4|xbox|nimbus|wiiu|F710|rc3)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">CONTROLLER_TYPE</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;xbox&#39;</span>               <span style="color:#6272a4">#(ps3|ps4|xbox|nimbus|wiiu|F710|rc3)</span>
 </code></pre></div><p>If your gamepad isn't <em>officially</em> supported, try following the rest of the tutorial and connecting it to the Nano. If it shows up as <code>/dev/input/js0</code>, you should be able to use it, since the Donkey platform just uses that OS device mount as the gamepad.</p>
 <h2 id="connecting-your-controller">Connecting your controller</h2>
 <h3 id="xbox-one-controller">Xbox (One) Controller</h3>
 <p><img src="/images/software/xbone.png?height=15pc" alt="Xbox One Controller"></p>
 <p>The Xbox controller doesn't like the <em>Enhanced Re-Transmission Mode</em>, so we'll disable it first.</p>
 <p>Open up the <code>/etc/modprobe.d/xbox_bt.conf</code> file (this may actually create the file if it doesn't exist yet):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/modprobe.d/xbox_bt.conf
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Add this line and save the file</span>
-options bluetooth disable_ertm<span style="color:#f92672">=</span>1
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Reboot</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/modprobe.d/xbox_bt.conf
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Add this line and save the file</span>
+options bluetooth <span style="color:#8be9fd;font-style:italic">disable_ertm</span><span style="color:#ff79c6">=</span>1
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Reboot</span>
 sudo reboot
 </code></pre></div><p>After rebooting, check it's actually disabled by running:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /sys/module/bluetooth/parameters/disable_ertm
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /sys/module/bluetooth/parameters/disable_ertm
 </code></pre></div><p>It should say &lsquo;<strong>Y</strong>'. If it does, open up bluetoothctl:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo bluetoothctl
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo bluetoothctl
 </code></pre></div><pre><code># Register the default agent
 agent on
 # Default agent request
@@ -1185,27 +1242,27 @@ default-agent
 scan on
 </code></pre><p>Turn on your Xbox controller (by pressing the big <strong>Xbox logo button</strong>) and start the pairing mode by pressing the <strong>sync</strong> button on the back of the controller, next to the microUSB port.</p>
 <p>You should see your controller show up in bluetoothctl similar to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>NEW<span style="color:#f92672">]</span> Device YO:UR:MA:CA:DD:RS XBox One Wireless Controller
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>NEW<span style="color:#ff79c6">]</span> Device YO:UR:MA:CA:DD:RS XBox One Wireless Controller
 </code></pre></div><p>Type in:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># This may take a few tries ...</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># This may take a few tries ...</span>
 connect YOUR_MAC_ADDRESS
-<span style="color:#75715e"># If it connects but immediately disconnects, the disable_ertm setting isn&#39;t properly set up, try doing that again</span>
-<span style="color:#75715e"># When it connects and the big Xbox logo button is solid white:</span>
+<span style="color:#6272a4"># If it connects but immediately disconnects, the disable_ertm setting isn&#39;t properly set up, try doing that again</span>
+<span style="color:#6272a4"># When it connects and the big Xbox logo button is solid white:</span>
 trust YOUR_MAC_ADDRESS
 quit
 </code></pre></div><p>Once connected, it should automatically reconnect anytime the Jetson and it are both powered on. If it doesn't, you'll have to run the steps above again.</p>
 <h3 id="ps4-controller">PS4 Controller</h3>
 <p><img src="/images/software/ps4.png?height=15pc" alt=""></p>
 <p>Install ds4drv:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pip install ds4drv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pip install ds4drv
 </code></pre></div><p>Grant it permissions:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo wget https://raw.githubusercontent.com/chrippa/ds4drv/master/udev/50-ds4drv.rules -O /etc/udev/rules.d/50-ds4drv.rules
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo wget https://raw.githubusercontent.com/chrippa/ds4drv/master/udev/50-ds4drv.rules -O /etc/udev/rules.d/50-ds4drv.rules
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 sudo reboot
 </code></pre></div><p>After rebooting run ds4drv:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># --led changes the light bar color, you can modify it or not use it at all</span>
-<span style="color:#75715e"># --hidraw doesn&#39;t play well with some controllers, if you&#39;re having issues, try not using it</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># --led changes the light bar color, you can modify it or not use it at all</span>
+<span style="color:#6272a4"># --hidraw doesn&#39;t play well with some controllers, if you&#39;re having issues, try not using it</span>
 ds4drv --hidraw --led 00ff00
 </code></pre></div><p>Start the controller in pairing mode:</p>
 <ul>
@@ -1214,30 +1271,30 @@ ds4drv --hidraw --led 00ff00
 <li>If it goes <strong>green</strong> after a few seconds, pairing is successful.</li>
 </ul>
 <p>To run ds4drv on boot, open up <code>/etc/rc.local</code> and paste in the command you used to start ds4drv:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/rc.local
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Paste in (with or without --hidraw and --led):</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/rc.local
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Paste in (with or without --hidraw and --led):</span>
 /home/YOUR-USERNAME/env/bin/ds4drv --led 00ff00
 </code></pre></div><h3 id="ps3-controller">PS3 Controller</h3>
 <p>The Donkey docs say to follow <a href="https://pythonhosted.org/triangula/sixaxis.html">this guide</a>, or you can just run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install bluetooth libbluetooth3 libusb-dev
-sudo systemctl enable bluetooth.service
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install bluetooth libbluetooth3 libusb-dev
+sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> bluetooth.service
 sudo usermod -G bluetooth -a pi
 sudo reboot
 </code></pre></div><p>After rebooting, plug in the controller with an USB cable, press the <strong>PS button</strong> and:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://www.pabr.org/sixlinux/sixpair.c
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://www.pabr.org/sixlinux/sixpair.c
 gcc -o sixpair sixpair.c -lusb
 sudo ./sixpair
 </code></pre></div><p>Run bluetoothctl as a super user and pair your controller:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo bluetoothctl
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Enable the default agent</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo bluetoothctl
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Enable the default agent</span>
 agent on
-<span style="color:#75715e"># List all found devices and get your controller&#39;s MAC address</span>
+<span style="color:#6272a4"># List all found devices and get your controller&#39;s MAC address</span>
 devices
-<span style="color:#75715e"># Trust your controller</span>
+<span style="color:#6272a4"># Trust your controller</span>
 trust &lt;MAC ADDRESS&gt;
-<span style="color:#75715e"># Default agent request</span>
+<span style="color:#6272a4"># Default agent request</span>
 default-agent
-<span style="color:#75715e"># Quit</span>
+<span style="color:#6272a4"># Quit</span>
 quit
 </code></pre></div><p>Unplug the USB cable and press the <strong>PS button</strong>. Your controller should be mounted at <code>ls /dev/input/js0</code>.</p>
 <h2 id="any-other-gamepadjoystickcontroller">Any other gamepad/joystick/controller</h2>
@@ -1246,44 +1303,44 @@ quit
 <p>If neither goes, try searching how to connect that particular controller to a Linux device online, if there's a way (mostly there is), it should mount at the above mentioned <code>js0</code> and you should be able to follow along.</p>
 <h2 id="creating-a-buttonaxis-mapping">Creating a Button/Axis mapping:</h2>
 <p>After your controller is connected, run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createjs
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createjs
 </code></pre></div><p>The output should be:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##</span>
-<span style="color:#75715e">## Welcome to Joystick Creator Wizard. ##</span>
-<span style="color:#75715e">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##</span>
+<span style="color:#6272a4">## Welcome to Joystick Creator Wizard. ##</span>
+<span style="color:#6272a4">##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##</span>
 This will generate code to use your joystick with a Donkey car.
 
 Overview:
 
-First we name each button, <span style="color:#66d9ef">then</span> each axis control.
+First we name each button, <span style="color:#ff79c6">then</span> each axis control.
 Next we map names to actions.
 Finally we output a python file you can use in your project.
 
-Hit Enter to <span style="color:#66d9ef">continue</span>
+Hit Enter to <span style="color:#ff79c6">continue</span>
 
-<span style="color:#75715e"># After pressing Enter</span>
+<span style="color:#6272a4"># After pressing Enter</span>
 Please plug-in your controller via USB or bluetooth. Make sure status lights are on and device is mapped.
-Enter to <span style="color:#66d9ef">continue</span>
-<span style="color:#75715e"># You can press enter since we&#39;ve already gone through connecting your controller</span>
+Enter to <span style="color:#ff79c6">continue</span>
+<span style="color:#6272a4"># You can press enter since we&#39;ve already gone through connecting your controller</span>
 
-Where can we find the device file <span style="color:#66d9ef">for</span> your joystick?
-Hit Enter <span style="color:#66d9ef">for</span> default: /dev/input/js0 or type alternate path:
-<span style="color:#75715e"># Should be /dev/input/js0 if it&#39;s a PS3/PS4/Xbox/Standard USB one</span>
-<span style="color:#75715e"># Hit enter and see if it finds it (it will if its on /dev/input/js0)</span>
+Where can we find the device file <span style="color:#ff79c6">for</span> your joystick?
+Hit Enter <span style="color:#ff79c6">for</span> default: /dev/input/js0 or <span style="color:#8be9fd;font-style:italic">type</span> alternate path:
+<span style="color:#6272a4"># Should be /dev/input/js0 if it&#39;s a PS3/PS4/Xbox/Standard USB one</span>
+<span style="color:#6272a4"># Hit enter and see if it finds it (it will if its on /dev/input/js0)</span>
 
 Attempting to open device at that file...
 Opening /dev/input/js0...
-Device name: The type of Controller you<span style="color:#e6db74">&#39;re using
-</span><span style="color:#e6db74">Found and accessed input device.
-</span><span style="color:#e6db74"># After pressing Enter
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">Next we are going to look for gyroscope data.
-</span><span style="color:#e6db74">For 5 seconds, move controller and rotate on each axis. Hit Enter then start moving:
-</span><span style="color:#e6db74"># You can skip this, since you most probably won&#39;</span>t be using it
+Device name: The <span style="color:#8be9fd;font-style:italic">type</span> of Controller you<span style="color:#f1fa8c">&#39;re using
+</span><span style="color:#f1fa8c">Found and accessed input device.
+</span><span style="color:#f1fa8c"># After pressing Enter
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">Next we are going to look for gyroscope data.
+</span><span style="color:#f1fa8c">For 5 seconds, move controller and rotate on each axis. Hit Enter then start moving:
+</span><span style="color:#f1fa8c"># You can skip this, since you most probably won&#39;</span>t be using it
 
-Ok, we didn<span style="color:#e6db74">&#39;t see any events. So perhaps your controller doesn&#39;</span>t emit gyroscope data. No problem.
+Ok, we didn<span style="color:#f1fa8c">&#39;t see any events. So perhaps your controller doesn&#39;</span>t emit gyroscope data. No problem.
 </code></pre></div><p>Finally, you'll get to this part:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">We will display the current progress in this set of tables:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">We will display the current progress in this <span style="color:#8be9fd;font-style:italic">set</span> of tables:
 
 Button Map:
 +-------------+-------------+
@@ -1306,7 +1363,7 @@ As you name buttons and map them to controls this table will be updated.
 </code></pre></div><p>While in here, you should go through pressing every button on your controller, and giving it a name.</p>
 <p>Note: during this first step, you can only map buttons, the axes, such as triggers or analog sticks will come next.</p>
 <p>For my Xbox One Controller, I made the following button map:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Button Map:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Button Map:
 +-------------+-------------+
 | button code | button name |
 +-------------+-------------+
@@ -1323,7 +1380,7 @@ As you name buttons and map them to controls this table will be updated.
 +-------------+-------------+
 </code></pre></div><p>After mapping all the buttons, wait for 10 seconds and enter <code>Y</code> when the program asks you if you've finished mapping all the buttons.</p>
 <p>This is what my axis map looks like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Axis Map:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Axis Map:
 +-----------+-------------------------+
 | axis code |        axis name        |
 +-----------+-------------------------+
@@ -1336,7 +1393,7 @@ As you name buttons and map them to controls this table will be updated.
 +-----------+-------------------------+
 </code></pre></div><p>You can enter <code>D</code> when you're done and move on to the control map, through which we'll map buttons and axes to specific car controls.</p>
 <p>This is what my control map looks like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Control Map:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Control Map:
 +------------------------+--------------------------+
 |        control         |          action          |
 +------------------------+--------------------------+
@@ -1351,44 +1408,44 @@ As you name buttons and map them to controls this table will be updated.
 | Right Stick: Vertical  |       set_throttle       |
 +------------------------+--------------------------+
 </code></pre></div><p>If you've messed something up, don't worry, at the next menu you can go back to any step you'd like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Now we are nearly <span style="color:#66d9ef">done</span>! Are you happy with this config or would you like to revisit a topic?
-H<span style="color:#f92672">)</span>appy, please <span style="color:#66d9ef">continue</span> to write out python file.
-B<span style="color:#f92672">)</span>uttons need renaming.
-A<span style="color:#f92672">)</span>xes need renaming.
-T<span style="color:#f92672">)</span>hrottle and steering need remap.
-R<span style="color:#f92672">)</span>emap buttons to controls.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Now we are nearly <span style="color:#ff79c6">done</span>! Are you happy with this config or would you like to revisit a topic?
+H<span style="color:#ff79c6">)</span>appy, please <span style="color:#ff79c6">continue</span> to write out python file.
+B<span style="color:#ff79c6">)</span>uttons need renaming.
+A<span style="color:#ff79c6">)</span>xes need renaming.
+T<span style="color:#ff79c6">)</span>hrottle and steering need remap.
+R<span style="color:#ff79c6">)</span>emap buttons to controls.
 </code></pre></div><p>If you're happy with your maps, enter <code>H</code> and it will prompt you for a name under which to save your mapping. The default one is <code>my_joystick.py</code>, but you can enter a custom one, if you're planning to use multiple different controllers, or just for non-generic-naming's sake:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Now we will write these values to a new python file.
-What is the name of python file to create joystick code? <span style="color:#f92672">[</span>default: my_joystick.py<span style="color:#f92672">]</span> xbox_one_controller.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Now we will write these values to a new python file.
+What is the name of python file to create joystick code? <span style="color:#ff79c6">[</span>default: my_joystick.py<span style="color:#ff79c6">]</span> xbox_one_controller.py
 </code></pre></div><p>It will then ask what to name the custom Python class of the controller you've just created:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">What is the name of joystick class? <span style="color:#f92672">[</span>default: MyJoystick<span style="color:#f92672">]</span> XboxOneController
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">What is the name of joystick class? <span style="color:#ff79c6">[</span>default: MyJoystick<span style="color:#ff79c6">]</span> XboxOneController
 xbox_one_controller.py written.
-Check your new python file to see the controller implementation. Import this in manage.py and use <span style="color:#66d9ef">for</span> control.
+Check your new python file to see the controller implementation. Import this in manage.py and use <span style="color:#ff79c6">for</span> control.
 </code></pre></div><p>Almost there, we just need to import our custom mapping in the <code>manage.py</code> script to be able to use it with our RC.</p>
 <p>Open up <code>manage.py</code> (<code>nano</code> or <code>vim</code>) and at the end of the imports, find the following line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> donkeycar.parts.controller <span style="color:#f92672">import</span> get_js_controller
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">from</span> donkeycar.parts.controller <span style="color:#ff79c6">import</span> get_js_controller
 
-ctr <span style="color:#f92672">=</span> get_js_controller(cfg)
+ctr <span style="color:#ff79c6">=</span> get_js_controller(cfg)
 </code></pre></div><p>And replace it with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># This assumes you haven&#39;t changed the default names</span>
-<span style="color:#f92672">from</span> my_joystick <span style="color:#f92672">import</span> MyJoystick
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># This assumes you haven&#39;t changed the default names</span>
+<span style="color:#ff79c6">from</span> my_joystick <span style="color:#ff79c6">import</span> MyJoystick
 
-ctr <span style="color:#f92672">=</span> MyJoystick(throttle_dir<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>JOYSTICK_THROTTLE_DIR,
-                                throttle_scale<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>JOYSTICK_MAX_THROTTLE,
-                                steering_scale<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>JOYSTICK_STEERING_SCALE,
-                                auto_record_on_throttle<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>AUTO_RECORD_ON_THROTTLE)
+ctr <span style="color:#ff79c6">=</span> MyJoystick(throttle_dir<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>JOYSTICK_THROTTLE_DIR,
+                                throttle_scale<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>JOYSTICK_MAX_THROTTLE,
+                                steering_scale<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>JOYSTICK_STEERING_SCALE,
+                                auto_record_on_throttle<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>AUTO_RECORD_ON_THROTTLE)
 
-ctr<span style="color:#f92672">.</span>set_deadzone(cfg<span style="color:#f92672">.</span>JOYSTICK_DEADZONE)
+ctr<span style="color:#ff79c6">.</span>set_deadzone(cfg<span style="color:#ff79c6">.</span>JOYSTICK_DEADZONE)
 </code></pre></div><p>Or if you've defined a custom name for the python file containing your mapping, and the class it contains, which I did, then modify the import line so it uses your custom script and class name:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># In my case</span>
-<span style="color:#f92672">from</span> xbox_one_controller <span style="color:#f92672">import</span> XboxOneController
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># In my case</span>
+<span style="color:#ff79c6">from</span> xbox_one_controller <span style="color:#ff79c6">import</span> XboxOneController
 
-ctr <span style="color:#f92672">=</span> XboxOneController(throttle_dir<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>JOYSTICK_THROTTLE_DIR,
-                                throttle_scale<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>JOYSTICK_MAX_THROTTLE,
-                                steering_scale<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>JOYSTICK_STEERING_SCALE,
-                                auto_record_on_throttle<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>AUTO_RECORD_ON_THROTTLE)
+ctr <span style="color:#ff79c6">=</span> XboxOneController(throttle_dir<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>JOYSTICK_THROTTLE_DIR,
+                                throttle_scale<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>JOYSTICK_MAX_THROTTLE,
+                                steering_scale<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>JOYSTICK_STEERING_SCALE,
+                                auto_record_on_throttle<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>AUTO_RECORD_ON_THROTTLE)
 
-ctr<span style="color:#f92672">.</span>set_deadzone(cfg<span style="color:#f92672">.</span>JOYSTICK_DEADZONE)
+ctr<span style="color:#ff79c6">.</span>set_deadzone(cfg<span style="color:#ff79c6">.</span>JOYSTICK_DEADZONE)
 </code></pre></div><p>And you're done! Now we can start actually driving the car using our controller!</p>
 
 
@@ -2128,8 +2185,7 @@ ctr<span style="color:#f92672">.</span>set_deadzone(cfg<span style="color:#f9267
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

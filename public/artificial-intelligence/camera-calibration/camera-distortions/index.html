@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -47,6 +47,63 @@
     }
   });
 </script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
+</script>
     <style>
       :root #header + #content > #left > #rlblock_left{
           display:none !important;
@@ -70,7 +127,7 @@
   <img src="/images/logo.png">
 </a>
 
-	  1642 words.<br>
+	  1598 words.<br>
 	  Reading time: 8 minutes.
 	  
     </div>
@@ -1204,7 +1261,7 @@ s \begin{bmatrix}{u}\\{v}\\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&{0}&{c_x}\\{0
 <p>Since we're imaging 2D images, we'd like to map the 3D coordinates to a coordinate system:</p>
 <div>
 ++
-\begin{bmatrix}{x}\\{y}\\{z}\end{bmatrix} = R  \\
+\begin{bmatrix}{x}\\{y}\\{z}\end{bmatrix} = R 
 \begin{bmatrix}{X}\\{Y}\\{Z}\end{bmatrix} + t \\
 x' = x/z \\
 y' = y/z \\
@@ -1215,8 +1272,6 @@ v = f_y*y' + c_y
 <p>Also, since we're not using a pinhole camera, we need to add the distortion coefficients to our model:</p>
 <div>
 ++
-x' = x/z \\ 
-y' = y/z \\ 
 x'' = x'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + 2 p_1 x' y' + p_2  \\ 
 y'' = y'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + p_1 (r^2 + 2 y'^2) + 2 p_2 x' y'  
 \\ \text{where} \quad r^2 = x'^2 + y'^2  \\ 
@@ -1224,7 +1279,7 @@ u = f_x*x'' + c_x \\
 v = f_y*y'' + c_y
 ++
 </div>
-<p>Since we're primarily interested in efficiently removing the radial distortion, we'll be using Fitzgibbon's <a href="http://www.robots.ox.ac.uk/~vgg/publications/papers/fitzgibbon01b.pdf">division model</a> as opposed to Brown-Conrady's <a href="https://eserv.asprs.org/PERS/1966journal/may/1966_may_444-462.pdf">even-order polynomial</a> model, since it requires fewer terms in cases of severe distortion. It is also a bit easier to work with, since inverting the single parameter division model requires solving a one degree less polynomial than inverting the single-parameter polynomial model. [^Bukhari]</p>
+<p>Since we're primarily interested in efficiently removing the radial distortion, we'll be using Fitzgibbon's <a href="http://www.robots.ox.ac.uk/~vgg/publications/papers/fitzgibbon01b.pdf">division model</a> as opposed to Brown-Conrady's <a href="https://eserv.asprs.org/PERS/1966journal/may/1966_may_444-462.pdf">even-order polynomial</a> model, since it requires fewer terms in cases of severe distortion. It is also a bit easier to work with, since inverting the single parameter division model requires solving a one degree less polynomial than inverting the single-parameter polynomial model. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <h3 id="finding-the-cameras-intrinsic-and-extrinsic-parameters">Finding the camera's intrinsic and extrinsic parameters</h3>
 <p>Now that we've laid out all of the formulas we use to correct radial and tangential distortion, the only question that remains is how do we get the intrinsic and extrinsic parameters.</p>
 <p>For those purposes, we'll be using the OpenCV <em><strong>calibrateCamera</strong></em> function, along with its  <em><strong>findChessboardCorners</strong></em> function.</p>
@@ -1237,8 +1292,8 @@ v = f_y*y'' + c_y
 <p>The calibrateCamera function, given the object points and image points by the <em>findChessboardCorners function</em>, performs the following:</p>
 <ol>
 <li>Computes the initial intrinsic parameters. The distortion coefficients are all set to zeros initially.</li>
-<li>Estimates the initial camera pose as if the intrinsic parameters have been already known. This is done using [<code>solvePnP()</code>](<a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#bool">https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#bool</a> solvePnP(InputArray objectPoints, InputArray imagePoints, InputArray cameraMatrix, InputArray distCoeffs, OutputArray rvec, OutputArray tvec, bool useExtrinsicGuess, int flags)) .</li>
-<li>Runs the global <a href="https://cs.uwaterloo.ca/~y328yu/classics/levenberg.pdf">Levenberg-Marquardt</a> optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points <code>imagePoints</code> and the projected (using the current estimates for camera parameters and the poses) object points <code>objectPoints</code>. See [<code>projectPoints()</code>](<a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#void">https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#void</a> projectPoints(InputArray objectPoints, InputArray rvec, InputArray tvec, InputArray cameraMatrix, InputArray distCoeffs, OutputArray imagePoints, OutputArray jacobian, double aspectRatio)) for details.</li>
+<li>Estimates the initial camera pose as if the intrinsic parameters have been already known.</li>
+<li>Runs the global <a href="https://cs.uwaterloo.ca/~y328yu/classics/levenberg.pdf">Levenberg-Marquardt</a> optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points <code>imagePoints</code> and the projected (using the current estimates for camera parameters and the poses) object points <code>objectPoints</code>.</li>
 </ol>
 <p>The function returns a matrix with the intrinsic camera parameters and a matrix with the distortion coefficients, which we can use to undistort our images.</p>
 <h3 id="other-stuff-if-you-like-computer-vision">Other stuff if you like computer vision</h3>
@@ -1246,7 +1301,7 @@ v = f_y*y'' + c_y
 <p>If you're not interested in it, feel free to skip the small paragraph below.</p>
 <p>I'd recommend at least reading about the two most important parameters of optical lenses: the focal length  and the maximum aperture of the camera.</p>
 <p>It's useful to know how different focal lengths affect the represented size of distant objects, for example:</p>
-<p>![https://upload.wikimedia.org/wikipedia/commons/e/e5/Focal_length.jpg?1580214480612](/images/ai/focal length.jpg)</p>
+<p><img src="/images/ai/focallength.jpg" alt="https://upload.wikimedia.org/wikipedia/commons/e/e5/Focal_length.jpg?1580214480612"></p>
 <p>You can also learn a lot by reading how the focal length determines the angle of view, how the focal ratio (or f-number) defines the maximum usable aperture of a lens and so on. It's really interesting.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
@@ -1256,6 +1311,9 @@ v = f_y*y'' + c_y
 </li>
 <li id="fn:2" role="doc-endnote">
 <p><a href="https://en.wikipedia.org/wiki/Camera_obscura">Camera Obscura</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="http://www.cs.ait.ac.th/~mdailey/papers/Bukhari-RadialDistortion.pdf">Automatic Radial Distortion Estimation from a Single Image</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -1998,8 +2056,7 @@ v = f_y*y'' + c_y
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

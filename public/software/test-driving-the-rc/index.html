@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1146,11 +1203,11 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 </ul>
 <h2 id="test-drive-using-a-gamepad">Test drive using a gamepad</h2>
 <p>Change to the directory you've created with the <code>donkey createcar</code> command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/mycar
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> ~/mycar
 </code></pre></div><p>Start the <code>manage.py</code> script with the <code>drive</code> command and the <code>--js</code> flag, to control your RC with your gamepad:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --js
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --js
 </code></pre></div><p>The output should look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">using donkey v3.1.1 ...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">using donkey v3.1.1 ...
 loading config file: /home/your_username/mycar/config.py
 loading personal config over-rides
 
@@ -1174,7 +1231,7 @@ New tub created at: /home/your_username/mycar/data/tub_15_20-01-02
 Adding part TubWriter.
 You can now move your joystick to drive your car.
 </code></pre></div><p>It'll also show you your controller mapping and the controller name:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Joystick Controls:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Joystick Controls:
 +------------------+---------------------------+
 |     control      |           action          |
 +------------------+---------------------------+
@@ -1198,17 +1255,17 @@ Device name: Xbox Wireless Controller
 </code></pre></div><center><video controls src="/video/gamepad_steering.mp4" autoplay muted loop width="100%"></video></center>
 <center><video controls src="/video/gamepad_throttle.mp4" autoplay muted loop width="100%"></video></center>
 <p>You can also see it mentioning something called a <em>tub</em>, and if you drive your RC around, it'll say that it's making records:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Starting vehicle...
-recorded <span style="color:#ae81ff">10</span> records
-recorded <span style="color:#ae81ff">20</span> records
-recorded <span style="color:#ae81ff">30</span> records
-recorded <span style="color:#ae81ff">40</span> records
-recorded <span style="color:#ae81ff">50</span> records
-recorded <span style="color:#ae81ff">60</span> records
-recorded <span style="color:#ae81ff">70</span> records
-recorded <span style="color:#ae81ff">80</span> records
-recorded <span style="color:#ae81ff">90</span> records
-recorded <span style="color:#ae81ff">100</span> records
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Starting vehicle...
+recorded <span style="color:#bd93f9">10</span> records
+recorded <span style="color:#bd93f9">20</span> records
+recorded <span style="color:#bd93f9">30</span> records
+recorded <span style="color:#bd93f9">40</span> records
+recorded <span style="color:#bd93f9">50</span> records
+recorded <span style="color:#bd93f9">60</span> records
+recorded <span style="color:#bd93f9">70</span> records
+recorded <span style="color:#bd93f9">80</span> records
+recorded <span style="color:#bd93f9">90</span> records
+recorded <span style="color:#bd93f9">100</span> records
 ...
 </code></pre></div><p>A tub is a folder containing data from a drive. It's located in the <code>data</code> directory inside the <code>mycar</code> directory. The data is made up of camera images (JPEGs), along with steering and throttle values (JSONs).</p>
 <p>We'll use this data later on to train our models.</p>
@@ -1216,15 +1273,15 @@ recorded <span style="color:#ae81ff">100</span> records
 <h2 id="test-drive-using-the-web-interface">Test drive using the Web interface</h2>
 <p>The Web interface can sometimes be a bit simpler to use, since it allows you to see the camera output and has a nice GUI for all of the autopilot settings. Let's try it out.</p>
 <p>First, change to the directory you've created with the <code>donkey createcar</code> command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/mycar
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> ~/mycar
 </code></pre></div><p>Start the <code>manage.py</code> script with the <code>drive</code> command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive
 </code></pre></div><p>If all went well, the end of the output should say:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">You can now go to &lt;your pis hostname.local&gt;:8887 to drive your car.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">You can now go to &lt;your pis hostname.local&gt;:8887 to drive your car.
 Starting vehicle...
 8887
 </code></pre></div><p>You can now open up your browser, and enter your Jetson Nano's IP with the port 8887 to control your car:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">192.168.x.xxx:8887
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">192.168.x.xxx:8887
 </code></pre></div>
 <div class="notices warning" ><p>Before starting up your RC, <strong>set the Max Throttle value to 50% or less</strong>. <strong>By default it will allow your RC to go as fast as it can</strong>, regardless of the values you've set in <code>myconfig.py</code>. A lot of RC's can easily go over 50MPH/80KPH, so this could cause a world of pain.</p>
 </div>
@@ -1260,43 +1317,43 @@ Starting vehicle...
 </ul>
 <p>A quick note if you're using an USB camera and it's showing a blue-ish picture. The default color space for the CVCAM is BGR, since it's an OpenCV camera. Don't worry about it, it makes no practical difference for your model.</p>
 <p>If, however, you insist on seeing the CVCAM output in RGB, open up the <code>cv.py</code> script, found in your <code>projects</code> folder, inside the <code>donkeycar/donkeycar/parts</code> directory:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/projects/donkeycar/donkeycar/parts/cv.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/projects/donkeycar/donkeycar/parts/cv.py
 </code></pre></div><p>Find the <code>CvCam</code> class, and:</p>
 <ul>
 <li>Add an instance of the <code>ImgBGR2RGB</code> class to a class variable</li>
 <li>Call the <code>run()</code> method of the <code>ImgBGR2RGB</code> instance any time the class returns an image frame</li>
 </ul>
 <p>The resulting <code>CvCam</code> class code should look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CvCam</span>(object):
-    <span style="color:#66d9ef">def</span> __init__(self, image_w<span style="color:#f92672">=</span><span style="color:#ae81ff">1280</span>, image_h<span style="color:#f92672">=</span><span style="color:#ae81ff">720</span>, image_d<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, iCam<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CvCam</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
+    <span style="color:#ff79c6">def</span> __init__(self, image_w<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1280</span>, image_h<span style="color:#ff79c6">=</span><span style="color:#bd93f9">720</span>, image_d<span style="color:#ff79c6">=</span><span style="color:#bd93f9">3</span>, iCam<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>):
         
-        <span style="color:#75715e"># Added an instance of the converter class</span>
-        self<span style="color:#f92672">.</span>imgConverter <span style="color:#f92672">=</span> ImgBGR2RGB()
-        self<span style="color:#f92672">.</span>frame <span style="color:#f92672">=</span> None
-        self<span style="color:#f92672">.</span>cap <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>VideoCapture(iCam)
-        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> True
-        self<span style="color:#f92672">.</span>cap<span style="color:#f92672">.</span>set(<span style="color:#ae81ff">3</span>, image_w)
-        self<span style="color:#f92672">.</span>cap<span style="color:#f92672">.</span>set(<span style="color:#ae81ff">4</span>, image_h)
+        <span style="color:#6272a4"># Added an instance of the converter class</span>
+        self<span style="color:#ff79c6">.</span>imgConverter <span style="color:#ff79c6">=</span> ImgBGR2RGB()
+        self<span style="color:#ff79c6">.</span>frame <span style="color:#ff79c6">=</span> None
+        self<span style="color:#ff79c6">.</span>cap <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>VideoCapture(iCam)
+        self<span style="color:#ff79c6">.</span>running <span style="color:#ff79c6">=</span> True
+        self<span style="color:#ff79c6">.</span>cap<span style="color:#ff79c6">.</span>set(<span style="color:#bd93f9">3</span>, image_w)
+        self<span style="color:#ff79c6">.</span>cap<span style="color:#ff79c6">.</span>set(<span style="color:#bd93f9">4</span>, image_h)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">poll</span>(self):
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>cap<span style="color:#f92672">.</span>isOpened():
-            ret, self<span style="color:#f92672">.</span>frame <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cap<span style="color:#f92672">.</span>read()
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">poll</span>(self):
+        <span style="color:#ff79c6">if</span> self<span style="color:#ff79c6">.</span>cap<span style="color:#ff79c6">.</span>isOpened():
+            ret, self<span style="color:#ff79c6">.</span>frame <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>cap<span style="color:#ff79c6">.</span>read()
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self):
-        <span style="color:#66d9ef">while</span>(self<span style="color:#f92672">.</span>running):
-            self<span style="color:#f92672">.</span>poll() <span style="color:#75715e"># poll the camera for a frame</span>
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">update</span>(self):
+        <span style="color:#ff79c6">while</span>(self<span style="color:#ff79c6">.</span>running):
+            self<span style="color:#ff79c6">.</span>poll() <span style="color:#6272a4"># poll the camera for a frame</span>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_threaded</span>(self):
-        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>imgConverter<span style="color:#f92672">.</span>run(self<span style="color:#f92672">.</span>frame) <span style="color:#75715e"># Convert the image to RGB</span>
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">run_threaded</span>(self):
+        <span style="color:#ff79c6">return</span> self<span style="color:#ff79c6">.</span>imgConverter<span style="color:#ff79c6">.</span>run(self<span style="color:#ff79c6">.</span>frame) <span style="color:#6272a4"># Convert the image to RGB</span>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
-        self<span style="color:#f92672">.</span>poll()
-        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>imgConverter<span style="color:#f92672">.</span>run(self<span style="color:#f92672">.</span>frame)  <span style="color:#75715e"># Convert the image to RGB</span>
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">run</span>(self):
+        self<span style="color:#ff79c6">.</span>poll()
+        <span style="color:#ff79c6">return</span> self<span style="color:#ff79c6">.</span>imgConverter<span style="color:#ff79c6">.</span>run(self<span style="color:#ff79c6">.</span>frame)  <span style="color:#6272a4"># Convert the image to RGB</span>
         
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shutdown</span>(self):
-        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False
-        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)
-        self<span style="color:#f92672">.</span>cap<span style="color:#f92672">.</span>release()
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">shutdown</span>(self):
+        self<span style="color:#ff79c6">.</span>running <span style="color:#ff79c6">=</span> False
+        time<span style="color:#ff79c6">.</span>sleep(<span style="color:#bd93f9">0.2</span>)
+        self<span style="color:#ff79c6">.</span>cap<span style="color:#ff79c6">.</span>release()
 
 </code></pre></div><p>Now you should be seeing your camera output in RGB. But as I said, it doesn't really matter to the model.</p>
 
@@ -2037,8 +2094,7 @@ Starting vehicle...
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

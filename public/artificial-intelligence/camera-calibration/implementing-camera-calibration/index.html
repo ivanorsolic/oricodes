@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1133,75 +1190,75 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
 <p>First we'll import the stuff we need and declare some variables:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> cv2<span style="color:#f92672">,</span> os<span style="color:#f92672">,</span> glob
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
+<span style="color:#ff79c6">import</span> cv2<span style="color:#ff79c6">,</span> os<span style="color:#ff79c6">,</span> glob
 
 
-objectPoints <span style="color:#f92672">=</span> []
-imagePoints <span style="color:#f92672">=</span> []
-cameraIntrinsicValues <span style="color:#f92672">=</span> []
-<span style="color:#75715e"># Distortion coefficients</span>
-cameraExtrinsicValues <span style="color:#f92672">=</span> []
+objectPoints <span style="color:#ff79c6">=</span> []
+imagePoints <span style="color:#ff79c6">=</span> []
+cameraIntrinsicValues <span style="color:#ff79c6">=</span> []
+<span style="color:#6272a4"># Distortion coefficients</span>
+cameraExtrinsicValues <span style="color:#ff79c6">=</span> []
 </code></pre></div><p>Now we'll implement the function that finds and returns the object and image points, given images of a chessboard:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getObjectAndImagePoints</span>():
-    <span style="color:#66d9ef">global</span> objectPoints, imagePoints
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">getObjectAndImagePoints</span>():
+    <span style="color:#ff79c6">global</span> objectPoints, imagePoints
 
-    <span style="color:#75715e"># Number of inside corners per row and column</span>
-    cornersPerRow <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
-    cornersPerColumn <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>
+    <span style="color:#6272a4"># Number of inside corners per row and column</span>
+    cornersPerRow <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">10</span>
+    cornersPerColumn <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">7</span>
 
-    <span style="color:#75715e"># Initializing the object points to zero</span>
-    chessboardObjectPoints <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((cornersPerColumn <span style="color:#f92672">*</span> cornersPerRow, <span style="color:#ae81ff">3</span>), np<span style="color:#f92672">.</span>float32)
+    <span style="color:#6272a4"># Initializing the object points to zero</span>
+    chessboardObjectPoints <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>zeros((cornersPerColumn <span style="color:#ff79c6">*</span> cornersPerRow, <span style="color:#bd93f9">3</span>), np<span style="color:#ff79c6">.</span>float32)
 
-    <span style="color:#75715e"># Prepare a meshgrid for object points</span>
-    <span style="color:#75715e"># (0,0,0), (1,0,0), (2,0,0) ..., (cornersPerRow,cornersPerColumn,0)</span>
-    <span style="color:#75715e"># We can do this since we know how many corners there are on our printed chessboard</span>
-    chessboardObjectPoints[:,:<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mgrid[<span style="color:#ae81ff">0</span>:cornersPerRow, <span style="color:#ae81ff">0</span>:cornersPerColumn]<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+    <span style="color:#6272a4"># Prepare a meshgrid for object points</span>
+    <span style="color:#6272a4"># (0,0,0), (1,0,0), (2,0,0) ..., (cornersPerRow,cornersPerColumn,0)</span>
+    <span style="color:#6272a4"># We can do this since we know how many corners there are on our printed chessboard</span>
+    chessboardObjectPoints[:,:<span style="color:#bd93f9">2</span>] <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>mgrid[<span style="color:#bd93f9">0</span>:cornersPerRow, <span style="color:#bd93f9">0</span>:cornersPerColumn]<span style="color:#ff79c6">.</span>T<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>)
 
-    <span style="color:#75715e"># List of calibration images</span>
-    images <span style="color:#f92672">=</span> []
+    <span style="color:#6272a4"># List of calibration images</span>
+    images <span style="color:#ff79c6">=</span> []
     
-    <span style="color:#75715e"># To make sure you can run the script on any image filetype</span>
-    extensions <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*.gif</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*.png</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*.jpeg</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*.jpg</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*.tiff</span><span style="color:#e6db74">&#39;</span>]
-    <span style="color:#66d9ef">for</span> extension <span style="color:#f92672">in</span> extensions:
-        images<span style="color:#f92672">.</span>extend(glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">calibration_images/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>extension))
+    <span style="color:#6272a4"># To make sure you can run the script on any image filetype</span>
+    extensions <span style="color:#ff79c6">=</span> [<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">*.gif</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">*.png</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">*.jpeg</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">*.jpg</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">*.tiff</span><span style="color:#f1fa8c">&#39;</span>]
+    <span style="color:#ff79c6">for</span> extension <span style="color:#ff79c6">in</span> extensions:
+        images<span style="color:#ff79c6">.</span>extend(glob<span style="color:#ff79c6">.</span>glob(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">calibration_images/</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">+</span>extension))
     
-    <span style="color:#66d9ef">print</span>(images)
-    <span style="color:#75715e"># Step through the list and search for chessboard corners</span>
-    <span style="color:#66d9ef">for</span> calibrationImageFileName <span style="color:#f92672">in</span> images:
-        calibrationImage <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(calibrationImageFileName)
+    <span style="color:#ff79c6">print</span>(images)
+    <span style="color:#6272a4"># Step through the list and search for chessboard corners</span>
+    <span style="color:#ff79c6">for</span> calibrationImageFileName <span style="color:#ff79c6">in</span> images:
+        calibrationImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>imread(calibrationImageFileName)
 
-        <span style="color:#75715e"># The detector doesn&#39;t work well with images larger than 1280x720</span>
-        <span style="color:#75715e"># So we&#39;ll resize any until they&#39;re 720p or smaller</span>
-        height, width <span style="color:#f92672">=</span> calibrationImage<span style="color:#f92672">.</span>shape[:<span style="color:#ae81ff">2</span>]
-        <span style="color:#66d9ef">while</span> width <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1280</span>:
-            width <span style="color:#f92672">/</span><span style="color:#f92672">/</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-            height <span style="color:#f92672">/</span><span style="color:#f92672">/</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-            calibrationImage <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>resize(calibrationImage, (width, height))
+        <span style="color:#6272a4"># The detector doesn&#39;t work well with images larger than 1280x720</span>
+        <span style="color:#6272a4"># So we&#39;ll resize any until they&#39;re 720p or smaller</span>
+        height, width <span style="color:#ff79c6">=</span> calibrationImage<span style="color:#ff79c6">.</span>shape[:<span style="color:#bd93f9">2</span>]
+        <span style="color:#ff79c6">while</span> width <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1280</span>:
+            width <span style="color:#ff79c6">/</span><span style="color:#ff79c6">/</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">2</span>
+            height <span style="color:#ff79c6">/</span><span style="color:#ff79c6">/</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">2</span>
+            calibrationImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>resize(calibrationImage, (width, height))
         
-        <span style="color:#75715e"># Convert it to grayscale</span>
-        grayCalibrationImage <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(calibrationImage, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)
+        <span style="color:#6272a4"># Convert it to grayscale</span>
+        grayCalibrationImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>cvtColor(calibrationImage, cv2<span style="color:#ff79c6">.</span>COLOR_BGR2GRAY)
 
-        <span style="color:#75715e"># Find the image points</span>
-        cornersFound, foundCorners <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>findChessboardCorners(grayCalibrationImage, (cornersPerRow, cornersPerColumn),None)
+        <span style="color:#6272a4"># Find the image points</span>
+        cornersFound, foundCorners <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>findChessboardCorners(grayCalibrationImage, (cornersPerRow, cornersPerColumn),None)
 
-        <span style="color:#75715e"># If corners were found on the images</span>
-        <span style="color:#75715e"># Append the found image points and defined object points to global variables</span>
-        <span style="color:#66d9ef">if</span> cornersFound:
-            objectPoints<span style="color:#f92672">.</span>append(chessboardObjectPoints)
-            imagePoints<span style="color:#f92672">.</span>append(foundCorners)
+        <span style="color:#6272a4"># If corners were found on the images</span>
+        <span style="color:#6272a4"># Append the found image points and defined object points to global variables</span>
+        <span style="color:#ff79c6">if</span> cornersFound:
+            objectPoints<span style="color:#ff79c6">.</span>append(chessboardObjectPoints)
+            imagePoints<span style="color:#ff79c6">.</span>append(foundCorners)
             
-            <span style="color:#75715e"># If you want to visualize the found corners</span>
-            cv2<span style="color:#f92672">.</span>drawChessboardCorners(calibrationImage, (cornersPerRow, cornersPerColumn), foundCorners, cornersFound)
-            cv2<span style="color:#f92672">.</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Preview</span><span style="color:#e6db74">&#39;</span>, calibrationImage)
-            cv2<span style="color:#f92672">.</span>waitKey(<span style="color:#ae81ff">500</span>)
+            <span style="color:#6272a4"># If you want to visualize the found corners</span>
+            cv2<span style="color:#ff79c6">.</span>drawChessboardCorners(calibrationImage, (cornersPerRow, cornersPerColumn), foundCorners, cornersFound)
+            cv2<span style="color:#ff79c6">.</span>imshow(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">Preview</span><span style="color:#f1fa8c">&#39;</span>, calibrationImage)
+            cv2<span style="color:#ff79c6">.</span>waitKey(<span style="color:#bd93f9">500</span>)
 </code></pre></div><p>Now we can call the <em><strong>calibrateCamera</strong></em> function to get our extrinsic and intrinsic values:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calibrateCamera</span>(imageSize):
-    <span style="color:#66d9ef">global</span> cameraIntrinsicValues, cameraExtrinsicValues, objectPoints, imagePoints
-    retVal, cameraIntrinsicValues, cameraExtrinsicValues, rotationVectors, translationVectors <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>calibrateCamera(objectPoints, imagePoints, imageSize, None, None)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">calibrateCamera</span>(imageSize):
+    <span style="color:#ff79c6">global</span> cameraIntrinsicValues, cameraExtrinsicValues, objectPoints, imagePoints
+    retVal, cameraIntrinsicValues, cameraExtrinsicValues, rotationVectors, translationVectors <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>calibrateCamera(objectPoints, imagePoints, imageSize, None, None)
 </code></pre></div><p>And finally, with all of the values, we can undistort our image:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">undistortImage</span>(image):
-    <span style="color:#66d9ef">return</span> cv2<span style="color:#f92672">.</span>undistort(image, cameraIntrinsicValues, cameraExtrinsicValues, None, cameraIntrinsicValues)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">undistortImage</span>(image):
+    <span style="color:#ff79c6">return</span> cv2<span style="color:#ff79c6">.</span>undistort(image, cameraIntrinsicValues, cameraExtrinsicValues, None, cameraIntrinsicValues)
 </code></pre></div>
 
 <footer class=" footline" >
@@ -1944,8 +2001,7 @@ cameraExtrinsicValues <span style="color:#f92672">=</span> []
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1152,7 +1209,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p><img src="/images/software/test_track_fancy.jpg?width=100%25" alt=""></p>
 <h2 id="collecting-the-training-data">Collecting the training data</h2>
 <p>After your RC is on the track, connect your gamepad to it and from the <code>~/mycar</code> directory run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --js
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --js
 </code></pre></div><p>Now, try driving one lap around the track. It should be collecting records. If it is, you're good to go.</p>
 <center><video controls src="/video/collecting_data.mp4" autoplay muted loop width=100%></video></center>
 <p>You should now learn how to drive around the test track without making any errors. After you're confident in your driving abilities, you should stop the <code>manage.py</code> script, position your car on the track and start it up again.</p>
@@ -1169,7 +1226,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 </li>
 <li>
 <p>Scroll up to see in which tub the data was saved:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># The line you&#39;re looking for is:</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># The line you&#39;re looking for is:</span>
 New tub created at: /home/your_username/mycar/data/tub_**_**-**-**
 </code></pre></div></li>
 <li>
@@ -1183,7 +1240,7 @@ New tub created at: /home/your_username/mycar/data/tub_**_**-**-**
 <p>Mac OS X / Linux: (use the tub name you copied)</p>
 <ul>
 <li>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r username@your_nano_IP_address:~/mycar/data/tub_**_**-**-**  ~/mycar/data/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r username@your_nano_IP_address:~/mycar/data/tub_**_**-**-**  ~/mycar/data/
 </code></pre></div></li>
 </ul>
 </li>
@@ -1203,18 +1260,18 @@ New tub created at: /home/your_username/mycar/data/tub_**_**-**-**
 <center><video controls src="/video/training.mp4" autoplay loop width=100%></video></center>
 As mentioned previously, Donkey comes with a number of different neural network architectures you can use to train your autopilot. You can find them at the directory where you've cloned the donkey repository, inside the `parts\keras.py` script.
 <p>The usual location, if you've followed the tutorials and used the suggested directory, would be:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Linux/Mac OS X</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Linux/Mac OS X</span>
 ~/projects/donkeycar/donkeycar/parts/keras.py
 
-<span style="color:#75715e"># Windows</span>
-C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\y</span>our_username<span style="color:#ae81ff">\p</span>rojects<span style="color:#ae81ff">\d</span>onkeycar<span style="color:#ae81ff">\d</span>onkeycar<span style="color:#ae81ff">\p</span>arts<span style="color:#ae81ff">\k</span>eras.py
+<span style="color:#6272a4"># Windows</span>
+C:<span style="color:#f1fa8c">\U</span>sers<span style="color:#f1fa8c">\y</span>our_username<span style="color:#f1fa8c">\p</span>rojects<span style="color:#f1fa8c">\d</span>onkeycar<span style="color:#f1fa8c">\d</span>onkeycar<span style="color:#f1fa8c">\p</span>arts<span style="color:#f1fa8c">\k</span>eras.py
 </code></pre></div><p>We'll be using one of the simplest ones, the linear model.</p>
 <p><strong>You can see a list of all the architectures explained <a href="https://docs.donkeycar.com/parts/keras/">here</a>.</strong></p>
 <p>To train your first autopilot model, go to the <code>mycar</code> directory on your host PC, and run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python ~/mycar/manage.py train --model ~/mycar/models/firstAutopilot.h5 --type<span style="color:#f92672">=</span>linear
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python ~/mycar/manage.py train --model ~/mycar/models/firstAutopilot.h5 --type<span style="color:#ff79c6">=</span>linear
 </code></pre></div><p>This will use all of the tubs it can find in your <code>data</code> folder.</p>
 <p>If you'd like to specify specific tubs Donkey should use to train your model, you can run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python ~/mycar/manage.py train --tub /path/to/the/tub,/path/to/other/tub --model ~/mycar/models/theNameOfTheModel.h5 --type<span style="color:#f92672">=</span>architectureName
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python ~/mycar/manage.py train --tub /path/to/the/tub,/path/to/other/tub --model ~/mycar/models/theNameOfTheModel.h5 --type<span style="color:#ff79c6">=</span>architectureName
 </code></pre></div><p>Notice that you can either separate specific tub paths by using a comma, or you can use a mask, e.g.: <code>/somePath/tubs/tub-20*</code> to train all tubs starting with the name <code>tub-20</code>.</p>
 
 <div class="notices tip" ><p>Feel free to train a number of models using different architectures to see how they work. I'd recommend trying the linear, rnn and 3d architectures.</p>
@@ -1227,7 +1284,7 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\y</span>
 <p>Linux/Mac OS X:</p>
 <ul>
 <li>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r ~/mycar/models/ username@your_nano_IP_address:~/mycar/models/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r ~/mycar/models/ username@your_nano_IP_address:~/mycar/models/
 </code></pre></div></li>
 </ul>
 </li>
@@ -1240,7 +1297,7 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\y</span>
 </ul>
 <h2 id="let-the-autopilot-drive-by-itself">Let the autopilot drive by itself</h2>
 <p>After training and moving your models to your RC, let the model control the RC by running:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --model ~/mycar/models/yourModel.h5
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --model ~/mycar/models/yourModel.h5
 </code></pre></div><p>Go to the Web interface by opening up a browser and entering yourNanoIP:8887 into the address bar.</p>
 <p>I'd recommend setting the <em>Mode &amp; Pilot</em> to <strong>Local Angle</strong>, starting the vehicle and either giving the throttle by yourself, using the blue touch/click area on the right, or by giving it a constant throttle by setting the <em>Max Throttle</em> to <strong>50%</strong> and setting the <em>Throttle Mode</em> to <strong>Constant</strong>.</p>
 <p>After making sure your model doesn't just ram your RC into a wall, you can use the <strong>Local Pilot</strong> mode and it'll control the throttle by itself.</p>
@@ -1987,8 +2044,7 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\y</span>
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

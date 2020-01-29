@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1170,34 +1227,34 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <ul>
 <li>
 <p>Go to a place where you want the stuff we'll be working on to be.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># e.g. on Linux or Mac</span>
-cd ~
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># e.g. on Linux or Mac</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> ~
   
-<span style="color:#75715e"># e.g. on Windows</span>
-cd c:<span style="color:#ae81ff">\\</span>Users<span style="color:#ae81ff">\\</span>yourUsername
+<span style="color:#6272a4"># e.g. on Windows</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> c:<span style="color:#f1fa8c">\\</span>Users<span style="color:#f1fa8c">\\</span>yourUsername
 </code></pre></div></li>
 <li>
 <p>Make a folder for your projects and <code>cd</code> to it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir projects
-cd projects
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir projects
+<span style="color:#8be9fd;font-style:italic">cd</span> projects
 </code></pre></div></li>
 <li>
 <p>Clone the Donkey repository using git:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/autorope/donkeycar
-cd donkeycar
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/autorope/donkeycar
+<span style="color:#8be9fd;font-style:italic">cd</span> donkeycar
 git checkout master
 </code></pre></div></li>
 <li>
 <p>Create the Python Anaconda environment using the yml file from the repository:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Windows</span>
-conda env create -f install<span style="color:#ae81ff">\e</span>nvs<span style="color:#ae81ff">\w</span>indows.yml
-<span style="color:#75715e"># Mac</span>
-conda env create -f install<span style="color:#ae81ff">\e</span>nvs<span style="color:#ae81ff">\m</span>ac.yml
-<span style="color:#75715e"># Linux/Ubuntu</span>
-conda env create -f install<span style="color:#ae81ff">\e</span>nvs<span style="color:#ae81ff">\u</span>buntu.yml
-<span style="color:#75715e"># All three OS&#39;s</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Windows</span>
+conda env create -f install<span style="color:#f1fa8c">\e</span>nvs<span style="color:#f1fa8c">\w</span>indows.yml
+<span style="color:#6272a4"># Mac</span>
+conda env create -f install<span style="color:#f1fa8c">\e</span>nvs<span style="color:#f1fa8c">\m</span>ac.yml
+<span style="color:#6272a4"># Linux/Ubuntu</span>
+conda env create -f install<span style="color:#f1fa8c">\e</span>nvs<span style="color:#f1fa8c">\u</span>buntu.yml
+<span style="color:#6272a4"># All three OS&#39;s</span>
 conda activate donkey
-pip install -e .<span style="color:#f92672">[</span>pc<span style="color:#f92672">]</span>
+pip install -e .<span style="color:#ff79c6">[</span>pc<span style="color:#ff79c6">]</span>
 </code></pre></div></li>
 </ul>
 <h5 id="if-youre-not-using-a-host-pc-with-a-gpu-youre-done">If you're not using a host PC with a GPU, you're done!</h5>
@@ -1220,7 +1277,7 @@ pip install -e .<span style="color:#f92672">[</span>pc<span style="color:#f92672
 <ul>
 <li>
 <p>Which means installing PyCUDA (make sure nvcc is in your PATH):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install <span style="color:#e6db74">&#39;pycuda&gt;=2017.1.1&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install <span style="color:#f1fa8c">&#39;pycuda&gt;=2017.1.1&#39;</span>
 </code></pre></div><ul>
 <li>If you're getting errors, <a href="https://wiki.tiker.net/PyCuda/Installation">check the requirements here</a>.</li>
 <li>If you're on Windows, you probably need the <a href="https://www.scivision.dev/python-windows-visual-c-14-required/">VS C++ 14</a>, just download it through the <a href="https://aka.ms/vs/16/release/vs_buildtools.exe">VS Build Tools</a></li>
@@ -1235,7 +1292,7 @@ pip install -e .<span style="color:#f92672">[</span>pc<span style="color:#f92672
 </li>
 <li>
 <p>Then you can finally:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda install tensorflow-gpu<span style="color:#f92672">=</span><span style="color:#f92672">=</span>1.13.1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda install tensorflow-gpu<span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span>1.13.1
 </code></pre></div></li>
 </ul>
 
@@ -1976,8 +2033,7 @@ pip install -e .<span style="color:#f92672">[</span>pc<span style="color:#f92672
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

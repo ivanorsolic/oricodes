@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1144,7 +1201,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p>If we want to use the simulator to gather training data that's larger than the default 160x120 image size, we'll need to create a modified version of it.</p>
 <h2 id="setting-up-the-simulator-locally">Setting up the simulator locally</h2>
 <p>First off, let's clone (or fork) <a href="https://github.com/tawnkramer/sdsandbox/tree/donkey/sdsim">the original simulator</a> Tawn Kramer made for Donkey from GitHub.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone --single-branch --branch donkey https://github.com/tawnkramer/sdsandbox
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone --single-branch --branch donkey https://github.com/tawnkramer/sdsandbox
 </code></pre></div>
 <div class="notices tip" ><p>If you're wondering why aren't I just using the <code>git clone --branch</code> command: it clones all branches, but checks out just the one you've passed to the flag. Since Unity projects can be quite large, and Tawn has several branches on the repo, we'd end up downloading a lot of stuff we don't need.</p>
 </div>
@@ -1163,14 +1220,14 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p>Inside the prefab hierarchy (upper left by default) you can see the <em><strong>cameraSensorBase</strong></em> which contains the <strong>CameraSensor</strong>, which is the RC camera sensor that we use to generate our training data (<em>take pictures</em> from inside the simulator).</p>
 <p>After selecting the <strong>CameraSensor</strong>, we can see, in the inspector on the right side of the screen, that there is a <strong>CameraSensor script</strong> connected to it. You can open it by double clicking on it or finding it in the lower left project viewer inside Assets/Scripts/CameraSensor.cs.</p>
 <p>We'll make the width and height fields of the class static, so we can edit them from another script we'll create:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#960050;background-color:#1e0010">\</span> You can put whatever resolution you want to be <span style="color:#66d9ef">default</span> here.
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> width = <span style="color:#ae81ff">6</span><span style="color:#ae81ff">4</span><span style="color:#ae81ff">0</span>;
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> height = <span style="color:#ae81ff">4</span><span style="color:#ae81ff">8</span><span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">\\ You can put whatever resolution you want to be <span style="color:#ff79c6">default</span> here.
+<span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#8be9fd">int</span> width = <span style="color:#bd93f9">6</span><span style="color:#bd93f9">4</span><span style="color:#bd93f9">0</span>;
+<span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#8be9fd">int</span> height = <span style="color:#bd93f9">4</span><span style="color:#bd93f9">8</span><span style="color:#bd93f9">0</span>;
 </code></pre></div><p>And we'll change the parameters of the <em>ReadPixels</em> function to use our width and height:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">tex.ReadPixels(<span style="color:#66d9ef">new</span> Rect(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, width, height), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">tex.ReadPixels(<span style="color:#ff79c6">new</span> Rect(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, width, height), <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>);
 </code></pre></div><p>We'll also edit the <em><strong>CameraHelper</strong></em> script to use our static fields for the width and height:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">Texture2D texture2D = <span style="color:#66d9ef">new</span> Texture2D(CameraSensor.width, CameraSensor.height, TextureFormat.RGB24, <span style="color:#66d9ef">false</span>);
-texture2D.ReadPixels(<span style="color:#66d9ef">new</span> Rect(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, CameraSensor.width, CameraSensor.height), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">Texture2D texture2D = <span style="color:#ff79c6">new</span> Texture2D(CameraSensor.width, CameraSensor.height, TextureFormat.RGB24, <span style="color:#ff79c6">false</span>);
+texture2D.ReadPixels(<span style="color:#ff79c6">new</span> Rect(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, CameraSensor.width, CameraSensor.height), <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>);
 </code></pre></div><p>Now go to the <em>Scenes</em> folder and open the <em><strong>menu</strong></em> scene and add a Dropdown element to the menu by right clicking on the <em>Canvas</em> and selecting UI &gt; Dropdown.</p>
 <p>We'll be using this dropdown as our resolution picker, so go ahead and click on it, and inside the inspector panel add all of the resolutions you'd like to be able to use as options:</p>
 <p><img src="/images/ai/dropdown.png" alt="Options"></p>
@@ -1178,40 +1235,40 @@ texture2D.ReadPixels(<span style="color:#66d9ef">new</span> Rect(<span style="co
 <p><img src="/images/ai/dropdown2.png" alt="Dropdown on menu"></p>
 <p>Now go back to the <em>Scripts</em> folder and add a new class called <em><strong>ResolutionSetter</strong></em>. This class will set the resolution inside the <em><strong>CameraSensor</strong></em> class based on the selected option in the dropdown.</p>
 <p>Here's the code for the <strong>ResolutionSetter</strong> class:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> System.Collections;
-<span style="color:#66d9ef">using</span> System.Collections.Generic;
-<span style="color:#66d9ef">using</span> UnityEngine;
-<span style="color:#66d9ef">using</span> UnityEngine.UI;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#ff79c6">using</span> System.Collections;
+<span style="color:#ff79c6">using</span> System.Collections.Generic;
+<span style="color:#ff79c6">using</span> UnityEngine;
+<span style="color:#ff79c6">using</span> UnityEngine.UI;
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ResolutionSetter</span> : MonoBehaviour
+<span style="color:#ff79c6">public</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ResolutionSetter</span> : MonoBehaviour
 {
-    <span style="color:#75715e">//Attach this script to a Dropdown GameObject
-</span><span style="color:#75715e"></span>    Dropdown m_Dropdown;
-    <span style="color:#75715e">//This is the string that stores the current selection m_Text of the Dropdown
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">string</span> m_Message;
-    <span style="color:#75715e">//This Text outputs the current selection to the screen
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> Text m_Text;
-    <span style="color:#75715e">//This is the index value of the Dropdown
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_DropdownValue;
-    <span style="color:#66d9ef">void</span> Start()
+    <span style="color:#6272a4">//Attach this script to a Dropdown GameObject
+</span><span style="color:#6272a4"></span>    Dropdown m_Dropdown;
+    <span style="color:#6272a4">//This is the string that stores the current selection m_Text of the Dropdown
+</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">string</span> m_Message;
+    <span style="color:#6272a4">//This Text outputs the current selection to the screen
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">public</span> Text m_Text;
+    <span style="color:#6272a4">//This is the index value of the Dropdown
+</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">int</span> m_DropdownValue;
+    <span style="color:#ff79c6">void</span> Start()
     {
-        <span style="color:#75715e">//Fetch the Dropdown GameObject
-</span><span style="color:#75715e"></span>        m_Dropdown = GetComponent&lt;Dropdown&gt;();
-        <span style="color:#75715e">//Add listener for when the value of the Dropdown changes, to take action
-</span><span style="color:#75715e"></span>        m_Dropdown.onValueChanged.AddListener(<span style="color:#66d9ef">delegate</span> {
+        <span style="color:#6272a4">//Fetch the Dropdown GameObject
+</span><span style="color:#6272a4"></span>        m_Dropdown = GetComponent&lt;Dropdown&gt;();
+        <span style="color:#6272a4">//Add listener for when the value of the Dropdown changes, to take action
+</span><span style="color:#6272a4"></span>        m_Dropdown.onValueChanged.AddListener(<span style="color:#ff79c6">delegate</span> {
             DropdownValueChanged(m_Dropdown);
         });
         setCameraSensorRes(m_Dropdown.options[m_DropdownValue].text);
     }
 
-    <span style="color:#66d9ef">void</span> DropdownValueChanged(Dropdown change)
+    <span style="color:#ff79c6">void</span> DropdownValueChanged(Dropdown change)
     {
-       setCameraSensorRes(m_Dropdown.options[change.<span style="color:#66d9ef">value</span>].text);
+       setCameraSensorRes(m_Dropdown.options[change.<span style="color:#ff79c6">value</span>].text);
     }
 
-    <span style="color:#66d9ef">void</span> setCameraSensorRes(<span style="color:#66d9ef">string</span> resolution){
-        CameraSensor.width = System.Convert.ToInt32(resolution.Split(<span style="color:#e6db74">&#39;x&#39;</span>)[<span style="color:#ae81ff">0</span>]);
-        CameraSensor.height = System.Convert.ToInt32(resolution.Split(<span style="color:#e6db74">&#39;x&#39;</span>)[<span style="color:#ae81ff">1</span>]);
+    <span style="color:#ff79c6">void</span> setCameraSensorRes(<span style="color:#8be9fd">string</span> resolution){
+        CameraSensor.width = System.Convert.ToInt32(resolution.Split(<span style="color:#f1fa8c">&#39;x&#39;</span>)[<span style="color:#bd93f9">0</span>]);
+        CameraSensor.height = System.Convert.ToInt32(resolution.Split(<span style="color:#f1fa8c">&#39;x&#39;</span>)[<span style="color:#bd93f9">1</span>]);
     }
 }
 </code></pre></div><p>Now go back to the <em>Scenes</em> folder and open the menu scene once again. Select the dropdown element we created and in the inspector panel, drag and drop the <em><strong>ResolutionSetter</strong></em> script on it:</p>
@@ -1960,8 +2017,7 @@ texture2D.ReadPixels(<span style="color:#66d9ef">new</span> Rect(<span style="co
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

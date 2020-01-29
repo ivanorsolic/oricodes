@@ -106,3 +106,13 @@ weight = 20
 
 [markup.goldmark.renderer]
 unsafe= true
+[markup.highlight]
+  codeFences = true
+  guessSyntax = false
+  hl_Lines = ""
+  lineNoStart = 1
+  lineNos = false
+  lineNumbersInTable = true
+  noClasses = true
+  style = "dracula"
+  tabWidth = 4

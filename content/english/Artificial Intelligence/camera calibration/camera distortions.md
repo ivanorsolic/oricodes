@@ -88,7 +88,7 @@ s \begin{bmatrix}{u}\\{v}\\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&{0}&{c_x}\\{0
 Since we're imaging 2D images, we'd like to map the 3D coordinates to a coordinate system:
 <div>
 ++
-\begin{bmatrix}{x}\\{y}\\{z}\end{bmatrix} = R  \\
+\begin{bmatrix}{x}\\{y}\\{z}\end{bmatrix} = R 
 \begin{bmatrix}{X}\\{Y}\\{Z}\end{bmatrix} + t \\
 x' = x/z \\
 y' = y/z \\
@@ -100,8 +100,6 @@ v = f_y*y' + c_y
 Also, since we're not using a pinhole camera, we need to add the distortion coefficients to our model:
 <div>
 ++
-x' = x/z \\ 
-y' = y/z \\ 
 x'' = x'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + 2 p_1 x' y' + p_2  \\ 
 y'' = y'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + p_1 (r^2 + 2 y'^2) + 2 p_2 x' y'  
 \\ \text{where} \quad r^2 = x'^2 + y'^2  \\ 
@@ -151,3 +149,5 @@ It's useful to know how different focal lengths affect the represented size of d
 ![https://upload.wikimedia.org/wikipedia/commons/e/e5/Focal_length.jpg?1580214480612](/images/ai/focallength.jpg)
 
 You can also learn a lot by reading how the focal length determines the angle of view, how the focal ratio (or f-number) defines the maximum usable aperture of a lens and so on. It's really interesting.
+
+[^Bukhari]: [Automatic Radial Distortion Estimation from a Single Image](http://www.cs.ait.ac.th/~mdailey/papers/Bukhari-RadialDistortion.pdf)

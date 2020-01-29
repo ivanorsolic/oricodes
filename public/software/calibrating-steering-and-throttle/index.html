@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1147,13 +1204,13 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 **First, you'll need to turn on your car**; the actual RC, not the Nano.
 <p>Depending on your RC, it'll probably beep because it's turned on and the controller isn't connected to it, but don't worry, it'll stop once we connect to it via the I2C bus.</p>
 <p>Run the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey calibrate --channel YOUR_ESC<span style="color:#ae81ff">\T</span>HROTTLE_CHANNEL --bus<span style="color:#f92672">=</span>YOUR_I2C_PCA_BUS
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey calibrate --channel YOUR_ESC<span style="color:#f1fa8c">\T</span>HROTTLE_CHANNEL --bus<span style="color:#ff79c6">=</span>YOUR_I2C_PCA_BUS
 </code></pre></div><p>The output should look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">using donkey v3.1.1 ...
-init PCA9685 on channel <span style="color:#ae81ff">0</span> address 0x40 bus 0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">using donkey v3.1.1 ...
+init PCA9685 on channel <span style="color:#bd93f9">0</span> address 0x40 bus 0
 Using PWM freq: 60
 
-Enter a PWM setting to test <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;q&#39;</span> <span style="color:#66d9ef">for</span> quit<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>0-1500<span style="color:#f92672">)</span>:
+Enter a PWM setting to <span style="color:#8be9fd;font-style:italic">test</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#39;q&#39;</span> <span style="color:#ff79c6">for</span> quit<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">(</span>0-1500<span style="color:#ff79c6">)</span>:
 </code></pre></div><p>If you're using the wrong bus, you'll probably get a <code>OSError: [Errno 121] Remote I/O error</code></p>
 <p>Type in <code>370</code> and press enter. The ESC should stop beeping, indicating it is calibrated to the neutral throttle position.</p>
 <p>To detect your forward values for the throttle:</p>
@@ -1193,7 +1250,7 @@ Enter a PWM setting to test <span style="color:#f92672">(</span><span style="col
 <h2 id="calibrating-the-steering">Calibrating the steering</h2>
 <center><video controls src="/video/steering_calibration.mp4" autoplay muted loop width=100%></video></center>
 Once again, run the following:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey calibrate --channel YOUR_STEERING_CHANNEL --bus<span style="color:#f92672">=</span>YOUR_I2C_PCA_BUS
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey calibrate --channel YOUR_STEERING_CHANNEL --bus<span style="color:#ff79c6">=</span>YOUR_I2C_PCA_BUS
 </code></pre></div><ul>
 <li>Enter 360, and you should see your car slightly steering. If you don't, try 350 or 370.</li>
 <li>Once again, enter +/- 10 values to find out what values steer your car completely to the left and to the right and write them down.</li>
@@ -1201,7 +1258,7 @@ Once again, run the following:
 <p><strong>You can now enter q to finish the steering calibration procedure.</strong></p>
 <h2 id="entering-the-values-in-the-config-file">Entering the values in the config file</h2>
 <p>Open up the <code>myconfig.py</code> in the editor of your choice:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/mycar/myconfig.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/mycar/myconfig.py
 </code></pre></div><p>Find the <code>THROTTLE</code> and <code>STEERING</code> sections and enter the values you wrote down during calibration:</p>
 <ul>
 <li>STEERING_RIGHT_PWM: the value which steers your car completely to the right.</li>
@@ -1949,8 +2006,7 @@ Once again, run the following:
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

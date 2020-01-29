@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1166,12 +1223,12 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p><img src="/images/ai/testUndistort2.jpg" alt="testUndistort"></p>
 <p><img src="/images/ai/testUndistort.jpg" alt="testUndistort"></p>
 <p>And that's it! You can undistort every image like this before you input it to the neural network. Here's what the code could look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># At the beginning of run</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># At the beginning of run</span>
 getObjectAndImagePoints()
 
-calibrateCamera(inputImage<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
-undistortedImage <span style="color:#f92672">=</span> undistortImage(inputImage)
-<span style="color:#75715e"># Pass it along to the NN</span>
+calibrateCamera(inputImage<span style="color:#ff79c6">.</span>shape[<span style="color:#bd93f9">1</span>::<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>])
+undistortedImage <span style="color:#ff79c6">=</span> undistortImage(inputImage)
+<span style="color:#6272a4"># Pass it along to the NN</span>
 </code></pre></div><h2 id="calibrating-the-simulator-camera">Calibrating the simulator camera</h2>
 <p>First, we need to put a checkerboard object into the simulator so we can take photos of it.</p>
 <h1 id="todo">TODO</h1>
@@ -1917,8 +1974,7 @@ undistortedImage <span style="color:#f92672">=</span> undistortImage(inputImage)
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

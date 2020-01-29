@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1154,7 +1211,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 </ul>
 <h3 id="ssh-clients">SSH Clients:</h3>
 <p>If you're using Linux or a Mac, you're all set. They come with a SSH client pre-installed, and you just need to open up a terminal and type:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh username@ipAddress
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh username@ipAddress
 </code></pre></div><p>If you're using Windows, you need to install one. I'd recommend using <a href="https://mobaxterm.mobatek.net/">MobaXTerm</a>:</p>
 <ul>
 <li>
@@ -1170,7 +1227,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p>Press on the <em>Start local terminal</em> button</p>
 </li>
 <li>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh username@ipAddress
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh username@ipAddress
 </code></pre></div></li>
 </ul>
 </li>
@@ -1183,7 +1240,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 </li>
 <li>
 <p>Or by connecting your Nano to a monitor, keyboard and mouse, opening up a terminal and writing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ip addr show
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ip addr show
 </code></pre></div></li>
 </ul>
 <h3 id="ssh-via-wifi">SSH via WiFi:</h3>
@@ -1192,59 +1249,59 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <ul>
 <li>
 <p>Connect to a WiFi network:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmcli device wifi connect YOUR-SSID password YOUR-PASSWORD
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmcli device wifi connect YOUR-SSID password YOUR-PASSWORD
 </code></pre></div></li>
 <li>
 <p>Or make the Jetson into a hotspot so you can connect your laptop to it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmcli dev wifi hotspot ifname wlan0 ssid HOTSPOT-SSID password HOTSPOT-PASSWORD
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmcli dev wifi hotspot ifname wlan0 ssid HOTSPOT-SSID password HOTSPOT-PASSWORD
 </code></pre></div></li>
 </ul>
 <p>What I like to do is connect it to both my home network, and a hotspot on my mobile phone, so I can use it anywhere and still have Internet access on both it and my laptop.</p>
 <p>To do so, I use the <code>nmcli autoconnect.priority</code> property, so my home network has a higher priority than my phone hotspot, in case I forget to turn it off while I'm at home, so it doesn't eat up my data plan.</p>
 <p>You can find all of your network connections saved in <code>/etc/NetworkManager/system-connections/</code>, which you can open up with a text editor and edit the <code>autoconnect.priority</code> property for each network. The higher the integer you assign to it, the higher the priority.</p>
 <p>As an example, the network connection profile for my hotspot looks something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>connection<span style="color:#f92672">]</span>
-id<span style="color:#f92672">=</span>Hotspot
-uuid<span style="color:#f92672">=</span>random-long-string
-type<span style="color:#f92672">=</span>wifi
-autoconnect_priority<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># The home network has a priority of 3, in my case</span>
-permissions<span style="color:#f92672">=</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>connection<span style="color:#ff79c6">]</span>
+<span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span>Hotspot
+<span style="color:#8be9fd;font-style:italic">uuid</span><span style="color:#ff79c6">=</span>random-long-string
+<span style="color:#8be9fd;font-style:italic">type</span><span style="color:#ff79c6">=</span>wifi
+<span style="color:#8be9fd;font-style:italic">autoconnect_priority</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span> <span style="color:#6272a4"># The home network has a priority of 3, in my case</span>
+<span style="color:#8be9fd;font-style:italic">permissions</span><span style="color:#ff79c6">=</span>
 </code></pre></div><p>If your Nano keeps dropping the connection for some reason, try disabling the power saving mode found in <code>/etc/NetworkManager/conf.d</code>, using a text editor.</p>
 <p>Also, I assumed your Nano already has the <code>nmcli</code> or the <code>NetworkManager</code> utility installed, since it, at the time of writing, comes pre-installed with any Ubuntu distro. If, for some reason, you don't have it, you can install it using <code>sudo apt install network-manager</code>.</p>
 <p>After connecting your Nano to a WiFi network you want, find out its IP Address by opening up a terminal and typing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ip addr show
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ip addr show
 </code></pre></div><h4 id="now-you-can-use-your-ssh-client-and-ssh-into-the-nano-type-in-your-username-and-password-and-youre-ready-to-follow-the-rest-of-the-tutorial">Now you can use your SSH client and SSH into the Nano, type in your username and password and you're ready to follow the rest of the tutorial.</h4>
 <h2 id="dependencies">Dependencies</h2>
 <p>Open up a terminal on your Nano and install the following dependencies:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install build-essential python3 python3-dev python3-pip libhdf5-serial-dev hdf5-tools nano ntp
 </code></pre></div><h2 id="set-up-a-virtual-env">Set up a Virtual Env</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Install the venv package</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Install the venv package</span>
 pip3 install virtualenv
 python3 -m virtualenv -p python3 env --system-site-packages
-<span style="color:#75715e"># Activate the venv automatically at boot</span>
-echo <span style="color:#e6db74">&#34;source env/bin/activate&#34;</span> &gt;&gt; ~/.bashrc
-source ~/.bashrc
+<span style="color:#6272a4"># Activate the venv automatically at boot</span>
+<span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;source env/bin/activate&#34;</span> &gt;&gt; ~/.bashrc
+<span style="color:#8be9fd;font-style:italic">source</span> ~/.bashrc
 </code></pre></div><h2 id="compiling-and-installing-opencv">Compiling and installing OpenCV</h2>
 <p>First, since OpenCV needs more than 4GB of RAM to be built from source, and our Jetson Nano just doesn't have that much RAM, we have to define some swap space to prevent it from going bonkers while compiling it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Allocates 4G of additional swap space at /var/swapfile</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Allocates 4G of additional swap space at /var/swapfile</span>
 sudo fallocate -l 4G /var/swapfile
-<span style="color:#75715e"># Permissions</span>
-sudo chmod <span style="color:#ae81ff">600</span> /var/swapfile
-<span style="color:#75715e"># Make swap space</span>
+<span style="color:#6272a4"># Permissions</span>
+sudo chmod <span style="color:#bd93f9">600</span> /var/swapfile
+<span style="color:#6272a4"># Make swap space</span>
 sudo mkswap /var/swapfile
-<span style="color:#75715e"># Turn on swap</span>
+<span style="color:#6272a4"># Turn on swap</span>
 sudo swapon /var/swapfile
-<span style="color:#75715e"># Automount swap space on reboot</span>
-sudo bash -c <span style="color:#e6db74">&#39;echo &#34;/var/swapfile swap swap defaults 0 0&#34; &gt;&gt; /etc/fstab&#39;</span>
-<span style="color:#75715e"># Reboot</span>
+<span style="color:#6272a4"># Automount swap space on reboot</span>
+sudo bash -c <span style="color:#f1fa8c">&#39;echo &#34;/var/swapfile swap swap defaults 0 0&#34; &gt;&gt; /etc/fstab&#39;</span>
+<span style="color:#6272a4"># Reboot</span>
 sudo reboot
 </code></pre></div><p>Now, we need to get all the prerequisites needed to build OpenCV from source:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Update</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Update</span>
 sudo apt-get update
 sudo apt-get upgrade
-<span style="color:#75715e"># Pre-requisites</span>
+<span style="color:#6272a4"># Pre-requisites</span>
 sudo apt-get install build-essential cmake unzip pkg-config
 sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
 sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
@@ -1253,46 +1310,46 @@ sudo apt-get install libgtk-3-dev
 sudo apt-get install libatlas-base-dev gfortran
 sudo apt-get install python3-dev
 </code></pre></div><p>Okay, let's download the source code for OpenCV which we'll be building it from:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create a directory for opencv</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Create a directory for opencv</span>
 mkdir -p projects/cv2
-cd projects/cv2
+<span style="color:#8be9fd;font-style:italic">cd</span> projects/cv2
 
-<span style="color:#75715e"># Download sources</span>
+<span style="color:#6272a4"># Download sources</span>
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.0.zip
 wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.0.zip
 
-<span style="color:#75715e"># Unzip</span>
+<span style="color:#6272a4"># Unzip</span>
 unzip opencv.zip
 unzip opencv_contrib.zip
 
-<span style="color:#75715e"># Rename</span>
+<span style="color:#6272a4"># Rename</span>
 mv opencv-4.1.0 opencv
 mv opencv_contrib-4.1.0 opencv_contrib
 </code></pre></div><p>Also we'll need numpy in our virtual environment for this to work:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Install Numpy</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Install Numpy</span>
 pip install numpy
 </code></pre></div><p>We also need to make sure CMake correctly generates the OpenCV bindings for our virtual environment:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create a build directory</span>
-cd projects/cv2/opencv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Create a build directory</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> projects/cv2/opencv
 mkdir build
-cd build
+<span style="color:#8be9fd;font-style:italic">cd</span> build
 
-<span style="color:#75715e"># Setup CMake</span>
-cmake -D CMAKE_BUILD_TYPE<span style="color:#f92672">=</span>RELEASE <span style="color:#ae81ff">\</span>
-    -D CMAKE_INSTALL_PREFIX<span style="color:#f92672">=</span>/usr/local <span style="color:#ae81ff">\</span>
-    -D INSTALL_PYTHON_EXAMPLES<span style="color:#f92672">=</span>ON <span style="color:#ae81ff">\</span>
-    -D INSTALL_C_EXAMPLES<span style="color:#f92672">=</span>OFF <span style="color:#ae81ff">\</span>
-    -D OPENCV_ENABLE_NONFREE<span style="color:#f92672">=</span>ON <span style="color:#ae81ff">\</span>
-    <span style="color:#75715e"># Contrib path</span>
-    -D OPENCV_EXTRA_MODULES_PATH<span style="color:#f92672">=</span>~/projects/cv2/opencv_contrib/modules <span style="color:#ae81ff">\</span>
-    <span style="color:#75715e"># Your virtual environment&#39;s Python executable</span>
-    <span style="color:#75715e"># You need to specify the result of echo $(which python)</span>
-    -D PYTHON_EXECUTABLE<span style="color:#f92672">=</span>~/env/bin/python <span style="color:#ae81ff">\</span>
-    -D BUILD_EXAMPLES<span style="color:#f92672">=</span>ON ../opencv
+<span style="color:#6272a4"># Setup CMake</span>
+cmake -D <span style="color:#8be9fd;font-style:italic">CMAKE_BUILD_TYPE</span><span style="color:#ff79c6">=</span>RELEASE <span style="color:#f1fa8c">\</span>
+    -D <span style="color:#8be9fd;font-style:italic">CMAKE_INSTALL_PREFIX</span><span style="color:#ff79c6">=</span>/usr/local <span style="color:#f1fa8c">\</span>
+    -D <span style="color:#8be9fd;font-style:italic">INSTALL_PYTHON_EXAMPLES</span><span style="color:#ff79c6">=</span>ON <span style="color:#f1fa8c">\</span>
+    -D <span style="color:#8be9fd;font-style:italic">INSTALL_C_EXAMPLES</span><span style="color:#ff79c6">=</span>OFF <span style="color:#f1fa8c">\</span>
+    -D <span style="color:#8be9fd;font-style:italic">OPENCV_ENABLE_NONFREE</span><span style="color:#ff79c6">=</span>ON <span style="color:#f1fa8c">\</span>
+    <span style="color:#6272a4"># Contrib path</span>
+    -D <span style="color:#8be9fd;font-style:italic">OPENCV_EXTRA_MODULES_PATH</span><span style="color:#ff79c6">=</span>~/projects/cv2/opencv_contrib/modules <span style="color:#f1fa8c">\</span>
+    <span style="color:#6272a4"># Your virtual environment&#39;s Python executable</span>
+    <span style="color:#6272a4"># You need to specify the result of echo $(which python)</span>
+    -D <span style="color:#8be9fd;font-style:italic">PYTHON_EXECUTABLE</span><span style="color:#ff79c6">=</span>~/env/bin/python <span style="color:#f1fa8c">\</span>
+    -D <span style="color:#8be9fd;font-style:italic">BUILD_EXAMPLES</span><span style="color:#ff79c6">=</span>ON ../opencv
 </code></pre></div><p>The <code>cmake</code> command shows a summary of its configuration, and you should make sure that the <code>Interpreter</code> is set to the Python executable of your virtual environment, not the base OS one.</p>
 <p>Now, to compile the code from the build folder, run the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make -j2
-<span style="color:#75715e"># Install OpenCV</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make -j2
+<span style="color:#6272a4"># Install OpenCV</span>
 sudo make install
 sudo ldconfig
 </code></pre></div>
@@ -1314,31 +1371,31 @@ sudo ldconfig
 <p>And finally:</p>
 <ul>
 <li>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Go to your virtual environments site-packages folder</span>
-cd ~/env/lib/python<span style="color:#f92672">[</span>YOUR.VERSION<span style="color:#f92672">]</span>/site-packages/
-<span style="color:#75715e"># Symlink the native library</span>
-ln -s /usr/local/lib/python<span style="color:#f92672">[</span>YOUR.VERSION<span style="color:#f92672">]</span>/site-packages/cv2/python-<span style="color:#f92672">[</span>YOUR.VERSION<span style="color:#f92672">]</span>/cv2.so cv2.so
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Go to your virtual environments site-packages folder</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> ~/env/lib/python<span style="color:#ff79c6">[</span>YOUR.VERSION<span style="color:#ff79c6">]</span>/site-packages/
+<span style="color:#6272a4"># Symlink the native library</span>
+ln -s /usr/local/lib/python<span style="color:#ff79c6">[</span>YOUR.VERSION<span style="color:#ff79c6">]</span>/site-packages/cv2/python-<span style="color:#ff79c6">[</span>YOUR.VERSION<span style="color:#ff79c6">]</span>/cv2.so cv2.so
 </code></pre></div></li>
 </ul>
 </li>
 </ul>
 <p>To make sure everything works as it should, run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cv2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> cv2
 
-<span style="color:#75715e"># Should print 4.1.0</span>
-<span style="color:#66d9ef">print</span>(cv2<span style="color:#f92672">.</span>__version__)
+<span style="color:#6272a4"># Should print 4.1.0</span>
+<span style="color:#ff79c6">print</span>(cv2<span style="color:#ff79c6">.</span>__version__)
 </code></pre></div><h2 id="install-donkeycar">Install DonkeyCar</h2>
 <p>First, go to a directory where you'd like your stuff to be:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Probably</span>
-cd ~/projects
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Probably</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> ~/projects
 </code></pre></div><p>Install the latest Donkey from GitHub:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Clone it from GitHub</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Clone it from GitHub</span>
 git clone https://github.com/autorope/donkeycar
-cd donkeycar
-<span style="color:#75715e"># Checkout the master branch</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> donkeycar
+<span style="color:#6272a4"># Checkout the master branch</span>
 git checkout master
-pip install -e .<span style="color:#f92672">[</span>nano<span style="color:#f92672">]</span>
-pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu<span style="color:#f92672">=</span><span style="color:#f92672">=</span>1.13.1+nv19.3
+pip install -e .<span style="color:#ff79c6">[</span>nano<span style="color:#ff79c6">]</span>
+pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu<span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span>1.13.1+nv19.3
 </code></pre></div>
 
 <footer class=" footline" >
@@ -2077,8 +2134,7 @@ pip install --extra-index-url https://developer.download.nvidia.com/compute/redi
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

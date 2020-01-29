@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1150,25 +1207,25 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <h2 id="creating-a-donkeycar-application">Creating a DonkeyCar application</h2>
 <p>First, we'll run the <a href="https://docs.donkeycar.com/utility/donkey/#create-car"><code>createcar</code></a> command, which will create a new directory with all of the files needed to run and train our RC.</p>
 <p><a href="https://docs.donkeycar.com/utility/donkey/#create-car">Command usage</a> from the docs:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createcar --path &lt;dir&gt; <span style="color:#f92672">[</span>--overwrite<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--template &lt;donkey2&gt;<span style="color:#f92672">]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createcar --path &lt;dir&gt; <span style="color:#ff79c6">[</span>--overwrite<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">[</span>--template &lt;donkey2&gt;<span style="color:#ff79c6">]</span>
 </code></pre></div><p>Run the following command to create a new donkeycar application:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createcar --path ~/mycar
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createcar --path ~/mycar
 </code></pre></div><p>Open the newly created directory:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/mycar
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> ~/mycar
 </code></pre></div><h2 id="configuring-the-donkeycar-application">Configuring the DonkeyCar application</h2>
 <p>We can find a bunch of settings for the application we just created in a file called <code>myconfig.py</code>. We'll have to edit this file to make our RC work as intended.</p>
 <p>Open up the <code>myconfig.py</code> file in a text editor:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano myconfig.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano myconfig.py
 </code></pre></div><p><strong>Note</strong>: Some settings are commented out by default (read: have a <code>#</code> at the beginning of the line). <strong>Whenever we're filling in a value of some setting, you should uncomment it first</strong>/remove the <code>#</code> at the beginning.</p>
 <h3 id="camera-settings">Camera settings:</h3>
 <p>If you're using Nano as your text editor, you can press <code>CTRL+W</code> and type in <code>CAMERA</code> and press enter to jump to the camera settings.</p>
 <p>If you're using Vim, you probably don't need me to tell you how to search for stuff, but I'll do it anyways: type in <code>/CAMERA</code> to search forward for the camera settings, and use <code>n</code> and <code>N</code> to go back and forth between matches.</p>
 <p>Here are the settings:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># #CAMERA</span>
-CAMERA_TYPE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;CVCAM&#34;</span>   <span style="color:#75715e"># (PICAM|WEBCAM|CVCAM|CSIC|V4L|MOCK)</span>
-IMAGE_W <span style="color:#f92672">=</span> 1280
-IMAGE_H <span style="color:#f92672">=</span> 720
-IMAGE_DEPTH <span style="color:#f92672">=</span> 3
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># #CAMERA</span>
+<span style="color:#8be9fd;font-style:italic">CAMERA_TYPE</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;CVCAM&#34;</span>   <span style="color:#6272a4"># (PICAM|WEBCAM|CVCAM|CSIC|V4L|MOCK)</span>
+<span style="color:#8be9fd;font-style:italic">IMAGE_W</span> <span style="color:#ff79c6">=</span> 1280
+<span style="color:#8be9fd;font-style:italic">IMAGE_H</span> <span style="color:#ff79c6">=</span> 720
+<span style="color:#8be9fd;font-style:italic">IMAGE_DEPTH</span> <span style="color:#ff79c6">=</span> 3
 </code></pre></div><p>The different types of camera are:</p>
 <ul>
 <li>PICAM: the standard OV5647 Raspberry Pi camera</li>
@@ -1197,27 +1254,27 @@ IMAGE_DEPTH <span style="color:#f92672">=</span> 3
 <li>If you used pins 27 and 28, you're connected to Bus 0.</li>
 </ul>
 <p>We'll also need the I2C address our PCA is connected to, for which we'll need to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Add our user to the i2c group</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Add our user to the i2c group</span>
 sudo usermod -aG i2c YOUR-USERNAME
-<span style="color:#75715e"># Reboot so it takes effect</span>
+<span style="color:#6272a4"># Reboot so it takes effect</span>
 sudo reboot
 </code></pre></div><p>After rebooting, type:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># i2c-tools should come preinstalled with your Nano, but in case they aren&#39;t:</span>
-<span style="color:#75715e"># sudo apt install i2c-tools</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># i2c-tools should come preinstalled with your Nano, but in case they aren&#39;t:</span>
+<span style="color:#6272a4"># sudo apt install i2c-tools</span>
 
-<span style="color:#75715e"># For Bus 0: use 0</span>
-<span style="color:#75715e"># For Bus 1: use 1</span>
+<span style="color:#6272a4"># For Bus 0: use 0</span>
+<span style="color:#6272a4"># For Bus 1: use 1</span>
 sudo i2cdetect -r -y 1
 </code></pre></div><p>If your PCA is wired/connected correctly to the Nano, you should get something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  a  b  c  d  e  f
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">     <span style="color:#bd93f9">0</span>  <span style="color:#bd93f9">1</span>  <span style="color:#bd93f9">2</span>  <span style="color:#bd93f9">3</span>  <span style="color:#bd93f9">4</span>  <span style="color:#bd93f9">5</span>  <span style="color:#bd93f9">6</span>  <span style="color:#bd93f9">7</span>  <span style="color:#bd93f9">8</span>  <span style="color:#bd93f9">9</span>  a  b  c  d  e  f
 00:          -- -- -- -- -- -- -- -- -- -- -- -- --
 10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-40: <span style="color:#ae81ff">40</span> -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: <span style="color:#bd93f9">40</span> -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-70: <span style="color:#ae81ff">70</span> -- -- -- -- -- -- --
+70: <span style="color:#bd93f9">70</span> -- -- -- -- -- -- --
 </code></pre></div><p>The results explained:</p>
 <ul>
 <li>
@@ -1232,8 +1289,8 @@ sudo i2cdetect -r -y 1
 </ul>
 <p>If you're getting jibberish or all of the addresses are filled, check your connections, you probably swapped SDA and SCL or plugged them into the wrong pins.</p>
 <p>Finally, in the <code>myconfig.py</code> file, find and fill the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">PCA9685_I2C_ADDR <span style="color:#f92672">=</span> 0x40
-PCA9685_I2C_BUSNUM <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">PCA9685_I2C_ADDR</span> <span style="color:#ff79c6">=</span> 0x40
+<span style="color:#8be9fd;font-style:italic">PCA9685_I2C_BUSNUM</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> 
 </code></pre></div><ul>
 <li>PCA9685_I2C_ADDR: the I2C address of our PCA, in hex format (0xNumber)</li>
 <li>PCA9685_I2C_BUSNUM: the I2C bus our PCA is connected to</li>
@@ -1242,19 +1299,19 @@ PCA9685_I2C_BUSNUM <span style="color:#f92672">=</span> <span style="color:#ae81
 <p>We also need to specify to which PCA channels our steering servo and our ESC are connected to.</p>
 <p><a href="/hardware/connecting-the-car-to-the-nano/#enter-the-pca9685">See this to refresh your memory</a> or just look at the numbers on the PCA, above the places you've connected your servo and ESC connectors to, they correspond to their respective channel numbers.</p>
 <p>In the settings, find and fill out the steering:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># #STEERING</span>
-STEERING_CHANNEL <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>            <span style="color:#75715e">#channel on the 9685 pwm board 0-15</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># #STEERING</span>
+<span style="color:#8be9fd;font-style:italic">STEERING_CHANNEL</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>            <span style="color:#6272a4">#channel on the 9685 pwm board 0-15</span>
 </code></pre></div><p>And the throttle channel values:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># #THROTTLE</span>
-THROTTLE_CHANNEL <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>            <span style="color:#75715e">#channel on the 9685 pwm board 0-15</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># #THROTTLE</span>
+<span style="color:#8be9fd;font-style:italic">THROTTLE_CHANNEL</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>            <span style="color:#6272a4">#channel on the 9685 pwm board 0-15</span>
 </code></pre></div><p>In my case, the throttle/ESC is the zeroth channel and the steering/servo is the first channel.</p>
 <p>We will also need to fill out the following values for steering:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">STEERING_LEFT_PWM <span style="color:#f92672">=</span> ???         <span style="color:#75715e">#pwm value for full left steering</span>
-STEERING_RIGHT_PWM <span style="color:#f92672">=</span> ???        <span style="color:#75715e">#pwm value for full right steering</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">STEERING_LEFT_PWM</span> <span style="color:#ff79c6">=</span> ???         <span style="color:#6272a4">#pwm value for full left steering</span>
+<span style="color:#8be9fd;font-style:italic">STEERING_RIGHT_PWM</span> <span style="color:#ff79c6">=</span> ???        <span style="color:#6272a4">#pwm value for full right steering</span>
 </code></pre></div><p>And throttle:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">THROTTLE_FORWARD_PWM <span style="color:#f92672">=</span> ???      <span style="color:#75715e">#pwm value for max forward throttle</span>
-THROTTLE_STOPPED_PWM <span style="color:#f92672">=</span> ???      <span style="color:#75715e">#pwm value for no movement</span>
-THROTTLE_REVERSE_PWM <span style="color:#f92672">=</span> ???      <span style="color:#75715e">#pwm value for max reverse throttle</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">THROTTLE_FORWARD_PWM</span> <span style="color:#ff79c6">=</span> ???      <span style="color:#6272a4">#pwm value for max forward throttle</span>
+<span style="color:#8be9fd;font-style:italic">THROTTLE_STOPPED_PWM</span> <span style="color:#ff79c6">=</span> ???      <span style="color:#6272a4">#pwm value for no movement</span>
+<span style="color:#8be9fd;font-style:italic">THROTTLE_REVERSE_PWM</span> <span style="color:#ff79c6">=</span> ???      <span style="color:#6272a4">#pwm value for max reverse throttle</span>
 </code></pre></div><p>To do so, we'll need to calibrate our steering and throttle first, and then come back with the values we've found and fill them in.</p>
 <p>Feel free to save the changes you've made to the <code>myconfig.py</code> file so far:</p>
 <ul>
@@ -1999,8 +2056,7 @@ THROTTLE_REVERSE_PWM <span style="color:#f92672">=</span> ???      <span style="
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

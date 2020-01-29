@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1165,63 +1222,63 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <h1 id="skip-to-the-tldrtldr-how-to-implement-your-own-architecture"><a href="#tldr-how-to-implement-your-own-architecture"><strong>SKIP TO THE TL;DR</strong></a></h1>
 <p>When we wanted to train our first autopilot with Donkey, we used the <code>train</code> flag to tell the <code>manage.py</code> script to train a model.</p>
 <p>So if we open up the <code>manage.py</code> script and look at the main method, we can see how the script handles the <code>train</code> flag:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">train</span><span style="color:#e6db74">&#39;</span>]:
-        <span style="color:#f92672">from</span> train <span style="color:#f92672">import</span> multi_train, preprocessFileList
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">if</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">train</span><span style="color:#f1fa8c">&#39;</span>]:
+        <span style="color:#ff79c6">from</span> train <span style="color:#ff79c6">import</span> multi_train, preprocessFileList
         
-        tub <span style="color:#f92672">=</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--tub</span><span style="color:#e6db74">&#39;</span>]
-        model <span style="color:#f92672">=</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--model</span><span style="color:#e6db74">&#39;</span>]
-        transfer <span style="color:#f92672">=</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--transfer</span><span style="color:#e6db74">&#39;</span>]
-        model_type <span style="color:#f92672">=</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--type</span><span style="color:#e6db74">&#39;</span>]
-        continuous <span style="color:#f92672">=</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--continuous</span><span style="color:#e6db74">&#39;</span>]
-        aug <span style="color:#f92672">=</span> args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--aug</span><span style="color:#e6db74">&#39;</span>]     
+        tub <span style="color:#ff79c6">=</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--tub</span><span style="color:#f1fa8c">&#39;</span>]
+        model <span style="color:#ff79c6">=</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--model</span><span style="color:#f1fa8c">&#39;</span>]
+        transfer <span style="color:#ff79c6">=</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--transfer</span><span style="color:#f1fa8c">&#39;</span>]
+        model_type <span style="color:#ff79c6">=</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--type</span><span style="color:#f1fa8c">&#39;</span>]
+        continuous <span style="color:#ff79c6">=</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--continuous</span><span style="color:#f1fa8c">&#39;</span>]
+        aug <span style="color:#ff79c6">=</span> args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--aug</span><span style="color:#f1fa8c">&#39;</span>]     
 
-        dirs <span style="color:#f92672">=</span> preprocessFileList( args[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--file</span><span style="color:#e6db74">&#39;</span>] )
-        <span style="color:#66d9ef">if</span> tub <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-            tub_paths <span style="color:#f92672">=</span> [os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>expanduser(n) <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> tub<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span>)]
-            dirs<span style="color:#f92672">.</span>extend( tub_paths )
+        dirs <span style="color:#ff79c6">=</span> preprocessFileList( args[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">--file</span><span style="color:#f1fa8c">&#39;</span>] )
+        <span style="color:#ff79c6">if</span> tub <span style="color:#ff79c6">is</span> <span style="color:#ff79c6">not</span> None:
+            tub_paths <span style="color:#ff79c6">=</span> [os<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>expanduser(n) <span style="color:#ff79c6">for</span> n <span style="color:#ff79c6">in</span> tub<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">,</span><span style="color:#f1fa8c">&#39;</span>)]
+            dirs<span style="color:#ff79c6">.</span>extend( tub_paths )
 
         multi_train(cfg, dirs, model, transfer, model_type, continuous, aug)
 </code></pre></div><p>Most notably, it uses the <code>multi_train</code> function that it imports from the <code>train.py</code> script. Other than that, it parses the rest of the arguments it needs to call the <code>multi_train</code> function and does some preprocessing with the list of tubs we want to use.</p>
 <p>So, we'll open up the <code>train.py</code> script, and find the definition of the <code>multi_train</code> function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">multi_train</span>(cfg, tub, model, transfer, model_type, continuous, aug):
-    <span style="color:#75715e"># choose the right regime for the given model type</span>
-    train_fn <span style="color:#f92672">=</span> train
-    <span style="color:#66d9ef">if</span> model_type <span style="color:#f92672">in</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rnn</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">3d</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">look_ahead</span><span style="color:#e6db74">&#39;</span>):
-        train_fn <span style="color:#f92672">=</span> sequence_train
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">multi_train</span>(cfg, tub, model, transfer, model_type, continuous, aug):
+    <span style="color:#6272a4"># choose the right regime for the given model type</span>
+    train_fn <span style="color:#ff79c6">=</span> train
+    <span style="color:#ff79c6">if</span> model_type <span style="color:#ff79c6">in</span> (<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">rnn</span><span style="color:#f1fa8c">&#34;</span>,<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">3d</span><span style="color:#f1fa8c">&#39;</span>,<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">look_ahead</span><span style="color:#f1fa8c">&#39;</span>):
+        train_fn <span style="color:#ff79c6">=</span> sequence_train
 
     train_fn(cfg, tub, model, transfer, model_type, continuous, aug)
 </code></pre></div><p>We can see that it chooses the <code>train</code> function as the default function for training the models, but can also use the <code>sequence_train</code> function if the architecture is a sequential network. Cool!</p>
 <p>Since we won't be implementing a custom sequential network, we'll take a look at the default <code>train</code> function. There's a lot going on inside the function, from managing the data and creating generators to split it into batches for training to handling different model filetypes, but we don't have to, and won't go through all the details. That's one of the reasons we're using Donkey, so we don't have to everything by ourselves.</p>
 <p>Our goal is to use a custom architecture with Donkey, and we're trying to find out how Donkey uses the pre-defined architectures, so this line is very much of interest to us:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> kl <span style="color:#f92672">=</span> get_model_by_type(train_type, cfg<span style="color:#f92672">=</span>cfg)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> kl <span style="color:#ff79c6">=</span> get_model_by_type(train_type, cfg<span style="color:#ff79c6">=</span>cfg)
 </code></pre></div><p>The function above is imported from <code>donkeycar/utils.py</code>, so we'll open that script up and find the definition of the <code>get_model_by_type</code> function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_model_by_type</span>(model_type, cfg):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74"></span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    given the string model_type and the configuration settings in cfg </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    create a Keras model and return it.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#39;&#39;&#39;</span>
-    <span style="color:#f92672">from</span> donkeycar.parts.keras <span style="color:#f92672">import</span> KerasRNN_LSTM, KerasBehavioral, \
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">get_model_by_type</span>(model_type, cfg):
+    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;&#39;&#39;</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    given the string model_type and the configuration settings in cfg </span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    create a Keras model and return it.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    </span><span style="color:#f1fa8c">&#39;&#39;&#39;</span>
+    <span style="color:#ff79c6">from</span> donkeycar.parts.keras <span style="color:#ff79c6">import</span> KerasRNN_LSTM, KerasBehavioral, \
         KerasCategorical, KerasIMU, KerasLinear, Keras3D_CNN, \
         KerasLocalizer, KerasLatent
-    <span style="color:#f92672">from</span> donkeycar.parts.tflite <span style="color:#f92672">import</span> TFLitePilot
+    <span style="color:#ff79c6">from</span> donkeycar.parts.tflite <span style="color:#ff79c6">import</span> TFLitePilot
  
-    <span style="color:#66d9ef">if</span> model_type <span style="color:#f92672">is</span> None:
-        model_type <span style="color:#f92672">=</span> cfg<span style="color:#f92672">.</span>DEFAULT_MODEL_TYPE
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">get_model_by_type</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> model Type is: {}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(model_type))
+    <span style="color:#ff79c6">if</span> model_type <span style="color:#ff79c6">is</span> None:
+        model_type <span style="color:#ff79c6">=</span> cfg<span style="color:#ff79c6">.</span>DEFAULT_MODEL_TYPE
+    <span style="color:#ff79c6">print</span>(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">get_model_by_type</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c"> model Type is: {}</span><span style="color:#f1fa8c">&#34;</span><span style="color:#ff79c6">.</span>format(model_type))
 
-    input_shape <span style="color:#f92672">=</span> (cfg<span style="color:#f92672">.</span>IMAGE_H, cfg<span style="color:#f92672">.</span>IMAGE_W, cfg<span style="color:#f92672">.</span>IMAGE_DEPTH)
-    roi_crop <span style="color:#f92672">=</span> (cfg<span style="color:#f92672">.</span>ROI_CROP_TOP, cfg<span style="color:#f92672">.</span>ROI_CROP_BOTTOM)
+    input_shape <span style="color:#ff79c6">=</span> (cfg<span style="color:#ff79c6">.</span>IMAGE_H, cfg<span style="color:#ff79c6">.</span>IMAGE_W, cfg<span style="color:#ff79c6">.</span>IMAGE_DEPTH)
+    roi_crop <span style="color:#ff79c6">=</span> (cfg<span style="color:#ff79c6">.</span>ROI_CROP_TOP, cfg<span style="color:#ff79c6">.</span>ROI_CROP_BOTTOM)
 
-    <span style="color:#66d9ef">if</span> model_type <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">tflite_linear</span><span style="color:#e6db74">&#34;</span>:
-        kl <span style="color:#f92672">=</span> TFLitePilot()
-    <span style="color:#66d9ef">elif</span> model_type <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">localizer</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">or</span> cfg<span style="color:#f92672">.</span>TRAIN_LOCALIZER:
-        kl <span style="color:#f92672">=</span> KerasLocalizer(num_locations<span style="color:#f92672">=</span>cfg<span style="color:#f92672">.</span>NUM_LOCATIONS, input_shape<span style="color:#f92672">=</span>input_shape)
+    <span style="color:#ff79c6">if</span> model_type <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">tflite_linear</span><span style="color:#f1fa8c">&#34;</span>:
+        kl <span style="color:#ff79c6">=</span> TFLitePilot()
+    <span style="color:#ff79c6">elif</span> model_type <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">localizer</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">or</span> cfg<span style="color:#ff79c6">.</span>TRAIN_LOCALIZER:
+        kl <span style="color:#ff79c6">=</span> KerasLocalizer(num_locations<span style="color:#ff79c6">=</span>cfg<span style="color:#ff79c6">.</span>NUM_LOCATIONS, input_shape<span style="color:#ff79c6">=</span>input_shape)
         
-    <span style="color:#75715e"># And so on ...</span>
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">unknown model type: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> model_type)
+    <span style="color:#6272a4"># And so on ...</span>
+    <span style="color:#ff79c6">else</span>:
+        <span style="color:#ff79c6">raise</span> Exception(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">unknown model type: </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">%</span> model_type)
 
-    <span style="color:#66d9ef">return</span> kl
+    <span style="color:#ff79c6">return</span> kl
 </code></pre></div><p>This is exactly what we were looking for. We can see that the function:</p>
 <ul>
 <li>Takes in the name of the wanted architecture as a string 
@@ -1235,100 +1292,100 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <p>Let's take a look at <code>keras.py</code> to see how to define a custom architecture/model.</p>
 <h3 id="keraspilot-base-class">KerasPilot base class</h3>
 <p>We can see that there is a base class already prepared for us, that implements functions that all models use, such as model and weight loading, training and setting the optimizer of the model:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KerasPilot</span>(object):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74"></span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Base class for Keras models that will provide steering and throttle to guide a car.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#39;&#39;&#39;</span>
-    <span style="color:#66d9ef">def</span> __init__(self):
-        self<span style="color:#f92672">.</span>model <span style="color:#f92672">=</span> None
-        self<span style="color:#f92672">.</span>optimizer <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">adam</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">KerasPilot</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
+    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;&#39;&#39;</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    Base class for Keras models that will provide steering and throttle to guide a car.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    </span><span style="color:#f1fa8c">&#39;&#39;&#39;</span>
+    <span style="color:#ff79c6">def</span> __init__(self):
+        self<span style="color:#ff79c6">.</span>model <span style="color:#ff79c6">=</span> None
+        self<span style="color:#ff79c6">.</span>optimizer <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">adam</span><span style="color:#f1fa8c">&#34;</span>
  
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load</span>(self, model_path):
-        self<span style="color:#f92672">.</span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>load_model(model_path)
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">load</span>(self, model_path):
+        self<span style="color:#ff79c6">.</span>model <span style="color:#ff79c6">=</span> keras<span style="color:#ff79c6">.</span>models<span style="color:#ff79c6">.</span>load_model(model_path)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_weights</span>(self, model_path, by_name<span style="color:#f92672">=</span>True):
-        self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>load_weights(model_path, by_name<span style="color:#f92672">=</span>by_name)
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">load_weights</span>(self, model_path, by_name<span style="color:#ff79c6">=</span>True):
+        self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>load_weights(model_path, by_name<span style="color:#ff79c6">=</span>by_name)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shutdown</span>(self):
-        <span style="color:#66d9ef">pass</span>
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">shutdown</span>(self):
+        <span style="color:#ff79c6">pass</span>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compile</span>(self):
-        <span style="color:#66d9ef">pass</span>
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">compile</span>(self):
+        <span style="color:#ff79c6">pass</span>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_optimizer</span>(self, optimizer_type, rate, decay):
-        <span style="color:#66d9ef">if</span> optimizer_type <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">adam</span><span style="color:#e6db74">&#34;</span>:
-            self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>optimizer <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>Adam(lr<span style="color:#f92672">=</span>rate, decay<span style="color:#f92672">=</span>decay)
-        <span style="color:#66d9ef">elif</span> optimizer_type <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">sgd</span><span style="color:#e6db74">&#34;</span>:
-            self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>optimizer <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(lr<span style="color:#f92672">=</span>rate, decay<span style="color:#f92672">=</span>decay)
-        <span style="color:#66d9ef">elif</span> optimizer_type <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rmsprop</span><span style="color:#e6db74">&#34;</span>:
-            self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>optimizer <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>RMSprop(lr<span style="color:#f92672">=</span>rate, decay<span style="color:#f92672">=</span>decay)
-        <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">unknown optimizer type: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> optimizer_type)
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">set_optimizer</span>(self, optimizer_type, rate, decay):
+        <span style="color:#ff79c6">if</span> optimizer_type <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">adam</span><span style="color:#f1fa8c">&#34;</span>:
+            self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>optimizer <span style="color:#ff79c6">=</span> keras<span style="color:#ff79c6">.</span>optimizers<span style="color:#ff79c6">.</span>Adam(lr<span style="color:#ff79c6">=</span>rate, decay<span style="color:#ff79c6">=</span>decay)
+        <span style="color:#ff79c6">elif</span> optimizer_type <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">sgd</span><span style="color:#f1fa8c">&#34;</span>:
+            self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>optimizer <span style="color:#ff79c6">=</span> keras<span style="color:#ff79c6">.</span>optimizers<span style="color:#ff79c6">.</span>SGD(lr<span style="color:#ff79c6">=</span>rate, decay<span style="color:#ff79c6">=</span>decay)
+        <span style="color:#ff79c6">elif</span> optimizer_type <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">rmsprop</span><span style="color:#f1fa8c">&#34;</span>:
+            self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>optimizer <span style="color:#ff79c6">=</span> keras<span style="color:#ff79c6">.</span>optimizers<span style="color:#ff79c6">.</span>RMSprop(lr<span style="color:#ff79c6">=</span>rate, decay<span style="color:#ff79c6">=</span>decay)
+        <span style="color:#ff79c6">else</span>:
+            <span style="color:#ff79c6">raise</span> Exception(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">unknown optimizer type: </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">%</span> optimizer_type)
     
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">train</span>(self, train_gen, val_gen, 
-              saved_model_path, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, steps<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, train_split<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>,
-              verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, min_delta<span style="color:#f92672">=</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0005</span>, patience<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, use_early_stop<span style="color:#f92672">=</span>True):
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">train</span>(self, train_gen, val_gen, 
+              saved_model_path, epochs<span style="color:#ff79c6">=</span><span style="color:#bd93f9">100</span>, steps<span style="color:#ff79c6">=</span><span style="color:#bd93f9">100</span>, train_split<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0.8</span>,
+              verbose<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>, min_delta<span style="color:#ff79c6">=</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0005</span>, patience<span style="color:#ff79c6">=</span><span style="color:#bd93f9">10</span>, use_early_stop<span style="color:#ff79c6">=</span>True):
         
-        <span style="color:#75715e"># And so on ...</span>
+        <span style="color:#6272a4"># And so on ...</span>
 </code></pre></div><p>The only three functions we need to implement ourselves in our custom class are: <strong>compile</strong> and <strong>run</strong> (and the constructor)</p>
 <p>Let's look at the default architecture, the <code>KerasLinear</code> class:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KerasLinear</span>(KerasPilot):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74"></span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    The KerasLinear pilot uses one neuron to output a continous value via the </span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Keras Dense layer with linear activation. One each for steering and throttle.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    The output is not bounded.</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#39;&#39;&#39;</span>
-    <span style="color:#66d9ef">def</span> __init__(self, num_outputs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">160</span>, <span style="color:#ae81ff">3</span>), roi_crop<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        super(KerasLinear, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        self<span style="color:#f92672">.</span>model <span style="color:#f92672">=</span> default_n_linear(num_outputs, input_shape, roi_crop)
-        self<span style="color:#f92672">.</span>compile()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">KerasLinear</span>(KerasPilot):
+    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;&#39;&#39;</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    The KerasLinear pilot uses one neuron to output a continous value via the </span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    Keras Dense layer with linear activation. One each for steering and throttle.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    The output is not bounded.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    </span><span style="color:#f1fa8c">&#39;&#39;&#39;</span>
+    <span style="color:#ff79c6">def</span> __init__(self, num_outputs<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>, input_shape<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">120</span>, <span style="color:#bd93f9">160</span>, <span style="color:#bd93f9">3</span>), roi_crop<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>), <span style="color:#ff79c6">*</span>args, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>kwargs):
+        <span style="color:#8be9fd;font-style:italic">super</span>(KerasLinear, self)<span style="color:#ff79c6">.</span>__init__(<span style="color:#ff79c6">*</span>args, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>kwargs)
+        self<span style="color:#ff79c6">.</span>model <span style="color:#ff79c6">=</span> default_n_linear(num_outputs, input_shape, roi_crop)
+        self<span style="color:#ff79c6">.</span>compile()
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compile</span>(self):
-        self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>optimizer,
-                loss<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mse</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">compile</span>(self):
+        self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>compile(optimizer<span style="color:#ff79c6">=</span>self<span style="color:#ff79c6">.</span>optimizer,
+                loss<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">mse</span><span style="color:#f1fa8c">&#39;</span>)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self, img_arr):
-        img_arr <span style="color:#f92672">=</span> img_arr<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> img_arr<span style="color:#f92672">.</span>shape)
-        outputs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>predict(img_arr)
-        steering <span style="color:#f92672">=</span> outputs[<span style="color:#ae81ff">0</span>]
-        throttle <span style="color:#f92672">=</span> outputs[<span style="color:#ae81ff">1</span>]
-        <span style="color:#66d9ef">return</span> steering[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>], throttle[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">run</span>(self, img_arr):
+        img_arr <span style="color:#ff79c6">=</span> img_arr<span style="color:#ff79c6">.</span>reshape((<span style="color:#bd93f9">1</span>,) <span style="color:#ff79c6">+</span> img_arr<span style="color:#ff79c6">.</span>shape)
+        outputs <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>predict(img_arr)
+        steering <span style="color:#ff79c6">=</span> outputs[<span style="color:#bd93f9">0</span>]
+        throttle <span style="color:#ff79c6">=</span> outputs[<span style="color:#bd93f9">1</span>]
+        <span style="color:#ff79c6">return</span> steering[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>], throttle[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]
 </code></pre></div><p>We can see that this particular class uses the <code>roi_crop</code> variable along with the <code>input_shape</code>, that gets passed to it through the <code>utils.py</code> script.</p>
 <p>The class inherits the base <code>KerasPilot</code> class, and sets the <code>self.model</code> using the <code>default_n_linear</code> function, which actually implements the architecture in Keras.</p>
 <p>It also compiles itself using the default parent class optimizer (adam), and uses the mean squared error as the error function.</p>
 <p>Let's look at the actual Keras implementation in the <code>default_n_linear</code> function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">default_n_linear</span>(num_outputs, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">160</span>, <span style="color:#ae81ff">3</span>), roi_crop<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">default_n_linear</span>(num_outputs, input_shape<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">120</span>, <span style="color:#bd93f9">160</span>, <span style="color:#bd93f9">3</span>), roi_crop<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>)):
 
-    drop <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
-    input_shape <span style="color:#f92672">=</span> adjust_input_shape(input_shape, roi_crop)
+    drop <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.1</span>
+    input_shape <span style="color:#ff79c6">=</span> adjust_input_shape(input_shape, roi_crop)
     
-    img_in <span style="color:#f92672">=</span> Input(shape<span style="color:#f92672">=</span>input_shape, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">img_in</span><span style="color:#e6db74">&#39;</span>)
-    x <span style="color:#f92672">=</span> img_in
-    x <span style="color:#f92672">=</span> Convolution2D(<span style="color:#ae81ff">24</span>, (<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">5</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2d_1</span><span style="color:#e6db74">&#34;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
-    x <span style="color:#f92672">=</span> Convolution2D(<span style="color:#ae81ff">32</span>, (<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">5</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2d_2</span><span style="color:#e6db74">&#34;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
-    x <span style="color:#f92672">=</span> Convolution2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">5</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2d_3</span><span style="color:#e6db74">&#34;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
-    x <span style="color:#f92672">=</span> Convolution2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2d_4</span><span style="color:#e6db74">&#34;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
-    x <span style="color:#f92672">=</span> Convolution2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">conv2d_5</span><span style="color:#e6db74">&#34;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
+    img_in <span style="color:#ff79c6">=</span> Input(shape<span style="color:#ff79c6">=</span>input_shape, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">img_in</span><span style="color:#f1fa8c">&#39;</span>)
+    x <span style="color:#ff79c6">=</span> img_in
+    x <span style="color:#ff79c6">=</span> Convolution2D(<span style="color:#bd93f9">24</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">conv2d_1</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
+    x <span style="color:#ff79c6">=</span> Convolution2D(<span style="color:#bd93f9">32</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">conv2d_2</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
+    x <span style="color:#ff79c6">=</span> Convolution2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">conv2d_3</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
+    x <span style="color:#ff79c6">=</span> Convolution2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">3</span>,<span style="color:#bd93f9">3</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">conv2d_4</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
+    x <span style="color:#ff79c6">=</span> Convolution2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">3</span>,<span style="color:#bd93f9">3</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">conv2d_5</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
     
-    x <span style="color:#f92672">=</span> Flatten(name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">flattened</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">50</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(drop)(x)
+    x <span style="color:#ff79c6">=</span> Flatten(name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">flattened</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">100</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">50</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(drop)(x)
 
-    outputs <span style="color:#f92672">=</span> []
+    outputs <span style="color:#ff79c6">=</span> []
     
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_outputs):
-        outputs<span style="color:#f92672">.</span>append(Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">linear</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">n_outputs</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(i))(x))
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(num_outputs):
+        outputs<span style="color:#ff79c6">.</span>append(Dense(<span style="color:#bd93f9">1</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">linear</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">n_outputs</span><span style="color:#f1fa8c">&#39;</span> <span style="color:#ff79c6">+</span> <span style="color:#8be9fd;font-style:italic">str</span>(i))(x))
         
-    model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>[img_in], outputs<span style="color:#f92672">=</span>outputs)
+    model <span style="color:#ff79c6">=</span> Model(inputs<span style="color:#ff79c6">=</span>[img_in], outputs<span style="color:#ff79c6">=</span>outputs)
     
-    <span style="color:#66d9ef">return</span> model
+    <span style="color:#ff79c6">return</span> model
 </code></pre></div><p>And that's the last piece of the puzzle. It takes the number of outputs, the input shape and the region of interest via parameters, and implements a Keras model.</p>
 <p>So, in summary, what are the steps for making your own architecture?</p>
 <h2 id="tldr-how-to-implement-your-own-architecture">TL;DR: How to implement your own architecture</h2>
@@ -1338,7 +1395,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 </li>
 <li>
 <p>Import the <code>KerasPilot</code> base model class:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> donkeycar.parts.keras <span style="color:#f92672">import</span> KerasPilot
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">from</span> donkeycar.parts.keras <span style="color:#ff79c6">import</span> KerasPilot
 </code></pre></div></li>
 <li>
 <p>Define a custom function that implements your architecture in Keras</p>
@@ -1387,88 +1444,88 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 <li>I used two separate output units for steering and throttle, using the <code>KerasLinear</code> model as a starting point.</li>
 </ul>
 <p>This is what the above described architecture looks like implemented in Keras:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">customArchitecture</span>(num_outputs, input_shape, roi_crop):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">customArchitecture</span>(num_outputs, input_shape, roi_crop):
 
-    input_shape <span style="color:#f92672">=</span> adjust_input_shape(input_shape, roi_crop)
-    img_in <span style="color:#f92672">=</span> Input(shape<span style="color:#f92672">=</span>input_shape, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">img_in</span><span style="color:#e6db74">&#39;</span>)
-    x <span style="color:#f92672">=</span> img_in
+    input_shape <span style="color:#ff79c6">=</span> adjust_input_shape(input_shape, roi_crop)
+    img_in <span style="color:#ff79c6">=</span> Input(shape<span style="color:#ff79c6">=</span>input_shape, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">img_in</span><span style="color:#f1fa8c">&#39;</span>)
+    x <span style="color:#ff79c6">=</span> img_in
     
-    <span style="color:#75715e"># Dropout rate</span>
-    keep_prob <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.9</span>
-    rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> keep_prob
+    <span style="color:#6272a4"># Dropout rate</span>
+    keep_prob <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.9</span>
+    rate <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">-</span> keep_prob
     
-    <span style="color:#75715e"># Convolutional Layer 1</span>
-    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), input_shape <span style="color:#f92672">=</span> input_shape)(x)
-    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+    <span style="color:#6272a4"># Convolutional Layer 1</span>
+    x <span style="color:#ff79c6">=</span> Convolution2D(filters<span style="color:#ff79c6">=</span><span style="color:#bd93f9">24</span>, kernel_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>, strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">2</span>), input_shape <span style="color:#ff79c6">=</span> input_shape)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
 
-    <span style="color:#75715e"># Convolutional Layer 2</span>
-    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">36</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+    <span style="color:#6272a4"># Convolutional Layer 2</span>
+    x <span style="color:#ff79c6">=</span> Convolution2D(filters<span style="color:#ff79c6">=</span><span style="color:#bd93f9">36</span>, kernel_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>, strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">2</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
 
-    <span style="color:#75715e"># Convolutional Layer 3</span>
-    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">48</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+    <span style="color:#6272a4"># Convolutional Layer 3</span>
+    x <span style="color:#ff79c6">=</span> Convolution2D(filters<span style="color:#ff79c6">=</span><span style="color:#bd93f9">48</span>, kernel_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>, strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">2</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
 
-    <span style="color:#75715e"># Convolutional Layer 4</span>
-    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+    <span style="color:#6272a4"># Convolutional Layer 4</span>
+    x <span style="color:#ff79c6">=</span> Convolution2D(filters<span style="color:#ff79c6">=</span><span style="color:#bd93f9">64</span>, kernel_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">3</span>, strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
 
-    <span style="color:#75715e"># Convolutional Layer 5</span>
-    x <span style="color:#f92672">=</span> Convolution2D(filters<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    x <span style="color:#f92672">=</span> Dropout(rate)(x)
+    <span style="color:#6272a4"># Convolutional Layer 5</span>
+    x <span style="color:#ff79c6">=</span> Convolution2D(filters<span style="color:#ff79c6">=</span><span style="color:#bd93f9">64</span>, kernel_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">3</span>, strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>), activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
 
-    <span style="color:#75715e"># Flatten Layers</span>
-    x <span style="color:#f92672">=</span> Flatten()(x)
+    <span style="color:#6272a4"># Flatten Layers</span>
+    x <span style="color:#ff79c6">=</span> Flatten()(x)
 
-    <span style="color:#75715e"># Fully Connected Layer 1</span>
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    <span style="color:#6272a4"># Fully Connected Layer 1</span>
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">100</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
 
-    <span style="color:#75715e"># Fully Connected Layer 2</span>
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">50</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    <span style="color:#6272a4"># Fully Connected Layer 2</span>
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">50</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
 
-    <span style="color:#75715e"># Fully Connected Layer 3</span>
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">25</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    <span style="color:#6272a4"># Fully Connected Layer 3</span>
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">25</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
     
-    <span style="color:#75715e"># Fully Connected Layer 4</span>
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
+    <span style="color:#6272a4"># Fully Connected Layer 4</span>
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">10</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
     
-    <span style="color:#75715e"># Fully Connected Layer 5</span>
-    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">5</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">relu</span><span style="color:#e6db74">&#39;</span>)(x)
-    outputs <span style="color:#f92672">=</span> []
+    <span style="color:#6272a4"># Fully Connected Layer 5</span>
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">5</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">relu</span><span style="color:#f1fa8c">&#39;</span>)(x)
+    outputs <span style="color:#ff79c6">=</span> []
     
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_outputs):
-        <span style="color:#75715e"># Output layer</span>
-        outputs<span style="color:#f92672">.</span>append(Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">linear</span><span style="color:#e6db74">&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">n_outputs</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> str(i))(x))
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(num_outputs):
+        <span style="color:#6272a4"># Output layer</span>
+        outputs<span style="color:#ff79c6">.</span>append(Dense(<span style="color:#bd93f9">1</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">linear</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">n_outputs</span><span style="color:#f1fa8c">&#39;</span> <span style="color:#ff79c6">+</span> <span style="color:#8be9fd;font-style:italic">str</span>(i))(x))
         
-    model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>[img_in], outputs<span style="color:#f92672">=</span>outputs)
+    model <span style="color:#ff79c6">=</span> Model(inputs<span style="color:#ff79c6">=</span>[img_in], outputs<span style="color:#ff79c6">=</span>outputs)
     
-    <span style="color:#66d9ef">return</span> model
+    <span style="color:#ff79c6">return</span> model
 </code></pre></div><p>Now we need to implement our custom class, inheriting the base <code>KerasPilot</code> class:</p>
 <ul>
 <li>I used the adam optimizer and the mean squared error as the error function</li>
 <li>I've set the model using the above <code>customArchitecture</code> function, passing it the number of outputs, the input shape and the region of interest</li>
 <li>I've copied the <code>KerasLinear</code> run method, since it already implements everything needed to run</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NvidiaModel</span>(KerasPilot):
-    <span style="color:#66d9ef">def</span> __init__(self, num_outputs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">160</span>, <span style="color:#ae81ff">3</span>), roi_crop<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        super(NvidiaModel, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        self<span style="color:#f92672">.</span>model <span style="color:#f92672">=</span> customArchitecture(num_outputs, input_shape, roi_crop)
-        self<span style="color:#f92672">.</span>compile()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">NvidiaModel</span>(KerasPilot):
+    <span style="color:#ff79c6">def</span> __init__(self, num_outputs<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>, input_shape<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">120</span>, <span style="color:#bd93f9">160</span>, <span style="color:#bd93f9">3</span>), roi_crop<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>), <span style="color:#ff79c6">*</span>args, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>kwargs):
+        <span style="color:#8be9fd;font-style:italic">super</span>(NvidiaModel, self)<span style="color:#ff79c6">.</span>__init__(<span style="color:#ff79c6">*</span>args, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>kwargs)
+        self<span style="color:#ff79c6">.</span>model <span style="color:#ff79c6">=</span> customArchitecture(num_outputs, input_shape, roi_crop)
+        self<span style="color:#ff79c6">.</span>compile()
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compile</span>(self):
-        self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">adam</span><span style="color:#e6db74">&#34;</span>,
-                loss<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mse</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">compile</span>(self):
+        self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>compile(optimizer<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">adam</span><span style="color:#f1fa8c">&#34;</span>,
+                loss<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">mse</span><span style="color:#f1fa8c">&#39;</span>)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self, img_arr):
-        img_arr <span style="color:#f92672">=</span> img_arr<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> img_arr<span style="color:#f92672">.</span>shape)
-        outputs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>predict(img_arr)
-        steering <span style="color:#f92672">=</span> outputs[<span style="color:#ae81ff">0</span>]
-        throttle <span style="color:#f92672">=</span> outputs[<span style="color:#ae81ff">1</span>]
-        <span style="color:#66d9ef">return</span> steering[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>], throttle[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">run</span>(self, img_arr):
+        img_arr <span style="color:#ff79c6">=</span> img_arr<span style="color:#ff79c6">.</span>reshape((<span style="color:#bd93f9">1</span>,) <span style="color:#ff79c6">+</span> img_arr<span style="color:#ff79c6">.</span>shape)
+        outputs <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>predict(img_arr)
+        steering <span style="color:#ff79c6">=</span> outputs[<span style="color:#bd93f9">0</span>]
+        throttle <span style="color:#ff79c6">=</span> outputs[<span style="color:#bd93f9">1</span>]
+        <span style="color:#ff79c6">return</span> steering[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>], throttle[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]
 </code></pre></div><p>Now we need to add our custom class to the <code>utils.py</code> script so we can use it through the <code>manage.py</code> script. I've appended the following lines to the <code>get_model_by_type</code> function, right after the rest of the pre-defined architectures:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">elif</span> model_type <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">nvidia</span><span style="color:#e6db74">&#34;</span>:
-    	<span style="color:#f92672">from</span> donkeycar.parts.nvidia <span style="color:#f92672">import</span> NvidiaModel
-        kl <span style="color:#f92672">=</span> NvidiaModel(input_shape<span style="color:#f92672">=</span>input_shape,roi_crop<span style="color:#f92672">=</span>roi_crop)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">elif</span> model_type <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">nvidia</span><span style="color:#f1fa8c">&#34;</span>:
+    	<span style="color:#ff79c6">from</span> donkeycar.parts.nvidia <span style="color:#ff79c6">import</span> NvidiaModel
+        kl <span style="color:#ff79c6">=</span> NvidiaModel(input_shape<span style="color:#ff79c6">=</span>input_shape,roi_crop<span style="color:#ff79c6">=</span>roi_crop)
 </code></pre></div><p>And that's it! We can now train a model using the <code>manage.py</code> script. Here's the result of training the architecture using <a href="https://drive.google.com/open?id=1A5sTSddFsf494UDtnvYQBaEPYX87_LMp">this test dataset</a> and running it in the simulator:</p>
 <center><video controls src="/video/nvidia_architecture_test.mp4" autoplay muted loop width=100%></video></center>
 Not bad, considering it's trained on a really small dataset. Also, it's not the best driving data around. You can see it on the sharp 90 degree turns. It first goes as near as it can to the middle line, to *take a swing* so it can enter the turn faster. If we'd trained it on a much bigger dataset, with better driving data, it'd work better. 
@@ -2208,8 +2265,7 @@ Not bad, considering it's trained on a really small dataset. Also, it's not the 
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

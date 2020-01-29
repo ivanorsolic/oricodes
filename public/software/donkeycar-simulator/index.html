@@ -18,7 +18,7 @@
     <link href="/css/featherlight.min.css" rel="stylesheet">
     <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
     <link href="/css/auto-complete.css" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css" rel="stylesheet">
+    
     <link href="/css/theme.css" rel="stylesheet">
     <link href="/css/hugo-theme.css" rel="stylesheet">
     
@@ -46,6 +46,63 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
+</script>
+
+<script type="text/javascript">
+  window.MathJax = {
+    jax: ["input/TeX", "output/CommonHTML"],
+    extensions: ["tex2jax.js"],
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+    },
+    
+
+    AuthorInit: function() {
+      MathJax.Hub.Register.StartupHook("End Typeset", function() {
+        const fullFontSize = 121;
+        var renderMath = function() {
+          
+
+          var mjFormulae = document.getElementsByClassName("mj-formula");
+          if (mjFormulae) {
+            for (var i = 0; i < mjFormulae.length; ++i) {
+              var mjFormula = mjFormulae[i];
+
+              
+
+              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+              
+
+              var scale = 0.8 * (mjTable ?
+                mjFormula.offsetWidth / mjTable.offsetWidth :
+                mjFormula.offsetWidth / mjElement.offsetWidth);
+
+              
+
+              const oldFontSize = parseInt(mjElement.style.fontSize);
+              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+              mjElement.style.fontSize = `${newFontSize}%`;
+            }
+          }
+        }
+
+        
+
+        renderMath();
+
+         
+        var timeoutId;
+        const delay = 250;
+        window.addEventListener("resize", function() {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(renderMath, delay);
+        });
+      });
+    }
+  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1157,30 +1214,30 @@ This is one of the coolest parts of DonkeyCar for me, and probably one of the mo
 </li>
 <li>
 <p>Install DonkeyGym:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/projects
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> ~/projects
 git clone https://github.com/tawnkramer/gym-donkeycar
 conda activate donkey
 pip install -e gym-donkeycar
 </code></pre></div></li>
 <li>
 <p>Create a new Donkey application for your simulator:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createcar --path ~/mysim
-cd ~/mysim
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">donkey createcar --path ~/mysim
+<span style="color:#8be9fd;font-style:italic">cd</span> ~/mysim
 </code></pre></div></li>
 <li>
 <p>Edit the myconfig.py file inside the application folder you just created (mysim):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Enables the Donkey Gym simulator wrapper</span>
-DONKEY_GYM <span style="color:#f92672">=</span> True
-DONKEY_SIM_PATH <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/home/wherever/your/projects/are/DonkeySimFolder/DonkeySim.exe</span><span style="color:#e6db74">&#34;</span>
-<span style="color:#75715e"># Choose the track you want to run, you can change this later</span>
-DONKEY_GYM_ENV_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">donkey-generated-track-v0</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># Enables the Donkey Gym simulator wrapper</span>
+DONKEY_GYM <span style="color:#ff79c6">=</span> True
+DONKEY_SIM_PATH <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">/home/wherever/your/projects/are/DonkeySimFolder/DonkeySim.exe</span><span style="color:#f1fa8c">&#34;</span>
+<span style="color:#6272a4"># Choose the track you want to run, you can change this later</span>
+DONKEY_GYM_ENV_NAME <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">donkey-generated-track-v0</span><span style="color:#f1fa8c">&#34;</span>
 </code></pre></div></li>
 <li>
 <p><a href="https://drive.google.com/open?id=1A5sTSddFsf494UDtnvYQBaEPYX87_LMp">Download this test dataset</a> that contains data of a car recovering from dropping out from the track and some standard driving data and put it in your data folder inside your application folder (/mysim/data/)</p>
 </li>
 <li>
 <p>Train your model by running</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py train --model models/mymodel.h5
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py train --model models/mymodel.h5
 </code></pre></div><ul>
 <li>You can choose different architectures or create your own by going into the DonkeyCar parts folder (/projects/donkeycar/parts/) and opening up the <em><strong>keras.py</strong></em> script.</li>
 <li>You can define a new class that inherits the base class for models and implement your own neural network architecture, but we'll get to that further on in the project!</li>
@@ -1191,7 +1248,7 @@ DONKEY_GYM_ENV_NAME <span style="color:#f92672">=</span> <span style="color:#e6d
 </li>
 <li>
 <p>Test your model by running</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --model models/mymodel.h5
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py drive --model models/mymodel.h5
 </code></pre></div><ul>
 <li>Open up your browser and go to: http://localhost:8887 and set the mode to Local Pilot and watch your car go!</li>
 </ul>
@@ -1948,8 +2005,7 @@ DONKEY_GYM_ENV_NAME <span style="color:#f92672">=</span> <span style="color:#e6d
     <script src="/js/jquery.sticky.js"></script>
     <script src="/js/featherlight.min.js"></script>
     <script src="/js/html5shiv-printshiv.min.js"></script>
-    <script src="/js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    
     <script src="/js/modernizr.custom-3.6.0.js"></script>
     <script src="/js/learn.js"></script>
     <script src="/js/hugo-learn.js"></script>

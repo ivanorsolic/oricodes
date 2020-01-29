@@ -169,7 +169,7 @@ Isto tako, zamislimo da krećemo iz točke (x,y,f(x,y)), ako vrijednosti x i y p
 
 Sad zamislimo da imamo vektor a, smjer gradijenta, koji pokazuje točno u smjeru najbržeg rasta funkcije f. Ako uzmemo nekakav proizvoljan unit vektor b, koji pokazuje u random smjeru, zanima nas koliko smo "pogodili" smjer najbržeg rasta.
 
-![1556443728906](C:\Users\ori\Desktop\/images/derivacije/\1556443728906.png)
+![1556443728906](/images/derivacije/1556443728906.png)
 
 ![1556447645931](/images/derivacije/1556447645931.png)
 
@@ -365,17 +365,17 @@ Ostali parametri su:
 ++
 </div>
 Zanima nas kako se mijenja output $\ell$, ako mijenjamo parametre $w, b$. Odgovor na to nam daje parcijalna derivacija $\ell$ po tim parametrima:
+
 <div>
 ++
 \begin{align}
 \\\frac{\partial l}{\partial r} &= 2r
-
 \\\frac{\partial l}{\partial \hat y} &= \frac{\partial l}{\partial r} \cdot \frac{\partial r}{\partial \hat y} = 2r \cdot -1 = -2r
 \\\frac{\partial \ell}{\partial w} &= \frac{\partial \ell}{\partial \hat y} \cdot \frac{\partial \hat y}{\partial w} = -2r \cdot x_j
-
 \end{align}
 ++
 </div>
+
 Zamislimo da imamo sljedeći neural net:
 
 ![_images/simple_nn_diagram_zo_zh_defined.png](https://ml-cheatsheet.readthedocs.io/en/latest/_images/simple_nn_diagram_zo_zh_defined.png)

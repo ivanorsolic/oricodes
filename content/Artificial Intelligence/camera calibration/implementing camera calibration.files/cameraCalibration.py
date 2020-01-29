@@ -1,13 +1,3 @@
-+++
-title = "Camera calibration: Implementing the calibration and undistortion"
-menuTitle = "Calibration implementation"
-draft = false
-weight=2
-
-+++
-First we'll import the stuff we need and declare some variables:
-
-```python
 import numpy as np
 import cv2, os, glob
 
@@ -17,11 +7,7 @@ imagePoints = []
 cameraIntrinsicValues = []
 # Distortion coefficients
 cameraExtrinsicValues = []
-```
 
-Now we'll implement the function that finds and returns the object and image points, given images of a chessboard:
-
-```python
 def getObjectAndImagePoints():
     global objectPoints, imagePoints
 
@@ -45,6 +31,7 @@ def getObjectAndImagePoints():
     for extension in extensions:
         images.extend(glob.glob('calibration_images/'+extension))
     
+    print(images)
     # Step through the list and search for chessboard corners
     for calibrationImageFileName in images:
         calibrationImage = cv2.imread(calibrationImageFileName)
@@ -73,21 +60,11 @@ def getObjectAndImagePoints():
             cv2.drawChessboardCorners(calibrationImage, (cornersPerRow, cornersPerColumn), foundCorners, cornersFound)
             cv2.imshow('Preview', calibrationImage)
             cv2.waitKey(500)
-```
 
-Now we can call the ***calibrateCamera*** function to get our extrinsic and intrinsic values:
-
-```python
 def calibrateCamera(imageSize):
     global cameraIntrinsicValues, cameraExtrinsicValues, objectPoints, imagePoints
     retVal, cameraIntrinsicValues, cameraExtrinsicValues, rotationVectors, translationVectors = cv2.calibrateCamera(objectPoints, imagePoints, imageSize, None, None)
-```
 
-And finally, with all of the values, we can undistort our image:
-
-```python
 def undistortImage(image):
+    # Returns the undistorted image
     return cv2.undistort(image, cameraIntrinsicValues, cameraExtrinsicValues, None, cameraIntrinsicValues)
-```
-
-{{%attachments style="green" title="You can download the above code as python script here." pattern=".*py" /%}}

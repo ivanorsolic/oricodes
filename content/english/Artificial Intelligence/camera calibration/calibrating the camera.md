@@ -55,23 +55,50 @@ After getting the image points, we can call the ***calibrateCamera*** function o
 
 ![testUndistort](/images/ai/testUndistort2.jpg)
 
-
-
 ![testUndistort](/images/ai/testUndistort.jpg)
 
-And that's it! You can undistort every image like this before you input it to the neural network. Here's what the code could look like:
+## Calibrating the simulator camera
+
+First, we need to put a checkerboard object into the simulator so we can take photos of it with our RC:
+
+- Open up Unity and open the project
+- Go to *Scenes* and open the *small_looping_course* (or any course you'd like)
+- In the *Hierarchy* panel (upper left) expand the *world* element and double click the *starting_line* element
+- The camera should've automatically zoomed into the starting position from which your RC begins the drive when you first open up the track in the simulator
+- Click on the *GameObject* menu in the main menu bar:
+  - Click 3D object > Cube
+- Convert your checkerboard PDF to a JPG using a tool online or however you'd like
+- Drag and drop your JPG in the Unity Assets/Materials folder
+- Drag and drop the JPG from the Unity editor onto the Cube
+
+![Checkerboard](/images/ai/simcalibration.png)
+
+If you want to make the cube proportions fit the original checkerboard size, e.g. an A4 paper,  after clicking on the cube, you can edit the scale values in the *Inspector* panel and set the values to be e.g. 0.297 for X and 0.21 for Y, since an A4 is 29.7 cm x 21.0 cm.
+
+- Run the simulator in full screen at a high resolution (720p/1080p) and open the track in which you've added the checkerboard
+- Select Joystick/Keyboard No Rec
+- Drive around the course and take multiple screenshots of your cube, under different angles, just like you'd do with your real camera
+- Screenshot hotkeys:
+  - **Windows**: Win key + Shift + S 
+  - **Mac OS X:** Shift + Cmd + 3
+  - **Linux:** Print Screen key (somewhere between F12 and Scroll Lock)
+
+After you've got yourself some images, you can run them through the same procedure as you would if you used a real camera. Here's what mine looked like:
+
+![Checkerboard](/images/ai/simcal1.png)
+
+![Checkerboard](/images/ai/simcal2.png)
+
+## How are we going to use it for our neural net?
+
+You can undistort every image like this before you input it to the neural network. Here's what the code could look like:
 
 ```python
 # At the beginning of run
 getObjectAndImagePoints()
-
 calibrateCamera(inputImage.shape[1::-1])
+
+# For every input image to the NN
 undistortedImage = undistortImage(inputImage)
 # Pass it along to the NN
 ```
-
-## Calibrating the simulator camera
-
-First, we need to put a checkerboard object into the simulator so we can take photos of it.
-
-# TODO

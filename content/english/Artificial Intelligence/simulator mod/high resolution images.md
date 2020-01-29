@@ -122,6 +122,33 @@ Now go back to the *Scenes* folder and open the menu scene once again. Select th
 
 And that's it. Now the output images will have the resolution that you've set in the main menu using the dropdown.
 
+### Updating the default donkey-gym port
+
+One thing we have to edit in donkey itself before we can use our modded simulator:
+
+- Go to your donkeycar project folder
+
+- Go to donkeycar/parts/ and open up **dgym.py**
+
+- Find the following line and change the port number from 9090 to 9091:
+
+  ```python
+  def __init__(self, sim_path, port=9091, headless=0, env_name="whatever-env-name-here", sync="asynchronous"):
+  ```
+
+Now when you want to control your sim through the simulator *manage.py* script:
+
+- Start it as you usually would, it should start the simulator automatically
+- Open the simulator and select the track you'd like the car to drive on
+- Click the **NN Control over Network** button
+- Open up localhost:8887 in a browser and you should be good to go!
+
+{{% notice tip %}}
+
+If you're compiling your model to a different directory than the default one, or you've changed the project/executable name, be sure to update the **myconfig.py** file, specifically the `DONKEY_SIM_PATH ` variable.
+
+{{% /notice %}}
+
 ### Building and using the modded simulator
 
 You can now go to File > Build Settings (or press CTRL + SHIFT + B), select Build at the bottom of the screen and select the folder where your simulator binary is. After building, you can use your modded version the same way you used the default Donkey simulator release.

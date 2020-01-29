@@ -152,7 +152,7 @@ To stop our model from overfitting our data, we can randomly knock-out some neur
 
 Let's say we're training our car on the following track:
 
-![Untitled design (/images/howtotrain/Untitled design (1)-1574780814518.png)](../Downloads/Untitled design (1).png)
+![Untitled design](/images/howtotrain/Untitled design (1)-1574780814518.png)
 
 We run a few laps on the track and save our data. If we've only driven in the usual, counter-clockwise direction, we have inadvertently caused our model to be slightly biased to always turn a bit to the left.
 

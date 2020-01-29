@@ -281,7 +281,7 @@ save_movie_mp4(inputImages, output, fps)
 
 The output video I got using the Nvidia model we made earlier and the dataset we downloaded:
 
-<center><video controls src="/images/ai/saliency.mp4" autoplay loop></video></center>
+<center><video controls src="/images/ai/saliency.mp4" autoplay loop width=100%></video></center>
 We can see that the car indeed uses the lane lines, but it also uses the horizon as a feature a lot. That's quite interesting. We can get rid of that problem using a ROI crop or by implementing some computer vision feature extraction/engineering, which we'll do right after we make a high res version of the simulator. :)
 
 We can also see that it's far more interested in the right line, than the middle (left) one. That's because, in general, the car tends to go to the right, since we're driving around the circuit clockwise. We need to do some data augmentation to solve this issue, which we'll also do a bit later.

@@ -26,6 +26,10 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/draft-and-todo/how-to-train-your-model/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</loc>
   </url>
   
@@ -58,6 +62,10 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/draft-and-todo/derivacije/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</loc>
   </url>
   
@@ -77,6 +85,10 @@
   
   <url>
     <loc>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/draft-and-todo/hough-transform/</loc>
   </url>
   
   <url>
@@ -112,6 +124,11 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/draft-and-todo/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/rc-car/body_type/</loc>
     <xhtml:link
                 rel="alternate"
@@ -144,6 +161,10 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/draft-and-todo/integrating-the-lane-finding/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/rc-car/servo/</loc>
     <xhtml:link
                 rel="alternate"
@@ -172,6 +193,10 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/draft-and-todo/adding-behaviours/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/rc-car/receiver/</loc>
     <xhtml:link
                 rel="alternate"
@@ -183,6 +208,10 @@
                 hreflang="en"
                 href="https://ori.codes/rc-car/receiver/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/draft-and-todo/data-augmentation/</loc>
   </url>
   
   <url>
@@ -200,6 +229,10 @@
   </url>
   
   <url>
+    <loc>https://ori.codes/draft-and-todo/object-detection-and-tracking/</loc>
+  </url>
+  
+  <url>
     <loc>https://ori.codes/hardware/inventory/</loc>
   </url>
   
@@ -213,6 +246,10 @@
   
   <url>
     <loc>https://ori.codes/software/donkeycar/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ori.codes/draft-and-todo/reinforcement-learning/</loc>
   </url>
   
   <url>

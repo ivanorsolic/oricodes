@@ -26,7 +26,13 @@
     
 
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" async
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+   "HTML-CSS": { linebreaks: { automatic: true } },
+           SVG: { linebreaks: { automatic: true } }
+  });
+  </script>
+<script type="text/javascript" async
   src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Config({
   tex2jax: {
@@ -46,63 +52,6 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script>
-
-<script type="text/javascript">
-  window.MathJax = {
-    jax: ["input/TeX", "output/CommonHTML"],
-    extensions: ["tex2jax.js"],
-    TeX: {
-      equationNumbers: { autoNumber: "AMS" },
-      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
-    },
-    
-
-    AuthorInit: function() {
-      MathJax.Hub.Register.StartupHook("End Typeset", function() {
-        const fullFontSize = 121;
-        var renderMath = function() {
-          
-
-          var mjFormulae = document.getElementsByClassName("mj-formula");
-          if (mjFormulae) {
-            for (var i = 0; i < mjFormulae.length; ++i) {
-              var mjFormula = mjFormulae[i];
-
-              
-
-              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
-              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
-
-              
-
-              var scale = 0.8 * (mjTable ?
-                mjFormula.offsetWidth / mjTable.offsetWidth :
-                mjFormula.offsetWidth / mjElement.offsetWidth);
-
-              
-
-              const oldFontSize = parseInt(mjElement.style.fontSize);
-              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
-              mjElement.style.fontSize = `${newFontSize}%`;
-            }
-          }
-        }
-
-        
-
-        renderMath();
-
-         
-        var timeoutId;
-        const delay = 250;
-        window.addEventListener("resize", function() {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(renderMath, delay);
-        });
-      });
-    }
-  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{

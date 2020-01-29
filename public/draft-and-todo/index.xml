@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Drafts and #TODO&#39;s on Ori Codes</title>
+    <link>https://ori.codes/draft-and-todo/</link>
+    <description>Recent content in Drafts and #TODO&#39;s on Ori Codes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
+    
+	<atom:link href="https://ori.codes/draft-and-todo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Master recipe: How train your model</title>
+      <link>https://ori.codes/draft-and-todo/how-to-train-your-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/how-to-train-your-model/</guid>
+      <description>THIS IS A DRAFT
+ Will publish in two or three days!
+ Train/dev/test sets  How many layers, hidden units, learning rates, what activation functions? Iterate, iterate, iterate   Split the data into three parts: training set, cross validation set and test set. You train the data on the training set, and validate it using the dev set. Since you&#39;re using the dev set to tune the model hyperparameters, you&#39;re kinda fitting them to the data in the dev set.</description>
+    </item>
+    
+    <item>
+      <title>Raspisivanje math-a</title>
+      <link>https://ori.codes/draft-and-todo/derivacije/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/derivacije/</guid>
+      <description>THIS IS A DRAFT
+ I&#39;ll probably just delete this!
+ Nagib linije Recimo da imamo sljedeću funkciju: f(x) = x+1:
+Želimo odrediti njezin nagib (slope). Nagib definiramo kao promjenu y u odnosu na promjenu x.
+Nagib nam govori koliko brzo y raste ako promijenimo x.
+ Odaberemo bilo koju točku (x1,y1) na grafu. Nakon toga x povećamo za proizvoljnu veličinu Δx, te pogledamo koliko iznosi promjena Δy. Tako dobivamo drugu točku, (x1+Δx, y1+Δy), odnosno (x2, y2).</description>
+    </item>
+    
+    <item>
+      <title>Raspisivanje Hough transform-a</title>
+      <link>https://ori.codes/draft-and-todo/hough-transform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/hough-transform/</guid>
+      <description>THIS IS A DRAFT
+ I&#39;ll probably just delete this!
+ Hough transform Linearnu funkciju u $xy$ - ravnini definiramo kao: $f(x) = y = ax + b$
+U toj funkciji, $a$ i $b$ su fiksni i određuju nagib/smjer funkcije. Pravac $y = ax+b$ predstavlja sve moguće kombinacije $x$ i $y$ uz zadane $a$ i $b$.
+Pretpostavimo da znamo dvije točke na tom pravcu (dvije moguće kombinacije $x$ i $y$ za zadane $a$ i $b$):</description>
+    </item>
+    
+    <item>
+      <title>Integrating the lane finding with our model</title>
+      <link>https://ori.codes/draft-and-todo/integrating-the-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/integrating-the-lane-finding/</guid>
+      <description>Will publish tommorow or the day after! </description>
+    </item>
+    
+    <item>
+      <title>Adding behaviours: automated lane changing</title>
+      <link>https://ori.codes/draft-and-todo/adding-behaviours/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/adding-behaviours/</guid>
+      <description>Will publish this week! </description>
+    </item>
+    
+    <item>
+      <title>Augmenting the data with neural style transfer</title>
+      <link>https://ori.codes/draft-and-todo/data-augmentation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/data-augmentation/</guid>
+      <description>Augmenting the data by generating mirrored images to counter (counter)clockwise bias on tracks.
+Using neural style transfers to make the model more robust to lighting changes and real life track reflectiveness!
+Will publish next week! </description>
+    </item>
+    
+    <item>
+      <title>Detecting and tracking objects on images</title>
+      <link>https://ori.codes/draft-and-todo/object-detection-and-tracking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/object-detection-and-tracking/</guid>
+      <description>Will publish this week! </description>
+    </item>
+    
+    <item>
+      <title>Reinforcement learning: letting the car learn to drive on its own</title>
+      <link>https://ori.codes/draft-and-todo/reinforcement-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/reinforcement-learning/</guid>
+      <description>Using reinforcement learning in the real world for cars is pretty dangerous and expensive, since they&#39;ll be crashing into everything they can at the very beginning. To counter this, we&#39;ll be creating an OpenAI environment in which the car learns to drive by itself in order to pretrain weights for real life use.
+Will publish next week! </description>
+    </item>
+    
+  </channel>
+</rss>

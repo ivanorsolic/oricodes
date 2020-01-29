@@ -26,7 +26,13 @@
     
 
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" async
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+   "HTML-CSS": { linebreaks: { automatic: true } },
+           SVG: { linebreaks: { automatic: true } }
+  });
+  </script>
+<script type="text/javascript" async
   src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Config({
   tex2jax: {
@@ -46,63 +52,6 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script>
-
-<script type="text/javascript">
-  window.MathJax = {
-    jax: ["input/TeX", "output/CommonHTML"],
-    extensions: ["tex2jax.js"],
-    TeX: {
-      equationNumbers: { autoNumber: "AMS" },
-      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
-    },
-    
-
-    AuthorInit: function() {
-      MathJax.Hub.Register.StartupHook("End Typeset", function() {
-        const fullFontSize = 121;
-        var renderMath = function() {
-          
-
-          var mjFormulae = document.getElementsByClassName("mj-formula");
-          if (mjFormulae) {
-            for (var i = 0; i < mjFormulae.length; ++i) {
-              var mjFormula = mjFormulae[i];
-
-              
-
-              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
-              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
-
-              
-
-              var scale = 0.8 * (mjTable ?
-                mjFormula.offsetWidth / mjTable.offsetWidth :
-                mjFormula.offsetWidth / mjElement.offsetWidth);
-
-              
-
-              const oldFontSize = parseInt(mjElement.style.fontSize);
-              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
-              mjElement.style.fontSize = `${newFontSize}%`;
-            }
-          }
-        }
-
-        
-
-        renderMath();
-
-         
-        var timeoutId;
-        const delay = 250;
-        window.addEventListener("resize", function() {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(renderMath, delay);
-        });
-      });
-    }
-  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -127,7 +76,7 @@
   <img src="/images/logo.png">
 </a>
 
-	  327 words.<br>
+	  339 words.<br>
 	  Reading time: 2 minutes.
 	  
     </div>
@@ -1047,6 +996,192 @@
  
 
           
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/draft-and-todo/" title="Drafts and #TODO&#39;s" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/draft-and-todo/">
+          <b>5. </b>Drafts and #TODO&#39;s
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/how-to-train-your-model/" title="Master recipe: How train your model" class="dd-item ">
+        <a href="/draft-and-todo/how-to-train-your-model/">
+        Master recipe: How train your model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/derivacije/" title="Raspisivanje math-a" class="dd-item ">
+        <a href="/draft-and-todo/derivacije/">
+        Random math stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/hough-transform/" title="Raspisivanje Hough transform-a" class="dd-item ">
+        <a href="/draft-and-todo/hough-transform/">
+        Hough transform stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/integrating-the-lane-finding/" title="Integrating the lane finding with our model" class="dd-item ">
+        <a href="/draft-and-todo/integrating-the-lane-finding/">
+        Integrating the lane finding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/adding-behaviours/" title="Adding behaviours: automated lane changing" class="dd-item ">
+        <a href="/draft-and-todo/adding-behaviours/">
+        Behaviours: Lane Changing
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/data-augmentation/" title="Augmenting the data with neural style transfer" class="dd-item ">
+        <a href="/draft-and-todo/data-augmentation/">
+        Data augmentation: ML meets art!
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/object-detection-and-tracking/" title="Detecting and tracking objects on images" class="dd-item ">
+        <a href="/draft-and-todo/object-detection-and-tracking/">
+        Object recognition and tracking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/reinforcement-learning/" title="Reinforcement learning: letting the car learn to drive on its own" class="dd-item ">
+        <a href="/draft-and-todo/reinforcement-learning/">
+        Reinforcement learning
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
          
     </ul>
 
@@ -1223,7 +1358,6 @@ cameraExtrinsicValues <span style="color:#ff79c6">=</span> []
     <span style="color:#ff79c6">for</span> extension <span style="color:#ff79c6">in</span> extensions:
         images<span style="color:#ff79c6">.</span>extend(glob<span style="color:#ff79c6">.</span>glob(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">calibration_images/</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">+</span>extension))
     
-    <span style="color:#ff79c6">print</span>(images)
     <span style="color:#6272a4"># Step through the list and search for chessboard corners</span>
     <span style="color:#ff79c6">for</span> calibrationImageFileName <span style="color:#ff79c6">in</span> images:
         calibrationImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>imread(calibrationImageFileName)
@@ -1260,6 +1394,34 @@ cameraExtrinsicValues <span style="color:#ff79c6">=</span> []
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">undistortImage</span>(image):
     <span style="color:#ff79c6">return</span> cv2<span style="color:#ff79c6">.</span>undistort(image, cameraIntrinsicValues, cameraExtrinsicValues, None, cameraIntrinsicValues)
 </code></pre></div>
+<section class="attachments green">
+	<label>
+		<i class="fas fa-paperclip" aria-hidden="true"></i>
+		You can download the above code as python script here.
+	</label>
+	
+		
+	
+	<div class="attachments-files">
+	
+		
+		
+			
+				<li>
+					<a href="/Artificial%20Intelligence/camera%20calibration/implementing%20camera%20calibration.files/cameraCalibration.py" >
+						cameraCalibration.py
+					</a>
+					(2 ko)
+				</li>
+			
+		
+	
+	<div>
+	
+</section>
+
+
+
 
 <footer class=" footline" >
 	
@@ -1950,6 +2112,150 @@ cameraExtrinsicValues <span style="color:#ff79c6">=</span> []
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
             
         

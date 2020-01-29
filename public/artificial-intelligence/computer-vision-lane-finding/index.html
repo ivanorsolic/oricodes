@@ -26,7 +26,13 @@
     
 
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" async
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+   "HTML-CSS": { linebreaks: { automatic: true } },
+           SVG: { linebreaks: { automatic: true } }
+  });
+  </script>
+<script type="text/javascript" async
   src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Config({
   tex2jax: {
@@ -46,63 +52,6 @@
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script>
-
-<script type="text/javascript">
-  window.MathJax = {
-    jax: ["input/TeX", "output/CommonHTML"],
-    extensions: ["tex2jax.js"],
-    TeX: {
-      equationNumbers: { autoNumber: "AMS" },
-      extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
-    },
-    
-
-    AuthorInit: function() {
-      MathJax.Hub.Register.StartupHook("End Typeset", function() {
-        const fullFontSize = 121;
-        var renderMath = function() {
-          
-
-          var mjFormulae = document.getElementsByClassName("mj-formula");
-          if (mjFormulae) {
-            for (var i = 0; i < mjFormulae.length; ++i) {
-              var mjFormula = mjFormulae[i];
-
-              
-
-              var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
-              var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
-
-              
-
-              var scale = 0.8 * (mjTable ?
-                mjFormula.offsetWidth / mjTable.offsetWidth :
-                mjFormula.offsetWidth / mjElement.offsetWidth);
-
-              
-
-              const oldFontSize = parseInt(mjElement.style.fontSize);
-              var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
-              mjElement.style.fontSize = `${newFontSize}%`;
-            }
-          }
-        }
-
-        
-
-        renderMath();
-
-         
-        var timeoutId;
-        const delay = 250;
-        window.addEventListener("resize", function() {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(renderMath, delay);
-        });
-      });
-    }
-  };
 </script>
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -127,8 +76,8 @@
   <img src="/images/logo.png">
 </a>
 
-	  3 words.<br>
-	  Reading time: 1 minutes.
+	  227 words.<br>
+	  Reading time: 2 minutes.
 	  
     </div>
     
@@ -1047,6 +996,192 @@
  
 
           
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/draft-and-todo/" title="Drafts and #TODO&#39;s" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/draft-and-todo/">
+          <b>5. </b>Drafts and #TODO&#39;s
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/how-to-train-your-model/" title="Master recipe: How train your model" class="dd-item ">
+        <a href="/draft-and-todo/how-to-train-your-model/">
+        Master recipe: How train your model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/derivacije/" title="Raspisivanje math-a" class="dd-item ">
+        <a href="/draft-and-todo/derivacije/">
+        Random math stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/hough-transform/" title="Raspisivanje Hough transform-a" class="dd-item ">
+        <a href="/draft-and-todo/hough-transform/">
+        Hough transform stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/integrating-the-lane-finding/" title="Integrating the lane finding with our model" class="dd-item ">
+        <a href="/draft-and-todo/integrating-the-lane-finding/">
+        Integrating the lane finding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/adding-behaviours/" title="Adding behaviours: automated lane changing" class="dd-item ">
+        <a href="/draft-and-todo/adding-behaviours/">
+        Behaviours: Lane Changing
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/data-augmentation/" title="Augmenting the data with neural style transfer" class="dd-item ">
+        <a href="/draft-and-todo/data-augmentation/">
+        Data augmentation: ML meets art!
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/object-detection-and-tracking/" title="Detecting and tracking objects on images" class="dd-item ">
+        <a href="/draft-and-todo/object-detection-and-tracking/">
+        Object recognition and tracking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/reinforcement-learning/" title="Reinforcement learning: letting the car learn to drive on its own" class="dd-item ">
+        <a href="/draft-and-todo/reinforcement-learning/">
+        Reinforcement learning
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
          
     </ul>
 
@@ -1165,7 +1300,11 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#quick-overview-of-what-well-be-doing">Quick overview of what we'll be doing</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1189,7 +1328,33 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 
 
 
-<h1 id="coming-up-tomorrow">Coming up tomorrow</h1>
+<p>Remember we've showed before that our CNN is taking the horizon as the input feature, and that we'll be addressing it after making a simulator mod that'll allow us to take high res images. Well, the time has come!</p>
+<p>We'll be using some computer vision tricks to help it find the lane lines easier.</p>
+<h2 id="quick-overview-of-what-well-be-doing">Quick overview of what we'll be doing</h2>
+<p>Here's what it will look like. We'll be going through a detailed explanation and implementation further on, this is just a motivational example.</p>
+
+<div class="notices note" ><p>This is just a quick motivational overview, worry not, we'll get through a very detailed explanation for each step and implement everything in code.</p>
+</div>
+
+<p>Let's take this input image for an example:</p>
+<p><img src="/images/ai/preview1.jpg" alt=""></p>
+<p>We'll begin by transforming its perspective to a birds-eye view like this:</p>
+<p><img src="/images/ai/preview2.jpg" alt=""></p>
+<p>We'll apply some color space transformations and filters to extract only the lane lines:</p>
+<p><img src="/images/ai/preview3.jpg" alt=""></p>
+<p>We can then fit two polynomials for the left and right lane which allow us to map the entire lane like this:</p>
+<p><img src="/images/ai/preview4.jpg" alt=""></p>
+<p>We'll then revert the perspective to the normal car view:</p>
+<p><img src="/images/ai/preview5.jpg" alt=""></p>
+<p>And make an overlay to visualize how the detected lane looks like:</p>
+<p><img src="/images/ai/preview6.jpg" alt=""></p>
+
+<div class="notices tip" ><p>This uses absolutely no machine learning! We'll use some form of the detected lane as an input to our neural net, which should work even better!</p>
+</div>
+
+<p>This is what it looks like on video:</p>
+<center><video controls src="/images/ai/lanefinding.mp4" autoplay loop width=100%></video></center>
+<h1 id="will-publish-the-rest-today-or-tommorow">Will publish the rest today or tommorow!</h1>
 
 
 <footer class=" footline" >
@@ -1897,6 +2062,153 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -1909,7 +2221,7 @@ Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-he
 			<a class="nav nav-prev" href="/artificial-intelligence/camera-calibration/calibrating-the-camera/" title="Camera calibration: Calibrating the camera and undistorting images"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/artificial-intelligence/custom-architecture/" title="Creating our first custom network architecture" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/draft-and-todo/" title="Drafts and #TODO&#39;s" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

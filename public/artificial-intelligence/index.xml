@@ -29,7 +29,9 @@ And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
-      <description>Coming up tomorrow </description>
+      <description>Remember we&#39;ve showed before that our CNN is taking the horizon as the input feature, and that we&#39;ll be addressing it after making a simulator mod that&#39;ll allow us to take high res images. Well, the time has come!
+We&#39;ll be using some computer vision tricks to help it find the lane lines easier.
+Quick overview of what we&#39;ll be doing Here&#39;s what it will look like. We&#39;ll be going through a detailed explanation and implementation further on, this is just a motivational example.</description>
     </item>
     
   </channel>

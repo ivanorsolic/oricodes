@@ -33,6 +33,17 @@ And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures
     </item>
     
     <item>
+      <title>Master recipe: How train your model</title>
+      <link>https://ori.codes/draft-and-todo/how-to-train-your-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/how-to-train-your-model/</guid>
+      <description>THIS IS A DRAFT
+ Will publish in two or three days!
+ Train/dev/test sets  How many layers, hidden units, learning rates, what activation functions? Iterate, iterate, iterate   Split the data into three parts: training set, cross validation set and test set. You train the data on the training set, and validate it using the dev set. Since you&#39;re using the dev set to tune the model hyperparameters, you&#39;re kinda fitting them to the data in the dev set.</description>
+    </item>
+    
+    <item>
       <title>Simulator mod: High resolution images</title>
       <link>https://ori.codes/artificial-intelligence/simulator-mod/high-resolution-images/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -65,6 +76,20 @@ You&#39;ll want to have:  A RC car (with some batteries) A PWM/Servo Driver (I2C
     </item>
     
     <item>
+      <title>Raspisivanje math-a</title>
+      <link>https://ori.codes/draft-and-todo/derivacije/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/derivacije/</guid>
+      <description>THIS IS A DRAFT
+ I&#39;ll probably just delete this!
+ Nagib linije Recimo da imamo sljedeću funkciju: f(x) = x+1:
+Želimo odrediti njezin nagib (slope). Nagib definiramo kao promjenu y u odnosu na promjenu x.
+Nagib nam govori koliko brzo y raste ako promijenimo x.
+ Odaberemo bilo koju točku (x1,y1) na grafu. Nakon toga x povećamo za proizvoljnu veličinu Δx, te pogledamo koliko iznosi promjena Δy. Tako dobivamo drugu točku, (x1+Δx, y1+Δy), odnosno (x2, y2).</description>
+    </item>
+    
+    <item>
       <title>Simulator mod: Custom RC model</title>
       <link>https://ori.codes/artificial-intelligence/simulator-mod/custom-rc-model/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -93,6 +118,19 @@ Seeing what the network sees One useful visual tool we could use is Donkey&#39;s
 We&#39;ll start with the real camera on our RC and then we&#39;ll also calibrate our simulator camera!
 Once calibrated on the calibration images, you can use the same undistortion matrix for any other image that the same camera takes (given the focal length hasn&#39;t changed)!
  Calibrating your real camera I&#39;ll be using my RC camera, the EleCam Explorer 4K, which has an advertised 170 degree FOV.</description>
+    </item>
+    
+    <item>
+      <title>Raspisivanje Hough transform-a</title>
+      <link>https://ori.codes/draft-and-todo/hough-transform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/hough-transform/</guid>
+      <description>THIS IS A DRAFT
+ I&#39;ll probably just delete this!
+ Hough transform Linearnu funkciju u $xy$ - ravnini definiramo kao: $f(x) = y = ax + b$
+U toj funkciji, $a$ i $b$ su fiksni i određuju nagib/smjer funkcije. Pravac $y = ax+b$ predstavlja sve moguće kombinacije $x$ i $y$ uz zadane $a$ i $b$.
+Pretpostavimo da znamo dvije točke na tom pravcu (dvije moguće kombinacije $x$ i $y$ za zadane $a$ i $b$):</description>
     </item>
     
     <item>
@@ -146,7 +184,9 @@ RACE/STREET Probably the first thing that comes to mind when thinking of an RC c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
-      <description>Coming up tomorrow </description>
+      <description>Remember we&#39;ve showed before that our CNN is taking the horizon as the input feature, and that we&#39;ll be addressing it after making a simulator mod that&#39;ll allow us to take high res images. Well, the time has come!
+We&#39;ll be using some computer vision tricks to help it find the lane lines easier.
+Quick overview of what we&#39;ll be doing Here&#39;s what it will look like. We&#39;ll be going through a detailed explanation and implementation further on, this is just a motivational example.</description>
     </item>
     
     <item>
@@ -160,6 +200,15 @@ RACE/STREET Probably the first thing that comes to mind when thinking of an RC c
   Brushless pros: long lifespan, much better speed and handling, better power efficiency (85-90%).
   Brushless cons: much more expensive, worse for off-road.
   So what should we get? It depends on your budget, but brushed motors work just fine, and besides, for self-driving purposes, you don’t need a RC car that drives 100 KPH.</description>
+    </item>
+    
+    <item>
+      <title>Integrating the lane finding with our model</title>
+      <link>https://ori.codes/draft-and-todo/integrating-the-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/integrating-the-lane-finding/</guid>
+      <description>Will publish tommorow or the day after! </description>
     </item>
     
     <item>
@@ -184,6 +233,15 @@ Again, 1500 microseconds typically means &amp;ldquo;center&amp;rdquo; which for 
     </item>
     
     <item>
+      <title>Adding behaviours: automated lane changing</title>
+      <link>https://ori.codes/draft-and-todo/adding-behaviours/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/adding-behaviours/</guid>
+      <description>Will publish this week! </description>
+    </item>
+    
+    <item>
       <title>Receiver</title>
       <link>https://ori.codes/rc-car/receiver/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -191,6 +249,17 @@ Again, 1500 microseconds typically means &amp;ldquo;center&amp;rdquo; which for 
       <guid>https://ori.codes/rc-car/receiver/</guid>
       <description>If you buy a &amp;ldquo;kit car&amp;rdquo; that is listed as &amp;ldquo;needs a receiver,&amp;rdquo; then you don&#39;t need to buy a receiver.
  The Jetson Nano and the PWM/Servo driver will replace the receiver, outputting control signals to the car. If you’re buying a kit with a steering servo, motor, and ESC, you should actually try to not get a receiver, since the RC car could be specifically designed for that receivers PWM signals, and you’ll be taking it apart anyways.</description>
+    </item>
+    
+    <item>
+      <title>Augmenting the data with neural style transfer</title>
+      <link>https://ori.codes/draft-and-todo/data-augmentation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/data-augmentation/</guid>
+      <description>Augmenting the data by generating mirrored images to counter (counter)clockwise bias on tracks.
+Using neural style transfers to make the model more robust to lighting changes and real life track reflectiveness!
+Will publish next week! </description>
     </item>
     
     <item>
@@ -202,6 +271,15 @@ Again, 1500 microseconds typically means &amp;ldquo;center&amp;rdquo; which for 
       <description>There are two types of batteries used for RC cars: Nickel Metal Hydride batteries (NiMH) and Lithium Polymer batteries (LiPo).
 TL;DR: LiPo batteries are much better, but also more expensive.
 Lithium Polymer batteries generally have higher current capacity (the amount of Amps the battery can deliver at one point while driving) as well as energy storage (the number of Amp Hours the battery stores when fully charged) so it may also last longer.</description>
+    </item>
+    
+    <item>
+      <title>Detecting and tracking objects on images</title>
+      <link>https://ori.codes/draft-and-todo/object-detection-and-tracking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/object-detection-and-tracking/</guid>
+      <description>Will publish this week! </description>
     </item>
     
     <item>
@@ -245,6 +323,16 @@ Syonyk has an awesome Jetson Nano guide with all of this stuff explained and was
 Source: Official Donkey docs
  We&#39;ll be using Donkey® as an interface between our RC car and the neural net we&#39;d like to drive it for us.
 As you can see above, we&#39;d like to send the camera data from our RC to a model which would analyse it and tell the RC where to steer and how fast to go, in order to stay on the road.</description>
+    </item>
+    
+    <item>
+      <title>Reinforcement learning: letting the car learn to drive on its own</title>
+      <link>https://ori.codes/draft-and-todo/reinforcement-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/draft-and-todo/reinforcement-learning/</guid>
+      <description>Using reinforcement learning in the real world for cars is pretty dangerous and expensive, since they&#39;ll be crashing into everything they can at the very beginning. To counter this, we&#39;ll be creating an OpenAI environment in which the car learns to drive by itself in order to pretrain weights for real life use.
+Will publish next week! </description>
     </item>
     
     <item>

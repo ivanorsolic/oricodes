@@ -2,7 +2,7 @@
 title = "Augmenting the data with neural style transfer"
 menuTitle = "Data augmentation: ML meets art!"
 draft = false
-weight=10
+weight=2
 
 +++
 

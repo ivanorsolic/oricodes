@@ -2,7 +2,7 @@
 title = "Reinforcement learning: letting the car learn to drive on its own"
 menuTitle = "Reinforcement learning"
 draft = false
-weight=11
+weight=6
 
 +++
 

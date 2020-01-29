@@ -2,7 +2,7 @@
 title = "Integrating the lane finding with our model"
 menuTitle = "Integrating the lane finding"
 draft = false
-weight=7
+weight=1
 
 +++
 

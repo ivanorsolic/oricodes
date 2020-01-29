@@ -2,7 +2,7 @@
 title = "Master recipe: How train your model"
 menuTitle = "Master recipe: How train your model"
 draft = false
-weight=1
+weight=3
 
 +++
 

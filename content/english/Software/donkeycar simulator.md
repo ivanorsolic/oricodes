@@ -17,6 +17,12 @@ This is one of the coolest parts of DonkeyCar for me, and probably one of the mo
 
 It's also a good way to get your feet wet with this kind of a project without building an actual RC. If it turns out you like it, you can always go back to the beginning and build an actual platform.
 
+And if you're thinking: *boo, why use a simulator when we have a real RC car!*, remember, **[even Tesla uses a simulator](https://youtu.be/Ucp0TTmvqOE?t=7371)**. 
+
+It is true that, **as Andrej Karpathy says:** ***there is no substitute for real data***, the simulator gives us a chance to rapidly prototype and even test multiple models at once. It also gives us an environment where we don't have to worry about the physical RC crashing into something or hurting someone. Also, if you wanted to use reinforcement learning, would you really be willing to let your RC smash into the wall for episodes and episodes until it learns basic stuff?
+
+Also, if you've got the time, **do take a look at the [Tesla Autonomy Day stream](https://www.youtube.com/watch?v=Ucp0TTmvqOE)**, it's a goldmine of valuable insights on **how they actually do stuff that <u>actually drives on actual roads</u>** (!).
+
 #### Let's get it up and running:
 
 - Download and unzip the simulator for your platform from the [DonkeyCar GitHub release page](https://github.com/tawnkramer/gym-donkeycar/releases)

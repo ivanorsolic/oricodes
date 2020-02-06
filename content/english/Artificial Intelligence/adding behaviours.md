@@ -6,5 +6,3 @@ weight=13
 
 +++
 
-# Will publish today!
-

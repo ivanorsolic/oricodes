@@ -191,11 +191,15 @@ You can even apply preprocessing like this to your images to try and make it foc
 ![Van Gogh](/images/ai/vangogh.jpg)
 ![Picasso](/images/ai/picasso.jpg)
 
-#### **Also, I made this just to make some artful Baby Yoda memes and had to put it into this project somehow, so here goes:**
+#### **Also, I wrote this just to have an excuse to make some artful Baby Yoda memes, which had to be put into this project somehow, so here goes:**
 ****
 ![Baby Yoder](/images/howtotrain/babyyoder1.jfif)
 ![Baby Yoder2](/images/howtotrain/babyyoder2.jfif)
 ![Baby Yode3r](/images/howtotrain/babyyoder3.jfif)
+
+**You could still tell that it's Baby Yoda, even though the images lost a lot of the original information about him, e.g. the hairs on his head.** So in contrast, you could use this approach and still be able to identify lane lines on images, but just by focusing on the things that make us recognize them the most.
+
+Or not. Anyways, artful Baby Yoda memes.
 
 #### **Early stopping**
 ****

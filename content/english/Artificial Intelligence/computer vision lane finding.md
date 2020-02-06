@@ -1,6 +1,6 @@
 +++
-title = "Computer Vision: Lane Finding"
-menuTitle = "Computer Vision: Lane Finding"
+title = "Finding lane lines easier"
+menuTitle = "Image preprocessing"
 draft = false
 weight=6
 
@@ -272,7 +272,6 @@ This is what the entire process would look like, in a video:
 
 <center><video controls src="/images/ai/lanelines.mp4" autoplay loop width=80%></video></center>
 
-
 ## Alternative approaches, and why not use them
 
 We also could've used a number of different approaches as opposed to our use of the S channel. We also could've combined multiple of them. A lot of people do. Let's go through some of them and I'll explain why I didn't use them.
@@ -309,7 +308,6 @@ Once the lanes are found in the first frame, the sliding windows don't go throug
 The fitted polynomials can then be easily visualized, and since I've actually implemented this, this is what the result would look like in our simulator:
 
 <center><video controls src="/images/ai/lanefinding.mp4" autoplay loop width=100%></video></center>
-
 
 That looks pretty cool and works relatively well, so why not use it?
 

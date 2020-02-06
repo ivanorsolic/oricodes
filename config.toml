@@ -105,7 +105,7 @@ url = "https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?us
 weight = 20
 
 [markup.goldmark.renderer]
-unsafe= true
+unsafe=true
 [markup.highlight]
   codeFences = true
   guessSyntax = false

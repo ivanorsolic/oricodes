@@ -14,5 +14,8 @@ Using neural style transfers to make the model more robust to lighting changes a
 
 ![Picasso](/images/ai/picasso.jpg)
 
-# Will publish next week!
+# I've got this implemented, will think about writing it up!
 
+![Baby Yoder](/images/howtotrain/babyyoder1.jfif)
+![Baby Yoder2](/images/howtotrain/babyyoder2.jfif)
+![Baby Yode3r](/images/howtotrain/babyyoder3.jfif)

@@ -1,20 +1,18 @@
 +++
-title = "Advanced lane finding model: integrating the image preprocessing"
+title = "Advanced lane finding model"
 menuTitle = "Advanced lane finding model"
 draft = false
 weight=10
 
 +++
 
-Now it's time to implement our image preprocessing from the previous chapter as an input to our model. 
-
-This is what the model will look like:
-
 ![nnWithoutBehavior](/images/ai/nnWithoutBehavior2.png)
 
-It will consist of two paralel CNNs, each of which end with a dense 100-unit layer, which we will then concatenate and pass through three additional dense layers, and end with two linear activations. The model should have about 6.5 million parameters, which take up about 2GB of VRAM, so we should be able to run it on our Jetson Nano with half that much RAM to spare. :)
+The model will consist of two parallel CNNs, each of which end with a dense 100-unit layer, which we will then concatenate and pass through three additional dense layers, and end with two linear activations. The model should have about 6.5 million parameters, which take up about 2GB of VRAM, so we should be able to run it on our Jetson Nano with half that much RAM to spare. :)
 
-# The idea of teaching a vehicle to drive autonomously
+## The idea of teaching a vehicle to drive autonomously
+
+****
 
 Now I know that a whole separate (and rather big) CNN is an overkill for the thresholded binary image, but the main reason why I'm currently doing it like this is to test if its possible to have multiple specialized parts of the architecture all siphon in to a smaller final part (the last n dense layers) in order for the car to make a decision where to steer and how much to throttle, which is more or less how you do everything while you're in a car, parking, driving, you just combine multiple inputs, e.g.:
 
@@ -23,7 +21,7 @@ Now I know that a whole separate (and rather big) CNN is an overkill for the thr
 - Actually knowing where you are with respect to that exit and by what path can you get to it - path planning, localization
 - Actually give the appropriate steering and throttle to actually perform the maneuver
 
-So no matter what we're doing in a car, be it parking or driving to a destination, all we can really do to control the car is turn the steering wheel and control its speed (assuming it's an electric car 😋), we're just taking in the input from our surroundings, mostly using our eyes, which we analyze through a series of specialized procedures which ultimately lead us to control our car based on the decisions we've made, in order to perform a maneuver.
+So no matter what we're doing in a car, be it parking or driving to a destination, all we can really do to control the car is turn the steering wheel and control its speed (assuming no gear shifting, e.g. an electric car 😋), we're just taking in the input from our surroundings, mostly using our eyes, which we analyze through a series of specialized procedures which ultimately lead us to control our car based on the decisions we've made, in order to perform a maneuver.
 
 So what I wanted to do is to have a series of specialized parts in the net, which we could even call smaller subnets, which would take the input images and extract highly specific data from it, using (relatively) specialized procedures, which we would then plug into the final layer, along with the first convolutional network that uses the raw input image, which should give the final part of the network enough context about the world and enough information in order to appropriately control the RC.
 
@@ -31,21 +29,20 @@ It would look something like this:
 
 ![Main idea](/images/ai/networkIdea.png)
 
-I was playing around with the idea in my mind when I saw [**Andrej Karpathy's talk on PyTorch at Tesla**](https://www.youtube.com/watch?v=oBklltKXtDE), where he explained their use of **HydraNets**. In a nutshell, because they have a 1000 (!) distinct output tensors (predictions), and all of them have to know a ton of context and details about the scene, they use a shared backbone, like this:
+I was playing around with the idea in my mind when I saw [**Andrej Karpathy's talk on PyTorch at Tesla**](https://www.youtube.com/watch?v=oBklltKXtDE), where he explained their use of **HydraNets**. In a nutshell, because they have a 1000 (!) distinct output tensors (predictions), and all of them have to know a ton of context and details about the scene, they use a shared backbone, like this (**screenshot taken from YouTube: [PyTorch at Tesla](https://www.youtube.com/watch?v=oBklltKXtDE)**:
 
 ![Karpathy HydraNets](/images/ai/KarpathyHydraNets.jpg)
 
-**They actually have 48 networks that output a total of 1000 predictions, which is insane to do in real-time (on 1000x1000 images and 8 cameras) while being accurate enough to actually drive living humans on real roads.** Though, they do have some pretty sweet hardware, unlike our Jetson Nanos 😢.
+**They actually have 48 networks that output a total of 1000 predictions, which is insane to do in real-time (on 1000x1000 images and 8 cameras) while being accurate enough to actually drive living humans on real roads.** Though, they do have some pretty sweet custom hardware ([FSD2](https://www.youtube.com/watch?v=Ucp0TTmvqOE)), unlike our Jetson Nanos 😢.
 
 Now, it obviously makes much more sense to do what Tesla did, to have a shared backbone since a lot of the information that the backbone extracts from the input images can be applied to all of the specialized tasks, so you don't have to learn them all over again for each and every one of them.
 
-But I figured, what the heck, I'd try my idea out, which I did, since the main reason for doing this is to actually learn to apply ML/DL to something I could actually see drive around my backyard, and when we teach the car to do behaviours like lane changing in the next chapter, you'll see that it actually works!
+**But I figured, what the heck, I'd try my idea out, which I did, since the main reason for doing this is to actually learn to apply ML/DL to something I could actually see drive around my backyard, and when we teach the car to do behaviours like lane changing in the next chapter, you'll see that it actually works!**
 
 This is what it looks like in action:
 
-<center><video controls src="/images/ai/video1.mp4" autoplay loop width=100%></video></center>
-<center><video controls src="/images/ai/video2.mp4" autoplay loop width=100%></video></center>
-
+<center><video controls src="/images/ai/video1.mp4" autoplay muted loop width=100%></video></center>
+<center><video controls src="/images/ai/video2.mp4" autoplay muted loop width=100%></video></center>
 Let's implement it.
 
 ### Creating a Keras model

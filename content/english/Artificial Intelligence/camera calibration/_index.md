@@ -1,5 +1,5 @@
 +++
-title = "Camera calibration"
+title = "Camera distortions and calibration"
 date = 2019-07-27T16:24:11+02:00
 weight = 4
 chapter = true

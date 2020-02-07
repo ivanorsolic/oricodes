@@ -1,5 +1,5 @@
 +++
-title = "Visualization"
+title = "Visualizations"
 date = 2019-07-27T16:24:11+02:00
 weight = 2
 chapter = true

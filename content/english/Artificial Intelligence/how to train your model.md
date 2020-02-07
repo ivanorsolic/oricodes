@@ -1,6 +1,6 @@
 +++
-title = "Master recipe: How train your model"
-menuTitle = "Master recipe: How train your model"
+title = "Master recipe: How to learn your machines"
+menuTitle = "How to learn your machines"
 draft = false
 weight=11
 
@@ -305,7 +305,7 @@ First we'd define a grid, which can either be randomized or a regular grid, and 
 
 **Illustration by Andrew Ng:**
 
-![image-20191208195454506](/images/howtotrain/image-20191208195454506.png)
+![image-20191208195454506](/images/howtotrain/hyperparameters.png)
 
 Keep in mind that the grid search approach suffers from **[the curse of dimensionality](https://www.wikiwand.com/en/Curse_of_dimensionality)**. 
 

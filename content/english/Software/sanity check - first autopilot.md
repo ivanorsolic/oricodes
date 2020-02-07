@@ -143,7 +143,6 @@ After making sure your model doesn't just ram your RC into a wall, you can use t
 
 <center><video controls src="/video/autopilot.mp4" autoplay muted loop height=500px></video></center>
 
-
 ## What's next?
 
 The autopilot works, but it's far from perfect. But it's still pretty impressive considering we started out with a regular RC, and now we have a thing that can drive around a track on its own. :)

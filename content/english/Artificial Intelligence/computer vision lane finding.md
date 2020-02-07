@@ -8,6 +8,8 @@ weight=6
 
 Remember we've showed before that our CNN is taking the horizon as the input feature, and that we'll be addressing it after making a simulator mod that'll allow us to take high res images. Well, here we are.
 
+<center><video controls src="/images/ai/lanelines.mp4" autoplay muted loop width=50%></video><video controls src="/images/ai/lanefinding.mp4" autoplay muted loop width=50%></video></center>
+
 ## What we're going to do
 
 To solve the horizon problem and simultaneously help the car recognize lane lines better, we'll do the following:
@@ -306,7 +308,8 @@ Once the lanes are found in the first frame, the sliding windows don't go throug
 
 The fitted polynomials can then be easily visualized, and since I've actually implemented this, this is what the result would look like in our simulator:
 
-<center><video controls src="/images/ai/lanefinding.mp4" autoplay loop width=100%></video></center>
+<center><video controls src="/images/ai/lanefinding.mp4" autoplay muted loop width=100%></video></center>
+
 That looks pretty cool and works relatively well, so why not use it?
 
 Well, I've tried to use it by passing on the fitted polynomials to the network, by passing the warped image with the detected lane overlaid on it:

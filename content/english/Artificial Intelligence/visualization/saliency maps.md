@@ -12,6 +12,8 @@ In the context of Deep Learning and convolutional neural networks, they were fir
 
 I won't go into excessive detail on how it works, but in our case, a saliency map will show us which pixels on the input image make the most impact on the output inferred by the network. We will make a heat map that shows us which visual features the car uses the most, in order to steer and throttle correctly. Hopefully, it should be the lane lines.
 
+<center><video controls src="/images/ai/saliency.mp4" autoplay loop width=50%></video></center>
+
 Now, just a day after I've implemented a script that generates a video with a saliency map, given a trained model and some input data, I've noticed that Tawn Kramer (of Donkey) has already implemented a saliency map visualization, which you can generate using the `donkey makemovie` command. But since I've already made my implementation, we'll walk through it.
 
 As a starting point, I've used this [Jupyter Notebook](https://github.com/ermolenkodev/keras-salient-object-visualisation/blob/fix_tf1.8/keras-salient-object-visualisation.ipynb) made by [ermolenkodev](https://github.com/ermolenkodev/keras-salient-object-visualisation/blob/fix_tf1.8).
@@ -281,7 +283,8 @@ save_movie_mp4(inputImages, output, fps)
 
 The output video I got using the Nvidia model we made earlier and the dataset we downloaded:
 
-<center><video controls src="/images/ai/saliency.mp4" autoplay loop width=100%></video></center>
+<center><video controls src="/images/ai/saliency.mp4" autoplay loop width=50%></video></center>
+
 We can see that the car indeed uses the lane lines, but it also uses the horizon as a feature a lot. That's quite interesting. We can get rid of that problem using a ROI crop or by implementing some computer vision feature extraction/engineering, which we'll do right after we make a high res version of the simulator. :)
 
 We can also see that it's far more interested in the right line, than the middle (left) one. That's because, in general, the car tends to go to the right, since we're driving around the circuit clockwise. We need to do some data augmentation to solve this issue, which we'll also do a bit later.

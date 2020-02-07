@@ -21,7 +21,7 @@ Now I know that a whole separate (and rather big) CNN is an overkill for the thr
 - Actually knowing where you are with respect to that exit and by what path can you get to it - path planning, localization
 - Actually give the appropriate steering and throttle to actually perform the maneuver
 
-So no matter what we're doing in a car, be it parking or driving to a destination, all we can really do to control the car is turn the steering wheel and control its speed (assuming no gear shifting, e.g. an electric car 😋), we're just taking in the input from our surroundings, mostly using our eyes, which we analyze through a series of specialized procedures which ultimately lead us to control our car based on the decisions we've made, in order to perform a maneuver.
+So no matter what we're doing in a car, be it parking, changing lanes or driving to a destination, all we can really do to control the car is turn the steering wheel and control its speed (assuming no gear shifting, e.g. an electric car 😋), we're just taking in the input from our surroundings, mostly using our eyes, which we analyze through a series of specialized procedures which ultimately lead us to control our car based on the decisions we've made, in order to perform a maneuver.
 
 So what I wanted to do is to have a series of specialized parts in the net, which we could even call smaller subnets, which would take the input images and extract highly specific data from it, using (relatively) specialized procedures, which we would then plug into the final layer, along with the first convolutional network that uses the raw input image, which should give the final part of the network enough context about the world and enough information in order to appropriately control the RC.
 
@@ -234,12 +234,12 @@ And finally, we'll define the output and return the model:
 As every model, this one began as one thing and ended up a whole different thing in terms of hyperparameters and the architecture. I'll explain that in much more detail in the next chapter. But one thing that happened to me while training the above model using ReLU as the activation function for the convolutional layers was **dying ReLU(s)**.
 
 First, let's remember how the **ReLU** (Rectified Linear Unit) function is defined:
-$$
+++
 f(x) \begin{cases}
-      x & \text{when x=>0}\\
+      x & \text{when x=>0}\\\\
       0 & \text{when x<0}
     \end{cases}
-$$
+++
  This is what it looks like when plotted:
 
 ![image-20200206154123283](/images/ai/relu.png)
@@ -257,23 +257,23 @@ In my case, the neural network was just outputting the same throttle and steerin
 Why not PReLU? Because I wanted to try something simple before having an additional parameter to train, which I'd get by using PReLUs, and after trying out LeakyReLU the model trained just fine, with the loss being close to 0.001 (using MSE as the loss function).
 
 Here's the definition of **LeakyReLU**
-$$
+++
 f(x) \begin{cases}
-      x & \text{when x=>0}\\
+      x & \text{when x=>0}\\\\
       \alpha \cdot x & \text{when x<0}
     \end{cases}
-$$
-[The default alpha in Keras is 0.3](https://github.com/keras-team/keras/blob/master/keras/layers/advanced_activations.py#L19). Here's a plot of **LeakyReLU** with $$\alpha = 0.3$$:
+++
+[The default alpha in Keras is 0.3](https://github.com/keras-team/keras/blob/master/keras/layers/advanced_activations.py#L19). Here's a plot of **LeakyReLU** with $\alpha = 0.3$:
 
 ![image-20200206154605605](/images/ai/leakyrelu.png)
 
-And here's a plot when $$\alpha = 0.03$$:
+And here's a plot when $\alpha = 0.03$:
 
 ![image-20200206154755492](/images/ai/leakyrelu2.png)
 
-You can choose whichever $$\alpha$$ value you'd like. This will allow the unit to activate even if the value is negative.
+You can choose whichever $\alpha$ value you'd like. This will allow the unit to activate even if the value is negative.
 
-Speaking of choosing $$\alpha$$, the main idea behind **PReLU** is to make it a parameter which the network will learn. You can read about **PReLUs** in this [paper they were first proposed by He et al](https://arxiv.org/abs/1502.01852). or you can take a look at the [Keras implementation here.](https://github.com/keras-team/keras/blob/master/keras/layers/advanced_activations.py#L59)
+Speaking of choosing $\alpha$, the main idea behind **PReLU** is to make it a parameter which the network will learn. You can read about **PReLUs** in this [paper they were first proposed by He et al](https://arxiv.org/abs/1502.01852). or you can take a look at the [Keras implementation here.](https://github.com/keras-team/keras/blob/master/keras/layers/advanced_activations.py#L59)
 
 ## Training the network
 

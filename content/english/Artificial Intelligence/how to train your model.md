@@ -180,7 +180,7 @@ Now your car shouldn't be inclined much to steer to one side or the other for no
 
 {{% notice info %}}
 
-Make sure to make copies of your json files and invert the steering values aswell.
+Make sure to make copies of your JSON files and invert their steering values as well.
 
 {{% /notice %}}
 
@@ -301,7 +301,7 @@ So it's important to keep in mind that while we're trying to optimize one of the
 
 **A traditional way to choose hyperparameters is to sample them from a grid:**
 
-First we'd define a grid, which can either be randomized or a regular grid, and then iteratively sample the parameters from it:
+First we'd define a grid, which can either be a randomized or a regular grid, and then iteratively sample the parameters from it:
 
 **Illustration by Andrew Ng:**
 

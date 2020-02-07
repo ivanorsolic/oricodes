@@ -10,6 +10,8 @@ This website is a guide meant for everyone that would like to build a self-drivi
 
 **I'll go through everything from building your RC car and the low level electronics stuff to hacking kernels and teaching your car how to drive** and even do stuff like change lanes using deep learning.
 
+This is still a work in progress which gets updated regularly, but there's more than enough material for you to make an RC drive itself. :)
+
 #### **Scroll below for a sneak peek and a couple of recommended posts!**
 
 ***
@@ -21,7 +23,9 @@ This website is a guide meant for everyone that would like to build a self-drivi
 - [**Master recipe: How to learn your machines**](artificial-intelligence/how-to-train-your-model/): a basic recipe for model training, might be interesting if you're already doing ML/DL stuff
 - [**Lane changing behaviour**](/artificial-intelligence/adding-behaviours/) and [**object tracking and recognition**](object-detection-and-tracking/): PoCs and demos, I'll publish the latter in a couple of days!
 ***
-<center><video controls src="/images/ai/lanelines.mp4" autoplay loop width=33%></video><video controls src="/images/ai/lanefinding.mp4" autoplay loop width=33%></video><video controls src="/video/output.mp4" autoplay muted loop width=34%></video></center>
+<center>
+    <video controls src="/images/ai/lanelines.mp4" autoplay muted loop width=33%></video><video controls src="/images/ai/lanefinding.mp4" autoplay muted loop width=33%></video><video controls src="/video/output.mp4" autoplay muted loop width=34%></video>
+</center>
 
 ***
 

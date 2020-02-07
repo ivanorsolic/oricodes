@@ -21,7 +21,7 @@ This is still a work in progress which gets updated regularly, but there's more 
 
 - [**My idea of how to teach a vehicle to drive itself**](/artificial-intelligence/integrating-the-lane-finding/#the-idea-of-teaching-a-vehicle-to-drive-autonomously): an idea similar to networks like the *"[HydraNets](https://youtu.be/oBklltKXtDE?t=171)"* Tesla uses (but ~~probably~~ certainly dumber)
 - [**Master recipe: How to learn your machines**](artificial-intelligence/how-to-train-your-model/): a basic recipe for model training, might be interesting if you're already doing ML/DL stuff
-- [**Lane changing behaviour**](/artificial-intelligence/adding-behaviours/) and [**object tracking and recognition**](object-detection-and-tracking/): PoCs and demos, I'll publish the latter in a couple of days!
+- [**Lane changing behaviour**](/artificial-intelligence/adding-behaviours/) and [**object tracking and recognition**](/artificial-intelligence/object-detection-and-tracking/): PoCs and demos, I'll publish the latter in a couple of days!
 ***
 <center>
     <video controls src="/images/ai/lanelines.mp4" autoplay muted loop width=33%></video><video controls src="/images/ai/lanefinding.mp4" autoplay muted loop width=33%></video><video controls src="/video/output.mp4" autoplay muted loop width=34%></video>

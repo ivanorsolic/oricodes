@@ -8,6 +8,10 @@ weight=18
 
 First of all: **congrats on getting this far!** Let's spin our RC for a ride.
 
+<center><video controls src="/video/gamepad_steering.mp4" autoplay muted loop width="50%"></video><video controls src="/video/gamepad_throttle.mp4" autoplay muted loop width="50%"></video></center>
+
+
+
 **Before continuing:**
 
 - Make sure your RC is powered up (not the Jetson Nano, the actual RC). 
@@ -83,9 +87,7 @@ Device name: Xbox Wireless Controller
 ```
 
 <center><video controls src="/video/gamepad_steering.mp4" autoplay muted loop width="100%"></video></center>
-
 <center><video controls src="/video/gamepad_throttle.mp4" autoplay muted loop width="100%"></video></center>
-
 You can also see it mentioning something called a *tub*, and if you drive your RC around, it'll say that it's making records:
 
 ```bash

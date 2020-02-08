@@ -84,7 +84,11 @@ make menuconfig
 
 You should see something like this:
 
+
+
 ![](/images/kernel hacking/menuconfig1.jpg)
+
+
 
 {{% notice tip %}}
 
@@ -111,9 +115,15 @@ We didn’t select the 3x allocator (z3fold) because isn't reliable prior to mid
   - Exit
 - Save the new configuration
 
+
+
 ![](/images/kernel hacking/menuconfig2.jpg)
 
+
+
 ![](/images/kernel hacking/menuconfig3.jpg)
+
+
 
 Now we’ll update ZSwap to enable same-filled page compression. The kernel that the Jetson Nano is running at the time of writing is 4.9, which doesn’t include it, but it can easily be backported from a newer kernel.
 

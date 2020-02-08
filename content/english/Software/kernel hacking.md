@@ -84,9 +84,7 @@ make menuconfig
 
 You should see something like this:
 
-
-
-![](/images/kernel hacking/menuconfig1.jpg)
+<img src="/images/kernel hacking/menuconfig1.jpg" style="width:100%;" />
 
 
 
@@ -117,11 +115,9 @@ We didn’t select the 3x allocator (z3fold) because isn't reliable prior to mid
 
 
 
-![](/images/kernel hacking/menuconfig2.jpg)
+<img src="/images/kernel hacking/menuconfig2.jpg" style="width:100%;" />
 
-
-
-![](/images/kernel hacking/menuconfig3.jpg)
+<img src="/images/kernel hacking/menuconfig3.jpg" style="width:100%;" />
 
 
 
@@ -164,7 +160,7 @@ patch -p1 < ~/Downloads/a85f878b443f8d2b91ba76f09da21ac0af22e07f.patch
 sed -i 's/memset_l(page, value, PAGE_SIZE \/ sizeof(unsigned long));/memset(page, value, PAGE_SIZE);/g' mm/zswap.c
 ```
 
-![](/images/kernel hacking/patching kernel.png)
+<img src="/images/kernel hacking/patching kernel.png" style="width:100%;" />
 
 ## Building and installing the kernel
 
@@ -185,7 +181,7 @@ sudo cp /boot/Image /boot/Image.dist
 sudo cp arch/arm64/boot/Image /boot
 ```
 
-![](/images/kernel hacking/building kernel.png)
+<img src="/images/kernel hacking/building kernel.png" style="width:100%;" />
 
 After this is done, you can reboot. If the Nano boots successfully, it means that you’re running your new custom kernel. You can run uname -r to check it:
 

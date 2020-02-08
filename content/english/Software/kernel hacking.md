@@ -160,7 +160,7 @@ patch -p1 < ~/Downloads/a85f878b443f8d2b91ba76f09da21ac0af22e07f.patch
 sed -i 's/memset_l(page, value, PAGE_SIZE \/ sizeof(unsigned long));/memset(page, value, PAGE_SIZE);/g' mm/zswap.c
 ```
 
-<img src="/images/kernel hacking/patching kernel.png" style="width:100%;" />
+<img src="/images/kernel hacking/patching kernel.png" style="width:60%;" />
 
 ## Building and installing the kernel
 
@@ -181,7 +181,7 @@ sudo cp /boot/Image /boot/Image.dist
 sudo cp arch/arm64/boot/Image /boot
 ```
 
-<img src="/images/kernel hacking/building kernel.png" style="width:100%;" />
+<img src="/images/kernel hacking/building kernel.png" style="width:60%;" />
 
 After this is done, you can reboot. If the Nano boots successfully, it means that you’re running your new custom kernel. You can run uname -r to check it:
 

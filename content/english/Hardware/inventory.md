@@ -44,7 +44,7 @@ And of course, per my warning on the batteries section at the RC Car primer, I g
 
 ![](/images/hardware/lipo.jpg?height=250px)
 
-![](/images/hardware/lipo bag.png)
+![](/images/hardware/lipo bag.jpg)
 
 
 

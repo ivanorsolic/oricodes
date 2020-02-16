@@ -95,13 +95,13 @@ url = "https://twitter.com/ivanorsolic"
 weight = 11
 
 [[menu.shortcuts]]
-name = "<i class='fas fa-tasks'></i> Other stuff"
+name = "<i class='fas fa-tasks'></i> Other projects"
 url = "https://ivanorsolic.github.io"
 weight = 12
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-file'></i> My CV"
-url = "https://drive.google.com/file/d/1c4F5kfnWZnwQciP8gKyKunzDOqBJ5gDM/view?usp=sharing"
+url = "https://drive.google.com/file/d/1OxfTifqPw3X5TqwcQMmdwOCJMiSAm1ED/view?usp=sharing"
 weight = 20
 
 [markup.goldmark.renderer]

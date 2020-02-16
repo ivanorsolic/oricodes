@@ -152,6 +152,10 @@ Of course, we don't (and won't) set our $\lambda$ parameter to a very large valu
 Imagine we have a neural net that looks like the one pictured above, on the left. 
 
 **To stop our model from overfitting our data, we can randomly knock-out some neurons while training our model.** This in turn causes the model to be unable to rely on just a particular set of neurons, or a pathway of neurons, so it has to train multiple subsets of neural nets, which makes it much more difficult to overfit the data, since it never knows when some of the neurons will be knocked out.
+$$
+S(i,j) = (I*K)(i,j) = \sum_m\sum_nI(m,n)K(i-m,j-n)
+$$
+
 
 ## Other tips to prevent overfitting/bias
 

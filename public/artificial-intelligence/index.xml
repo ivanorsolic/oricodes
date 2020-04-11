@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Artificial Intelligence on Ori Codes</title>
+    <link>https://ori.codes/artificial-intelligence/</link>
+    <description>Recent content in Artificial Intelligence on Ori Codes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
+    
+	<atom:link href="https://ori.codes/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating our first custom network architecture</title>
+      <link>https://ori.codes/artificial-intelligence/custom-architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/custom-architecture/</guid>
+      <description>Where do we even begin with the AI part of the project?
+Well, I think it&#39;d be a good idea to get the details of plugging a custom network into Donkey out of the way first.
+If you remember the first autopilot we trained for sanity checking purposes, you&#39;ll recall we&#39;ve used an architecture that came with Donkey, whose source can be found at donkeycar/parts/keras.py.
+And that&#39;s pretty cool, we&#39;ve already got a fair number of architectures to play around with out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Finding lane lines easier</title>
+      <link>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/computer-vision-lane-finding/</guid>
+      <description>Remember we&#39;ve showed before that our CNN is taking the horizon as the input feature, and that we&#39;ll be addressing it after making a simulator mod that&#39;ll allow us to take high res images. Well, here we are.
+What we&#39;re going to do To solve the horizon problem and simultaneously help the car recognize lane lines better, we&#39;ll do the following:
+ Perform a perspective transform on every input image to get a birds-eye view of the road Convert the image to HLS color space, extract only the S channel and perform some thresholding on it to extract only the lanes from the input image  Perspective transform There&#39;s one really useful thing we can do with our input images, and we kinda already did it while we were calibrating our camera; a perspective transform.</description>
+    </item>
+    
+    <item>
+      <title>Advanced lane finding model</title>
+      <link>https://ori.codes/artificial-intelligence/integrating-the-lane-finding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/integrating-the-lane-finding/</guid>
+      <description>The model will consist of two parallel CNNs, each of which end with a dense 100-unit layer, which we will then concatenate and pass through three additional dense layers, and end with two linear activations. The model should have about 6.5 million parameters, which take up about 2GB of VRAM, so we should be able to run it on our Jetson Nano with half that much RAM to spare. :)</description>
+    </item>
+    
+    <item>
+      <title>Master recipe: How to learn your machines</title>
+      <link>https://ori.codes/artificial-intelligence/how-to-train-your-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/how-to-train-your-model/</guid>
+      <description>These are notes I made while I was taking the Deeplearning.ai Deep Learning Specialization, more specifically, the awesome Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization course, through which Andrew Ng lays down a basic recipe for training your machines! I highly recommend you taking it, it&#39;s free and you&#39;ll absolutely learn something even if you&#39;re an experienced ML practicioner.
+This may very well be the most useful part of my project.</description>
+    </item>
+    
+    <item>
+      <title>Adding behaviours: automated lane changing</title>
+      <link>https://ori.codes/artificial-intelligence/adding-behaviours/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/adding-behaviours/</guid>
+      <description>The only thing left to do, in order to test my idea with multiple specialized networks converging into a final decision layer, is to implement the behavioural specialized network.
+This is what the model will look like:
+The behavioural part of the network can be seen just before the 100-unit dense layer.
+Here it is in action: note the lower left terminal to see when I pressed the button to change lanes</description>
+    </item>
+    
+    <item>
+      <title>Detecting and tracking objects on images</title>
+      <link>https://ori.codes/artificial-intelligence/object-detection-and-tracking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/artificial-intelligence/object-detection-and-tracking/</guid>
+      <description>Implemented. Need to sit down and write it up! </description>
+    </item>
+    
+  </channel>
+</rss>

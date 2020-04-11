@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.62.1" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Camera calibration: Explaining camera distortions :: Ori Codes</title>
+
+    
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hugo-theme.css" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+   "HTML-CSS": { linebreaks: { automatic: true } },
+           SVG: { linebreaks: { automatic: true } }
+  });
+  </script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['++','++']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/artificial-intelligence/camera-calibration/camera-distortions/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.codes/">
+  <img src="/images/logo.png">
+</a>
+
+	  1598 words.<br>
+	  Reading time: 8 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.codes\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware/" title="Hardware" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware/">
+          <b>2. </b>Hardware
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/software/" title="Software" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/software/">
+          <b>3. </b>Software
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/software/kernel-hacking/">
+        OPTIONAL: Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar/" title="DonkeyCar" class="dd-item ">
+        <a href="/software/donkeycar/">
+        DonkeyCar: Explained
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-host/" title="DonkeyCar installation: Host PC" class="dd-item ">
+        <a href="/software/donkeycar-host/">
+        DonkeyCar: Host PC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-simulator/" title="DonkeyCar Installation: The Simulator" class="dd-item ">
+        <a href="/software/donkeycar-simulator/">
+        DonkeyCar: Simulator
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-rc/" title="DonkeyCar installation: RC car" class="dd-item ">
+        <a href="/software/donkeycar-rc/">
+        DonkeyCar: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/setting-up-donkeycar-on-the-rc/" title="DonkeyCar configuration: RC car" class="dd-item ">
+        <a href="/software/setting-up-donkeycar-on-the-rc/">
+        DonkeyCar configuration: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/calibrating-steering-and-throttle/" title="Calibrating steering and throttle" class="dd-item ">
+        <a href="/software/calibrating-steering-and-throttle/">
+        Calibrating steering and throttle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/connecting-a-bluetooth-gamepad/" title="Using a gamepad" class="dd-item ">
+        <a href="/software/connecting-a-bluetooth-gamepad/">
+        Using a gamepad
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/test-driving-the-rc/" title="Test drive" class="dd-item ">
+        <a href="/software/test-driving-the-rc/">
+        Test drive
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/sanity-check-first-autopilot/" title="First Autopilot: sanity check" class="dd-item ">
+        <a href="/software/sanity-check-first-autopilot/">
+        First Autopilot: sanity check
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/" title="Artificial Intelligence" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/">
+          <b>4. </b>Artificial Intelligence
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/custom-architecture/" title="Creating our first custom network architecture" class="dd-item ">
+        <a href="/artificial-intelligence/custom-architecture/">
+        Creating our first model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/visualization/" title="Visualizations" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/visualization/">
+          Visualizations
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/cnn-activations/" title="Visualization: CNN Activations" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/cnn-activations/">
+        CNN Activations
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/saliency-maps/" title="Visualization: Saliency Maps" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/saliency-maps/">
+        Saliency Maps
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/donkey-makemovie/" title="Visualization: donkey makemovie" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/donkey-makemovie/">
+        Donkey makemovie
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/simulator-mod/" title="Creating a custom simulator" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/simulator-mod/">
+          Creating a custom simulator
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/high-resolution-images/" title="Simulator mod: High resolution images" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/high-resolution-images/">
+        High res images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/custom-rc-model/" title="Simulator mod: Custom RC model" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/custom-rc-model/">
+        Custom RC model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/camera-calibration/" title="Camera distortions and calibration" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/camera-calibration/">
+          Camera distortions and calibration
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/camera-distortions/" title="Camera calibration: Explaining camera distortions" class="dd-item active">
+        <a href="/artificial-intelligence/camera-calibration/camera-distortions/">
+        Camera distortions
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/implementing-camera-calibration/" title="Camera calibration: Implementing the calibration and undistortion" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/implementing-camera-calibration/">
+        Calibration implementation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/calibrating-the-camera/" title="Camera calibration: Calibrating the camera and undistorting images" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/calibrating-the-camera/">
+        Calibrating your camera and undistorting images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/computer-vision-lane-finding/" title="Finding lane lines easier" class="dd-item ">
+        <a href="/artificial-intelligence/computer-vision-lane-finding/">
+        Extracting lanes from images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/integrating-the-lane-finding/" title="Advanced lane finding model" class="dd-item ">
+        <a href="/artificial-intelligence/integrating-the-lane-finding/">
+        Advanced lane finding model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/how-to-train-your-model/" title="Master recipe: How to learn your machines" class="dd-item ">
+        <a href="/artificial-intelligence/how-to-train-your-model/">
+        How to learn your machines
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/adding-behaviours/" title="Adding behaviours: automated lane changing" class="dd-item ">
+        <a href="/artificial-intelligence/adding-behaviours/">
+        Behaviours: Lane Changing
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/object-detection-and-tracking/" title="Detecting and tracking objects on images" class="dd-item ">
+        <a href="/artificial-intelligence/object-detection-and-tracking/">
+        Object recognition and tracking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/extras/" title="Extras" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/extras/">
+          <b>5. </b>Extras
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/hosting-the-website/" title="How is this website made?" class="dd-item ">
+        <a href="/extras/hosting-the-website/">
+        How is this website made?
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/how-is-this-website-made/" title="How is this website made?" class="dd-item ">
+        <a href="/extras/how-is-this-website-made/">
+        How is this website made?
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/static-websites/" title="Static websites" class="dd-item ">
+        <a href="/extras/static-websites/">
+        Static websites
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/prerequisites/" title="You&#39;ll need:" class="dd-item ">
+        <a href="/extras/prerequisites/">
+        Prerequisites
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/creating-a-demo-website/" title="Creating a website with Hugo" class="dd-item ">
+        <a href="/extras/creating-a-demo-website/">
+        Creating a website with Hugo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/hosting/" title="Where will we be hosting the site?" class="dd-item ">
+        <a href="/extras/hosting/">
+        Hosting the site
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/using-a-custom-domain/" title="Using a custom domain" class="dd-item ">
+        <a href="/extras/using-a-custom-domain/">
+        Using a custom domain
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/draft-and-todo/" title="Drafts and #TODO&#39;s" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/draft-and-todo/">
+          6. </b>Drafts and #TODO&#39;s
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/data-augmentation/" title="Augmenting the data with neural style transfer" class="dd-item ">
+        <a href="/draft-and-todo/data-augmentation/">
+        Data augmentation: ML meets art!
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/reinforcement-learning/" title="Reinforcement learning: letting the car learn to drive on its own" class="dd-item ">
+        <a href="/draft-and-todo/reinforcement-learning/">
+        Reinforcement learning
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/derivacije/" title="Raspisivanje math-a" class="dd-item ">
+        <a href="/draft-and-todo/derivacije/">
+        Random math stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/hough-transform/" title="Raspisivanje Hough transform-a" class="dd-item ">
+        <a href="/draft-and-todo/hough-transform/">
+        Hough transform stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/open?id=1UWx3KWlmyDX6hNNVlhsFmVdiUpEAnI8m"><i class='fas fa-graduation-cap'></i> Master's thesis</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other projects</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1OxfTifqPw3X5TqwcQMmdwOCJMiSAm1ED/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io/mastersPresentation"><i class='fas fa-presentation'></i> Master's thesis presentation</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Camera calibration: Explaining camera distortions 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-pinhole-camera-model">The pinhole camera model</a></li>
+    <li><a href="#types-of-distortions">Types of distortions</a>
+      <ul>
+        <li><a href="#getting-rid-of-distortions-with-opencv">Getting rid of distortions with OpenCV</a></li>
+        <li><a href="#finding-the-cameras-intrinsic-and-extrinsic-parameters">Finding the camera's intrinsic and extrinsic parameters</a></li>
+        <li><a href="#other-stuff-if-you-like-computer-vision">Other stuff if you like computer vision</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Camera calibration: Explaining camera distortions
+            </h1>
+          
+
+        
+
+
+
+<p>Since we're using only cameras to obtain the entirety of data we'll use to drive our car around the real world, we're sure trusting them a lot. We're trusting that they'll provide us with accurate representations of real world 3D objects as 2D images we'll feed into our neural network.</p>
+<p>But we shouldn't take that for granted. Cameras, albeit cheap and easy to use, come with all sorts of issues when it comes to mapping the 3D world onto a 2D sensor/image correctly. But luckily, we can do something about it.</p>
+<h2 id="the-pinhole-camera-model">The pinhole camera model</h2>
+<p>The pinhole camera model is a model of an ideal camera, that describes the mathematical relationship between the real world 3D object's coordinates and its 2D projection on the image plane. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><img src="/images/ai/pinhole.svg" alt="By en:User:DrBob; en:User:Pbroks13 (redraw) - http://commons.wikimedia.org/wiki/Image:Pinhole-camera.png, Public Domain, https://commons.wikimedia.org/w/index.php?curid=4099853"></p>
+<p>Pinhole cameras were the very beginning of photography <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, and are used even today to explain basic photography to students.</p>
+<p>They posses some advantages over our regular lens cameras:</p>
+<ul>
+<li>They have near infinite depth of field; <em>everything</em> appears in focus.</li>
+<li>No lenses are used to focus light, so they have no lens distortion and wide-images remain absolutely rectilinear.</li>
+</ul>
+<p>Basically, the smaller the pinhole gets, the more the resolution increases, until we reach the <a href="https://www.wikiwand.com/en/Diffraction-limited_system">diffraction limit</a>, at which point the image just gets darker and blurrier.  Also, the smaller the pinhole, less light comes in, so the exposure time needs to be increased. Which brings us to the big issue with them:</p>
+<ul>
+<li>Their exposure times are really long, which causes significant motion blur around any moving objects or it causes their complete absence if they've moved too fast.</li>
+</ul>
+<p>How can we get a small pinhole that gets a lot of light? We can use a convex lens, for starters.</p>
+<p><img src="/images/ai/convex.png" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big_pinhole_with_lens.svg/640px-Big_pinhole_with_lens.svg.png"></p>
+<p>Why does this help: instead of a single ray of light illuminating a single image point, now <a href="https://www.wikiwand.com/en/Pencil_(optics)">pencils of light</a> illuminate each image point. Even our eyes use lenses. :)</p>
+<p><img src="/images/ai/camera lenses.jpg" alt="Source: https://cnx.org/contents/WPust2k9@12.1:GSmvj4q5@5/Image-Formation-by-Lenses" style="width: 40%;" /></p>
+<p>But of course, lenses bring the issues we've mentioned earlier:</p>
+<ul>
+<li>They have finite aperture so blurring of unfocused objects appears.</li>
+<li>They contain geometric distortions due to lenses, which increase as we get closer to the edges of the lenses.</li>
+</ul>
+<h2 id="types-of-distortions">Types of distortions</h2>
+<p>The first, and most common type of camera lens distortion is called <strong>radial distortion.</strong></p>
+<p><img src="/images/ai/radial.png" alt="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html"></p>
+<p>There are two types of this distortion, the positive or barrel radial distortion, and the negative or pincushion radial distortion.</p>
+<p>In the context of self driving RCs, you'll most probably be dealing with the barrel distortion, that will most probably be caused by fisheye lenses, since we'd like to get as big a field of view as we can. Some action cams even have a FOV of 170 to 180 degrees, which causes a lot of positive radial distortion.</p>
+<p>The other type of distortion you can come across is called <strong>tangential distortion</strong>, which occurs when the lens is not aligned perfectly parallel to the imaging plane (the sensor). It causes the image to look tilted, which is obviously bad for us since some objects look further away than they really are.</p>
+<p><img src="/images/ai/tangential.jpg" style="zoom:80%;" /></p>
+<p>That being said, we have to expect that no camera is actually really perfect. Most, if not all have some amount of radial and tangential distortion, since the lenses are imperfect in real life, and the lens isn't always perfectly in line with the imaging plane.</p>
+<h3 id="getting-rid-of-distortions-with-opencv">Getting rid of distortions with OpenCV</h3>
+<p>Luckily for us, the radial and tangential distortions can be described using a couple of coefficients:</p>
+<ul>
+<li>$k_n$ coefficients will describe radial distortion</li>
+<li>$p_n$ coefficients will describe tangential distortion</li>
+</ul>
+<p>The worse the distortion, the more coefficients we need to accurately describe it.</p>
+<p>OpenCV works with up to six ($k_1$, $k_2$, $k_3$, $k_4$, $k_5$ and $k_6$) radial distortion coefficients, which should be more than enough for us, and with two ($p_1$, $p_2$) tangential distortion coefficients.</p>
+<p>If we have the barrel radial distortion type, $k_1$ will typically be larger than zero. If we have the pincushion distortion, $k_1$ will typically be smaller than zero.</p>
+<p><a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#camera-calibration-and-3d-reconstruction">OpenCV uses a pinhole camera model to describe how an image is created by projecting 3D points into the image plane using a perspective transformation:</a></p>
+<div>
+++
+s \begin{bmatrix}{u}\\{v}\\{1}\end{bmatrix} = \begin{bmatrix}{f_x}&{0}&{c_x}\\{0}&{f_y}&{c_y}\\{0}&{0}&{1}\end{bmatrix} \begin{bmatrix} r_{11} & r_{12} & r_{13} & t_1  \\ r_{21} & r_{22} & r_{23} & t_2  \\ r_{31} & r_{32} & r_{33} & t_3 \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
+++
+</div>
+<ul>
+<li>$(X, Y, Z)$ are the coordinates of a 3D point we're imaging</li>
+<li>$(u,v)$ are the 2D coordinates of the projection point in pixels</li>
+<li>The first matrix after the equation is the camera matrix, containing intrinsic camera parameters
+<ul>
+<li>$(c_x, c_y)$  defines the principle point which is usually the center of the image</li>
+<li>$f_x$ and $f_y$ are the focal lengths expressed in pixel units</li>
+</ul>
+</li>
+<li>The matrix containing the $r_{mn}$ parameters is the joint rotation-translation matrix, a matrix of extrinsic parameters which describes camera motion around a static scene. It's used to translate the 3D coordinates to a 2D coordinate system, fixed with respect to the camera.</li>
+</ul>
+<p>Since we're imaging 2D images, we'd like to map the 3D coordinates to a coordinate system:</p>
+<div>
+++
+\begin{bmatrix}{x}\\{y}\\{z}\end{bmatrix} = R 
+\begin{bmatrix}{X}\\{Y}\\{Z}\end{bmatrix} + t \\
+x' = x/z \\
+y' = y/z \\
+u = f_x*x' + c_x \\
+v = f_y*y' + c_y
+++
+</div>
+<p>Also, since we're not using a pinhole camera, we need to add the distortion coefficients to our model:</p>
+<div>
+++
+x'' = x'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + 2 p_1 x' y' + p_2  \\ 
+y'' = y'  \frac{1 + k_1 r^2 + k_2 r^4 + k_3 r^6}{1 + k_4 r^2 + k_5 r^4 + k_6 r^6} + p_1 (r^2 + 2 y'^2) + 2 p_2 x' y'  
+\\ \text{where} \quad r^2 = x'^2 + y'^2  \\ 
+u = f_x*x'' + c_x \\
+v = f_y*y'' + c_y
+++
+</div>
+<p>Since we're primarily interested in efficiently removing the radial distortion, we'll be using Fitzgibbon's <a href="http://www.robots.ox.ac.uk/~vgg/publications/papers/fitzgibbon01b.pdf">division model</a> as opposed to Brown-Conrady's <a href="https://eserv.asprs.org/PERS/1966journal/may/1966_may_444-462.pdf">even-order polynomial</a> model, since it requires fewer terms in cases of severe distortion. It is also a bit easier to work with, since inverting the single parameter division model requires solving a one degree less polynomial than inverting the single-parameter polynomial model. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="finding-the-cameras-intrinsic-and-extrinsic-parameters">Finding the camera's intrinsic and extrinsic parameters</h3>
+<p>Now that we've laid out all of the formulas we use to correct radial and tangential distortion, the only question that remains is how do we get the intrinsic and extrinsic parameters.</p>
+<p>For those purposes, we'll be using the OpenCV <em><strong>calibrateCamera</strong></em> function, along with its  <em><strong>findChessboardCorners</strong></em> function.</p>
+<p>The <em><strong>calibrateCamera</strong></em> function is based on Zhang's <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr98-71.pdf">A Flexible New Technique for Camera Calibration</a> and Caltech's <a href="http://www.vision.caltech.edu/bouguetj/calib_doc/">Camera Calibration Toolbox</a>.</p>
+<p>It needs the coordinates of a 3D object we're imaging and its corresponding 2D projected coordinates in order to detect the intrinsic and extrinsic parameters of the camera we're using to image the object.</p>
+<p>To easily get those coordinates, we'll be using a <strong>chessboard</strong>. A chessboard is an object with a known geometry to us and it has easily detectable feature points. Such objects are called <em><strong>calibration rigs or patterns</strong></em>, and OpenCV has a built-in function that uses a chessboard as a calibration rig, the <em><strong>findChessboardCorners</strong></em> function.</p>
+<p>The <a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#bool%20findChessboardCorners(InputArray%20image,%20Size%20patternSize,%20OutputArray%20corners,%20int%20flags)">findChessboardCorners</a> function attempts to determine whether the input image is a view of the chessboard pattern and automatically locate the internal chessboard corners.</p>
+<p>The cool thing with this is that we can print out a 3D object (a chessboard) whose geometry is well known to us, and map its 3D coordinates to our 2D image projection. The 3D points of the chessboard from the real world are called <em><strong>object points</strong></em> and their 2D mappings on our image are called <em><strong>image points</strong></em>.</p>
+<p>So, we print out a chessboard, take multiple pictures of it from different angles to better capture the camera distortions, and feed them to the <em>findChessboardCorners</em> function. It will give us the detected object points and corresponding image points back to us, which we can use to then calibrate the camera.</p>
+<p>The calibrateCamera function, given the object points and image points by the <em>findChessboardCorners function</em>, performs the following:</p>
+<ol>
+<li>Computes the initial intrinsic parameters. The distortion coefficients are all set to zeros initially.</li>
+<li>Estimates the initial camera pose as if the intrinsic parameters have been already known.</li>
+<li>Runs the global <a href="https://cs.uwaterloo.ca/~y328yu/classics/levenberg.pdf">Levenberg-Marquardt</a> optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points <code>imagePoints</code> and the projected (using the current estimates for camera parameters and the poses) object points <code>objectPoints</code>.</li>
+</ol>
+<p>The function returns a matrix with the intrinsic camera parameters and a matrix with the distortion coefficients, which we can use to undistort our images.</p>
+<h3 id="other-stuff-if-you-like-computer-vision">Other stuff if you like computer vision</h3>
+<p>Optics is a pretty interesting field of physics, and you if you're planning to do any computer vision work or research, there's a bunch of stuff to learn and read to understand how cameras work, which would help you dive deeper into the field.</p>
+<p>If you're not interested in it, feel free to skip the small paragraph below.</p>
+<p>I'd recommend at least reading about the two most important parameters of optical lenses: the focal length  and the maximum aperture of the camera.</p>
+<p>It's useful to know how different focal lengths affect the represented size of distant objects, for example:</p>
+<p><img src="/images/ai/focallength.jpg" alt="https://upload.wikimedia.org/wikipedia/commons/e/e5/Focal_length.jpg?1580214480612"></p>
+<p>You can also learn a lot by reading how the focal length determines the angle of view, how the focal ratio (or f-number) defines the maximum usable aperture of a lens and so on. It's really interesting.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://en.wikipedia.org/wiki/Pinhole_camera_model">Wikipedia: Pinhole camera model</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://en.wikipedia.org/wiki/Camera_obscura">Camera Obscura</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="http://www.cs.ait.ac.th/~mdailey/papers/Bukhari-RadialDistortion.pdf">Automatic Radial Distortion Estimation from a Single Image</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+<script src="https://utteranc.es/client.js"
+        repo="ivanorsolic/oricodes"
+        issue-term="title"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/artificial-intelligence/camera-calibration/" title="Camera distortions and calibration"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/artificial-intelligence/camera-calibration/implementing-camera-calibration/" title="Camera calibration: Implementing the calibration and undistortion" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    
+    <script src="/js/modernizr.custom-3.6.0.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    <link href="/mermaid/mermaid.css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

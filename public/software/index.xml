@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software on Ori Codes</title>
+    <link>https://ori.codes/software/</link>
+    <description>Recent content in Software on Ori Codes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
+    
+	<atom:link href="https://ori.codes/software/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Running the OS from an external SSD using a custom kernel</title>
+      <link>https://ori.codes/software/kernel-hacking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/kernel-hacking/</guid>
+      <description>This is the technical, optional upgrade that will enable you to boot your OS from an external SSD.
+Syonyk has an awesome Jetson Nano guide with all of this stuff explained and was the primary source of info while researching how to do this.
+ JetsonHacks also have a guide that should make this much easier to do, as they’ve prepared scripts that do all of the work for you, but I haven’t tried it so I can’t say it works for sure, but it should!</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar</title>
+      <link>https://ori.codes/software/donkeycar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar/</guid>
+      <description>Donkey is a high level self driving library written in Python. It was developed with a focus on enabling fast experimentation and easy contribution.
+Source: Official Donkey docs
+ We&#39;ll be using Donkey® as an interface between our RC car and the neural net we&#39;d like to drive it for us.
+As you can see above, we&#39;d like to send the camera data from our RC to a model which would analyse it and tell the RC where to steer and how fast to go, in order to stay on the road.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar installation: Host PC</title>
+      <link>https://ori.codes/software/donkeycar-host/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar-host/</guid>
+      <description>Let&#39;s install the Donkey software on your host PC. The only part where this differs between the three platforms, Mac OS X, Linux and Windows, is in the Miniconda software installation, so we&#39;ll get that out of the way first.
+Mac OS X  Download and install:  Miniconda here, git here   Open up a terminal and follow the rest of the tutorial  Windows  Download and install:  Miniconda here, git here   Open an Anaconda Prompt via Start Menu and follow the rest of the tutorial  Linux  Download Miniconda here and install it Open up a terminal and follow the rest of the tutorial  The rest of the tutorial:   Go to a place where you want the stuff we&#39;ll be working on to be.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar Installation: The Simulator</title>
+      <link>https://ori.codes/software/donkeycar-simulator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar-simulator/</guid>
+      <description>Even if you don&#39;t have an RC car, you can start here and follow the rest of the project by just substituting the RC car with the simulator!
+ This is one of the coolest parts of DonkeyCar for me, and probably one of the most useful ones. It&#39;s also a good way to get your feet wet with this kind of a project without building an actual RC.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar installation: RC car</title>
+      <link>https://ori.codes/software/donkeycar-rc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/donkeycar-rc/</guid>
+      <description>Connecting to your RC via SSH To connect and work with your RC throughout the rest of the project, you&#39;ll need two things:
+ An SSH client The IP address of your RC  SSH Clients: If you&#39;re using Linux or a Mac, you&#39;re all set. They come with a SSH client pre-installed, and you just need to open up a terminal and type:
+ssh username@ipAddressIf you&#39;re using Windows, you need to install one.</description>
+    </item>
+    
+    <item>
+      <title>DonkeyCar configuration: RC car</title>
+      <link>https://ori.codes/software/setting-up-donkeycar-on-the-rc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/setting-up-donkeycar-on-the-rc/</guid>
+      <description>From now until the end of this chapter, I&#39;ll assume you&#39;re working on your car via SSH.
+ Creating a DonkeyCar application First, we&#39;ll run the createcar command, which will create a new directory with all of the files needed to run and train our RC.
+Command usage from the docs:
+donkey createcar --path &amp;lt;dir&amp;gt; [--overwrite] [--template &amp;lt;donkey2&amp;gt;]Run the following command to create a new donkeycar application:
+donkey createcar --path ~/mycarOpen the newly created directory:</description>
+    </item>
+    
+    <item>
+      <title>Calibrating steering and throttle</title>
+      <link>https://ori.codes/software/calibrating-steering-and-throttle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/calibrating-steering-and-throttle/</guid>
+      <description>Make sure your car wheels are not touching the ground. Prop it up using a shoebox, or in my case, an eGPU dock. We will be calibrating the throttle which means your car will start accelerating very fast, without warning, so you wouldn&#39;t want it slamming into a wall at full throttle.
+ Calibrating the throttle: First, you&#39;ll need to turn on your car; the actual RC, not the Nano.</description>
+    </item>
+    
+    <item>
+      <title>Using a gamepad</title>
+      <link>https://ori.codes/software/connecting-a-bluetooth-gamepad/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/connecting-a-bluetooth-gamepad/</guid>
+      <description>You can, and should, use a gamepad to control your RC. It&#39;s much easier to generate good training data using a gamepad, and it&#39;s much easier to drive the thing compared to the Web interface that Donkey provides.
+So how do we connect and use one?
+Compatible controllers First, let&#39;s make sure you have one that&#39;ll actually work
+The official Donkey docs list that the following are known to work:</description>
+    </item>
+    
+    <item>
+      <title>Test drive</title>
+      <link>https://ori.codes/software/test-driving-the-rc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/test-driving-the-rc/</guid>
+      <description>First of all: congrats on getting this far! Let&#39;s spin our RC for a ride.
+Before continuing:
+ Make sure your RC is powered up (not the Jetson Nano, the actual RC). Make sure that the camera is connected and powered up (if you&#39;re using a USB camera). Make sure that your RC has enough space around it, depending on what throttle values you&#39;ve defined.  Test drive using a gamepad Change to the directory you&#39;ve created with the donkey createcar command:</description>
+    </item>
+    
+    <item>
+      <title>First Autopilot: sanity check</title>
+      <link>https://ori.codes/software/sanity-check-first-autopilot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ori.codes/software/sanity-check-first-autopilot/</guid>
+      <description>After doing a bunch of work like we just did, it&#39;s always important to periodically check that everything works as intended, before moving on to even more complex stuff.
+So that&#39;s what we&#39;ll be doing.
+Building a test track First, you need to build a test track. For this sanity checking, I wouldn&#39;t do anything over the top. Just take some duct-tape and make a circular track that&#39;s easy to drive around.</description>
+    </item>
+    
+  </channel>
+</rss>

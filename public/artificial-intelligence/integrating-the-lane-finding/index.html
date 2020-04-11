@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.62.1" />
+    <meta name="description" content="Ori&#39;s self-driving RC car">
+<meta name="author" content="ori">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Advanced lane finding model :: Ori Codes</title>
+
+    
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="/css/auto-complete.css" rel="stylesheet">
+    
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hugo-theme.css" rel="stylesheet">
+    
+      <link href="/css/theme-mine.css" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+   "HTML-CSS": { linebreaks: { automatic: true } },
+           SVG: { linebreaks: { automatic: true } }
+  });
+  </script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['++','++']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/artificial-intelligence/integrating-the-lane-finding/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://ori.codes/">
+  <img src="/images/logo.png">
+</a>
+
+	  2019 words.<br>
+	  Reading time: 10 minutes.
+	  
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/auto-complete.js"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ori.codes\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rc-car/" title="RC Cars: a primer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/rc-car/">
+          <b>1. </b>RC Cars: a primer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/parts_list/" title="Parts: an overview" class="dd-item ">
+        <a href="/rc-car/parts_list/">
+        Parts: an overview
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/scale/" title="Scale" class="dd-item ">
+        <a href="/rc-car/scale/">
+        Scale
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/body_type/" title="RC Car body types" class="dd-item ">
+        <a href="/rc-car/body_type/">
+        Body type
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electric_motors/" title="Electric motors" class="dd-item ">
+        <a href="/rc-car/electric_motors/">
+        Electric motors
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/servo/" title="Steering servo" class="dd-item ">
+        <a href="/rc-car/servo/">
+        Servo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/electronic_speed_controller/" title="Electronic Speed Controller" class="dd-item ">
+        <a href="/rc-car/electronic_speed_controller/">
+        ESC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/receiver/" title="Receiver" class="dd-item ">
+        <a href="/rc-car/receiver/">
+        Receiver
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/rc-car/batteries/" title="Batteries" class="dd-item ">
+        <a href="/rc-car/batteries/">
+        Batteries
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/hardware/" title="Hardware" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/hardware/">
+          <b>2. </b>Hardware
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/inventory/" title="Hardware inventory" class="dd-item ">
+        <a href="/hardware/inventory/">
+        Inventory: stuff you&#39;ll need
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/building-the-car/" title="Assembling the RC Car" class="dd-item ">
+        <a href="/hardware/building-the-car/">
+        Assembling the RC Car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/mounting-plates/" title="Building the mounting plates for the hardware" class="dd-item ">
+        <a href="/hardware/mounting-plates/">
+        Mounting plates
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/jetson-nano-installation/" title="Preparing the Jetson Nano" class="dd-item ">
+        <a href="/hardware/jetson-nano-installation/">
+        Preparing the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/assembling-the-nano/" title="Assembling the Jetson Nano" class="dd-item ">
+        <a href="/hardware/assembling-the-nano/">
+        Assembling the Jetson Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/hardware/connecting-the-car-to-the-nano/" title="Connecting the RC to the Nano" class="dd-item ">
+        <a href="/hardware/connecting-the-car-to-the-nano/">
+        Connecting the RC to the Nano
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/software/" title="Software" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/software/">
+          <b>3. </b>Software
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/kernel-hacking/" title="Running the OS from an external SSD using a custom kernel" class="dd-item ">
+        <a href="/software/kernel-hacking/">
+        OPTIONAL: Kernel Hacking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar/" title="DonkeyCar" class="dd-item ">
+        <a href="/software/donkeycar/">
+        DonkeyCar: Explained
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-host/" title="DonkeyCar installation: Host PC" class="dd-item ">
+        <a href="/software/donkeycar-host/">
+        DonkeyCar: Host PC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-simulator/" title="DonkeyCar Installation: The Simulator" class="dd-item ">
+        <a href="/software/donkeycar-simulator/">
+        DonkeyCar: Simulator
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/donkeycar-rc/" title="DonkeyCar installation: RC car" class="dd-item ">
+        <a href="/software/donkeycar-rc/">
+        DonkeyCar: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/setting-up-donkeycar-on-the-rc/" title="DonkeyCar configuration: RC car" class="dd-item ">
+        <a href="/software/setting-up-donkeycar-on-the-rc/">
+        DonkeyCar configuration: RC car
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/calibrating-steering-and-throttle/" title="Calibrating steering and throttle" class="dd-item ">
+        <a href="/software/calibrating-steering-and-throttle/">
+        Calibrating steering and throttle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/connecting-a-bluetooth-gamepad/" title="Using a gamepad" class="dd-item ">
+        <a href="/software/connecting-a-bluetooth-gamepad/">
+        Using a gamepad
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/test-driving-the-rc/" title="Test drive" class="dd-item ">
+        <a href="/software/test-driving-the-rc/">
+        Test drive
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/software/sanity-check-first-autopilot/" title="First Autopilot: sanity check" class="dd-item ">
+        <a href="/software/sanity-check-first-autopilot/">
+        First Autopilot: sanity check
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/" title="Artificial Intelligence" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/artificial-intelligence/">
+          <b>4. </b>Artificial Intelligence
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/custom-architecture/" title="Creating our first custom network architecture" class="dd-item ">
+        <a href="/artificial-intelligence/custom-architecture/">
+        Creating our first model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/visualization/" title="Visualizations" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/visualization/">
+          Visualizations
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/cnn-activations/" title="Visualization: CNN Activations" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/cnn-activations/">
+        CNN Activations
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/saliency-maps/" title="Visualization: Saliency Maps" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/saliency-maps/">
+        Saliency Maps
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/visualization/donkey-makemovie/" title="Visualization: donkey makemovie" class="dd-item ">
+        <a href="/artificial-intelligence/visualization/donkey-makemovie/">
+        Donkey makemovie
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/simulator-mod/" title="Creating a custom simulator" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/simulator-mod/">
+          Creating a custom simulator
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/high-resolution-images/" title="Simulator mod: High resolution images" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/high-resolution-images/">
+        High res images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/simulator-mod/custom-rc-model/" title="Simulator mod: Custom RC model" class="dd-item ">
+        <a href="/artificial-intelligence/simulator-mod/custom-rc-model/">
+        Custom RC model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/artificial-intelligence/camera-calibration/" title="Camera distortions and calibration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/artificial-intelligence/camera-calibration/">
+          Camera distortions and calibration
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/camera-distortions/" title="Camera calibration: Explaining camera distortions" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/camera-distortions/">
+        Camera distortions
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/implementing-camera-calibration/" title="Camera calibration: Implementing the calibration and undistortion" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/implementing-camera-calibration/">
+        Calibration implementation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/camera-calibration/calibrating-the-camera/" title="Camera calibration: Calibrating the camera and undistorting images" class="dd-item ">
+        <a href="/artificial-intelligence/camera-calibration/calibrating-the-camera/">
+        Calibrating your camera and undistorting images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/computer-vision-lane-finding/" title="Finding lane lines easier" class="dd-item ">
+        <a href="/artificial-intelligence/computer-vision-lane-finding/">
+        Extracting lanes from images
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/integrating-the-lane-finding/" title="Advanced lane finding model" class="dd-item active">
+        <a href="/artificial-intelligence/integrating-the-lane-finding/">
+        Advanced lane finding model
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/how-to-train-your-model/" title="Master recipe: How to learn your machines" class="dd-item ">
+        <a href="/artificial-intelligence/how-to-train-your-model/">
+        How to learn your machines
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/adding-behaviours/" title="Adding behaviours: automated lane changing" class="dd-item ">
+        <a href="/artificial-intelligence/adding-behaviours/">
+        Behaviours: Lane Changing
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/artificial-intelligence/object-detection-and-tracking/" title="Detecting and tracking objects on images" class="dd-item ">
+        <a href="/artificial-intelligence/object-detection-and-tracking/">
+        Object recognition and tracking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/extras/" title="Extras" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/extras/">
+          <b>5. </b>Extras
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/hosting-the-website/" title="How is this website made?" class="dd-item ">
+        <a href="/extras/hosting-the-website/">
+        How is this website made?
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/how-is-this-website-made/" title="How is this website made?" class="dd-item ">
+        <a href="/extras/how-is-this-website-made/">
+        How is this website made?
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/static-websites/" title="Static websites" class="dd-item ">
+        <a href="/extras/static-websites/">
+        Static websites
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/prerequisites/" title="You&#39;ll need:" class="dd-item ">
+        <a href="/extras/prerequisites/">
+        Prerequisites
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/creating-a-demo-website/" title="Creating a website with Hugo" class="dd-item ">
+        <a href="/extras/creating-a-demo-website/">
+        Creating a website with Hugo
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/hosting/" title="Where will we be hosting the site?" class="dd-item ">
+        <a href="/extras/hosting/">
+        Hosting the site
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/extras/using-a-custom-domain/" title="Using a custom domain" class="dd-item ">
+        <a href="/extras/using-a-custom-domain/">
+        Using a custom domain
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/draft-and-todo/" title="Drafts and #TODO&#39;s" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/draft-and-todo/">
+          6. </b>Drafts and #TODO&#39;s
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/data-augmentation/" title="Augmenting the data with neural style transfer" class="dd-item ">
+        <a href="/draft-and-todo/data-augmentation/">
+        Data augmentation: ML meets art!
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/reinforcement-learning/" title="Reinforcement learning: letting the car learn to drive on its own" class="dd-item ">
+        <a href="/draft-and-todo/reinforcement-learning/">
+        Reinforcement learning
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/derivacije/" title="Raspisivanje math-a" class="dd-item ">
+        <a href="/draft-and-todo/derivacije/">
+        Random math stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/draft-and-todo/hough-transform/" title="Raspisivanje Hough transform-a" class="dd-item ">
+        <a href="/draft-and-todo/hough-transform/">
+        Hough transform stuff
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="https://ori.codes/artificial-intelligence/integrating-the-lane-finding/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+	  
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+	  
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/open?id=1UWx3KWlmyDX6hNNVlhsFmVdiUpEAnI8m"><i class='fas fa-graduation-cap'></i> Master's thesis</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/ivanorsolic"><i class='fab fa-github'></i> Github</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://twitter.com/ivanorsolic"><i class='fab fa-twitter'></i> Twitter</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io"><i class='fas fa-tasks'></i> Other projects</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://drive.google.com/file/d/1OxfTifqPw3X5TqwcQMmdwOCJMiSAm1ED/view?usp=sharing"><i class='fas fa-file'></i> My CV</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://ivanorsolic.github.io/mastersPresentation"><i class='fas fa-presentation'></i> Master's thesis presentation</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+      </ul>
+    </section>
+    
+	
+    <section id="footer">
+      <p align="center">Built by <a href="https://twitter.com/ivanorsolic">Ori</a> with <a href="https://github.com/matcornic/hugo-theme-learn">Learn</i></a>, <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo.</a><br>
+Hosted for free at <a href="https://app.netlify.com">Netlify <i class="fas fa-heart"></i></a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   Advanced lane finding model 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-idea-of-teaching-a-vehicle-to-drive-autonomously">The idea of teaching a vehicle to drive autonomously</a>
+      <ul>
+        <li><a href="#creating-a-keras-model">Creating a Keras model</a></li>
+      </ul>
+    </li>
+    <li><a href="#why-leakyrelu">Why LeakyReLU</a></li>
+    <li><a href="#training-the-network">Training the network</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Advanced lane finding model
+            </h1>
+          
+
+        
+
+
+
+<p><img src="/images/ai/nnWithoutBehavior2.png" alt="nnWithoutBehavior"></p>
+<p>The model will consist of two parallel CNNs, each of which end with a dense 100-unit layer, which we will then concatenate and pass through three additional dense layers, and end with two linear activations. The model should have about 6.5 million parameters, which take up about 2GB of VRAM, so we should be able to run it on our Jetson Nano with half that much RAM to spare. :)</p>
+<h2 id="the-idea-of-teaching-a-vehicle-to-drive-autonomously">The idea of teaching a vehicle to drive autonomously</h2>
+<hr>
+<p>Now I know that a whole separate (and rather big) CNN is an overkill for the thresholded binary image, but the main reason why I'm currently doing it like this is to test if its possible to have multiple specialized parts of the architecture all siphon in to a smaller final part (the last n dense layers) in order for the car to make a decision where to steer and how much to throttle, which is more or less how you do everything while you're in a car, parking, driving, you just combine multiple inputs, e.g.:</p>
+<ul>
+<li>Checking your mirrors and dead angle to make sure you're safe to do a maneuver - collision avoidance, object recognition and tracking</li>
+<li>Recognizing a sign that says what exit you should take in order to get to your destination</li>
+<li>Actually knowing where you are with respect to that exit and by what path can you get to it - path planning, localization</li>
+<li>Actually give the appropriate steering and throttle to actually perform the maneuver</li>
+</ul>
+<p>So no matter what we're doing in a car, be it parking, changing lanes or driving to a destination, all we can really do to control the car is turn the steering wheel and control its speed (assuming no gear shifting, e.g. an electric car 😋), we're just taking in the input from our surroundings, mostly using our eyes, which we analyze through a series of specialized procedures which ultimately lead us to control our car based on the decisions we've made, in order to perform a maneuver.</p>
+<p>So what I wanted to do is to have a series of specialized parts in the net, which we could even call smaller subnets, which would take the input images and extract highly specific data from it, using (relatively) specialized procedures, which we would then plug into the final layer, along with the first convolutional network that uses the raw input image, which should give the final part of the network enough context about the world and enough information in order to appropriately control the RC.</p>
+<p>It would look something like this:</p>
+<p><img src="/images/ai/networkIdea.png" alt="Main idea"></p>
+<p>I was playing around with the idea in my mind when I saw <a href="https://www.youtube.com/watch?v=oBklltKXtDE"><strong>Andrej Karpathy's talk on PyTorch at Tesla</strong></a>, where he explained their use of <strong>HydraNets</strong>. In a nutshell, because they have a 1000 (!) distinct output tensors (predictions), and all of them have to know a ton of context and details about the scene, they use a shared backbone, like this (<strong>screenshot taken from YouTube: <a href="https://www.youtube.com/watch?v=oBklltKXtDE">PyTorch at Tesla</a></strong>:</p>
+<p><img src="/images/ai/KarpathyHydraNets.jpg" alt="Karpathy HydraNets"></p>
+<p><strong>They actually have 48 networks that output a total of 1000 predictions, which is insane to do in real-time (on 1000x1000 images and 8 cameras) while being accurate enough to actually drive living humans on real roads.</strong> Though, they do have some pretty sweet custom hardware (<a href="https://www.youtube.com/watch?v=Ucp0TTmvqOE">FSD2</a>), unlike our Jetson Nanos 😢.</p>
+<p>Now, it obviously makes much more sense to do what Tesla did, to have a shared backbone since a lot of the information that the backbone extracts from the input images can be applied to all of the specialized tasks, so you don't have to learn them all over again for each and every one of them.</p>
+<p><strong>But I figured, what the heck, I'd try my idea out, which I did, since the main reason for doing this is to actually learn to apply ML/DL to something I could actually see drive around my backyard, and when we teach the car to do behaviours like lane changing in the next chapter, you'll see that it actually works!</strong></p>
+<p>This is what it looks like in action:</p>
+<center><video controls src="/images/ai/video1.mp4" autoplay muted loop width=100%></video></center>
+<center><video controls src="/images/ai/video2.mp4" autoplay muted loop width=100%></video></center>
+Let's implement it.
+<h3 id="creating-a-keras-model">Creating a Keras model</h3>
+<p>First off, we'll create a Keras model in the <code>donkeycar/parts</code> folder. I'll be calling it <code>OriModel</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">from</span> donkeycar.parts.keras <span style="color:#ff79c6">import</span> KerasPilot
+
+<span style="color:#ff79c6">from</span> tensorflow.python.keras.models <span style="color:#ff79c6">import</span> Model, Sequential
+<span style="color:#ff79c6">from</span> tensorflow.python.keras.layers <span style="color:#ff79c6">import</span> Input, Dense, Activation, Dropout, Flatten, Conv2D
+<span style="color:#ff79c6">from</span> tensorflow.python.keras.layers.merge <span style="color:#ff79c6">import</span> Concatenate
+
+<span style="color:#ff79c6">import</span> cv2
+<span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
+</code></pre></div><p>We'll be inheriting the base <code>KerasPilot</code> class for Donkey, the model will be a sequential one and among others it will use dense, 2D convolutional layers and the concatenation layer.</p>
+<p>We'll also need OpenCV and Numpy for our image preprocessing.</p>
+<p>We'll start by inheriting the base class and implementing the constructor and compile methods:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">OriModel</span>(KerasPilot):
+    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;&#39;&#39;</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    Custom model that takes an input image and feeds it and a preprocessed version of it to the model.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    The preprocessing converts the image to HSL color space, extracts the S channel and thresholds it.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    The thresholded S channel is passed to the model to help find lane lines easier.</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    </span><span style="color:#f1fa8c">&#39;&#39;&#39;</span>
+    <span style="color:#ff79c6">def</span> __init__(self, model<span style="color:#ff79c6">=</span>None, input_shape<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">180</span>, <span style="color:#bd93f9">320</span>, <span style="color:#bd93f9">3</span>), <span style="color:#ff79c6">*</span>args, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>kwargs):
+        <span style="color:#8be9fd;font-style:italic">super</span>(OriModel, self)<span style="color:#ff79c6">.</span>__init__(<span style="color:#ff79c6">*</span>args, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>kwargs)
+        self<span style="color:#ff79c6">.</span>model <span style="color:#ff79c6">=</span> oriModel(inputShape<span style="color:#ff79c6">=</span>input_shape)
+        self<span style="color:#ff79c6">.</span>compile()
+
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">compile</span>(self):
+        self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>compile(optimizer<span style="color:#ff79c6">=</span>self<span style="color:#ff79c6">.</span>optimizer,
+                loss<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">mse</span><span style="color:#f1fa8c">&#39;</span>)
+</code></pre></div><p>We'll want to preprocess images at runtime, so we can use it during inference, so we'll implement the run method accordingly:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">run</span>(self, inputImage):
+        <span style="color:#6272a4"># Preprocesses the input image for easier lane detection</span>
+        extractedLaneInput <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>processImage(inputImage)
+        <span style="color:#6272a4"># Reshapes to (1, height, width, channels)</span>
+        extractedLaneInput <span style="color:#ff79c6">=</span> extractedLaneInput<span style="color:#ff79c6">.</span>reshape((<span style="color:#bd93f9">1</span>,) <span style="color:#ff79c6">+</span> extractedLaneInput<span style="color:#ff79c6">.</span>shape)
+        inputImage <span style="color:#ff79c6">=</span> inputImage<span style="color:#ff79c6">.</span>reshape((<span style="color:#bd93f9">1</span>,) <span style="color:#ff79c6">+</span> inputImage<span style="color:#ff79c6">.</span>shape)
+        <span style="color:#6272a4"># Predicts the output steering and throttle</span>
+        steering, throttle <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>model<span style="color:#ff79c6">.</span>predict([inputImage, extractedLaneInput])
+        <span style="color:#ff79c6">print</span>(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Throttle: </span><span style="color:#f1fa8c">%f</span><span style="color:#f1fa8c">, Steering: </span><span style="color:#f1fa8c">%f</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">%</span> (throttle[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>], steering[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]))
+        <span style="color:#ff79c6">return</span> steering[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>], throttle[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]
+</code></pre></div><p>We'll use the code we wrote in the previous chapter and unify it in a couple helper methods:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">warpImage</span>(self, image):
+    <span style="color:#6272a4"># Define the region of the image we&#39;re interested in transforming</span>
+    regionOfInterest <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>float32(
+    [[<span style="color:#bd93f9">0</span>,  <span style="color:#bd93f9">180</span>],  <span style="color:#6272a4"># Bottom left</span>
+    [<span style="color:#bd93f9">112.5</span>, <span style="color:#bd93f9">87.5</span>], <span style="color:#6272a4"># Top left</span>
+    [<span style="color:#bd93f9">200</span>, <span style="color:#bd93f9">87.5</span>], <span style="color:#6272a4"># Top right</span>
+    [<span style="color:#bd93f9">307.5</span>, <span style="color:#bd93f9">180</span>]]) <span style="color:#6272a4"># Bottom right</span>
+
+    <span style="color:#6272a4"># Define the destination coordinates for the perspective transform</span>
+    newPerspective <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>float32(
+    [[<span style="color:#bd93f9">80</span>,  <span style="color:#bd93f9">180</span>],  <span style="color:#6272a4"># Bottom left</span>
+    [<span style="color:#bd93f9">80</span>,    <span style="color:#bd93f9">0.25</span>],  <span style="color:#6272a4"># Top left</span>
+    [<span style="color:#bd93f9">230</span>,   <span style="color:#bd93f9">0.25</span>],  <span style="color:#6272a4"># Top right</span>
+    [<span style="color:#bd93f9">230</span>, <span style="color:#bd93f9">180</span>]]) <span style="color:#6272a4"># Bottom right</span>
+    <span style="color:#6272a4"># Compute the matrix that transforms the perspective</span>
+    transformMatrix <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>getPerspectiveTransform(regionOfInterest, newPerspective)
+    <span style="color:#6272a4"># Warp the perspective - image.shape[:2] takes the height, width, [::-1] inverses it to width, height</span>
+    warpedImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>warpPerspective(image, transformMatrix, image<span style="color:#ff79c6">.</span>shape[:<span style="color:#bd93f9">2</span>][::<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>], flags<span style="color:#ff79c6">=</span>cv2<span style="color:#ff79c6">.</span>INTER_LINEAR)
+    <span style="color:#ff79c6">return</span> warpedImage
+  
+<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">extractLaneLinesFromSChannel</span>(self, warpedImage):
+    <span style="color:#6272a4"># Convert to HSL</span>
+    hslImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>cvtColor(warpedImage, cv2<span style="color:#ff79c6">.</span>COLOR_BGR2HLS)
+    <span style="color:#6272a4"># Split the image into three variables by the channels</span>
+    hChannel, lChannel, sChannel <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>split(hslImage)
+    <span style="color:#6272a4"># Threshold the S channel image to select only the lines</span>
+    lowerThreshold <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">65</span>
+    higherThreshold <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">255</span>
+    <span style="color:#6272a4"># Threshold the image, keeping only the pixels/values that are between lower and higher threshold</span>
+    returnValue, binaryThresholdedImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>threshold(sChannel,lowerThreshold,higherThreshold,cv2<span style="color:#ff79c6">.</span>THRESH_BINARY)
+    <span style="color:#6272a4"># Since this is a binary image, we&#39;ll convert it to a 3-channel image so OpenCV can use it</span>
+    thresholdedImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>cvtColor(binaryThresholdedImage, cv2<span style="color:#ff79c6">.</span>COLOR_GRAY2RGB)
+    <span style="color:#ff79c6">return</span> thresholdedImage
+
+<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">processImage</span>(self, image): 
+    warpedImage <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>warpImage(image)
+    <span style="color:#6272a4"># We&#39;ll normalize it just to make sure it&#39;s between 0-255 before thresholding</span>
+    warpedImage <span style="color:#ff79c6">=</span> cv2<span style="color:#ff79c6">.</span>normalize(warpedImage,None,<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">255</span>,cv2<span style="color:#ff79c6">.</span>NORM_MINMAX,cv2<span style="color:#ff79c6">.</span>CV_8U)
+    thresholdedImage <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>extractLaneLinesFromSChannel(warpedImage)
+    one_byte_scale <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.0</span> <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">255.0</span> 
+    <span style="color:#6272a4"># To make sure it&#39;s between 0-1 for the model</span>
+    <span style="color:#ff79c6">return</span> np<span style="color:#ff79c6">.</span>array(thresholdedImage)<span style="color:#ff79c6">.</span>astype(np<span style="color:#ff79c6">.</span>float32) <span style="color:#ff79c6">*</span> one_byte_scale
+</code></pre></div><p>And now to the architecture/model itself. First, let's define the inputs and the dropout rate:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">oriModel</span>(inputShape, numberOfBehaviourInputs):
+
+    <span style="color:#6272a4"># Dropout rate</span>
+    keep_prob <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.9</span>
+    rate <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">-</span> keep_prob
+    
+    <span style="color:#6272a4"># Input layers</span>
+    imageInput <span style="color:#ff79c6">=</span> Input(shape<span style="color:#ff79c6">=</span>inputShape, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">imageInput</span><span style="color:#f1fa8c">&#39;</span>)
+    laneInput <span style="color:#ff79c6">=</span> Input(shape<span style="color:#ff79c6">=</span>inputShape, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">laneInput</span><span style="color:#f1fa8c">&#39;</span>)
+    behaviourInput <span style="color:#ff79c6">=</span> Input(shape<span style="color:#ff79c6">=</span>(numberOfBehaviourInputs,), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">behaviourInput</span><span style="color:#f1fa8c">&#34;</span>)
+</code></pre></div><p>Now let's define the upper CNN, which takes in the raw image as its input:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># Input image convnet</span>
+    x <span style="color:#ff79c6">=</span> imageInput
+    x <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">24</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_imageInput_1</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> LeakyReLU()(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
+    x <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">32</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_imageInput_2</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> LeakyReLU()(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
+    x <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_imageInput_3</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> LeakyReLU()(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
+    x <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">3</span>,<span style="color:#bd93f9">3</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_imageInput_4</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> LeakyReLU()(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
+    x <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">3</span>,<span style="color:#bd93f9">3</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_imageInput_5</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> LeakyReLU()(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
+    x <span style="color:#ff79c6">=</span> Flatten(name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">flattenedx</span><span style="color:#f1fa8c">&#34;</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">100</span>)(x)
+    x <span style="color:#ff79c6">=</span> Dropout(rate)(x)
+</code></pre></div><p>I'll explain why I'm using LeakyReLU in a moment. Let's define the bottom CNN which takes in the thresholded lane image as its input:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># Preprocessed lane image input convnet</span>
+    y <span style="color:#ff79c6">=</span> laneInput
+    y <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">24</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_laneInput_1</span><span style="color:#f1fa8c">&#34;</span>)(y)
+    y <span style="color:#ff79c6">=</span> LeakyReLU()(y)
+    y <span style="color:#ff79c6">=</span> Dropout(rate)(y)
+    y <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">32</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_laneInput_2</span><span style="color:#f1fa8c">&#34;</span>)(y)
+    y <span style="color:#ff79c6">=</span> LeakyReLU()(y)
+    y <span style="color:#ff79c6">=</span> Dropout(rate)(y)
+    y <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">2</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_laneInput_3</span><span style="color:#f1fa8c">&#34;</span>)(y)
+    y <span style="color:#ff79c6">=</span> LeakyReLU()(y)
+    y <span style="color:#ff79c6">=</span> Dropout(rate)(y)
+    y <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">3</span>,<span style="color:#bd93f9">3</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_laneInput_4</span><span style="color:#f1fa8c">&#34;</span>)(y)
+    y <span style="color:#ff79c6">=</span> LeakyReLU()(y)
+    y <span style="color:#ff79c6">=</span> Dropout(rate)(y)
+    y <span style="color:#ff79c6">=</span> Conv2D(<span style="color:#bd93f9">64</span>, (<span style="color:#bd93f9">3</span>,<span style="color:#bd93f9">3</span>), strides<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>), name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Conv2D_laneInput_5</span><span style="color:#f1fa8c">&#34;</span>)(y)
+    y <span style="color:#ff79c6">=</span> LeakyReLU()(y)
+    y <span style="color:#ff79c6">=</span> Flatten(name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">flattenedy</span><span style="color:#f1fa8c">&#34;</span>)(y)
+    y <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">100</span>)(y)
+    y <span style="color:#ff79c6">=</span> Dropout(rate)(y)
+</code></pre></div><p>Now we have to concatenate the two networks and feed them into the last three dense layers:</p>
+<pre><code># Concatenated final convnet
+    c = Concatenate(axis=1)([x, y])
+    c = Dense(100, activation='relu')(c)
+    c = Dense(50, activation='relu')(c)
+</code></pre><p>And finally, we'll define the output and return the model:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># Output layers</span>
+    steering_out <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">1</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">linear</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">steering_out</span><span style="color:#f1fa8c">&#39;</span>)(o)
+    throttle_out <span style="color:#ff79c6">=</span> Dense(<span style="color:#bd93f9">1</span>, activation<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">linear</span><span style="color:#f1fa8c">&#39;</span>, name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">throttle_out</span><span style="color:#f1fa8c">&#39;</span>)(o)
+    model <span style="color:#ff79c6">=</span> Model(inputs<span style="color:#ff79c6">=</span>[imageInput, laneInput, behaviourInput], outputs<span style="color:#ff79c6">=</span>[steering_out, throttle_out]) 
+    
+    <span style="color:#ff79c6">return</span> model
+</code></pre></div><h2 id="why-leakyrelu">Why LeakyReLU</h2>
+<p>As every model, this one began as one thing and ended up a whole different thing in terms of hyperparameters and the architecture. I'll explain that in much more detail in the next chapter. But one thing that happened to me while training the above model using ReLU as the activation function for the convolutional layers was <strong>dying ReLU(s)</strong>.</p>
+<p>First, let's remember how the <strong>ReLU</strong> (Rectified Linear Unit) function is defined:
+++
+f(x) \begin{cases}
+x &amp; \text{when x=&gt;0}\\<br>
+0 &amp; \text{when x&lt;0}
+\end{cases}
+++
+This is what it looks like when plotted:</p>
+<p><img src="/images/ai/relu.png" alt="image-20200206154123283"></p>
+<p>You can see that any negative input will result in a 0 activation for the ReLU function.</p>
+<p>Now imagine we get a large negative value that gets input to our unit that uses the ReLU activation function. It will cause the unit weights to update in a way that will prevent it to ever be activated again.</p>
+<p>This is a known disadvantage of ReLU, and there are even papers written on this topic alone <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Stanford's course <a href="http://cs231n.github.io/neural-networks-1/#actfun">CS231n</a> states that: <em><strong>you can find that as much as 40% of your network can be “dead”</strong></em> .</p>
+<p>In my case, the neural network was just outputting the same throttle and steering values for every input. And since it had a lot of layers, I knew it should be learning at least something, and after removing the small (10%) dropout rate I've implemented, and after it still hasn't changed, I realised that many of the convolutional units weren't really outputting anything, which caused the rest of the network to just have the same output over and over again.</p>
+<p><strong>The fix was obviously to use either LeakyReLU or PReLU or any other activation function made specifically to overcome this advantage of ReLUs</strong>, while still preserving it's linear non-saturating form.</p>
+<p>Why not PReLU? Because I wanted to try something simple before having an additional parameter to train, which I'd get by using PReLUs, and after trying out LeakyReLU the model trained just fine, with the loss being close to 0.001 (using MSE as the loss function).</p>
+<p>Here's the definition of <strong>LeakyReLU</strong>
+++
+f(x) \begin{cases}
+x &amp; \text{when x=&gt;0}\\<br>
+\alpha \cdot x &amp; \text{when x&lt;0}
+\end{cases}
+++
+<a href="https://github.com/keras-team/keras/blob/master/keras/layers/advanced_activations.py#L19">The default alpha in Keras is 0.3</a>. Here's a plot of <strong>LeakyReLU</strong> with $\alpha = 0.3$:</p>
+<p><img src="/images/ai/leakyrelu.png" alt="image-20200206154605605"></p>
+<p>And here's a plot when $\alpha = 0.03$:</p>
+<p><img src="/images/ai/leakyrelu2.png" alt="image-20200206154755492"></p>
+<p>You can choose whichever $\alpha$ value you'd like. This will allow the unit to activate even if the value is negative.</p>
+<p>Speaking of choosing $\alpha$, the main idea behind <strong>PReLU</strong> is to make it a parameter which the network will learn. You can read about <strong>PReLUs</strong> in this <a href="https://arxiv.org/abs/1502.01852">paper they were first proposed by He et al</a>. or you can take a look at the <a href="https://github.com/keras-team/keras/blob/master/keras/layers/advanced_activations.py#L59">Keras implementation here.</a></p>
+<h2 id="training-the-network">Training the network</h2>
+<p><strong>I've trained the network using about 10k records</strong> made on the randomly generated track, and left the network to train for 12 epochs which took 21m 45s on my RTX 2060. <strong>The final validation loss was 0.003665.</strong></p>
+<p>Here is a graph showing a plot of the training loss vs the validation loss:</p>
+<p><img src="/images/ai/training.png" alt="image-20200206162353666"></p>
+<p>Here is the training loss plot with the two separate outputs plotted:</p>
+<p><img src="/images/ai/training2.png" alt="image-20200206162038449"></p>
+<p>Here is the validation loss plot with the two separate outputs plotted:</p>
+<p><img src="/images/ai/training3.png" alt="image-20200206162206772"></p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://arxiv.org/pdf/1903.06733.pdf">https://arxiv.org/pdf/1903.06733.pdf</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+		
+        
+<script src="https://utteranc.es/client.js"
+        repo="ivanorsolic/oricodes"
+        issue-term="title"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/artificial-intelligence/computer-vision-lane-finding/" title="Finding lane lines easier"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/artificial-intelligence/how-to-train-your-model/" title="Master recipe: How to learn your machines" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+    </section>
+    
+		
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    
+    <script src="/js/modernizr.custom-3.6.0.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    <link href="/mermaid/mermaid.css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+	
+  </body>
+</html>
+

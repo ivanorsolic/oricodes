@@ -17,7 +17,7 @@ I'll briefly explain how some of it works in the background, but if you're not i
 
 {{% /notice %}}
 
-# [**CLICK HERE TO SKIP**](https://ori.codes/prerequisites)
+# [**CLICK HERE TO SKIP**](https://ori.codes/extras/prerequisites/)
 
 ## What is a static site generator?
 

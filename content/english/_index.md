@@ -8,6 +8,8 @@ draft = false
 ## Hello there! My name is [Ivan](https://twitter.com/ivanorsolic), and I'm building a **self-driving RC Car** for my Master's thesis.
 This website is a guide meant for everyone that would like to build a self-driving RC car model. Even if you don't have/want a physical RC, you can still follow by using the simulator we'll build! 
 
+[**Read the Master's thesis here**](https://drive.google.com/open?id=1UWx3KWlmyDX6hNNVlhsFmVdiUpEAnI8m) and take look at the [presentation here.](https://ivanorsolic.github.io/mastersPresentation)
+
 **I'll go through everything from building your RC car and the low level electronics stuff to hacking kernels and teaching your car how to drive** and even do stuff like change lanes using deep learning.
 
 This is still a work in progress which gets updated regularly, but there's more than enough material for you to make an RC drive itself. :)
@@ -26,7 +28,6 @@ This is still a work in progress which gets updated regularly, but there's more 
 <center>
     <video controls src="/images/ai/lanelines.mp4" autoplay muted loop width=33%></video><video controls src="/images/ai/lanefinding.mp4" autoplay muted loop width=33%></video><video controls src="/video/output.mp4" autoplay muted loop width=34%></video>
 </center>
-
 ***
 
 #### Feel free to ping me at  {{% button href="https://twitter.com/ivanorsolic" icon="fab fa-twitter" %}}Twitter{{% /button %}} or at my  {{% button href="mailto:ivanorsolic@gmail.com" icon="fas fa-envelope" %}}E-mail{{% /button %}} if you want to say hi or ask anything.

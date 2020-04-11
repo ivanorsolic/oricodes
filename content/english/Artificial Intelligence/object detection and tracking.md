@@ -10,5 +10,5 @@ weight=14
 <center><video controls src="/images/ai/bigtracking.mp4" autoplay loop width=100%></video></center>
 
 
-# Will publish this week!
+# Implemented. Need to sit down and write it up!
 

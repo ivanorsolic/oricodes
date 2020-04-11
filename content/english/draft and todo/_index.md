@@ -1,9 +1,9 @@
 +++
 title = "Drafts and #TODO's"
 date = 2019-07-27T16:24:11+02:00
-weight = 5
+weight = 6
 chapter = true
-pre = "<b>5. </b>"
+pre = "6. </b>"
 
 +++
 

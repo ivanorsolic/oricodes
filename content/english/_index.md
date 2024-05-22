@@ -5,7 +5,7 @@ draft = false
 
 +++
 
-## Hello there! My name is [Ivan](https://twitter.com/ivanorsolic), and I'm building a **self-driving RC Car** for my Master's thesis.
+## Hello there! My name is [Ivan](https://twitter.com/ivanorsolic), and I built a **self-driving RC Car** for my Master's thesis.
 This website is a guide meant for everyone that would like to build a self-driving RC car model. Even if you don't have/want a physical RC, you can still follow by using the simulator we'll build! 
 
 [**Read the Master's thesis here**](https://drive.google.com/open?id=1UWx3KWlmyDX6hNNVlhsFmVdiUpEAnI8m) and take look at the [presentation here.](https://ivanorsolic.github.io/mastersPresentation)

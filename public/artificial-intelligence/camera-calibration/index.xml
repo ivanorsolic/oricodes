@@ -2,47 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Camera distortions and calibration on Ori Codes</title>
-    <link>https://ori.codes/artificial-intelligence/camera-calibration/</link>
+    <link>http://localhost:1313/artificial-intelligence/camera-calibration/</link>
     <description>Recent content in Camera distortions and calibration on Ori Codes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
-    
-	<atom:link href="https://ori.codes/artificial-intelligence/camera-calibration/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/artificial-intelligence/camera-calibration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Camera calibration: Explaining camera distortions</title>
-      <link>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</link>
+      <link>http://localhost:1313/artificial-intelligence/camera-calibration/camera-distortions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/camera-calibration/camera-distortions/</guid>
-      <description>Since we&#39;re using only cameras to obtain the entirety of data we&#39;ll use to drive our car around the real world, we&#39;re sure trusting them a lot. We&#39;re trusting that they&#39;ll provide us with accurate representations of real world 3D objects as 2D images we&#39;ll feed into our neural network.
-But we shouldn&#39;t take that for granted. Cameras, albeit cheap and easy to use, come with all sorts of issues when it comes to mapping the 3D world onto a 2D sensor/image correctly.</description>
+      <guid>http://localhost:1313/artificial-intelligence/camera-calibration/camera-distortions/</guid>
+      <description>Since we&amp;rsquo;re using only cameras to obtain the entirety of data we&amp;rsquo;ll use to drive our car around the real world, we&amp;rsquo;re sure trusting them a lot. We&amp;rsquo;re trusting that they&amp;rsquo;ll provide us with accurate representations of real world 3D objects as 2D images we&amp;rsquo;ll feed into our neural network.&#xA;But we shouldn&amp;rsquo;t take that for granted. Cameras, albeit cheap and easy to use, come with all sorts of issues when it comes to mapping the 3D world onto a 2D sensor/image correctly.</description>
     </item>
-    
     <item>
       <title>Camera calibration: Implementing the calibration and undistortion</title>
-      <link>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</link>
+      <link>http://localhost:1313/artificial-intelligence/camera-calibration/implementing-camera-calibration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/camera-calibration/implementing-camera-calibration/</guid>
-      <description>First we&#39;ll import the stuff we need and declare some variables:
-import numpy as npimport cv2, os, globobjectPoints = []imagePoints = []cameraIntrinsicValues = []# Distortion coefficients cameraExtrinsicValues = []Now we&#39;ll implement the function that finds and returns the object and image points, given images of a chessboard:
-def getObjectAndImagePoints():global objectPoints, imagePoints# Number of inside corners per row and column cornersPerRow = 10cornersPerColumn = 7# Initializing the object points to zero chessboardObjectPoints = np.</description>
+      <guid>http://localhost:1313/artificial-intelligence/camera-calibration/implementing-camera-calibration/</guid>
+      <description>First we&amp;rsquo;ll import the stuff we need and declare some variables:&#xA;import numpy as np import cv2, os, glob objectPoints = [] imagePoints = [] cameraIntrinsicValues = [] # Distortion coefficients cameraExtrinsicValues = [] Now we&amp;rsquo;ll implement the function that finds and returns the object and image points, given images of a chessboard:&#xA;def getObjectAndImagePoints(): global objectPoints, imagePoints # Number of inside corners per row and column cornersPerRow = 10 cornersPerColumn = 7 # Initializing the object points to zero chessboardObjectPoints = np.</description>
     </item>
-    
     <item>
       <title>Camera calibration: Calibrating the camera and undistorting images</title>
-      <link>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</link>
+      <link>http://localhost:1313/artificial-intelligence/camera-calibration/calibrating-the-camera/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/artificial-intelligence/camera-calibration/calibrating-the-camera/</guid>
-      <description>Finally, we can actually calibrate our camera and undistort our images!
-We&#39;ll start with the real camera on our RC and then we&#39;ll also calibrate our simulator camera!
-Once calibrated on the calibration images, you can use the same undistortion matrix for any other image that the same camera takes (given the focal length hasn&#39;t changed)!
- Calibrating your real camera I&#39;ll be using my RC camera, the EleCam Explorer 4K, which has an advertised 170 degree FOV.</description>
+      <guid>http://localhost:1313/artificial-intelligence/camera-calibration/calibrating-the-camera/</guid>
+      <description>Finally, we can actually calibrate our camera and undistort our images!&#xA;We&amp;rsquo;ll start with the real camera on our RC and then we&amp;rsquo;ll also calibrate our simulator camera!&#xA;Once calibrated on the calibration images, you can use the same undistortion matrix for any other image that the same camera takes (given the focal length hasn&amp;rsquo;t changed)!&#xA;Calibrating your real camera I&amp;rsquo;ll be using my RC camera, the EleCam Explorer 4K, which has an advertised 170 degree FOV.</description>
     </item>
-    
   </channel>
 </rss>

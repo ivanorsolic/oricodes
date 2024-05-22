@@ -2,13 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Ori Codes</title>
-    <link>https://ori.codes/hr/categories/</link>
+    <link>http://localhost:1313/hr/categories/</link>
     <description>Recent content in Categories on Ori Codes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://ori.codes/hr/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <generator>Hugo</generator>
+    <language>hr</language>
+    <atom:link href="http://localhost:1313/hr/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

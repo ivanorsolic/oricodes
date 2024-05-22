@@ -12,8 +12,6 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-
-
 .button, .button-secondary {
     display: inline-block;
     padding: 7px 12px;
@@ -40,7 +38,6 @@
     font-weight: 500;
     src: url("../fonts/Work_Sans_500.eot?#iefix") format("embedded-opentype"), url("../fonts/Work_Sans_500.woff") format("woff"), url("../fonts/Work_Sans_500.woff2") format("woff2"), url("../fonts/Work_Sans_500.svg#WorkSans") format("svg"), url("../fonts/Work_Sans_500.ttf") format("truetype");
 }
-
 body {
     background: #fff;
     color: #777;
@@ -264,7 +261,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 #sidebar ul.topics ul ul {
     padding-bottom: 0;
 }
-#sidebar ul.topics li.parent > ul {
+#sidebar ul.topics li.parent ul, #sidebar ul.topics > li.active ul {
     display: block;
 }
 #sidebar ul.topics > li > a {
@@ -331,14 +328,6 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 }
 #body img, #body .video-container {
     margin: 3rem auto;
-    display: block;
-    text-align: center;
-}
-#commento div .commento-header{
-	margin-right: 500px;
-}
-#commento img{
-    margin: auto;
     display: block;
     text-align: center;
 }
@@ -460,7 +449,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 }
 body {
     font-family: "Work Sans", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.6;
     font-size: 18px !important;
 }
@@ -1089,12 +1078,12 @@ pre .copy-to-clipboard {
     position: absolute;
     right: 4px;
     top: 4px;
-    background-color: #949bab;
+    background-color: #C1C4C6;
     color: #ccc;
     border-radius: 2px;
 }
 pre .copy-to-clipboard:hover {
-    background-color: #656c72;
+    background-color: #00bdf3;
     color: #fff;
 }
 .parent-element {
@@ -1138,6 +1127,17 @@ pre .copy-to-clipboard:hover {
     padding-left: 1rem;
 }
 
+#homelinks {
+  background-color: #9c6fb6;
+  color: #fff;
+  padding: 7px 0;
+  border-bottom: 4px solid #9c6fb6;
+}
+
 #searchResults {
     text-align: left;
+}
+
+option {
+    color: initial;
 }

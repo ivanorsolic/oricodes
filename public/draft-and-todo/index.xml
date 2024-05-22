@@ -2,62 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Drafts and #TODO&#39;s on Ori Codes</title>
-    <link>https://ori.codes/draft-and-todo/</link>
+    <link>http://localhost:1313/draft-and-todo/</link>
     <description>Recent content in Drafts and #TODO&#39;s on Ori Codes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
-    
-	<atom:link href="https://ori.codes/draft-and-todo/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/draft-and-todo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Augmenting the data with neural style transfer</title>
-      <link>https://ori.codes/draft-and-todo/data-augmentation/</link>
+      <link>http://localhost:1313/draft-and-todo/data-augmentation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/draft-and-todo/data-augmentation/</guid>
-      <description>Augmenting the data by generating mirrored images to counter (counter)clockwise bias on tracks.
-Using neural style transfers to make the model more robust to lighting changes and real life track reflectiveness!
-I&#39;ve got this implemented, will think about writing it up! </description>
+      <guid>http://localhost:1313/draft-and-todo/data-augmentation/</guid>
+      <description>Augmenting the data by generating mirrored images to counter (counter)clockwise bias on tracks.&#xA;Using neural style transfers to make the model more robust to lighting changes and real life track reflectiveness!&#xA;I&amp;rsquo;ve got this implemented, will think about writing it up! </description>
     </item>
-    
     <item>
       <title>Reinforcement learning: letting the car learn to drive on its own</title>
-      <link>https://ori.codes/draft-and-todo/reinforcement-learning/</link>
+      <link>http://localhost:1313/draft-and-todo/reinforcement-learning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/draft-and-todo/reinforcement-learning/</guid>
-      <description>Using reinforcement learning in the real world for cars is pretty dangerous and expensive, since they&#39;ll be crashing into everything they can at the very beginning. To counter this, we&#39;ll be creating an OpenAI environment in which the car learns to drive by itself in order to pretrain weights for real life use.
-Tried this, worked but wasn&#39;t anything extraordinary, will think about writing it up! Take a look at the donkey-gym for examples if you really want to try it.</description>
+      <guid>http://localhost:1313/draft-and-todo/reinforcement-learning/</guid>
+      <description>Using reinforcement learning in the real world for cars is pretty dangerous and expensive, since they&amp;rsquo;ll be crashing into everything they can at the very beginning. To counter this, we&amp;rsquo;ll be creating an OpenAI environment in which the car learns to drive by itself in order to pretrain weights for real life use.&#xA;Tried this, worked but wasn&amp;rsquo;t anything extraordinary, will think about writing it up! Take a look at the donkey-gym for examples if you really want to try it.</description>
     </item>
-    
     <item>
       <title>Raspisivanje math-a</title>
-      <link>https://ori.codes/draft-and-todo/derivacije/</link>
+      <link>http://localhost:1313/draft-and-todo/derivacije/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/draft-and-todo/derivacije/</guid>
-      <description>THIS IS A DRAFT
- I&#39;ll probably just delete this!
- Nagib linije Recimo da imamo sljedeću funkciju: f(x) = x+1:
-Želimo odrediti njezin nagib (slope). Nagib definiramo kao promjenu y u odnosu na promjenu x.
-Nagib nam govori koliko brzo y raste ako promijenimo x.
- Odaberemo bilo koju točku (x1,y1) na grafu. Nakon toga x povećamo za proizvoljnu veličinu Δx, te pogledamo koliko iznosi promjena Δy. Tako dobivamo drugu točku, (x1+Δx, y1+Δy), odnosno (x2, y2).</description>
+      <guid>http://localhost:1313/draft-and-todo/derivacije/</guid>
+      <description>THIS IS A DRAFT&#xA;I&amp;rsquo;ll probably just delete this!&#xA;Nagib linije Recimo da imamo sljedeću funkciju: f(x) = x+1:&#xA;Želimo odrediti njezin nagib (slope). Nagib definiramo kao promjenu y u odnosu na promjenu x.&#xA;Nagib nam govori koliko brzo y raste ako promijenimo x.&#xA;Odaberemo bilo koju točku (x1,y1) na grafu. Nakon toga x povećamo za proizvoljnu veličinu Δx, te pogledamo koliko iznosi promjena Δy. Tako dobivamo drugu točku, (x1+Δx, y1+Δy), odnosno (x2, y2).</description>
     </item>
-    
     <item>
       <title>Raspisivanje Hough transform-a</title>
-      <link>https://ori.codes/draft-and-todo/hough-transform/</link>
+      <link>http://localhost:1313/draft-and-todo/hough-transform/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/draft-and-todo/hough-transform/</guid>
-      <description>THIS IS A DRAFT
- I&#39;ll probably just delete this!
- Hough transform Linearnu funkciju u $xy$ - ravnini definiramo kao: $f(x) = y = ax + b$
-U toj funkciji, $a$ i $b$ su fiksni i određuju nagib/smjer funkcije. Pravac $y = ax+b$ predstavlja sve moguće kombinacije $x$ i $y$ uz zadane $a$ i $b$.
-Pretpostavimo da znamo dvije točke na tom pravcu (dvije moguće kombinacije $x$ i $y$ za zadane $a$ i $b$):</description>
+      <guid>http://localhost:1313/draft-and-todo/hough-transform/</guid>
+      <description>THIS IS A DRAFT&#xA;I&amp;rsquo;ll probably just delete this!&#xA;Hough transform Linearnu funkciju u $xy$ - ravnini definiramo kao: $f(x) = y = ax + b$&#xA;U toj funkciji, $a$ i $b$ su fiksni i određuju nagib/smjer funkcije. Pravac $y = ax+b$ predstavlja sve moguće kombinacije $x$ i $y$ uz zadane $a$ i $b$.&#xA;Pretpostavimo da znamo dvije točke na tom pravcu (dvije moguće kombinacije $x$ i $y$ za zadane $a$ i $b$):</description>
     </item>
-    
   </channel>
 </rss>

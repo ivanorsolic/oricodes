@@ -1,178 +1,153 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://ori.codes/hr/rc-car/</loc>
+    <loc>http://localhost:1313/hr/rc-car/</loc>
     <lastmod>2019-07-27T16:24:11+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/"
+                href="http://localhost:1313/rc-car/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/"
+                href="http://localhost:1313/hr/rc-car/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/parts_list/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/parts_list/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/parts_list/"
+                href="http://localhost:1313/rc-car/parts_list/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/parts_list/"
+                href="http://localhost:1313/hr/rc-car/parts_list/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/car_model/</loc>
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/scale/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/car_model/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/scale/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/scale/"
+                href="http://localhost:1313/rc-car/scale/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/scale/"
+                href="http://localhost:1313/hr/rc-car/scale/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/body_type/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/body_type/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/body_type/"
+                href="http://localhost:1313/rc-car/body_type/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/body_type/"
+                href="http://localhost:1313/hr/rc-car/body_type/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/electric_motors/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/electric_motors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/electric_motors/"
+                href="http://localhost:1313/rc-car/electric_motors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/electric_motors/"
+                href="http://localhost:1313/hr/rc-car/electric_motors/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/servo/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/servo/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/servo/"
+                href="http://localhost:1313/rc-car/servo/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/servo/"
+                href="http://localhost:1313/hr/rc-car/servo/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/electronic_speed_controller/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/electronic_speed_controller/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/electronic_speed_controller/"
+                href="http://localhost:1313/rc-car/electronic_speed_controller/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/electronic_speed_controller/"
+                href="http://localhost:1313/hr/rc-car/electronic_speed_controller/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/receiver/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/receiver/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/receiver/"
+                href="http://localhost:1313/rc-car/receiver/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/receiver/"
+                href="http://localhost:1313/hr/rc-car/receiver/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/rc-car/batteries/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/rc-car/batteries/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/rc-car/batteries/"
+                href="http://localhost:1313/rc-car/batteries/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/rc-car/batteries/"
+                href="http://localhost:1313/hr/rc-car/batteries/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/</loc>
+    <lastmod>2019-07-27T16:24:11+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/categories/"
+                href="http://localhost:1313/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/categories/"
+                href="http://localhost:1313/hr/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/"
+                href="http://localhost:1313/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/"
+                href="http://localhost:1313/hr/categories/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://ori.codes/hr/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hr/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://ori.codes/tags/"
+                href="http://localhost:1313/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="hr"
-                href="https://ori.codes/hr/tags/"
+                href="http://localhost:1313/hr/tags/"
                 />
   </url>
-  
 </urlset>

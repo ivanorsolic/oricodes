@@ -2,90 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Extras on Ori Codes</title>
-    <link>https://ori.codes/extras/</link>
+    <link>http://localhost:1313/extras/</link>
     <description>Recent content in Extras on Ori Codes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jul 2019 16:24:11 +0200</lastBuildDate>
-    
-	<atom:link href="https://ori.codes/extras/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/extras/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How is this website made?</title>
-      <link>https://ori.codes/extras/hosting-the-website/</link>
+      <link>http://localhost:1313/extras/how-is-this-website-made/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/hosting-the-website/</guid>
-      <description>I made this site using:
- Hugo - a static site generator that converts my markdown source files into this website. Learn - a theme for Hugo which provides this sweet design and other functions. Typora - for actually typing up all of the content you see here in markdown. Netlify - which hosts this site (and so many others) for free! And Visual Studio Code for some theme and Hugo source files editing.</description>
+      <guid>http://localhost:1313/extras/how-is-this-website-made/</guid>
+      <description>I made this site using:&#xA;Hugo - a static site generator that converts my markdown source files into this website. Learn - a theme for Hugo which provides this sweet design and other functions. Typora - for actually typing up all of the content you see here in markdown. Netlify - which hosts this site (and so many others) for free! And Visual Studio Code for some theme and Hugo source files editing.</description>
     </item>
-    
-    <item>
-      <title>How is this website made?</title>
-      <link>https://ori.codes/extras/how-is-this-website-made/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/how-is-this-website-made/</guid>
-      <description>I made this site using:
- Hugo - a static site generator that converts my markdown source files into this website. Learn - a theme for Hugo which provides this sweet design and other functions. Typora - for actually typing up all of the content you see here in markdown. Netlify - which hosts this site (and so many others) for free! And Visual Studio Code for some theme and Hugo source files editing.</description>
-    </item>
-    
     <item>
       <title>Static websites</title>
-      <link>https://ori.codes/extras/static-websites/</link>
+      <link>http://localhost:1313/extras/static-websites/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/static-websites/</guid>
-      <description>A static web page is delivered to the user exactly as stored on the server. By contrast, a dynamic web page first has to be generated using a web application. Which of course means that static websites display the same web pages for every user, as opposed to dynamic websites which can dynamically generate sites tailored to their users (at a significant cost and overhead). Static sites can still dynamically do stuff, but they have to do it at the user&#39;s end (e.</description>
+      <guid>http://localhost:1313/extras/static-websites/</guid>
+      <description>A static web page is delivered to the user exactly as stored on the server. By contrast, a dynamic web page first has to be generated using a web application. Which of course means that static websites display the same web pages for every user, as opposed to dynamic websites which can dynamically generate sites tailored to their users (at a significant cost and overhead). Static sites can still dynamically do stuff, but they have to do it at the user&amp;rsquo;s end (e.</description>
     </item>
-    
     <item>
       <title>You&#39;ll need:</title>
-      <link>https://ori.codes/extras/prerequisites/</link>
+      <link>http://localhost:1313/extras/prerequisites/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/prerequisites/</guid>
-      <description>Git
- Windows installer here. Linux instruction here (but it should come with Linux out of the box). Mac OS X installer here.    A Markdown editor
- I very much recommend Typora, I&#39;m writing this using it. But you can use anything you like, even VS Code.    A Hugo theme you like
- You can see a list of themes, along with demos here.</description>
+      <guid>http://localhost:1313/extras/prerequisites/</guid>
+      <description>Git&#xA;Windows installer here. Linux instruction here (but it should come with Linux out of the box). Mac OS X installer here. A Markdown editor&#xA;I very much recommend Typora, I&amp;rsquo;m writing this using it. But you can use anything you like, even VS Code. A Hugo theme you like&#xA;You can see a list of themes, along with demos here. You can also search GitHub or the Web and find any other theme you&amp;rsquo;d like.</description>
     </item>
-    
     <item>
       <title>Creating a website with Hugo</title>
-      <link>https://ori.codes/extras/creating-a-demo-website/</link>
+      <link>http://localhost:1313/extras/creating-a-demo-website/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/creating-a-demo-website/</guid>
-      <description>Go to the folder where your Hugo binary is and run:
-hugo new site quickstartAdd the theme you&#39;d like to your site&#39;s themes directory:
-cd quickstartgit init# Replace the URL below with your themegit submodule add https://github.com/calintat/minimal.git themes/minimalIf you&#39;re wondering how to find the URL for your theme:
- Assuming you&#39;re on themes.gohugo.io and on your theme&#39;s page, just copy the link from the download button and you&#39;re good!</description>
+      <guid>http://localhost:1313/extras/creating-a-demo-website/</guid>
+      <description>Go to the folder where your Hugo binary is and run:&#xA;hugo new site quickstart Add the theme you&amp;rsquo;d like to your site&amp;rsquo;s themes directory:&#xA;cd quickstart git init # Replace the URL below with your theme git submodule add https://github.com/calintat/minimal.git themes/minimal If you&amp;rsquo;re wondering how to find the URL for your theme:&#xA;Assuming you&amp;rsquo;re on themes.gohugo.io and on your theme&amp;rsquo;s page, just copy the link from the download button and you&amp;rsquo;re good!</description>
     </item>
-    
     <item>
       <title>Where will we be hosting the site?</title>
-      <link>https://ori.codes/extras/hosting/</link>
+      <link>http://localhost:1313/extras/hosting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/hosting/</guid>
-      <description>I&#39;d recommend using GitHub Pages or Netlify. The main difference is:
- GitHub Pages just hosts your website, without any additional features, but you can host unlimited project sites. And yes, you can use a custom domain for each one. It&#39;s also dead simple to use. You can use either Hugo or Jekyll or whatever you&#39;d like. Netlify provides only one free website, for one team member, with 100 GB of bandwidth per month.</description>
+      <guid>http://localhost:1313/extras/hosting/</guid>
+      <description>I&amp;rsquo;d recommend using GitHub Pages or Netlify. The main difference is:&#xA;GitHub Pages just hosts your website, without any additional features, but you can host unlimited project sites. And yes, you can use a custom domain for each one. It&amp;rsquo;s also dead simple to use. You can use either Hugo or Jekyll or whatever you&amp;rsquo;d like. Netlify provides only one free website, for one team member, with 100 GB of bandwidth per month.</description>
     </item>
-    
     <item>
       <title>Using a custom domain</title>
-      <link>https://ori.codes/extras/using-a-custom-domain/</link>
+      <link>http://localhost:1313/extras/using-a-custom-domain/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ori.codes/extras/using-a-custom-domain/</guid>
-      <description>It&#39;s very easy to use a custom domain with both GitHub Pages and Netlify.
-First, you need a custom domain. You can buy it from wherever you&#39;d like, I&#39;ll assume you&#39;re using Namecheap.
-  Go to Namecheap domain search, find a domain you like and buy it.
-  Go to your hosting provider:
- GitHub: Go to your repository, open up Settings, scroll down to the GitHub pages section and enter your domain.</description>
+      <guid>http://localhost:1313/extras/using-a-custom-domain/</guid>
+      <description>It&amp;rsquo;s very easy to use a custom domain with both GitHub Pages and Netlify.&#xA;First, you need a custom domain. You can buy it from wherever you&amp;rsquo;d like, I&amp;rsquo;ll assume you&amp;rsquo;re using Namecheap.&#xA;Go to Namecheap domain search, find a domain you like and buy it.&#xA;Go to your hosting provider:&#xA;GitHub: Go to your repository, open up Settings, scroll down to the GitHub pages section and enter your domain. Netlify: Go to your website, open up Domain settings and add your domain as a custom domain.</description>
     </item>
-    
   </channel>
 </rss>

@@ -15,11 +15,15 @@ hugo new site <new_project>
 
 ## Install the theme
 
-Install the **Hugo-theme-learn** theme by following [this documentation](https://gohugo.io/themes/installing/)
+Install the **Hugo-theme-learn** theme by following [this documentation](https://gohugo.io/getting-started/quick-start/#step-3-add-a-theme)
 
 This theme's repository is: https://github.com/matcornic/hugo-theme-learn.git
 
 Alternatively, you can [download the theme as .zip](https://github.com/matcornic/hugo-theme-learn/archive/master.zip) file and extract it in the `themes` directory
+
+{{% notice note %}}
+Google Analytics are added to `/layout/partials/custom-footer.html` remove the contents of that file to opt-out.
+{{% /notice %}}
 
 ## Basic configuration
 

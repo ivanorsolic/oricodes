@@ -1,6 +1,6 @@
-baseURL = "https://ori.codes/"
+baseURL = "https://rccar.orsolic.tech/"
 languageCode = "en-us"
-title = "Ori Codes"
+title = "Self-driving RC Car"
 theme = "hugo-theme-learn"
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
@@ -72,13 +72,13 @@ defaultContentLanguageInSubdir= true
 
 [Languages]
 	[Languages.en]
-	title = "Ori Codes"
+	title = "Self-driving RC Car"
 	weight = 1
 	languageName = "English"
 	contentDir = "content/english"
 
 	[Languages.hr]
-	title = "Ori Codes"
+	title = "Samovozeći RC autić"
 	weight = 2
 	languageName = "Hrvatski"
 	contentDir = "content/hrvatski"
@@ -98,12 +98,12 @@ weight = 10
 [[menu.shortcuts]] 
 name = "<i class='fab fa-twitter'></i> Twitter"
 identifier = "ds"
-url = "https://twitter.com/ivanorsolic"
+url = "https://x.com/ivanorsolic"
 weight = 11
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-tasks'></i> Other projects"
-url = "https://ivanorsolic.github.io"
+url = "https://orsolic.tech"
 weight = 12
 
 [[menu.shortcuts]]
